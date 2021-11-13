@@ -1,0 +1,214 @@
+Zaprojektuj i zaimplementuj klasy punkt i wielobok.
+
+Klasa punkt ma odwzorowywaæ punkt na p³aszczyŸnie.
+
+Klasa wielobok powinna odwzorowywaæ wieloboczn¹ figurê geometryczn¹ na p³aszczyŸnie opisan¹ dowolnym zbiorem punktów. Oznacza to, ¿e obiekt typu wielobok mo¿e reprezentowaæ tak¿e i pusty zbiór punktów.
+
+Obydwie klasy powinny byæ wyposa¿one we w³aœciwie dobrany zbiór metod umo¿liwiaj¹cych bezpieczne pos³ugiwanie siê ich obiektami, w tym kopiowanie obiektów, dostêp do wartoœci pól sk³adowych klas jak równie¿ ich modyfikowanie.
+Klasa punkt powinna posiadaæ te¿ metodê pozwalaj¹c¹ na obliczanie odleg³oœci danego punktu od innego.
+
+Klasa wielobok powinna posiadaæ metodê – nazwijmy j¹ obwód() – do obliczania obwodu tej figury tj. sumy odleg³oœci miêdzy kolejnymi punktami. Sumê odleg³oœci nale¿y liczyæ zaczynaj¹c od punktu pierwszego i skoñczyæ na punkcie pierwszym – bez zwracania uwagi na ewentualn¹ mo¿liwoœæ przecinania siê jakichœ odcinków.
+Dostêp do poszczególnych punktów obiektu typu wielobok nale¿y zrealizowaæ przeci¹¿aj¹c operator indeksowania.
+
+Do zweryfikowania poprawnoœci dzia³ania zaimplementowanych klas proszê wykorzystaæ poni¿szy kod testuj¹cy oraz kod zawieraj¹cy wskazówki i podpowiedzi.
+
+
+  punkt p(2, 3);
+  cout << p.x() << ' ' << p.y() << '\n';
+  p.x() = 1;
+  p.y() = 1;
+  cout << p.x() << ' ' << p.y() << '\n';
+  cout << p.odleglosc(punkt()) << "\n\n";
+  const punkt t[] = { punkt(0, 0), punkt(0, 1), punkt(1, 1), punkt(1, 0) };
+  for(size_t i=0; i < sizeof(t)/sizeof(punkt); ++i)
+    cout << i+1 << ")  " << t[i] << endl;
+
+  cout << "\n*****\n";
+  wielobok w1(t, t+4);
+  cout << w1.obwod() << '\n';
+
+  w1[1] = punkt(0.5, 0.5);
+  cout << w1.obwod() << '\n';
+  cout << "***\n\n";  
+ 
+
+  wielobok w2;
+  w2 = wielobok(t, t+3);
+  cout << w2.obwod() << '\n';
+
+  for (size_t i = 0; i < w2.ilosc(); ++i)
+    cout << w2[i].x() << ' ' << w2[i].y() << '\n';
+
+  cout << "\n*****\n";
+  wielobok w3(w2);
+  w3[1] = punkt(0, -1);
+  w3[2] = punkt(-1, -1);
+  for (size_t i = 0; i < w3.ilosc(); ++i)
+    cout << w3[i] << endl;
+  cout << "***\n\n";
+
+  cout << "\n*****\n";
+  cout << w2 << "***\n" << w3;
+  cout << "*****\n\n";
+
+  cout << w2.obwod() - w3.obwod() << "\n\n";
+
+
+  PODPOWIEDZ:
+
+  #ifdef _WIN32
+  #include <windows.h>
+#endif // _WIN32 and _WIN64 too
+
+//...
+
+/*
+  Wszêdzie gdzie znajdziesz ???_xx poeksperymentuj  
+  Przygotuj sobie papier w kratkê, o³ówek, mo¿e te¿ kolorowe pisaki. Mog¹ siê przydaæ.
+*/
+
+
+
+class punkt {
+//...
+  //pamiêtaj o metodzie odleglosc(). Jeœli nie wiesz jak to zrobiæ poszukaj dalej problemu ???_01 i zapoznaj siê ze wskazówkami. 
+//...
+};
+
+ostream& operator<<(ostream& out, const punkt& r){
+  //...
+}
+
+
+class wielobok{  
+  size_t roz;  // Klasa wielobok powinna umo¿liwiaæ przechowywanie dowolnej iloœci punktów.
+  punkt* wsk;  // Mo¿na by³oby u¿yæ kontenera std::vector<punkt> ale Twoim zadaniem jest stworzenie klasy
+               // "zarz¹dzaj¹cej" dynamiczn¹ tablic¹ obiektów typu punkt.
+               // Jak widaæ do tego celu wystarcz¹ dwa pola. Zastanów siê co one reprezentuj¹.  
+public:
+  wielobok():roz(0), wsk(0){}
+  
+ 
+  wielobok(const punkt* b, const punkt* e):roz(e-b>0 ? e-b:0), wsk( roz?new punkt[roz]:0 ){ // ???_02
+    //... tu jeszcze trzeba przepisaæ dane
+  }  
+
+//*   //???_03  // Jeœli nie zdefiniujesz konstruktora kopiuj¹cego i operatora praypisania Twój 
+                // program siê skompiluje i uruchomi. SprawdŸ jednak czy bêdzie dzia³a³ tak jak trzeba.
+  wielobok(const wielobok&r) //...
+  wielobok& operator=(const wielobok&r){
+    if(this != &r){
+      //...
+    }
+    return *this;
+  }
+// */
+
+  ~wielobok(){ 
+    // ... Pamiêtaj, ¿e musisz zwolniæ tablicê obiektów a nie pojedynczy obiekt.
+  }
+
+  punkt& operator[](size_t i){
+    //... //przeci¹¿ony operator indeksowania to klasyczna metoda dostêpowa 
+  }
+/*
+  Jescze tylko druga wersja operatora[], metoda obwód(), metoda ilosc() i klasa powinna byæ gotowa. 
+*/
+
+};
+ostream& operator<<(ostream& out, const wielobok& r){
+  //...
+}
+
+
+int main(){
+  #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+  #endif
+
+
+  punkt p(2, 3);
+  cout << p.x() << ' ' << p.y() << '\n';
+  p.x() = 1;
+  p.y() = 1;
+  cout << p.x() << ' ' << p.y() << '\n';
+  cout << p.odleglosc( punkt() ) << "\n\n"; // ???_01
+                                            // Jeœli nie wiesz miêdzy jakimi punktami jest liczona odleg³oœæ to:
+                                            // - weŸ kartkê w kratkê i narysuj na niej prostok¹tny uk³ad wspó³rzêdnych;
+                                            // - narysuj punkt p o wspó³rzêdnych takich jakie zmieni³eœ kilka linijek wczeœniej (1,1).
+                                            // To w³aœnie punkt p wywo³uje metodê odleglosc().
+                                            // Odleg³oœæ, jak wiadomo, jest liczona miedzy dwoma punktami.
+                                            // Drugim punktem jest ten, który jest argumentem metody odleglosc().
+                                            // Jest nienazwanym obiektem chwilowym typu punkt. (Pamiêtaj, ¿e obiekty chwilowe s¹ zawsze obiektami sta³ymi.)
+                                            // Zastanów siê jaki konstruktor klasy punkt powinien byæ wywo³any w tej sytuacji.
+                                            // Jeœli ju¿ wiesz jaki konstruktor zosta³ u¿yty to wiesz te¿ ju¿ 
+                                            // jakie wspó³rzêdne ma ten drugi punkt. (Jeœli spartoli³eœ ten konstruktor to sam sobie jesteœ winny wg. zasady jak sobie poœcielisz ....)
+                                            // Teraz narysuj ten drugi punkt i wszystko powinno byæ jasne.
+                                            // To w³aœnie miêdzy tymi punktami liczona jest odleg³oœæ.
+                                            // Pewnie za du¿o ju¿ tych wskazówek, ale jeœli ktoœ dalej ma problem
+                                            // to dodam, ¿e przepis jak to policzyæ sformu³owa³ pewien grecki
+                                            // matematyk i filozof ur. ok. 572 p.n.e. 
+                                            // Wynik jaki powinieneœ zobaczyæ na ekranie to 1.41421
+                                              
+
+  const punkt t[] = { punkt(0, 0), punkt(0, 1), punkt(1, 1), punkt(1, 0) };
+
+  for(size_t i=0; i < sizeof(t)/sizeof(punkt); ++i)
+    cout << i+1 << ")  " << t[i] << endl; 
+
+  cout << "\n*****\n";
+  wielobok w1(t, t+4);         // ???_02 Zobacz jaki zadeklarowano typ argumentów tego konstruktora
+                               // Zastanów siê dlaczego. Prztpomnij sobie jaki jest typ zmiennej t.
+                               // Jeœli wiesz to bardzo dobrze. Ja z doœwiadczenia wiem, ¿e wielu osobom wydaje siê, ¿e wiedz¹.
+                               // Dlatego zrób ma³y dodatkowy eksperyment.
+                               // Zobacz co siê wyœwietli jeœli napiszesz kod:
+                               // cout << t;
+                               // cout << *t;
+                               // cout << t[0] << ' ' << *(t+0) << ' ' << t[i] << ' ' << *(t+1) ...
+                               // Przypomnij te¿ sobie co to jest arytmetyka wskaŸników 
+                               // jak¹ wartoœæ bêdzie mia³o wyra¿enie t+4 - t
+                               // Dok³adnie przeanalizuj to co jest napisane tam, gdzie jest prawie gotowa definicja tego konstruktora.
+                               // Na koniec pamiêtaj, ¿e obiekt klasy wiekobok utworzony tym konstruktorem
+                               // ma mieæ w³asny zestaw punktów a nie odwo³ywaæ siê do jakiejœ innej tablicy.
+                               
+  cout << w1.obwod() << '\n';  // Tu powinieneœ zobaczyæ wynik 4
+
+  w1[1] = punkt(0.5, 0.5);     // W tej linijce u¿ywasz dwóch operatorów, które nale¿y zdefiniowaæ w klasie wielobok.
+                               // S¹ to operator[] (indeksowania) i operator= (przypisania). Dok³adniej mówi¹c przypisania z kopiowaniem, bowiem od standardu C++11 mo¿liwy jest tak¿e operator przypisania z przenoszeniem. Ale to nie w tym kursie. 
+                               // Zastanów siê jaki jest typ lewego i prawego argumentu operatora= .
+  
+
+// Dalej ju¿ nie ma ¿adnych nowoœci.   
+// Jeœli sam zrobi³eœ wszystko z poprzednich zadañ to powinno pójœæ jak z p³atka.
+// Poeksperymentuj koniecznie z problemem ???_03
+
+  cout << w1.obwod() << '\n';
+  cout << "***\n\n";  
+  
+
+  wielobok w2;
+  w2 = wielobok(t, t+3);
+  cout << w2.obwod() << '\n';
+
+  for (size_t i = 0; i < w2.ilosc(); ++i)
+    cout << w2[i].x() << ' ' << w2[i].y() << '\n';
+
+  cout << "\n*****\n";
+  wielobok w3(w2);
+  w3[1] = punkt(0, -1);
+  w3[2] = punkt(-1, -1);
+  for (size_t i = 0; i < w3.ilosc(); ++i)
+   cout << w3[i]<< endl;
+  cout << "***\n\n";
+
+  cout << "\n*****\n";
+  cout << w2 <<"***\n"<< w3;
+  cout << "*****\n\n";
+
+  cout << w2.obwod() - w3.obwod() << "\n\n";
+
+  #ifdef _WIN32
+    system("PAUSE");
+  #endif
+  return 0;
+}

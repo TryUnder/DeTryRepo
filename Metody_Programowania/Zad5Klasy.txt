@@ -1,0 +1,282 @@
+Zaprojektuj i zaimplementuj program do obliczania d³ugoœci obwodu i pola powierzchni
+dowolnego wielok¹ta przedstawionego w przestrzeni dwuwymiarowej.
+Opis geometrii wielok¹ta nale¿y pobraæ ze strumienia plikowego zapisanego wed³ug nastêpuj¹cego formatu:
+
+[POLYGON]
+[NUMBER OF NODES]
+n
+[NODES]
+k1 x1 y1
+k2 x2 y2
+... ... ...
+... ... ...
+kn xn yn
+[POLYGON]
+k1 k2 ...... kn
+
+gdzie:
+ n - liczba wierzcho³ków - wêz³ów wielok¹ta,
+ ki - numer wêz³a,
+ xi, yi - wspó³rzêdne wêz³a w uk³adzie kartezjañskim;
+
+W ostatniej sekcji [POLYGON] okreœlona jest kolejnoœæ przetwarzania danych.
+Jest to kolejnoœæ  "przemieszczania siê po wêz³ach",  która mo¿e byæ inna ni¿ kolejnoœæ "wprowadzania wêz³ów" okreœlona w sekcji [NODES].
+
+W programie nale¿y wykorzystaæ mechanizm obs³ugi sytuacji wyj¹tkowych do diagnozowania nieprawid³owoœci formatu danych wejœciowych. Nazwa pliku z danymi mo¿e byæ dowolna, jednak¿e musi mieæ rozszerzenie .txt .
+Do obliczenia pola powierzchni figury nale¿y skorzystaæ z równania:
+
+P= 1/2 * suma od i = 1 do n (x[i]*y[i+1]-x[i+1]*y[i])
+
+Przyk³adowa zawartoœæ pliku z danymi:
+[POLYGON]
+[NUMBER OF NODES]
+4
+[NODES]
+1 0.0 0.0
+3 0.0 0.1
+2 0.1 0.0
+4 0.1 0.1
+[POLYGON]
+1 2 4 3
+
+Do zweryfikowania poprawnoœci dzia³ania zaimplementowanych klas proszê wykorzystaæ poni¿szy kod testuj¹cy oraz kod zawieraj¹cy wskazówki i podpowiedzi.
+
+//...
+
+struct blad {
+  string txt;
+  unsigned lp;
+  blad():lp(0){}
+  blad(const string& a, unsigned b):txt(a), lp(b){}
+};
+ostream& operator<<(ostream& out, const blad& p){return out<<p.txt<< ' ' << p.lp << endl; }
+//---===*****===---
+
+
+int main (int argc, char* argv[])try {
+  #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+  #endif
+
+  if (argc !=2) throw int(0);
+  if (strlen(argv[1]) < 5 ) throw int(1);
+  if (string(argv[1]+(strlen(argv[1])-3))!="txt") throw 2 ;  
+
+  ifstream file(argv[1]);
+  if(!file) throw int (3);
+  {
+    polygon poly;
+    try{
+      poly.read(file);
+      cout<< "obwód : " << poly.obwod()<< endl;
+      cout<< "pole  : " << poly.pole()<< endl;  
+    }
+    catch ( const string& e ){ cout << e << endl;}
+    catch ( const blad&   e ){ cout << e ;}
+    file.close();
+  }
+
+  #ifdef _WIN32
+    system("PAUSE");
+  #endif
+  return 0;
+}
+catch (int err){
+  switch (err) {
+    case 0: cout << err <<": Z³a liczba parametrów programu.\n";
+    break;
+    case 1: cout << err <<": Z³a nazwa pliku z danymi.\n";
+    break;
+    case 2: cout << err <<": Z³e rozszerzenie pliku z danymi - musi byæ *.txt .\n";
+    break;
+    case 3: cout << err <<": Brak pliku o nazwie "<< argv[1] << " .\n";
+  }
+}
+catch ( ... ) { cout << "Nieznana sytuacja wyj¹tkowa.\n"; }
+
+PODPOWIEDZI:
+
+#include <iostream>
+#include <fstream>
+#include <cmath> 
+#ifdef _WIN32
+  #include <windows.h>
+#endif // _WIN32 and _WIN64 too
+
+
+using namespace std;
+class uint{
+  unsigned v;
+public:
+  uint():v(0){}
+  uint(const unsigned& a):v(a){}
+  operator unsigned()const { return v; }
+  friend 
+  ostream& operator<<(ostream& out, const uint& r){ return out << r.v; }
+  friend 
+  istream& operator>>(istream& in,  uint& r){ return in >> r.v; }
+};
+//---===*****===---
+
+struct blad {
+  string txt;
+  unsigned lp;
+  blad():lp(0){}
+  blad(const string& a, unsigned b):txt(a), lp(b){}
+};
+ostream& operator<<(ostream& out, const blad& p){return out<<p.txt<< ' ' << p.lp << endl; }
+//---===*****===---
+
+//*
+using naturalne = uint;     // Klasa uint gwarantuje, ¿e ka¿dy z elementów dowolnej tablicy dynamicznej 
+/*/                         // (obiektów tego typu) bêdzie mia³ wartoœæ 0.
+using naturalne = unsigned; // Typ unsigned tego nie gwarantuje. 
+// */
+
+class polygon;
+
+class point {
+  double x,y;
+  public:
+  point():x(0),y(0){}
+  point(const double& a, const double& b):x(a),y(b){}
+  double distance(const point& a)const; 
+  friend class polygon;
+  friend istream& operator>>(istream&, point&);
+  friend ostream& operator<<(ostream&, const point&);
+};
+double point::distance(const point& a)const {
+  double c2 = (a.x-x)*(a.x-x)+(a.y-y)*(a.y-y);
+  if(c2<1e-20)
+    return 0; 
+  return sqrt(c2); 
+}
+istream& operator>>(istream& in, point& p){return in>>p.x>>p.y; }
+ostream& operator<<(ostream& out, const point& p){return out << p.x <<' '<<p.y; }
+//---===*****===---
+
+
+/*
+class polygon{
+  unsigned n;
+  point* points;
+  naturalne* order;
+  
+ public:
+  polygon():n(0), points(nullptr), order(nullptr){}
+  polygon(const polygon& a);
+  polygon& operator=(const polygon& a);  
+  ~polygon(){ delete[] points; delete[] order; cout << "\n\n!!!~polygon()!!!\n\n"; } 
+ 
+  void read(ifstream & );
+  double obwod()const;
+  double pole()const;
+};
+
+polygon::polygon(const polygon& a)//resztê dopisz sam 
+
+polygon& polygon::operator=(const polygon& a){
+  if(this != &a){
+   //resztê dopisz sam 
+  }
+  return *this;
+}  
+
+void polygon::read(ifstream & f){
+
+  string buf;
+  getline(f,buf);
+
+  if(buf!="[POLYGON]") throw string("Brak nag³ówka \"[POLYGON]\""); 
+  //cout << buf << endl;
+  
+  getline(f,buf);
+  if(buf!="[NUMBER OF NODES]") throw string("Brak nag³ówka \"[NUMBER OF NODES]\""); 
+  //cout << buf << endl;
+
+  f >> n ; 
+  getline(f,buf);
+
+  if(!f || buf[0]!='\0' ) throw string("Nieprawid³owy format parmetru \"n\""); 
+  //cout << n << endl;
+ 
+  if(n<3) throw string("Liczba punktów mniejsza od 3");
+
+  getline(f,buf);
+  if(buf!="[NODES]") throw string("Brak nag³ówka \"[NODES]\""); 
+  //cout << buf << endl;
+
+  //resztê dopisz sam
+  //Wykorzystaj klasê blad do zg³asznia wyj¹tku. 
+  //Oprócz komunikatu tekstowego bêdziesz móg³ wskazaæ np., w którym wierszu lub kolumnie
+  //zidentyfikowany zosta³ b³¹d formatu pliku z danymi.
+}
+
+double polygon::obwod()const{
+  double obw=0;
+  if(!order) throw string ("Brak tablicy order.");
+  if(!points) throw string ("Brak tablicy points.");
+  for(int i=0, j=0; (unsigned)i<n ;++i){
+    j = order[i]-1;
+    if(j<0) throw string ("Niedozwolona wartoœæ 0 w tablicy order.");
+    if(j> //... dopisz sam 
+    obw+=points[j].distance(points[order[(i+1)%n]-1]);
+  }
+  return obw;
+}
+
+double polygon::pole()const{
+//resztê dopisz sam
+}
+*/
+
+int main (int argc, char* argv[])try {
+  #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+  #endif
+
+  if (argc !=2) throw int(0);                               // wyj¹tek typu int o wartoœci 0  
+  if (strlen(argv[1]) < 5 ) throw 1;                        // wyj¹tek typu int o wartoœci 1    
+  
+  if (string(argv[1]+(strlen(argv[1])-3))!="txt") throw 2 ;  
+/*  
+  // Warunek sprawdzaj¹cy czy plik posiada rozszerzenie .txt mo¿na sprawdziæ tak¿e na lilka innych sposobów.
+  if( string(argv[1],(strlen(argv[1])-3), 3) != "txt" ) throw 2; 
+  if( strcmp("txt", argv[1]+(strlen(argv[1])-3)) ) throw 2;  
+  char ext[4]; strcpy(ext, argv[1]+(strlen(argv[1])-3) ); if(strcmp("txt", ext)) throw 2; 
+  // Spróbuj znaleŸæ jeszcze inne rozwi¹zanie.
+*/
+
+  ifstream file(argv[1]);
+  if(!file) throw 3;
+  {
+//    polygon poly;
+    try{
+     cout << "\n---===*****===---\nZanim zdefiniujesz klasê polygon zobacz jak dzia³a reszta programu.";
+     cout << "\nUruchamiaj program tak, by zobaczyæ ka¿dy z komunikatów obs³ugi wyj¹tków typu int.\n---====***====---\n";
+//      poly.read(file);
+//      cout<< "obwód : " << poly.obwod()<< endl;
+//      cout<< "pole  : " << poly.pole()<< endl;  
+    }
+    catch ( const string& e ){ cout << e << endl;}
+    catch ( const blad&   e ){ cout << e ;}
+    file.close();
+  }
+
+  #ifdef _WIN32
+    system("PAUSE");
+  #endif
+  return 0;
+}
+catch (int err){
+  switch (err) {
+    case 0: cout << err <<": Z³a liczba parametrów programu.\n";
+    break;
+    case 1: cout << err <<": Z³a nazwa pliku z danymi.\n";
+    break;
+    case 2: cout << err <<": Z³e rozszerzenie pliku z danymi - musi byæ *.txt .\n";
+    break;
+    case 3: cout << err <<": Brak pliku o nazwie "<< argv[1] << " .\n";
+  }
+}
+catch ( ... ) { cout << "Nieznana sytuacja wyj¹tkowa.\n"; }

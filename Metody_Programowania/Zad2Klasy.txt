@@ -1,0 +1,203 @@
+Zaprojektuj i zaimplementuj klasy adres i osoba.
+
+Klasa osoba niech bêdzie opisana trzema polami sk³adowymi przeznaczonymi do przechowywania takich informacji jak:
+
+imiê;
+wiek;
+adres alokowanego dynamicznie obiektu typu adres .
+Klasa adres niech tak¿e zawiera trzy pola sk³adowe, do przechowywania takich informacji jak:
+
+miasto
+ulica
+numer budynku (liczba - bez teoretycznie mo¿liwych wartoœci w stylu 10a)
+Do zweryfikowania poprawnoœci dzia³ania zaimplementowanych klas proszê wykorzystaæ poni¿szy kod testuj¹cy oraz kod zawieraj¹cy wskazówki i podpowiedzi.
+
+
+adres* wsk = new adres("Czêstochowa", "D¹browskiego", 73);
+
+cout <<  wsk << '\n';
+cout << *wsk << '\n';
+
+adres a1(*wsk);
+delete wsk;
+wsk=nullptr;
+
+const adres* wsk1 = new adres("£ódŸ", "Piotrkowska", 33);
+
+cout << a1 << '\n';
+cout << *wsk1 << '\n';
+
+adres a2;
+cout << a2 << '\n';
+a2 = a1;
+cout << a2 << '\n';
+
+osoba os1("Ala", 25, *wsk1);
+delete wsk1;
+
+cout << os1 << '\n';
+osoba os2(os1);
+
+os1.miasto()="Zmieniono miasto osoby 1.";
+cout << os2 << '\n';
+
+osoba os3;
+cout << os3 << '\n';
+os3 = os2;
+
+os1.miasto()="Drugi raz zmieniono miasto osoby 1.";
+cout << os3 << '\n';
+
+
+PODPOWIEDZI:
+
+#include <iostream>
+#ifdef _WIN32
+  #include <windows.h>
+#endif // _WIN32 and _WIN64 too
+
+using namespace std;
+
+/*
+  Wszêdzie gdzie znajdziesz ???_xx poeksperymentuj  
+*/
+
+class adres{
+  string mia, ul;
+  int nr;
+public:
+ 
+/*  // ???_03
+  adres(){}
+/*/
+  adres()://resztê dopisz sam {}
+// */
+  
+//  adres(const string& a1, const string& a2, int a3) //resztê dopisz sam
+  ostream& view(ostream& out)const{
+    return out << mia << ", " << ul << ", " << nr << '\n';
+  }
+
+  friend 
+  ostream& operator<< (ostream& out, const adres& r);
+};
+ostream& operator<< (ostream& out, const adres& r){
+  return r.view(out);  
+}
+
+class osoba{
+  string im;
+  int wi;
+  adres* adr;
+public:
+//  osoba() //resztê dopisz sam
+  osoba(const string& a1, int a2, const adres& a3):im(a1), wi(a2), adr(new adres(a3)){}
+
+/*
+  osoba(const osoba& a1) //resztê dopisz sam
+  osoba& operator=(const osoba& a1){
+    // resztê dopisz sam
+    return *this;
+  }
+// */
+  ~osoba(){ delete adr; }
+
+  // resztê dopisz sam - potrzebne s¹ metody miasto() w tej klasie
+
+  friend 
+  ostream& operator<< (ostream& out, const osoba& r);
+};
+ostream& operator<< (ostream& out, const osoba& r){
+  // resztê dopisz sam
+  return out ;  
+}
+
+int main(){
+  #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8); 
+  #endif
+
+
+  adres* wsk = new adres("Czêstochowa", "D¹browskiego", 73);
+
+/*                     // ???_01
+  cout <<  wsk << '\n'; // Zastanów siê czym ró¿ni¹ siê te dwie linijki kodu 
+/*/                     // jaki jest w jednym i drugim przypadku typ  
+  cout << *wsk << '\n'; // prawego argumentu operatora << . ¯eby ten fragment kodu siê wykona³ musisz przeci¹¿yæ operator<<  .                      
+// */
+
+    
+
+  adres a1(*wsk);     // ???_02 Czy wiesz co tu siê dzieje? Co jest wartoœci¹ wy³uskania wskaŸnika wsk ?
+                      // Tu wywo³a³eœ konstruktor kopiuj¹cy. Nie musia³eœ go definiowaæ. Zadzia³a mechanizm kopiowania sk³adowa po sk³adowej.
+  
+  delete wsk;         // Skoñczy³ siê czas trwania dynamicznego obiektu, na który wskazywa³ wskaŸnik wsk.  
+  wsk=nullptr;        // Sam wskaŸnik jednak nadal jest. Od tej pory nie wskazuje na ¿aden obiekt typu adres.
+                      // Ma wartoœæ 0 (zero).
+           
+  const adres* wsk1 = new adres("£ódŸ", "Piotrkowska", 33);
+
+  cout << a1 << '\n';
+  cout << *wsk1 << '\n';
+
+  adres a2;           // Tutaj definiujesz obiekt typu adres z u¿yciem konstruktora domyœlnego.
+                      // Mo¿esz go, co prawda, zdefiniowaæ tak, by nie by³o w nim listy inicjalizacyjnej.
+                      // Sk³adowe typu string nie bêd¹ mia³y ¿adnych wartoœci (d³ugoœæ ³añcucha znaków bêdzie zero), - wiêcej: https://en.cppreference.com/w/cpp/string/basic_string
+                      // natomiast pole numeru budynku bêdzie mia³o wartoœæ bli¿ej nieokreœlon¹. 
+                      // Zdefiniuj ten konstruktor jednak tak, 
+  cout << a2 << '\n'; // by efektem instrukcji, któr¹ widzisz po lewej stronie by³o: brak, brak, 0  
+                      // ???_03 Poeksperymentuj. Konstruktor domyœlny z list¹ inicjalizacyjn¹ i bez.
+
+  a2 = a1;            // Tu wywo³a³eœ operator przypisania. Nie musisz go definiowaæ. Zadzia³a mechanizm kopiowania sk³adowa po sk³adowej.  
+  cout << a2 << '\n';
+
+  osoba os1("Ala", 25, *wsk1); //By w ten sposób zdefiniowaæ obiekt typu osoba w klasie musisz zdefiniowaæ odpowiedni konstruktor.
+  delete wsk1;
+
+  cout << os1 << '\n';
+  
+
+  osoba os2(os1);     // ???_04 Ta definicja, analogicznie jak w przypadku ???_02 , jest mo¿liwa jeœli nie zdefiniujesz konstruktora kopiuj¹cego.
+                      // Ale! Ale program nie bêdzie dzia³aæ prawid³owo. Domyœlnie dzia³aj¹cy mechanizm kopiowania sk³adowa po sk³adowej
+                      // sprawi, ¿e pole adr (obiektu os2) bêdzie mia³o tê sam¹ wartoœæ co pole adr obiektu os1.
+                      // Teraz ju¿ dwa obiekty typu osoba bêd¹ "chcia³y zarz¹dzaæ" raz alokowanym dynamicznie obiektem typu adres.
+                      // Taka sytuacja wczeœniej czy póŸniej musi siê skoñczyæ Ÿle.
+                      // Skoro os2 ma byæ kopi¹ os1 to musisz zadbaæ o to, 
+                      // by os2 dysponowa³ w³asn¹ kopi¹ wartoœci obiektu typu adres  
+                      // a nie kopi¹ adresu obiektu typu adres.
+
+                      // Jeœli dalej masz k³opot ze zrozumieniem co tu siê dzieje to pos³u¿ê siê takim oto przyk³adem.
+                      // Pawe³ i Gawe³ siedz¹ w jednym domku.
+                      // Pawe³ na górze a Gawe³ na dole (dwa obiekty tego samego typu).
+                      // Pawe³ w³aœnie kupi³ sobie nowy samochód. 
+                      // Gawe³ - zazdoœnik - chce mieæ taki sam.
+                      // Czy wystarczy Gaw³owi, ¿e wie gdzie (pod jakim adresem) Pawe³ parkuje samochód.
+                      // Czy samochód Paw³a ma byæ wspólnym zasobem obydwu gagatków?
+                      // Jeœli Gawe³ chce mieæ to samo co Pawe³ to musi nabyæ taki sam samochód. 
+                      // Mieæ w³asn¹ kopiê obiektu a nie informacjê o adresie gara¿owania w³asnoœci Paw³a. 
+             
+  os1.miasto()="Zmieniono miasto osoby 1.";  // Czyli Pawe³ uszkodzi³ swój samochód
+
+  cout << os2 << '\n';                       // Czy samochód Gaw³a ma mieæ takie samo uszkodzenie ?
+                                             // ???_05 Zakomentuj/odkomentuj definicjê konstruktora kopiuj¹cego
+                                             // Porównaj wyniki dzia³ania programu.
+ 
+  osoba os3;            // Tu potrzebny jest konstruktor domyœlny klasy osoba
+  cout << os3 << '\n';
+  
+  os3 = os2;            // Od teraz os3 ma byæ kopi¹ os2. Taka operacja jest mo¿liwa nawet jeœli w klasie osoba
+                        // nie zdefiniowa³eœ operatora przypisania. Zadzia³a mechanizm kopiowania sk³adowa po sk³adowej. 
+                        // Jeœli jednak nie zadbasz o to, by skopiowana zasta³a wartoœæ obiektu typu adres
+                        // to efekt bêdzie taki sam jak: patrz ???_04
+                        // ???_06 Zakomentuj/odkomentuj definicjê operatora przypisania 
+                        // Porównaj wyniki dzia³ania programu. 
+  
+  os1.miasto()="Drugi raz zmieniono miasto osoby 1.";  
+
+  cout << os3 << '\n';  
+
+  #ifdef _WIN32
+    system("PAUSE");
+  #endif
+  return 0;
+}

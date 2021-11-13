@@ -1,0 +1,164 @@
+Zaprojektuj i zaimplementuj oraz przetestuj klasê opisuj¹c¹ punkt w przestrzeni trójwymiarowej.
+Do przechowywania wspó³rzêdnych punktu u¿yj niedynamicznej trzyelementowej tablicy typu double.
+
+Klasa powinna dostarczaæ nastêpuj¹c¹ funkcjonalnoœæ:
+
+indeksowany dostêp do wspó³rzêdnej punktu,
+wyznaczanie odleg³oœci miêdzy dwoma punktami,
+dodawanie/odejmowanie dwóch punktów - realizowane jako suma/ró¿nica odpowiadaj¹cych sobie wspó³rzêdnych punktów,
+symetryczny iloczyn punktu z liczb¹ zmiennoprzecinkow¹ - realizowany jako iloczyn wspó³rzêdnych punktu i liczby,
+porównanie dwóch punktów na równoœæ i mniejszoœæ; punkty s¹ sobie równe jeœli ró¿nica ich odleg³oœci od pocz¹tku uk³adu wspó³rzêdnych jest mniejsza ni¿ 10-10.
+dostêp do strumienia wejœciowego i wyjœciowego.
+Do zweryfikowania poprawnoœci dzia³ania zaimplementowanych klas proszê wykorzystaæ poni¿szy kod testuj¹cy oraz kod zawieraj¹cy wskazówki i podpowiedzi.
+
+
+//...
+class point{
+  double tab[3];
+  //...
+};
+//...
+
+int main(){
+//...
+  double x[2][3] = {{1.0, 1.0, 1.0},
+                    {1.0, 2.0, 3.0}};
+
+  point p1(x[0]), p2(x[1]); 
+  const point p3(0.4, 0.2, 0.1);
+ 
+  cout << p1 << ", " << p2 << '\n';
+  cout << p3[0] << ' ' << p3[1] << ' ' << p3[2] << '\n';
+ 
+  cout << p1.distance(point()) << endl;
+  cout << p3.distance(p1) << endl;
+
+  cout << p1 + p2 << endl;
+  cout << p1 - p3 << endl;
+ 
+  cout << 3.14 * p2 << endl;
+  cout << p2 * 3.14 << endl;
+ 
+  cout << (p1 < p3) << endl;
+  cout << (p1 == point(1.0, 1.0, 1.0)) << endl;
+
+  cin >> p1;
+  cout << p1 << '\n';
+
+  //...
+}
+
+
+PODPOWIEDZI:
+
+#include <iostream>
+#include <cmath>
+#ifdef _WIN32
+  #include <windows.h>
+#endif // _WIN32 and _WIN64 too
+
+using namespace std;
+
+/*
+  Wszêdzie gdzie znajdziesz ???_xx poeksperymentuj  
+*/
+
+//*
+class point{
+  double tab[3];
+public:
+  //...
+  //Jeœli zastanawiasz siê, czy powinieneœ zdefiniowaæ konstruktor kopiuj¹cy i operator przypisania to wykonaj 
+  //eksperyment ???_02 - znajdziesz go na samym koñcu przyk³adu.
+};
+
+// */
+
+
+//...
+
+int main(){
+
+  double x[2][3] = { {1.0, 1.0, 1.0},
+                     {1.0, 2.0, 3.0} }; // Przypomnij sobie co to s¹ tablice, jak nale¿y interpretowaæ tablice wielowymiarowe.
+                                        // Jaki jest typ zmiennej x.
+                                        // Jak nale¿y interpretowaæ x[0], czy x[1].
+                                        // Jeœli nie wiesz to popatrz jak zapisa³em ³añcuch inicjuj¹cy tablicê.
+                                        // Mog³em to zrobiæ np. tak: x[2][3] = {1.0, 1.0, 1.0, 1.0, 2.0, 3.0};
+                                        // Chcia³em jednak uwidoczniæ drugi wymiar.
+                                        // Sposób inicjowania tablicy wielowymiarowej podlega œciœle okreœlonym regu³om, które zapewne pamiêtasz z podstaw informatyki.
+                                        // ???_01
+                                        // Jeœli masz jednak w¹tpliwoœci to poeksperymentuj - wyœwietlaj wartoœci tablicy x jeœli zainicjujesz j¹ inaczej:
+                                        // np.:
+                                        // double x[2][3] = { 9.0 };
+                                        // double x[2][3] = { 9.0, 8.0 };
+                                        // double x[2][3] = { {9.0}, {8.0} };
+                                        // double x[2][3] = { {9.0, 8.0}, {7.0} };
+                                        // double x[2][3] = { {9.0, 8.0, 7.0} };
+
+
+/*
+  point p1(x[0]), p2(x[1]);             // Zapewne doskonale wiesz jak do funkcji przekazywaæ tablice za pomoc¹ wskaŸników.
+                                        // C++ daje jeszcze jeden sposób. Jest nim przekazywanie tablicy przez referencjê - dok³adniej mówi¹c przez referencjê do tablicy o okreœlonym typie i rozmiarze.
+                                        // W tym zadaniu ten rozmiar to 3. 
+                                        // Jest to bardzo bezpieczny i wygodny sposób - kompilator skrupulatnie dokona sprawdzenia typu i rozmiaru przekazywanej tablicy.
+                                        // Tu w³aœnie definiujesz dwa obiekty typu point, gdzie wywo³ywany jest konstruktor, którego argumentem jest referencja do tablicy (znanego typu i rozmiaru) 
+ 
+
+
+
+  const point p3(0.4, 0.2, 0.1);        
+ 
+  cout << p1 << ", " << p2 << '\n';     
+  cout << p3[0] << ' ' << p3[1] << ' ' << p3[2] << '\n';
+ 
+  cout << p1.distance(point()) << endl; // distance( ) -analogicznie jak w zadaniu 3  
+  cout << p3.distance(p1) << endl;
+
+  cout << p1 + p2 << endl;              // Dwuargumentowy operator+ oraz operator- mo¿e byæ zdefiniowany jako metoda albo funkcja niebêd¹ca metod¹.  
+  cout << p1 - p3 << endl;              // Wypróbuj obydwa sposoby implementacji operatorów np. + jako metoda, a - jako funkcja zewnêtrzna 
+                                        // Pamiêtaj, ¿e wynikiem dzia³ania tych operatorów jest nowy obiekt obliczony na podstawie wartoœci lewego i prawego argumentu funkcji.
+                                        // Wskazówka - do implementacji tych operatorów wykorzystaj jeden z konstruktorów klasy point  
+
+  cout << 3.14 * p2 << endl;            // Ta operacja mo¿e byæ zrealizowana wy³¹cznie za pomoc¹ przeci¹¿onego operatora, który nie mo¿e byæ metod¹ klasy. 
+  cout << p2 * 3.14 << endl;            // To mo¿e byæ realizowane jak w przypadku operatorów + i -
+ 
+
+  cout << (p1 < p3) << endl;                
+
+  cout << (p1 == point(1.0, 1.0, 1.0)) << endl;
+
+  cin >> p1;
+
+  cout << p1 << '\n';
+// */
+ 
+/*  ???_02
+
+  //W klasie point zdefiniuj: const double* T3()const{ return tab; } 
+  //Analizuj dok³adnie wyniki wyœwietlane na ekranie.
+
+  cout << "\n***e0**\n";
+  point e0;
+  cout << &e0 << '\n' << e0.T3() << '\n' << e0 << endl;
+
+  cout << "\n***e1**\n";
+  point e1(x[0]);
+  cout << x << "  " << x[0] << "  (" << x[0][0] << ")  " << &x[0][0] << '\n';
+  cout << &e1 << '\n' << e1.T3() << '\n' << e1 << endl; 
+
+  cout << "\n***e2**\n";
+  point e2(e1);
+  cout << &e2 << '\n' << e2.T3() << '\n' << e2 << endl;
+
+  cout << "\n***e0**\n";
+  e0 = e2;
+  cout << &e0 << '\n' << e0.T3() << '\n' << e0 << endl;
+
+// */
+
+  #ifdef _WIN32
+    system("PAUSE");
+  #endif
+  return 0;
+}
