@@ -1,0 +1,165 @@
+Zaprojektowaæ i zaimplementowaæ klasy: punkt, prostok¹t, oraz graniastos³up, zak³adaj¹c ¿e:
+
+punkt jest opisany trzema wspó³rzêdnymi (x,y,z) w prostok¹tnym uk³adzie wspó³rzêdnych X-Y-Z;
+
+prostok¹t posiada szerokoœæ a i wysokoœæ b, le¿y w p³aszczyŸnie równoleg³ej do p³aszczyzny X-Y, a wierzcho³ki znajduj¹ce siê na przek¹tnej maj¹ wspó³rzêdne : (x, y, z) oraz (x+a, y+b, z);
+
+graniastos³up posiada podstawê typu prostok¹t i wysokoœæ h.
+
+Wszystkie z tworzonych klas wyposa¿yæ w zestaw konstruktorów pozwalaj¹cych na definiowanie obiektów o zadanych wartoœciach pocz¹tkowych, oraz zestaw metod dostêpowych.
+
+Dodatkowo klasy prostok¹t, oraz graniastos³up wyposa¿yæ w metody pozwalaj¹ce na obliczanie odpowiednio pola powierzchni oraz objêtoœci poszczególnych obiektów.
+
+Do zweryfikowania poprawnoœci dzia³ania zaimplementowanych klas proszê wykorzystaæ poni¿szy kod testuj¹cy oraz kod zawieraj¹cy wskazówki i podpowiedzi.
+
+/*
+  punkt p1, p2(1,2,3);         
+  const punkt p3(1.1,2.2,3.3);
+ 
+  cout << p1.x() << endl;
+  cout << p2.x() << endl;
+ 
+  cout << p3.x() << endl;     
+
+  cout << p3.x() << '\t' << p3.y() << '\t' << p3.z() << endl;
+ 
+  p1.x()=1; p1.y()=10; p1.z()=100;  
+                                    
+  cout << p1.x() << '\t' << p1.y() << '\t' << p1.z() << endl;
+ 
+  prostokat pr1, pr2(1,2,3,10.5, 20.5);
+                                        
+  const prostokat pr3(p2,5,5);
+
+  pr1.x()=2; pr1.y()=20; pr1.x()=200; pr1.a()= 10; pr1.b()=10;
+  cout << pr1.x() << '\t' << pr1.y() << '\t' << pr1.z() << '\t'
+       << pr1.a() << '\t' << pr1.b() << '\t' << endl;
+  cout << pr1.pole() << endl;
+
+
+  cout << pr3.x() << '\t' << pr3.y() << '\t' << pr3.z() << '\t'
+       << pr3.a() << '\t' << pr3.b() << '\t' << endl;
+
+  cout << pr3.pole() << endl;          
+
+  graniastoslup g1, g2(1,2,3,10.5,20.5,30.5), g3(p2,100,200,300);
+  const graniastoslup g4(pr3,5);
+
+  cout << g4.x() << '\t' << g4.y() << '\t' << g4.z() << '\n'
+       << g4.a() << '\t' << g4.b() << '\t' << g4.h() << '\n'
+       << g4.objetosc() << endl;
+
+  g1.a()=10; g1.b()=10; g1.h()=10;
+ 
+  cout << g1.x() << '\t' << g1.y() << '\t' << g1.z() << '\n'
+       << g1.a() << '\t' << g1.b() << '\t' << g1.h() << '\n'
+       << g1.objetosc() << endl;
+       */
+
+PODPOWIEDZI:
+#include<iostream>
+
+using namespace std;
+
+/*
+  Wszêdzie gdzie znajdziesz ???_xx poeksperymentuj  
+*/
+
+class punkt{
+  double x_, y_, z_;
+    
+public:
+  //*  ???_01  Zobacz co siê stanie jeœli nie zdefiniujesz konstruktora domyœlnego
+  punkt(): x_(0), y_(0), z_(0){}
+  // */
+  punkt(const double& a1, const double& a2, const double& a3 ): x_(a1), y_(a2), z_(a3){}
+  
+  double& x() { return x_; } // ???_02
+
+  /*
+  Dalej musisz popracowaæ samodzielnie   
+  */ 
+ 
+};
+ 
+class prostokat{
+  // ...
+};
+  
+class graniastoslup{
+  // ...
+};
+
+
+
+int main(){
+
+  punkt p1, p2(1,2,3);         // ???_01
+  const punkt p3(1.1,2.2,3.3);
+  cout << p1.x() << endl; 
+  cout << p2.x() << endl;
+
+  /*                          // ???_02 zobacz czy uda siê wyœwietliæ wartoœæ sk³adowej x_ obiektu p3
+  cout << p3.x() << endl;     // Jeœli siê nie kompiluje to zwróæ uwagê na fakt, ¿e definicja obiektu p3 
+  // */                       // jest inna ni¿ definicja obiektów p1 i p2.
+
+
+/*  // Teraz przenoœ komentarz linijka po linijce. Odkomentuj jedn¹ - góra dwie instrukcje 
+    // i zastanów siê jakie funkcjonalnoœci powinna posiadaæ klasa, by kod móg³ siê skompilowaæ i wykonaæ.
+    // Zawsze musisz wiedzieæ co ma robiæ jakaœ funkcja 
+    // jak nale¿y j¹ zadeklarowaæ i jak zdefiniowaæ.
+    // Zawsze pamiêtaj o typie b¹dŸ typach argumentów formalnych 
+    // i czy funkcja ma coœ zwróciæ, jeœli tak to w jaki sposób.
+  
+  cout << p3.x() << '\t' << p3.y() << '\t' << p3.z() << endl;
+ 
+  p1.x()=1; p1.y()=10; p1.z()=100;  // ???_03  Zastanów siê co tu siê dzieje. Jeœli wiesz to dobrze.
+                                    // Jeœli nie to pamiêtaj, ¿e operator przypisania jest funkcj¹.
+                                    // Chocia¿ go nie zdefiniowa³eœ to jest dostêpny.
+                                    // W tej klasie bêdzie dzia³a³ perfekcyjnie (nie zawsze jednak tak jest).
+                                    // Zastanów siê jaki jest typ lewego i prawego argumentu tego operatora (tej funkcji).
+ 
+  cout << p1.x() << '\t' << p1.y() << '\t' << p1.z() << endl;
+  
+
+
+  prostokat pr1, pr2(1,2,3,10.5, 20.5); // Definiuj¹c piêcioargumentowy konstruktor klasy prostokat
+                                        // pamiêtaj, ¿e klasa punkt ma swoje konstruktory.
+                                        
+  const prostokat pr3(p2,5,5);
+
+  pr1.x()=2; pr1.y()=20; pr1.x()=200; pr1.a()= 10; pr1.b()=10;
+  cout << pr1.x() << '\t' << pr1.y() << '\t' << pr1.z() << '\t' 
+       << pr1.a() << '\t' << pr1.b() << '\t' << endl; 
+  cout << pr1.pole() << endl;
+
+
+  cout << pr3.x() << '\t' << pr3.y() << '\t' << pr3.z() << '\t' 
+       << pr3.a() << '\t' << pr3.b() << '\t' << endl; 
+
+  cout << pr3.pole() << endl;           // ???_04 
+                                        // Jeœli zobaczy³eœ poprawny wynik na ekranie to dobrze.   
+                                        // Jeœli mia³eœ k³opoty ze skompilowaniem tej linii kodu
+                                        // to najwyraŸniej spartoli³eœ* metodê pole(). (*) spartoliæ to nie jest brzydkie s³owo - zobacz w s³owniku.
+                                        // Ja domyœlam siê dlaczego.
+                                        // Ty jednak musisz popracowaæ sam.
+                                        // Wskazówka - wróæ do problemu ???_02.
+                                        // Jeœli znalaz³eœ sam rozwi¹zanie problemu ???_04 
+                                        // nigdy ju¿ nie zapomnisz dlaczego nie chcia³o siê skompilowaæ ;).
+
+  graniastoslup g1, g2(1,2,3,10.5,20.5,30.5), g3(p2,100,200,300);
+  const graniastoslup g4(pr3,5);
+
+  cout << g4.x() << '\t' << g4.y() << '\t' << g4.z() << '\n' 
+       << g4.a() << '\t' << g4.b() << '\t' << g4.h() << '\n'
+       << g4.objetosc() << endl;
+
+  g1.a()=10; g1.b()=10; g1.h()=10;
+  
+  cout << g1.x() << '\t' << g1.y() << '\t' << g1.z() << '\n' 
+       << g1.a() << '\t' << g1.b() << '\t' << g1.h() << '\n'
+       << g1.objetosc() << endl;
+  
+*/
+  return 0;
+}
