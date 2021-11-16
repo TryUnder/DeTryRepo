@@ -33,6 +33,13 @@ public:
 		return p;
 	}
 
+	friend const point operator *(const double& pi, const point& ra) {
+		point p;
+		for (int i = 0; i <= 2; ++i)
+			p.tab[i] = pi * ra.tab[i];
+		return p;
+	}
+
 }; 
 
 ostream& operator <<(ostream& out, const point& obj) {
@@ -61,9 +68,9 @@ int main() {
 	cout << p1 - p3 << endl;
 	
 	cout << 3.14 * p2 << endl;
-	/*
+	
 	cout << p2 * 3.14 << endl;
-
+	/*
 	cout << (p1 < p3) << endl;
 	cout << (p1 == point(1.0, 1.0, 1.0)) << endl;
 
