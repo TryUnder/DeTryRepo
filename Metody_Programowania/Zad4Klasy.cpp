@@ -42,13 +42,13 @@ public:
 
 	friend const point operator *(const point& la, const double& pi) {
 		point p;
-		for (int i = 0; i < sizeof(la.tab) / sizeof(la.tab[0]); ++i) 
+		for (int i = 0; i < la.size(); ++i) 
 			p.tab[i] = la.tab[i] * pi;
 		return p;
 	}
 
-	 int size() {
-		return static_cast<int>(sizeof(this->tab / this->tab[2]));
+	 int size() const {
+		return static_cast<int>(sizeof(this->tab) / sizeof(this->tab[2]));
 	}
 
 }; 
