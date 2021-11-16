@@ -10,6 +10,9 @@ public:
 	point(double x, double y, double z) : tab{x,y,z} {}
 
 	friend ostream& operator <<(ostream& out, const point& obj);
+	const double& operator[] (const int& rozmiar) const {
+		return tab[rozmiar];
+	}
 }; 
 
 ostream& operator <<(ostream& out, const point& obj) {
@@ -26,9 +29,9 @@ int main() {
 	const point p3(0.4, 0.2, 0.1);
 	
 	cout << p1 << ", " << p2 << '\n';
-	/*
+	
 	cout << p3[0] << ' ' << p3[1] << ' ' << p3[2] << '\n';
-
+	/*
 	cout << p1.distance(point()) << endl;
 	cout << p3.distance(p1) << endl;
 
