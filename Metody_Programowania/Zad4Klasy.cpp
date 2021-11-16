@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 class point {
@@ -13,6 +14,11 @@ public:
 	const double& operator[] (const int& rozmiar) const {
 		return tab[rozmiar];
 	}
+
+	double distance(const point& obj) const {
+		return sqrt(pow(obj.tab[0] - this->tab[0], 2) + pow(obj.tab[1] - this->tab[1], 2));
+	}
+
 }; 
 
 ostream& operator <<(ostream& out, const point& obj) {
@@ -31,10 +37,11 @@ int main() {
 	cout << p1 << ", " << p2 << '\n';
 	
 	cout << p3[0] << ' ' << p3[1] << ' ' << p3[2] << '\n';
-	/*
+	
 	cout << p1.distance(point()) << endl;
+	
 	cout << p3.distance(p1) << endl;
-
+	/*
 	cout << p1 + p2 << endl;
 	cout << p1 - p3 << endl;
 
