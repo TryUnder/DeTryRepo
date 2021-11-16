@@ -1,0 +1,142 @@
+-- Zad1 
+-- Poka¿ atrybuty tabeli Studenci.
+DESC studenci;
+
+-- Zad2
+-- Wyœwietl wszystkie wiersze znajduj¹ce siê w tabeli Studenci
+SELECT * FROM studenci;
+
+-- Zad 3
+-- Na podstawie danych znajduj¹cych siê w tabeli Studenci.
+-- Zad 3.1
+-- Wyœwietl listê zawieraj¹c¹ nazwiska i imiona wszystkich studentów.
+SELECT nazwisko, imiona 
+FROM studenci;
+
+-- Zad 3.2
+-- Wyœwietl informacje dotycz¹c¹ kierunków (bez powtórzeñ) na jakich studiuj¹ studenci, których dane
+-- znajd¹ siê w tabeli
+SELECT DISTINCT kierunek
+FROM studenci;
+
+-- Zad 3.3
+--Wyœwietl listê prezentuj¹c¹ dane wszystkich studentów studiuj¹cych na kierunku informatyka w zakresie
+--ich nazwisk, imion, trybu studiów, roku, grupy dziekañskiej i zakresu. Dane uporz¹dkuj wg. roku w formie
+--niemalej¹cej (od 1) i nazwiska w formie „od ¯ do A”
+DESC studenci;
+SELECT imiona, nazwisko, tryb, rok, gr_dziekan, zakres
+FROM studenci
+ORDER BY 4, 2 DESC;
+
+-- Zad 3.4
+-- Wyœwietl dane studentów studiuj¹cych na 3-im roku i przynale¿¹cych do 2-ej grupy dziekañskiej
+SELECT * FROM studenci
+WHERE ROK LIKE 3 AND gr_dziekan LIKE 2;
+
+-- Zad 3.5
+-- Wyœwietl dane studentów, którzy nie maj¹ obliczonej sredniej (brak wartoœci w ramach kolumny srednia).
+SELECT * FROM studenci
+WHERE NVL(srednia,0) LIKE 0;
+
+-- Zad 3.6
+-- Wyœwietl nazwiska, imiona i roczniki studentów (rok) pierwszego stopnia studiów stacjonarnych z lat (rok):
+-- 2, 3, 4 (warunek zbuduj na kilka sposobów). Dane wyœwietl uporz¹dkowane w kolejnoœci alfabetycznej
+-- wg nazwisk studentów
+SELECT nazwisko, imiona, rok
+FROM studenci
+WHERE stopien LIKE 1 AND rok IN(2,3,4)
+ORDER BY nazwisko;
+
+-- Zad 3.7
+-- Wyœwietl imiona i nazwiska studentek (pañ) – kolumny imiona i nazwisko.
+SELECT imiona, nazwisko
+FROM studenci
+WHERE imiona LIKE '%a';
+
+-- Zad 3.8
+-- Wyœwietl imiona i nazwiska studentów (panów).
+SELECT imiona, nazwisko
+FROM studenci
+WHERE imiona NOT LIKE '%a';
+
+-- Zad 3.9
+-- Wyœwietl dane wszystkich Adamów, Konradów i Magdalen
+SELECT * FROM studenci
+WHERE Upper(imiona) IN('ADAM','KONRAD','MAGDALENA');
+
+-- Zad 3.10
+-- Wyœwietl dane wszystkich Kowalskich oraz Nowaków pañ i panów
+SELECT * FROM studenci
+WHERE Upper(nazwisko) IN('KOWALSKI','NOWAK');
+
+-- Zad 3.11
+-- Wyœwietl alfabetycznie uporz¹dkowan¹ listê imion studentów, których dwie pierwsze litery mieszcz¹ siê
+-- w przedziale alfabetycznym od DO do MI (np. Dorota, Helena, Jan, Marcin)
+SELECT imiona
+FROM studenci
+WHERE Upper(imiona) BETWEEN 'DO%' AND 'MI%'
+ORDER BY 1;
+
+-- Zad 4
+-- Poka¿ atrybuty tabeli Pracownicy.
+DESC pracownicy;
+
+-- Zad 5
+-- Na podstawie danych znajduj¹cych siê w tabeli Pracownicy
+-- Zad 5.1
+-- Wyœwietl listê zawieraj¹c¹ nazwiska pracowników i ich p³acê (kolumny nazwisko i placa).
+SELECT nazwisko, placa
+FROM pracownicy;
+
+-- Zad 5.2
+-- Wyœwietl listê zawieraj¹c¹ nazwiska pracowników wraz z wartoœciami ich tzw. „dniówek” obliczonych
+-- na podstawie wartoœci znajduj¹cych siê w ramach kolumny placa (Rys. 9). W ramach zadania nale¿y przyj¹æ
+-- za³o¿enie, ¿e w ka¿dym miesi¹cu wystêpuje 20 dni roboczych.
+SELECT nazwisko, placa/20 AS "DNIÓWKA"
+FROM pracownicy;
+
+-- Zad 5.3
+-- Wyœwietl listê miesiêcznych ca³kowitych pensji aktualnych pracowników (nazwisko, nr_akt) pracuj¹cych
+-- w ramach umowy na czas nieokreœlony (nieokreœlona wartoœæ kolumny data_zwol); lista ma byæ
+-- uporz¹dkowan¹ po kolumnie pensja w trybie niemalej¹cym (od najgorzej do najlepiej zarabiaj¹cego
+-- pracownika; patrz Rys. 10); uwaga w ramach pensji nale¿y uwzglêdniæ wartoœci z kolumn placa,
+-- dod_funkcyjny, dod_staz i koszt_ubezpieczenia (dododatek sta¿owy to procentowa wartoœæ; sam dodatek
+-- obliczany jest w oparciu o wysokoœæ p³acy podstawowej).
+SELECT nazwisko, nr_akt, placa+0.19*placa+Nvl(dod_funkcyjny,0)-Nvl(koszt_ubezpieczenia,0) "PENSJA", data_zwol
+FROM pracownicy
+WHERE data_zwol is NULL
+ORDER BY PENSJA;
+
+-- Zad 5.4
+-- Wyœwietl listê zawierajac¹ roczne pensje aktualnych pracowników posiadaj¹cych umowy na czas
+-- nieokreœlony, niepe³ni¹cych funkcji prezesa oraz dyrektora. Lista ma byæ uporz¹dkowana od najlepiej
+-- do najgorzej zarabiaj¹cego pracownika
+SELECT nazwisko, stanowisko, nr_akt, placa*12 as "ROCZNA PLACA"
+FROM pracownicy
+WHERE (data_zwol is NULL) AND (UPPER(stanowisko)NOT IN('PREZES','DYREKTOR'))
+ORDER BY 4 DESC;
+
+-- Zad 5.5
+-- Wyœwietl pod postaci¹ jednej kolumny informuj¹c¹ w jakich dzia³ach i na jakich stanowiskach pracuj¹
+-- aktualni pracownicy firmy zatrudnieni ma umowy na czas nieokreœlony
+DESC pracownicy;
+SELECT nazwisko ||' '|| imiona ||' '||'pracuje w dziale: '|| id_dzialu ||' na stanowisku '||stanowisko
+AS "Pracownik"
+FROM pracownicy
+WHERE data_zwol IS NULL;
+
+-- Zad 6
+DESC pojazdy;
+
+-- Zad 7
+-- Na podstawie danych znajduj¹cych siê w tabeli Pojazdy wyœwietl listê zawieraj¹c¹ informacje
+-- o samochodach osobowych których (Rys. 13):
+-- • numer rejestracyjny rozpoczyna siê na 'SC' a koñczy cyfr¹ 5,
+-- • wartoœæ pojemnoœci silnika nie nale¿y do przedzia³u od 1500 do 2000,
+-- • nazwa koloru jest ustalona w formie jednego wyrazu, w którym wystêpuje co najmniej jedna litera r
+-- (ew. R).
+SELECT * FROM pojazdy;
+
+SELECT kolor AS "OUTPUT_STRING" FROM pojazdy
+WHERE (nr_rejestracyjny LIKE 'SC%') AND (nr_rejestracyjny LIKE '%5')
+    AND (pojemnosc NOT BETWEEN 1500 AND 2000) AND (OUTPUT_STRING LIKE '%r%' OR OUTPUT_STRING LIKE '%R%');
