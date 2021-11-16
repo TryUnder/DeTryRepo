@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Metody_Programowania/Zad4Klasy
+/Metody_Programowania/test
+/Metody_Programowania/test.cpp

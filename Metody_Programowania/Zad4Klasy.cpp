@@ -10,13 +10,13 @@ public:
 	point(double* wsk) : tab{ *wsk,*(wsk + 1),*(wsk + 2) } {};
 	point(double x, double y, double z) : tab{x,y,z} {}
 
-	friend ostream& operator <<(ostream& out, const point& obj);
-	const double& operator[] (const int& rozmiar) const {
-		return tab[rozmiar];
+	friend ostream& operator <<(ostream& out, const point& obj) {
+		out << obj.tab[0] << " " << obj.tab[1] << " " << obj.tab[2];
+		return out;
 	}
 
-	double distance(const point& obj) const {
-		return sqrt(pow(obj.tab[0] - this->tab[0], 2) + pow(obj.tab[1] - this->tab[1], 2));
+	const double& operator[] (const int& rozmiar) const {
+		return tab[rozmiar];
 	}
 
 	friend const point operator +(const point& la, const point& ra) {
@@ -47,16 +47,24 @@ public:
 		return p;
 	}
 
-	 int size() const {
+	friend bool operator <(const point& la, const point& ra) {
+		return (la.distance() < ra.distance());
+	}
+
+	double distance(const point& obj) const {
+		return sqrt(pow(obj.tab[0] - this->tab[0], 2) + pow(obj.tab[1] - this->tab[1], 2));
+	}
+
+	double distance() const {
+		point p;
+		return sqrt(pow(this->tab[0]-p.tab[0], 2) + pow(this->tab[1]-p.tab[1], 2));
+	}
+
+	int size() const {
 		return static_cast<int>(sizeof(this->tab) / sizeof(this->tab[2]));
 	}
 
 }; 
-
-ostream& operator <<(ostream& out, const point& obj) {
-	out << obj.tab[0] << " " << obj.tab[1] << " " << obj.tab[2];
-	return out;
-}
 
 int main() {
 	double x[2][3] = { {1.0, 1.0, 1.0},
@@ -81,8 +89,9 @@ int main() {
 	cout << 3.14 * p2 << endl;
 	
 	cout << p2 * 3.14 << endl;
-	/*
+	
 	cout << (p1 < p3) << endl;
+	/*
 	cout << (p1 == point(1.0, 1.0, 1.0)) << endl;
 
 	cin >> p1;
