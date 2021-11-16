@@ -137,6 +137,6 @@ DESC pojazdy;
 -- (ew. R).
 SELECT * FROM pojazdy;
 
-SELECT kolor AS "OUTPUT_STRING" FROM pojazdy
+SELECT kolor FROM pojazdy
 WHERE (nr_rejestracyjny LIKE 'SC%') AND (nr_rejestracyjny LIKE '%5')
-    AND (pojemnosc NOT BETWEEN 1500 AND 2000) AND (OUTPUT_STRING LIKE '%r%' OR OUTPUT_STRING LIKE '%R%');
+    AND (pojemnosc NOT BETWEEN 1500 AND 2000) AND (kolor LIKE '%r%' OR kolor LIKE '%R%');
