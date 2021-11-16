@@ -19,6 +19,13 @@ public:
 		return sqrt(pow(obj.tab[0] - this->tab[0], 2) + pow(obj.tab[1] - this->tab[1], 2));
 	}
 
+	friend const point operator +(const point& la, const point& ra) {
+		point p;
+		for (int i = 0; i <= 2; ++i) 
+			p.tab[i] = la.tab[i] + ra.tab[i];		
+		return p;
+	}
+
 }; 
 
 ostream& operator <<(ostream& out, const point& obj) {
@@ -41,8 +48,9 @@ int main() {
 	cout << p1.distance(point()) << endl;
 	
 	cout << p3.distance(p1) << endl;
-	/*
+	
 	cout << p1 + p2 << endl;
+	/*
 	cout << p1 - p3 << endl;
 
 	cout << 3.14 * p2 << endl;
