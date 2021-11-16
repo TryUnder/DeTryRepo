@@ -26,6 +26,13 @@ public:
 		return p;
 	}
 
+	friend const point operator -(const point& la, const point& ra) {
+		point p;
+		for (int i = 0; i <= 2; ++i)
+			p.tab[i] = la.tab[i] - ra.tab[i];
+		return p;
+	}
+
 }; 
 
 ostream& operator <<(ostream& out, const point& obj) {
@@ -50,10 +57,11 @@ int main() {
 	cout << p3.distance(p1) << endl;
 	
 	cout << p1 + p2 << endl;
-	/*
+	
 	cout << p1 - p3 << endl;
-
+	
 	cout << 3.14 * p2 << endl;
+	/*
 	cout << p2 * 3.14 << endl;
 
 	cout << (p1 < p3) << endl;
