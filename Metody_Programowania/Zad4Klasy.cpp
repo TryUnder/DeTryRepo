@@ -21,23 +21,34 @@ public:
 
 	friend const point operator +(const point& la, const point& ra) {
 		point p;
-		for (int i = 0; i <= 2; ++i) 
+		for (int i = 0; i < la.size(); ++i) 
 			p.tab[i] = la.tab[i] + ra.tab[i];		
 		return p;
 	}
 
 	friend const point operator -(const point& la, const point& ra) {
 		point p;
-		for (int i = 0; i <= 2; ++i)
+		for (int i = 0; i < la.size(); ++i)
 			p.tab[i] = la.tab[i] - ra.tab[i];
 		return p;
 	}
 
 	friend const point operator *(const double& pi, const point& ra) {
 		point p;
-		for (int i = 0; i <= 2; ++i)
+		for (int i = 0; i < ra.size(); ++i)
 			p.tab[i] = pi * ra.tab[i];
 		return p;
+	}
+
+	friend const point operator *(const point& la, const double& pi) {
+		point p;
+		for (int i = 0; i < sizeof(la.tab) / sizeof(la.tab[0]); ++i) 
+			p.tab[i] = la.tab[i] * pi;
+		return p;
+	}
+
+	 int size() {
+		return static_cast<int>(sizeof(this->tab / this->tab[2]));
 	}
 
 }; 
