@@ -51,6 +51,18 @@ public:
 		return (la.distance() < ra.distance());
 	}
 
+	friend bool operator ==(const point& la, const point& ra) {
+		double eps = 1e-10;
+		return fabs(la.distance() - ra.distance())<eps;
+	}
+
+	friend istream& operator >>(istream& in, point& obj) {
+		cout << "Podaj x: "; in >> obj.tab[0];
+		cout << "Podaj y: "; in >> obj.tab[1];
+		cout << "Podaj z: "; in >> obj.tab[2];
+		return in;
+	}
+
 	double distance(const point& obj) const {
 		return sqrt(pow(obj.tab[0] - this->tab[0], 2) + pow(obj.tab[1] - this->tab[1], 2));
 	}
@@ -63,7 +75,6 @@ public:
 	int size() const {
 		return static_cast<int>(sizeof(this->tab) / sizeof(this->tab[2]));
 	}
-
 }; 
 
 int main() {
@@ -91,11 +102,11 @@ int main() {
 	cout << p2 * 3.14 << endl;
 	
 	cout << (p1 < p3) << endl;
-	/*
+	
 	cout << (p1 == point(1.0, 1.0, 1.0)) << endl;
-
+	
 	cin >> p1;
 	cout << p1 << '\n';
-	*/
+	
 	return 0;
 }
