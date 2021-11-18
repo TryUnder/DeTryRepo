@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 
 using namespace std;
 
@@ -30,7 +30,7 @@ private:
     adres* m_adr;
 
 public:
-    osoba() : m_imie("brak"), m_wiek(0), m_adr(new adres) {};
+    osoba() : m_imie("brak"), m_wiek(0), m_adr(new adres) { };
 
     osoba(string const imie, const unsigned int wiek, const adres adr) :
         m_imie(imie), m_wiek(wiek), m_adr(new adres(adr)) {}
@@ -72,7 +72,7 @@ public:
 
 int main()
 {
-    adres* wsk = new adres("Czêstochowa", "D¹browskiego", 73);
+    adres* wsk = new adres("CzÄ™stochowa", "DÄ…browskiego", 73);
 
     cout << wsk << '\n';
     cout << *wsk << '\n';
@@ -82,7 +82,7 @@ int main()
     delete wsk;
     wsk = nullptr;
 
-    const adres* wsk1 = new adres("£ódŸ", "Piotrkowska", 33);
+    const adres* wsk1 = new adres("ÅÃ³dÅº", "Piotrkowska", 33);
 
     cout << a1 << '\n';
     cout << *wsk1 << '\n';
