@@ -32,13 +32,30 @@ public:
     out << obj.w1.fout(0) << " " << obj.w1.fout(1) << " za: " << obj.w2 << endl;
     return out;
   }
+
+  const double& getw2()const{
+    return w2;
+  }
+  friend const K2 operator -(const K2& la, const double lowered_price){
+    K2 K2x;
+    K2x.w2 = la.w2 - lowered_price;
+    return K2x;
+  }
 };
 
 int main(){
   K2 ob1,ob2;
   const K2* wsk1 = new K2("kawa", " z mlekiem", 4.50);
   const K2 ob3(*wsk1);
-  cout << ob3 << endl;
   delete wsk1;
   wsk1 = 0;
+
+  const K2* wsk2 = new K2(ob3);
+  ob2=*wsk2;
+  cout << ob1 << endl;
+  delete wsk2;
+  wsk2=0;
+  cout << ob2;
+  cout << ob2-1.25;
+  cout << "****** 3 *****\n" << endl;
 }
