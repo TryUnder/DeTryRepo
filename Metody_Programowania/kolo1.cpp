@@ -9,11 +9,8 @@ public:
     p1[0] = "brak";
     p1[1] = "brak";
   };
-  K1(const string arg1, const string arg2){
-      p1 = new string[2];
-      p1[0] = arg1;
-      p1[1] = arg2;
-    };
+  K1(const string arg1, const string arg2):
+    p1(new string[2] {arg1,arg2}) {};
 
 
   K1(string* p):
