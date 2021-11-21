@@ -33,9 +33,6 @@ public:
     return out;
   }
 
-  const double& getw2()const{
-    return w2;
-  }
   friend const K2 operator -(const K2& la, const double lowered_price){
     K2 K2x;
     K2x.w2 = la.w2 - lowered_price;
