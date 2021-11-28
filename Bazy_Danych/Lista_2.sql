@@ -187,8 +187,74 @@ OR pojemnosc LIKE ('2000');
 -- • GD – pomorskie,
 -- • pozostałe – niezidentyfikowane.
 
-SELECT Rtrim(nr_rejestracyjny,'WY') FROM pojazdy;
+SELECT nr_rejestracyjny, marka, modell, pojemnosc,
+(CASE
+     WHEN Substr(Replace(nr_rejestracyjny,' ',''),1,2) LIKE 'SC' THEN 'SLASKIE'
+     WHEN Substr(Replace(nr_rejestracyjny,' ',''),1,2) LIKE 'PO' THEN 'WIELKOPOLSKIE'
+     WHEN Substr(Replace(nr_rejestracyjny,' ',''),1,2) LIKE 'EL' THEN 'LODZKIE'
+     WHEN Substr(Replace(nr_rejestracyjny,' ',''),1,2) LIKE 'GD' THEN 'POMORSKIE'
+     WHEN Substr(Replace(nr_rejestracyjny,' ',''),1,2) NOT IN('SC','PO','EL','GD') THEN 'NIEZIDENTYFIKOWANE'
+        END)AS "WOJEWODZTWO"
+FROM pojazdy
+WHERE marka LIKE 'OPEL'
+AND pojemnosc NOT BETWEEN 1600 AND 2000;
 
-SELECT nr_rejestracyjny, modell, pojemnosc,
-CASE(WHEN  END)AS "WOJEWODZTWO"
-FROM pojazdy;
+-- Zad 3
+-- Zrealizuj poniższe zadania poprzez utworzenie zapytań zwracających stosowne informacje w oparciu
+-- o aktualne dane przechowywane w tabeli Rejestry.
+
+-- Zad 3.1
+-- W postaci jednego zdania (jak na Rys. 3.1) wyświetl informację od kiedy do kiedy odnotowywano
+-- zdarzenia połowów ryb, ile było wszystkich takich zdarzeń w tym ile było udanych połowów (określona
+-- wartość kolumny id_gatunku) oraz wody ilu zarządców odwiedzili wędkarze (założenie: elementem
+-- identyfikującym zarządców wód jest pierwszy znak identyfikatora łowiska czyli id_lowiska).
+
+SELECT 'Od ' ||Trunc(Min(czas))|| ' do ' ||Trunc(Max(czas))||'. '||
+       'Wszystkich polowow bylo: '|| Count(Nvl(id_gatunku,0))||' a udanych: '||
+       Count(id_gatunku)||'. Liczba rybakow: '|| count(DISTINCT Substr(id_lowiska,1,1)) FROM rejestry;
+
+-- Zad 3.2
+-- Wyświetl listę zawierającą wszystkie połowy dotyczące ryb o identyfikatorach (id_gatunku) 1, 3, 9 lub 10
+-- złowione na wodach zarządzanych przez PZW Częstochowa (id_lowiska rozpoczynające się od litery C)
+-- o długościach od 40 do 60 cm., których waga została ustalona z precyzją nie większą niż 0.1 (1.0 kg czy 1.1 kg
+-- jest ok ale 1.05 kg. już nie; patrz Rys. 3.2).
+
+SELECT * FROM rejestry
+WHERE id_gatunku IN(1,3,9,10)
+AND Substr(id_lowiska,1,1) LIKE ('C')
+AND dlugosc BETWEEN 40 AND 60
+AND waga-trunc(waga,1)=0;
+
+-- Zad 3.3
+-- Wyświetl statystyki połowów gatunku o identyfikatorze 1 (id_gatunku) w zakresie liczby złowionych sztuk,
+-- liczby łowców (różnych wędkarzy, którzy złowili ten gatunek), liczby łowisk (różnych łowisk,
+-- na których odnotowano połów tego gatunku), łącznej wagi wszystkich złowionych ryb oraz ich średniej wagi
+-- (z dokładnością do 1 grama) i średniej długości (z dokładnością do 1 cm.; patrz Rys. 3.3).
+
+SELECT
+Count(id_gatunku) AS "Liczba ryb",
+Count(DISTINCT id_wedkarza) AS "Liczba wedkarzy",
+Sum(waga) AS "Laczna waga ryb",
+Trunc(Avg(waga),3) AS "Srednia waga ryby",
+Round(Avg(dlugosc)) AS "Srednia dlugosc ryby"
+FROM rejestry
+WHERE id_gatunku LIKE('1');
+
+-- Zad 3.4
+-- Wyświetl podstawowe informacje związane z wpisami dotyczącymi zdarzeń złowienia ryb o następujących
+-- identyfikatorach 2 (lin), 4 (amur), 15 (ploc), 17 (okon) oraz dotyczącymi nieudanych połowów (nieokreślona
+-- wartość id_gatunku → brak polowu). Informacje podaj w formie: dzien polowu, id_gatunku oraz słowna nazwa
+-- gatunku (patrz Rys. 3.4).
+DESC rejestry;
+SELECT
+trunc(czas),
+id_gatunku,
+(CASE
+WHEN to_char(nvl(id_gatunku,0)) LIKE '2' THEN 'LIN'
+WHEN to_char(nvl(id_gatunku,0)) LIKE '4' THEN 'AMUR'
+WHEN to_char(nvl(id_gatunku,0)) LIKE '15' THEN 'PLOC'
+WHEN to_char(nvl(id_gatunku,0)) LIKE '17' THEN 'OKON'
+WHEN to_char(nvl(id_gatunku,0)) LIKE '0' THEN 'NIEUDANY POLOW'
+END) AS "GATUNEK"
+FROM rejestry
+WHERE nvl(id_gatunku,0) IN(2,4,15,17,0);
