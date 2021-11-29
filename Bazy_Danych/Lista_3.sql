@@ -28,7 +28,7 @@ Round(placa*0.83,-2),
 Round(placa*0.83,-2)-Trunc(placa*0.83,-2)
 FROM pracownicy;
 
-/*
+/*x
   Zad.3
   Napisz zapytanie obliczające wartość następującego wyrażenia
   √(11.234+4√2399+√(1234.56)+log7 log12345) oraz wartości jakie uzyska się po zastosowaniu
