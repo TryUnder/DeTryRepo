@@ -240,7 +240,12 @@ AND Mod(Cast(Extract(DAY FROM data_urodzenia)AS INT),5) != 0;
   porządkując ich według stażu pracy podanego w pełnych latach i miesiącach pracy oraz kolejności
   alfabetycznej nazwisk (Rys. 16).
 */
-
-SELECT imiona,nazwisko,stanowisko,data_zatr,data_zwol
-
-FROM pracownicy;
+--do dokonczenia
+SELECT imiona,nazwisko,stanowisko,
+To_char(data_zatr,'YYYY-MM-DD') AS "DATA_ZATRUDNIENIA",
+To_char(data_zwol,'YYYY-MM-DD') AS "DATA_ZWOLNIENIA",
+Extract(YEAR FROM Sysdate) - Extract(YEAR FROM data_zatr) || ' lat, oraz ' ||
+Cast(Extract(MONTH FROM Sysdate)AS INT) - Cast(Extract(MONTH FROM data_zatr)AS INT) || ' miesiecy' AS "Pracuje: "
+FROM pracownicy
+WHERE data_zwol>sysdate
+OR data_zwol IS NULL;
