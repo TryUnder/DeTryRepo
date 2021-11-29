@@ -28,7 +28,7 @@ Round(placa*0.83,-2),
 Round(placa*0.83,-2)-Trunc(placa*0.83,-2)
 FROM pracownicy;
 
-/*x
+/*
   Zad.3
   Napisz zapytanie obliczające wartość następującego wyrażenia
   √(11.234+4√2399+√(1234.56)+log7 log12345) oraz wartości jakie uzyska się po zastosowaniu
@@ -186,3 +186,61 @@ SELECT
 Concat('987','654') AS "STRING ADDICTION VER 2",
 Cast(Concat('987','654')AS INT) - 123456 AS "DIFFERENCE"
 FROM dual;
+
+/*
+  Zad.16
+  Wyświetl aktualny wiek cyframi rzymskimi.
+*/
+
+SELECT
+To_char(Ceil(Extract(YEAR FROM Sysdate)/100),'RM') AS "WIEK"
+FROM dual;
+
+/*
+  Zad.17
+  Wyświetl aktualną datę w postaci np. część, jest dzisiaj czwartek, 2 styczeń 2021 roku.
+*/
+
+SELECT
+'CZESC! ' || 'JEST DZISIAJ: ' || To_char(Sysdate,'DAY') || ' ' || To_char(Sysdate,'DD-MM-YYYY')
+FROM dual;
+
+/*
+  Zad.18
+  Wyświetl wiek, kwartał, miesiąc, tydzień miesiąca oraz dzień tygodnia daty podanej w formie
+  '27-09-1959' (patrz przykład na Rys. 14).
+*/
+
+SELECT
+Ceil(To_char(Sysdate,'YYYY')/100) || ' WIEK ' || To_char(Sysdate,'Q') || ' KWARTAL '
+|| To_char(sysdate,'MONTH') || To_char(sysdate,'W') || ' TYDZIEN ' || To_char(Sysdate,'DAY')
+AS "SZCZEGOLY_DATY"
+FROM dual;
+
+/*
+  Zad.19
+  W oparciu o dane zawarte w tabeli Studenci wyświetl dane studentek (patrz Rys. 15), które urodziły
+  się w wakacyjny weekend (w lipcową lub sierpniową sobotę lub niedzielę) pod warunkiem,
+  że dzień miesiąca nie jest dzielnikiem liczby 5 (np. 6.07.1999 ale 10.08.1999 już nie; Rys. 15).
+*/
+
+SELECT
+imiona, nazwisko, data_urodzenia,
+To_char(data_urodzenia,'DAY'),
+To_char(data_urodzenia,'YYYY-MM-DD')
+FROM studenci
+WHERE imiona LIKE '%a'
+AND Extract(MONTH FROM data_urodzenia) IN (7,8)
+AND Rtrim(To_char(data_urodzenia,'DAY')) IN ('SOBOTA','NIEDZIELA')
+AND Mod(Cast(Extract(DAY FROM data_urodzenia)AS INT),5) != 0;
+
+/*
+  Zad.20
+  W oparciu o dane zawarte w tabeli Pracownicy wyświetl aktualnie pracujących pracowników,
+  porządkując ich według stażu pracy podanego w pełnych latach i miesiącach pracy oraz kolejności
+  alfabetycznej nazwisk (Rys. 16).
+*/
+
+SELECT imiona,nazwisko,stanowisko,data_zatr,data_zwol
+
+FROM pracownicy;
