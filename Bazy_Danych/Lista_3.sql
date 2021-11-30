@@ -136,7 +136,6 @@ FROM dual;
   --mają lat (Rys. 11). Zaproponuj dwa rozwiązania w zakresie szacowania wieku studentów: pełne
   --skończone lata oraz tzw. metodą „rocznikową”.
 
-
 SELECT
 imiona, nazwisko,
 To_char(data_urodzenia,'YYYY-MM-DD') AS "DATA_URODZENIA",
@@ -152,11 +151,9 @@ SELECT
 Cast(Systimestamp AS DATE)
 FROM dual;
 
-
   --Zad.15
   --W ramach zapytania dokonaj połączenia dwóch łańcuchów '987' i '654' oraz wyświetl wynik
   --różnicy otrzymanej liczby i wartości 123456 (zastosuj konwersję typów; Rys. 13).
-
 
 SELECT
 '987' || '654' AS "STRING ADDICTION VER 1",
@@ -166,7 +163,6 @@ FROM dual;
 
   --Zad.16
   --Wyświetl aktualny wiek cyframi rzymskimi.
-
 
 SELECT
 To_char(Ceil(Extract(YEAR FROM Sysdate)/100),'RM') AS "WIEK"
@@ -194,7 +190,6 @@ FROM dual;
   --się w wakacyjny weekend (w lipcową lub sierpniową sobotę lub niedzielę) pod warunkiem,
   --że dzień miesiąca nie jest dzielnikiem liczby 5 (np. 6.07.1999 ale 10.08.1999 już nie; Rys. 15).
 
-
 SELECT
 imiona, nazwisko, data_urodzenia,
 To_char(data_urodzenia,'DAY'),
@@ -204,7 +199,6 @@ WHERE imiona LIKE '%a'
 AND Extract(MONTH FROM data_urodzenia) IN (7,8)
 AND Rtrim(To_char(data_urodzenia,'DAY')) IN ('SOBOTA','NIEDZIELA')
 AND Mod(Cast(Extract(DAY FROM data_urodzenia)AS INT),5) != 0;
-
 
   --Zad.20
   --W oparciu o dane zawarte w tabeli Pracownicy wyświetl aktualnie pracujących pracowników,
@@ -226,13 +220,11 @@ OR data_zwol IS NULL;
   --i nazwisko), których imię składa się dokładnie z 5 liter a nazwisko rozpoczyna od frazy Ko a kończy
   --frazą ski (patrz Rys. 18).
 
-
 SELECT imiona, nazwisko
 FROM studenci
 WHERE
 REGEXP_LIKE(imiona,'^[[:alpha:]]{5}$') AND
 REGEXP_LIKE(nazwisko,'^Ko.*ski$');
-
 
   --Zad.24
   --W oparciu o dane zgromadzone w tabeli Studenci za pośrednictwem wyrażeń regularnych dokonaj
@@ -240,31 +232,26 @@ REGEXP_LIKE(nazwisko,'^Ko.*ski$');
   --składający się z przynajmniej 3 liter będzie zastąpiony frazą Alpha a każda cyfra/liczba będzie
   --zastąpiona frazą Digit (patrz Rys. 19).
 
-
 SELECT adres, REGEXP_REPLACE(REGEXP_REPLACE(adres,'[[:alpha:]]{3,}','Alpha'),'[[:digit:]]{1,}','Digit')
 FROM studenci;
-
 
   --Zad.25
   --W oparciu o dane zgromadzone w tabeli Studenci wyświetl adresy (kolumna adres) wskazujące
   --na ulice (ul. na początku adresu), których nazwa rozpoczyna się od litery D, O, P lub T,
   --a numer domu/budynku to dokładnie 188 (patrz Rys. 20).
 
-
 SELECT adres FROM studenci
 WHERE
 REGEXP_LIKE(adres,'^ul.\s(D|O|P|T)[[:alpha:]]{1,}\s188');
-
 
   --Zad.26
   --W oparciu o dane zgromadzone w tabeli Studenci wyświetl adresy (kolumna adres),
   --w ramach których zarówno nazwy ulic lub alei jak i nazwa miejscowości składają się dokładnie
   --z dwóch przynajmniej 5-cio literowych wyrazów (patrz Rys. 21).
 
-
 SELECT
 adres
 FROM studenci
 WHERE
 REGEXP_LIKE(adres,
-'^(ul.|al.)\s[[:upper:]]{1}[[:alpha:]]{4,}\s[[:upper:]]{1}[[:alpha:]]{4,}\s\d{1,}\s\S{1,}\s[[:upper:]]{1}[[:alpha:]]{4,}\s[[:upper:]]{1}[[:alpha:]]{4,}')
+'^(ul.|al.)\s[[:upper:]]{1}[[:alpha:]]{4,}\s[[:upper:]]{1}[[:alpha:]]{4,}\s\d{1,}\s\S{1,}\s[[:upper:]]{1}[[:alpha:]]{4,}\s[[:upper:]]{1}[[:alpha:]]{4,}');
