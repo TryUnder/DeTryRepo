@@ -95,7 +95,7 @@ Extract(MINUTE FROM Systimestamp) AS "MINUTA",
 Round(Extract(SECOND FROM Systimestamp)) AS "SEUNDA"
 FROM dual;
 
-  --Zad.9
+  --Zad.9.
   --W oparciu o dane zawarte w tabeli Studenci wyświetl studentów, którzy dzisiaj obchodzą urodziny
 
 SELECT*
