@@ -90,10 +90,10 @@ int main(){
     w->pokaz();
 
     w = &pr3;
-    /*
+
     w->pokaz();
 
     static_cast<pracownik*>(w)->pokaz();
-    */
+    
   return 0;
 }
