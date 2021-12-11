@@ -39,7 +39,7 @@ public:
       this->m_placa = entity.m_placa;
   }
 
-  pracownik& operator =(const pracownik entity){
+  pracownik& operator =(const pracownik& entity){
       this->osoba::operator=(entity);
       this->m_stanowisko = entity.m_stanowisko;
       this->m_placa = entity.m_placa;
