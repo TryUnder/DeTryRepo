@@ -9,6 +9,10 @@ public:
   osoba(): m_nazwisko("brak"), m_liczba_lat(0){};
   osoba(const string& nazwisko, const unsigned int& liczba_lat):
         m_nazwisko(nazwisko), m_liczba_lat(liczba_lat){};
+  osoba(const osoba& entity){
+    m_nazwisko = entity.m_nazwisko;
+    m_liczba_lat = entity.m_liczba_lat;
+  }
 
         void pokaz() const {
           cout << m_nazwisko << " " << m_liczba_lat << endl;
@@ -26,9 +30,7 @@ public:
             const string& stanowisko, const unsigned int& placa):
             osoba(nazwisko,liczba_lat), m_stanowisko(stanowisko), m_placa(placa){};
 
-  pracownik(const pracownik& entity){
-      this->m_nazwisko = entity.m_nazwisko;
-      this->m_liczba_lat = entity.m_liczba_lat;
+  pracownik(const pracownik& entity): osoba(entity){
       this->m_stanowisko = entity.m_stanowisko;
       this->m_placa = entity.m_placa;
   }
@@ -94,6 +96,6 @@ int main(){
     w->pokaz();
 
     static_cast<pracownik*>(w)->pokaz();
-    
+
   return 0;
 }
