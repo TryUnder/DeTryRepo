@@ -13,10 +13,15 @@ public:
     m_nazwisko = entity.m_nazwisko;
     m_liczba_lat = entity.m_liczba_lat;
   }
-
         void pokaz() const {
           cout << m_nazwisko << " " << m_liczba_lat << endl;
         }
+
+  osoba& operator=(const osoba& entity){
+    this->m_nazwisko = entity.m_nazwisko;
+    this->m_liczba_lat = entity.m_liczba_lat;
+    return *this;
+  }
 };
 
 class pracownik : public osoba{
@@ -24,7 +29,6 @@ private:
   string m_stanowisko;
   unsigned int m_placa;
 public:
-
   pracownik(): osoba(), m_stanowisko("brak"), m_placa(0) {};
   pracownik(const string& nazwisko, const unsigned int& liczba_lat,
             const string& stanowisko, const unsigned int& placa):
@@ -35,9 +39,8 @@ public:
       this->m_placa = entity.m_placa;
   }
 
-  pracownik& operator =(const pracownik& entity){
-      this->m_nazwisko = entity.m_nazwisko;
-      this->m_liczba_lat = entity.m_liczba_lat;
+  pracownik& operator =(const pracownik entity){
+      this->osoba::operator=(entity);
       this->m_stanowisko = entity.m_stanowisko;
       this->m_placa = entity.m_placa;
       return *this;
