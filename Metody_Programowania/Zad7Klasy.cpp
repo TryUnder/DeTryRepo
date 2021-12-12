@@ -31,9 +31,11 @@ public:
 
   friend ostream& operator << (ostream& stream, const pomiar& obj){
     vector <double> m_pomiar;
+    stream << obj.Get_m_opis();
     double* pointer = obj.Get_pomiar();
+
     for(size_t i=0; i<m_pomiar.size(); ++i){
-      m_pomiar.at(i) = *pointer;
+      m_pomiar.push_back(*pointer);
       pointer++;
     }
     for(size_t i=0; i<m_pomiar.size(); ++i){
