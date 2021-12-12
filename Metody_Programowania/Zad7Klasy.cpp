@@ -30,7 +30,8 @@ public:
   virtual string pokaz_opis() const PURE_VIRTUAL;
 
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    cout << "xd" << endl;
+    stream << obj.pokaz_opis() << obj.m_opis << endl;
+    return stream;
   }
 };
 
@@ -70,8 +71,8 @@ int main(){
   tab[3] = new temp("wieczory", dane+1, dane+9);
   tab[4] = new ciezar;
   cout << "********** 1 **********" << endl;
-  //for (int i=0; i<5; ++i)
-  //cout << *tab[i] << endl;
+  for (int i=0; i<5; ++i)
+  cout << *tab[i] << endl;
   /*
 
   cout << "\n********** 2 **********" << endl;
