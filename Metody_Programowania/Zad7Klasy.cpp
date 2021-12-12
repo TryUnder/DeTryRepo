@@ -20,16 +20,25 @@ public:
           ptr_1++;
         }
       }
+
   string Get_m_opis() const {
     return m_opis;
   }
+
+  double* Get_pomiar() const {
+    return m_pomiar;
+  }
+
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    stream << obj.Get_m_opis();
     vector <double> m_pomiar;
+    double* pointer = obj.Get_pomiar();
     for(size_t i=0; i<m_pomiar.size(); ++i){
-      stream << obj.m_pomiar[i] << " ";
+      m_pomiar.at(i) = *pointer;
+      pointer++;
     }
-    stream << endl;
+    for(size_t i=0; i<m_pomiar.size(); ++i){
+      stream << m_pomiar.at(i) << " ";
+    }
     return stream;
   }
 };
