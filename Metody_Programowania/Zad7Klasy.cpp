@@ -16,10 +16,20 @@ public:
         size_t size = ptr_2 - ptr_1;
         for(size_t i = 0; i<size; ++i){
           m_pomiar[i] = *ptr_1;
-          cout << m_pomiar[i] << endl;
           ptr_1++;
         }
       }
+  string Get_m_opis() const {
+    return m_opis
+  }
+  friend ostream& operator << (ostream& stream, const pomiar& obj){
+    stream << Get_m_opis();
+    for(size_t i=0; i<size; ++i){
+      stream << m_pomiar[i] << " ";
+    }
+    stream << endl;
+    return stream;
+  }
 };
 
 class ciezar : public pomiar{
@@ -49,11 +59,11 @@ int main(){
   tab[2] = new ciezar("jabłka", dane+1, dane+3);
   tab[3] = new temp("wieczory", dane+1, dane+9);
   tab[4] = new ciezar;
-  /*
+
   cout << "********** 1 **********" << endl;
   for (int i=0; i<5; ++i)
     cout << *tab[i] << endl ;
-
+  /*
 
   cout << "\n********** 2 **********" << endl;
 
