@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class pomiar{
@@ -20,12 +21,13 @@ public:
         }
       }
   string Get_m_opis() const {
-    return m_opis
+    return m_opis;
   }
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    stream << Get_m_opis();
+    stream << obj.Get_m_opis();
+    vector <double> = m_pomiar;
     for(size_t i=0; i<size; ++i){
-      stream << m_pomiar[i] << " ";
+      stream << obj.m_pomiar[i] << " ";
     }
     stream << endl;
     return stream;
