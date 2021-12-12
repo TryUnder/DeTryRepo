@@ -25,8 +25,8 @@ public:
   }
   friend ostream& operator << (ostream& stream, const pomiar& obj){
     stream << obj.Get_m_opis();
-    vector <double> = m_pomiar;
-    for(size_t i=0; i<size; ++i){
+    vector <double> m_pomiar;
+    for(size_t i=0; i<m_pomiar.size(); ++i){
       stream << obj.m_pomiar[i] << " ";
     }
     stream << endl;
