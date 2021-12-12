@@ -19,6 +19,13 @@ public:
           m_pomiar[i] = *ptr_1;
           ptr_1++;
         }
+        vector <double> m_pomiar_table;
+        for(size_t i=0; i<size; ++i){
+          m_pomiar_table.push_back(*ptr_1);
+          cout << m_pomiar_table.at(i) << " ";
+          ptr_1++;
+        }
+        cout << endl;
       }
 
   string Get_m_opis() const {
@@ -30,17 +37,6 @@ public:
   }
 
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    vector <double> m_pomiar;
-    stream << obj.Get_m_opis();
-    double* pointer = obj.Get_pomiar();
-
-    for(size_t i=0; i<m_pomiar.size(); ++i){
-      m_pomiar.push_back(*pointer);
-      pointer++;
-    }
-    for(size_t i=0; i<m_pomiar.size(); ++i){
-      stream << m_pomiar.at(i) << " ";
-    }
     return stream;
   }
 };
