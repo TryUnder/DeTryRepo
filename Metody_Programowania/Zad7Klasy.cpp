@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 using namespace std;
+#define PURE_VIRTUAL = 0
 
 class pomiar{
 private:
@@ -17,28 +18,19 @@ public:
         size_t size = ptr_2 - ptr_1;
         for(size_t i = 0; i<size; ++i){
           m_pomiar[i] = *(ptr_1);
-          cout << m_pomiar[i] << " ";
+          //cout << m_pomiar[i] << " ";
           ptr_1++;
         }
-        vector <double> m_pomiar_table;
-        for(size_t i=0; i<size; ++i){
-          m_pomiar_table.push_back(*ptr_1);
-          //cout << m_pomiar_table.at(i) << " ";
-          ptr_1++;
-        }
-        cout << endl;
       }
 
   string Get_m_opis() const {
     return m_opis;
   }
 
-  double* Get_pomiar() const {
-    return m_pomiar;
-  }
+  virtual string pokaz_opis() const PURE_VIRTUAL;
 
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    return stream;
+    cout << "xd" << endl;
   }
 };
 
@@ -50,6 +42,10 @@ public:
       : pomiar(opis) {}
   ciezar(const string& opis, const double* ptr_1, const double* ptr_2)
       : pomiar(opis,ptr_1,ptr_2) {}
+
+  virtual string pokaz_opis() const override {
+    return "Ciezar - ";
+  }
 };
 
 class temp : public pomiar{
@@ -57,6 +53,10 @@ private:
 public:
   temp(const string& opis, const double* ptr_1, const double* ptr_2)
       : pomiar(opis,ptr_1,ptr_2) {}
+
+  virtual string pokaz_opis() const override {
+    return "Temp - ";
+  }
 };
 
 int main(){
@@ -69,10 +69,9 @@ int main(){
   tab[2] = new ciezar("jabłka", dane+1, dane+3);
   tab[3] = new temp("wieczory", dane+1, dane+9);
   tab[4] = new ciezar;
-  cout << *(dane+3) << endl;
   cout << "********** 1 **********" << endl;
-  for (int i=0; i<5; ++i)
-    cout << *tab[i] << endl ;
+  //for (int i=0; i<5; ++i)
+  //cout << *tab[i] << endl;
   /*
 
   cout << "\n********** 2 **********" << endl;
