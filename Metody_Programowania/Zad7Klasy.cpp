@@ -14,7 +14,7 @@ public:
   pomiar(const string& opis)
       : m_opis(opis) {}
   pomiar(const string& opis, const double* ptr_1, const double* ptr_2)
-      : m_opis(opis), m_pomiar(new double[ptr_2 - ptr_1 > 0 ? ptr_2-ptr_1 : 1]) {
+      : m_opis(opis), m_pomiar(new double[ptr_2 - ptr_1 > 0 ? ptr_2-ptr_1 : 0]) {
         size_t size = ptr_2 - ptr_1;
         for(size_t i = 0; i<size; ++i){
           m_pomiar[i] = *(ptr_1);
@@ -50,7 +50,7 @@ public:
     return "Ciezar - ";
   }
   virtual double oblicz_wynik() override {
-    cout << *m_pomiar << endl;
+    //cout << *m_pomiar << endl;
     return 1;
   }
 };
