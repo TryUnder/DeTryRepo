@@ -26,6 +26,10 @@ public:
     return m_opis;
   }
 
+  double* Get_m_pomiar() const {
+    return m_pomiar;
+  }
+
   virtual string pokaz_opis() const PURE_VIRTUAL;
   virtual double oblicz_wynik() PURE_VIRTUAL;
 
@@ -33,6 +37,7 @@ public:
     stream << obj.pokaz_opis() << obj.m_opis;
     return stream;
   }
+  virtual pomiar& operator=(const pomiar& obj) PURE_VIRTUAL;
 };
 
 class ciezar : public pomiar{
@@ -47,6 +52,7 @@ public:
   virtual string pokaz_opis() const override {
     return "Ciezar - ";
   }
+
   virtual double oblicz_wynik() override {
     double eps=1e-1;
     double sum=0;
@@ -54,9 +60,33 @@ public:
       sum += m_pomiar[i];
       if(m_pomiar[i]<eps)break;
     }
-    if(sum==0) throw string("BRAK DANYCH");
     return sum;
   }
+
+  ciezar& operator=(const pomiar& obj) override {
+    if(this != &obj){
+      double eps = 1e-1;
+      this->m_opis = obj.Get_m_opis();
+      delete [] this->m_pomiar;
+      //this->m_pomiar = new double[obj.Get_m_pomiar]
+      //cout << sizeof(obj.Get_m_pomiar())/ << endl;
+      double* m_pomiar2 = obj.Get_m_pomiar();
+      for(int i=0; i<100; ++i){
+        if(*m_pomiar2 < eps){
+          double* True_m_pomiar = new double[i];
+          do{
+            True_m_pomiar[i] = *m_pomiar2;
+            m_pomiar2--;
+            i--;
+          }while(i!=0);
+          break;
+        }
+        m_pomiar2++;
+      }
+    }
+    return *this;
+  }
+
 };
 
 class temp : public pomiar{
@@ -81,6 +111,13 @@ public:
     }
     return avg;
   }
+
+  temp& operator=(const pomiar&obj) override {
+    if(this != &obj){
+      this->m_opis = obj.Get_m_opis();
+    }
+    return *this;
+  }
 };
 
 int main(){
@@ -102,9 +139,11 @@ int main(){
     try{
       cout << *tab[i] << ", WYNIK : " << tab[i]->oblicz_wynik() << endl;
     }catch(const string& a){cout << a << endl;}
-/*
   cout << "\n********** 2a *********" << endl;
-  *tab[0] = ciezar("cytryny", dane, dane+1);
+  cout << *tab[0] << " " << tab[0]->oblicz_wynik() << endl;
+  *tab[0] = ciezar("TEST", dane+1, dane+6);
+  cout << *tab[0] << " " << tab[0]->oblicz_wynik() << endl;
+  /*
   *tab[0] = ("[kg] " + *tab[0]) += "po wyprzedaży";
   *tab[1]  = "Wiosenne " + *tab[1];
   *tab[2] += "ANTONÓWKI suszone";
