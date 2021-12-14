@@ -75,10 +75,10 @@ public:
         if(*m_pomiar2 < eps){
           double* True_m_pomiar = new double[i];
           do{
-            True_m_pomiar[i] = *m_pomiar2;
-            cout << True_m_pomiar[i] << endl;
             m_pomiar2--;
             i--;
+            True_m_pomiar[i] = *m_pomiar2;
+            cout << True_m_pomiar[i] << endl;
           }while(i!=0);
           break;
         }
@@ -125,9 +125,10 @@ public:
         if(*m_pomiar2 < eps){
           double* True_m_pomiar = new double[i];
           do{
-            True_m_pomiar[i] = *m_pomiar2;
-            m_pomiar2--;
             i--;
+            m_pomiar2--;
+            True_m_pomiar[i] = *m_pomiar2;
+            cout << True_m_pomiar[i] << endl;
           }while(i!=0);
           break;
         }
