@@ -10,9 +10,9 @@ protected:
   double* m_pomiar;
 public:
   pomiar()
-      : m_opis("brak"), m_pomiar(new double(0)) {}
+      : m_opis("brak"), m_pomiar(new double(0)) {cout << m_pomiar << endl << *m_pomiar << endl;}
   pomiar(const string& opis)
-      : m_opis(opis) {}
+      : m_opis(opis), m_pomiar(new double(0)) {}
   pomiar(const string& opis, const double* ptr_1, const double* ptr_2)
       : m_opis(opis), m_pomiar(new double[ptr_2 - ptr_1 > 0 ? ptr_2-ptr_1 : 0]) {
         size_t size = ptr_2 - ptr_1;
@@ -50,8 +50,15 @@ public:
     return "Ciezar - ";
   }
   virtual double oblicz_wynik() override {
-    //cout << *m_pomiar << endl;
-    return 1;
+    double eps=1e-1;
+    double sum=0;
+    for(int i=0;i<10000000;++i){
+      sum += m_pomiar[i];
+      if(m_pomiar[i]<eps){
+        break;
+      }
+    }
+    return sum;
   }
 };
 
@@ -66,13 +73,15 @@ public:
   }
   virtual double oblicz_wynik() override {
     double eps=1e-1;
+    double avg=0;
     for(int i=0;i<10000000;++i){
+      avg += m_pomiar[i];
       if(m_pomiar[i]<eps){
+        avg /= i;
         break;
       }
-      cout << m_pomiar[i] << endl;
     }
-    return 1;
+    return avg;
   }
 };
 
@@ -80,7 +89,6 @@ int main(){
   double dane[] = { 0.0, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8 };
   //... zdefiniuj tablicę tab
   pomiar* tab[sizeof(dane)/sizeof(dane[0])];
-  cout << 1e-1 << endl;
   tab[0] = new ciezar("cytryny");
   tab[1] = new temp("poranki", dane+3, dane+6);
   tab[2] = new ciezar("jabłka", dane+1, dane+3);
