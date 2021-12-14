@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
 #define PURE_VIRTUAL = 0
 
@@ -10,7 +9,7 @@ protected:
   double* m_pomiar;
 public:
   pomiar()
-      : m_opis("brak"), m_pomiar(new double(0)) {cout << m_pomiar << endl << *m_pomiar << endl;}
+      : m_opis(" \" \" "), m_pomiar(new double(0)) {}
   pomiar(const string& opis)
       : m_opis(opis), m_pomiar(new double(0)) {}
   pomiar(const string& opis, const double* ptr_1, const double* ptr_2)
@@ -18,10 +17,9 @@ public:
         size_t size = ptr_2 - ptr_1;
         for(size_t i = 0; i<size; ++i){
           m_pomiar[i] = *(ptr_1);
-          cout << m_pomiar[i] << " ";
+          //cout << m_pomiar[i] << " ";
           ptr_1++;
         }
-        cout << endl;
       }
 
   string Get_m_opis() const {
@@ -32,7 +30,7 @@ public:
   virtual double oblicz_wynik() PURE_VIRTUAL;
 
   friend ostream& operator << (ostream& stream, const pomiar& obj){
-    stream << obj.pokaz_opis() << obj.m_opis << endl;
+    stream << obj.pokaz_opis() << obj.m_opis;
     return stream;
   }
 };
@@ -54,10 +52,9 @@ public:
     double sum=0;
     for(int i=0;i<10000000;++i){
       sum += m_pomiar[i];
-      if(m_pomiar[i]<eps){
-        break;
-      }
+      if(m_pomiar[i]<eps)break;
     }
+    if(sum==0) throw string("BRAK DANYCH");
     return sum;
   }
 };
@@ -77,6 +74,7 @@ public:
     for(int i=0;i<10000000;++i){
       avg += m_pomiar[i];
       if(m_pomiar[i]<eps){
+        if(i==0)throw string("NIE DZIELIMY PRZEZ ZERO!");
         avg /= i;
         break;
       }
@@ -97,20 +95,14 @@ int main(){
   cout << "********** 1 **********" << endl;
   for (int i=0; i<5; ++i)
   cout << *tab[i] << endl;
-  for (int i=0; i<5; ++i)
-  cout << tab[i]->oblicz_wynik() << endl;
 
   cout << "\n********** 2 **********" << endl;
-  /*
+
   for (int i=0; i<5; ++i)
     try{
-      cout << *tab[i] << ", WYNIK : " << tab[i]->oblicz_wynik() << endl ;
-    }
-    catch (const string& a){
-     cout << a << endl;
-    }
-
-
+      cout << *tab[i] << ", WYNIK : " << tab[i]->oblicz_wynik() << endl;
+    }catch(const string& a){cout << a << endl;}
+/*
   cout << "\n********** 2a *********" << endl;
   *tab[0] = ciezar("cytryny", dane, dane+1);
   *tab[0] = ("[kg] " + *tab[0]) += "po wyprzedaży";
