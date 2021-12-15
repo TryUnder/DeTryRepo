@@ -9,8 +9,8 @@ protected:
   size_t m_size;
   double* m_pomiar;
 public:
-  pomiar(): m_opis(" \" \" "), m_size(0), m_pomiar(new double(0)) {}
-  pomiar(const string& opis): m_opis(opis), m_size(0), m_pomiar(new double(0)) {}
+  pomiar(): m_opis(" \" \" "), m_size(0), m_pomiar(nullptr) {}
+  pomiar(const string& opis): m_opis(opis), m_size(0), m_pomiar(nullptr) {}
   pomiar(const string& opis, const double* ptr1, const double* ptr2)
         :m_opis(opis), m_size(ptr2 - ptr1 > 0 ? ptr2 - ptr1 : 0),
          m_pomiar(new double[m_size]) {
@@ -21,11 +21,8 @@ public:
          }
   virtual string pokaz_opis() const PURE_VIRTUAL;
   virtual double oblicz_wynik() const PURE_VIRTUAL;
-  friend ostream& operator << (ostream& stream, const pomiar& obj){
-    stream << obj.pokaz_opis() << obj.m_opis;
-    return stream;
-  }
-  virtual pomiar& operator = (const pomiar& obj){
+
+   pomiar& operator = (const pomiar& obj){
     if(this != &obj){
       m_opis = obj.m_opis;
       delete [] m_pomiar;
@@ -36,6 +33,30 @@ public:
       }
     }
     return *this;
+  }
+  friend ostream& operator << (ostream& stream, const pomiar& obj){
+    stream << obj.pokaz_opis() << obj.m_opis;
+    return stream;
+  }
+  friend pomiar& operator + (const string& str, pomiar& obj){
+    obj.m_opis=str+obj.m_opis;
+    return obj;
+  }
+  friend pomiar& operator += (pomiar& obj, const string& str){
+    obj.m_opis=obj.m_opis+str;
+    return obj;
+  }
+  friend pomiar& operator *= (pomiar& obj, const double& modifier){
+    for(size_t i=0; i<obj.m_size; ++i){
+      obj.m_pomiar[i] = obj.m_pomiar[i] * modifier;
+    }
+    return obj;
+  }
+  friend pomiar& operator += (pomiar& obj, const double& modifier){
+    for(size_t i=0; i<obj.m_size; ++i){
+      obj.m_pomiar[i] = obj.m_pomiar[i] + modifier;
+    }
+    return obj;
   }
 };
 
@@ -73,11 +94,14 @@ public:
     for(size_t i=0; i<m_size; ++i){
       avg+=m_pomiar[i];
     }
-    if(m_size==0) throw string("NIE DZIEL PRZEZ ZERO");
+    //if(m_size==0) throw string("NIE DZIEL PRZEZ ZERO");
     return avg/m_size;
   }
 };
 
+void pokaz_wszystko(ostream& stream, const pomiar& obj){
+  stream << obj << ", WYNIK: " << obj.oblicz_wynik() <<  endl;
+}
 
 int main(){
   double dane[] = { 0.0, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8 };
@@ -106,10 +130,7 @@ int main(){
     }
 
   cout << "\n********** 2a *********" << endl;
-  cout << *tab[1] << " AVG:" << tab[1]->oblicz_wynik() << endl;
-  *tab[1] = ciezar("TEST", dane+1, dane+9);
-  cout << *tab[1] << " AVG:" << tab[1]->oblicz_wynik() << endl;
-  /*
+  *tab[0] = ciezar("cytryny", dane, dane+1);
   *tab[0] = ("[kg] " + *tab[0]) += "po wyprzedaży";
   *tab[1]  = "Wiosenne " + *tab[1];
   *tab[2] += "ANTONÓWKI suszone";
@@ -128,7 +149,6 @@ int main(){
   for (int i=0; i<5; ++i)
     delete tab[i];
 
-
   cout << "\n********** 3 **********" << endl;
   const ciezar test1("gruszki", dane, dane+9);
   const temp test2;
@@ -139,5 +159,5 @@ int main(){
   pokaz_wszystko(cout, test2);
   pokaz_wszystko(cout, ciezar());
   pokaz_wszystko(cout, temp("Jakaś tam", dane+8, dane+9));
-  */
+
 }
