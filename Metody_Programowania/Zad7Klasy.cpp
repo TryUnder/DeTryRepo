@@ -19,6 +19,10 @@ public:
              ptr1++;
            }
          }
+ virtual ~pomiar(){
+   delete [] m_pomiar;
+ }
+
   virtual string pokaz_opis() const PURE_VIRTUAL;
   virtual double oblicz_wynik() const PURE_VIRTUAL;
 
