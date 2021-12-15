@@ -33,7 +33,6 @@ public:
       this->m_pomiar = new double[m_size];
       for(size_t i=0; i<m_size; ++i){
         m_pomiar[i] = obj.m_pomiar[i];
-        cout << m_pomiar[i] << endl;
       }
     }
     return *this;
