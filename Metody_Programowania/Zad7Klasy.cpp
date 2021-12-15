@@ -108,7 +108,7 @@ int main(){
   cout << "\n********** 2a *********" << endl;
   cout << *tab[1] << " AVG:" << tab[1]->oblicz_wynik() << endl;
   *tab[1] = ciezar("TEST", dane+1, dane+9);
-  cout << *tab[1] << " SUM:" << tab[1]->oblicz_wynik() << endl;
+  cout << *tab[1] << " AVG:" << tab[1]->oblicz_wynik() << endl;
   /*
   *tab[0] = ("[kg] " + *tab[0]) += "po wyprzedaży";
   *tab[1]  = "Wiosenne " + *tab[1];
