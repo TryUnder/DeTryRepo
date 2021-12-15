@@ -31,9 +31,10 @@ public:
       delete [] m_pomiar;
       this->m_size = obj.m_size;
       this->m_pomiar = new double[m_size];
-      *m_pomiar = *obj.m_pomiar;
-        
-
+      for(size_t i=0; i<m_size; ++i){
+        m_pomiar[i] = obj.m_pomiar[i];
+        cout << m_pomiar[i] << endl;
+      }
     }
     return *this;
   }
@@ -107,7 +108,7 @@ int main(){
 
   cout << "\n********** 2a *********" << endl;
   cout << *tab[1] << " AVG:" << tab[1]->oblicz_wynik() << endl;
-  *tab[1] = ciezar("kutas", dane+1, dane+9);
+  *tab[1] = ciezar("TEST", dane+1, dane+9);
   cout << *tab[1] << " SUM:" << tab[1]->oblicz_wynik() << endl;
   /*
   *tab[0] = ("[kg] " + *tab[0]) += "po wyprzedaży";
