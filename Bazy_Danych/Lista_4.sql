@@ -132,6 +132,7 @@ HAVING count(nr_indeksu)>100;
 danego stopnia, roku i grupy dziekańskiej na kierunku Matematyka stosowana i technologie informatyczne.
 Informację uzupełnij o średnią liczoną z średnich ocen studentek w danej grupie (patrz Rys. 13).
 */
+
 SELECT * FROM studenci;
 SELECT rok,stopien,gr_dziekan, count(imiona) AS "LICZBA_STUDENTEK", Round(Avg(srednia),2)
 FROM studenci
@@ -199,3 +200,19 @@ Round(Avg(placa)) AS "SREDNIA_PLACA"
 FROM pracownicy x LEFT JOIN dzialy USING (id_dzialu)
 GROUP BY id_dzialu, nazwa
 ORDER BY avg(placa) DESC;
+
+/*
+18. W oparciu o dane zawarte w tabelach Pracownicy i Dzialy wyświetl informacje o kosztach jakie ponosi
+firma w poszczególnych miastach (z adresu działu) z tytułu wypłacania miesięcznej pensji swoim aktualnym
+pracownikom (płaca+dodatki). Informację uzupełnij o dane w zakresie liczby wszystkich pracowników
+pracujących w danym mieście oraz ilu z nich posiada ubezpieczenie. W zestawieniu uwzględnij
+pracowników „nieposiadających działu” a dane wyświetl w trybie nierosnącym wg kosztów pracowniczych
+*/
+
+SELECT REGEXP_SUBSTR(adres,'Czestochowa|Radomsko|Katowice|Warszawa') AS "LOKALIZACJA",
+Count(REGEXP_SUBSTR(nvl(adres,0),'Czestochowa|Radomsko|Katowice|Warszawa|0')) AS "LICZBA_PRACOWNIKOW",
+Count(koszt_ubezpieczenia) AS "LICZBA_UBEZPIECZONYCH",
+Round(Sum(placa+placa*dod_staz/100+Nvl(dod_funkcyjny,0)-Nvl(koszt_ubezpieczenia,0))) AS "KOSZTY_PRACOWNICZE"
+FROM pracownicy x LEFT JOIN dzialy USING (id_dzialu)
+GROUP BY REGEXP_SUBSTR(adres,'Czestochowa|Radomsko|Katowice|Warszawa')
+ORDER BY Round(Sum(placa+placa*dod_staz/100+Nvl(dod_funkcyjny,0)-Nvl(koszt_ubezpieczenia,0))) DESC;
