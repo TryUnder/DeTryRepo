@@ -154,3 +154,4 @@ FROM studenci
 WHERE stopien=1 AND Upper(tryb) LIKE('STACJONARNY')
 GROUP BY kierunek,rok
 HAVING Round(Cast(to_date(max(data_urodzenia))-to_date(min(data_urodzenia))AS INT)/31) > 100
+ORDER BY 5 DESC;
