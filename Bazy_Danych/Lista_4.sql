@@ -216,3 +216,56 @@ Round(Sum(placa+placa*dod_staz/100+Nvl(dod_funkcyjny,0)-Nvl(koszt_ubezpieczenia,
 FROM pracownicy x LEFT JOIN dzialy USING (id_dzialu)
 GROUP BY REGEXP_SUBSTR(adres,'Czestochowa|Radomsko|Katowice|Warszawa')
 ORDER BY Round(Sum(placa+placa*dod_staz/100+Nvl(dod_funkcyjny,0)-Nvl(koszt_ubezpieczenia,0))) DESC;
+
+/*
+19. W oparciu o dane zawarte w tabelach Pracownicy i Stanowiska wyświetl informacje w zakresie ilu
+aktualnie pracowników pracuje na danym stanowisku (z uwzględnieniem nieobsadzonych stanowisk),
+ile wynosi średnia, najniższa i najwyższa płaca pracownika pracującego na danym stanowisku.
+Dane wyświetl uporządkowane w trybie niemalejącym kolejno wg liczy pracowników oraz średniej płacy
+*/
+
+SELECT pr.stanowisko,
+Count(pr.stanowisko) AS "LICZBA_PRACOWNIKOW",
+Round(Avg(placa),2) AS "SREDNIA PLACA",
+Min(pr.placa+pr.placa*pr.dod_staz/100+Nvl(pr.dod_funkcyjny,0)-Nvl(pr.koszt_ubezpieczenia,0)) AS "NAJNIZSZA PLACA",
+Max(pr.placa+pr.placa*pr.dod_staz/100+Nvl(pr.dod_funkcyjny,0)-Nvl(pr.koszt_ubezpieczenia,0)) AS "NAJWYZSZA PLACA"
+FROM pracownicy pr RIGHT JOIN stanowiska st ON (pr.stanowisko=st.stanowisko)
+WHERE data_zwol>sysdate OR data_zwol IS NULL
+GROUP BY(pr.stanowisko)
+ORDER BY Count(pr.stanowisko) DESC, Round(Avg(placa),2) DESC;
+
+/*
+20. W oparciu o dane zawarte w tabelach Rejestry i Gatunki wyświetl statystyki połowów poszczególnych
+gatunków (włącznie z tym, które nigdy nie zostały nigdy złowione) w zakresie liczby złowionych sztuk,
+łącznej i średniej ich wagi (z dokładnością do 1 grama) oraz średniej długości (z dokładnością do 0.1 cm.).
+W zestawieniu uwzględnij również połowy nieudane wstawiając w kolumny id_gatunku i nazwa kolejno
+frazy brak i brak połowu (patrz Rys. 20). Dane wyświetl uporządkowane w trybie nierosnącym wg liczby
+złowionych ryb oraz wg nazwy gatunku (alfabetycznie).
+*/
+SELECT * FROM rejestry;
+SELECT * FROM gatunki;
+
+SELECT DISTINCT Decode(re.id_gatunku,NULL,'brak',re.id_gatunku) AS "ID_GATUNKU",
+nazwa,
+Count(re.id_gatunku) AS "SZTUK",
+Round(Sum(Nvl(re.waga,0)),3) AS "LACZNA_WAGA",
+Round(Avg(Nvl(re.waga,0)),3) AS "SREDNIA_WAGA",
+Round(Avg(Nvl(re.dlugosc,0)),1) AS "SREDNIA_DLUGOSC"
+FROM rejestry re RIGHT JOIN gatunki ga ON(re.id_gatunku=ga.id_gatunku)
+GROUP BY re.id_gatunku, nazwa
+ORDER BY Count(re.id_gatunku)DESC, nazwa;
+
+/*
+21.W oparciu o dane zawarte w tabelach Rejestry i Lowiska wyświetl informacje o łowiskach, na których
+złowiono przynajmniej 6 ryb i odnotowano przynajmniej 2 nieudane połowy w okresie trwającym 2 lata
+21 dni 19 godzin i 28 sekund poczynając od godz. 7:05 w dniu 14.07.2018. Informację uzupełnij o liczbę
+wędkarzy, którzy przynajmniej raz odwiedzili dane łowisko w rozpatrywanym okresie
+*/
+
+SELECT * FROM rejestry;
+SELECT * FROM lowiska;
+
+SELECT id_lowiska, nazwa,
+count(id_gatunku) AS "LICZBA POLOWOW"
+FROM rejestry JOIN lowiska using(id_lowiska)
+GROUP BY id_lowiska, nazwa;
