@@ -266,6 +266,12 @@ SELECT * FROM rejestry;
 SELECT * FROM lowiska;
 
 SELECT id_lowiska, nazwa,
-count(id_gatunku) AS "LICZBA POLOWOW"
-FROM rejestry JOIN lowiska using(id_lowiska)
-GROUP BY id_lowiska, nazwa;
+Count(Nvl(id_gatunku,0)) AS "LICZBA_POLOWOW",
+Count(id_gatunku) AS "LICZBA_RYB",
+Count(DISTINCT id_wedkarza) AS "LICZBA_WEDKARZY"
+FROM rejestry JOIN lowiska USING(id_lowiska)
+WHERE (czas BETWEEN to_date('14-07-2018','DD-MM-YYYY') AND
+to_date('14-07-2018','DD-MM-YYYY') + Interval '2-00' YEAR TO MONTH + Interval '21 19:00:28' DAY TO SECOND)
+GROUP BY id_lowiska, nazwa
+HAVING Count(id_gatunku)>=6 AND Count(Nvl(id_gatunku,0))>=2
+ORDER BY Count(id_gatunku) DESC;
