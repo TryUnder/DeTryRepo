@@ -170,3 +170,32 @@ FROM rejestry
 WHERE Mod(Cast(Extract(DAY FROM czas)AS INT),2)=0
 GROUP BY To_char(czas,'day'),Extract(YEAR FROM czas)
 ORDER BY count(nvl(id_gatunku,0)) DESC,count(id_gatunku) DESC;
+
+/*
+16. W oparciu o dane zawarte w tabelach Pojazdy i Wlasciciele wyświetl informację o właścicielach,
+którzy posiadają do 7-miu do 16-tu pojazdów ciężarowych. Dane uzupełnij o informację z zakresu liczby
+marek posiadanych przez danego właściciela a wyniki wyświetl uporządkowane w trybie nierosnącym
+kolejno wg liczby posiadanych pojazdów oraz liczby marek (patrz Rys. 16).
+*/
+
+SELECT id_wlasciciela,wlasciciel,
+count (id_wlasciciela) AS "LICZBA_POJAZDOW",
+count (DISTINCT marka) AS "LICZBA_MAREK"
+FROM pojazdy JOIN wlasciciele using(id_wlasciciela)
+WHERE Upper(typ) LIKE ('SAM_CIEZAROWY')
+GROUP BY wlasciciel, id_wlasciciela
+HAVING count(id_wlasciciela) BETWEEN 7 AND 16
+ORDER BY count(id_wlasciciela) DESC, count(DISTINCT marka) DESC;
+
+/*
+17. W oparciu o dane zawarte w tabelach Pracownicy i Dzialy wyświetl informację o średnich wartościach płac
+(kolumna placa) pracowników aktualnie pracujących w poszczególnych działach firmy z uwzględnieniem
+grupy pracowników nieposiadających przynależności do żadnego działu. Dane wyświetl uporządkowane
+w trybie nierosnącym wg średniej płacy
+*/
+
+SELECT id_dzialu, nazwa,
+Round(Avg(placa)) AS "SREDNIA_PLACA"
+FROM pracownicy x LEFT JOIN dzialy USING (id_dzialu)
+GROUP BY id_dzialu, nazwa
+ORDER BY avg(placa) DESC;
