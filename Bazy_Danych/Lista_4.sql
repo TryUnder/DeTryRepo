@@ -127,3 +127,14 @@ SELECT tryb,kierunek, Count(nr_indeksu) AS "LICZBA_STUDENTOW"
 FROM studenci
 GROUP BY tryb,kierunek
 HAVING count(nr_indeksu)>100;
+
+/*
+13. W oparciu o dane zawarte w tabeli Studenci wyświetl informację ile studentek (pań) studiuje w ramach
+danego stopnia, roku i grupy dziekańskiej na kierunku Matematyka stosowana i technologie informatyczne.
+Informację uzupełnij o średnią liczoną z średnich ocen studentek w danej grupie (patrz Rys. 13).
+*/
+SELECT * FROM studenci;
+SELECT rok,stopien,gr_dziekan, count(imiona) AS "LICZBA_STUDENTEK", Round(Avg(srednia),2)
+FROM studenci
+WHERE imiona LIKE('%a') AND Upper(kierunek) LIKE('MATEMATYKA%')
+GROUP BY rok, stopien, gr_dziekan
