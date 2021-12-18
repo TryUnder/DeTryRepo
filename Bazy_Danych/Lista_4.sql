@@ -100,13 +100,12 @@ WHERE p1.id_dzialu=20 AND p2.id_dzialu=30;
 W przypadku braku przełożonego w ramach kolumny przełożony zastosuj frazę „ Brak” (bez analizy okresu
 zatrudnienia).
 */
-DESC pracownicy;
-SELECT pr1.nr_akt, pr1.nazwisko, pr1.imiona, pr1.placa, pr1.stanowisko,
-Decode(nvl(pr1.przelozony,0),0,'brak',pr1.przelozony) AS "PRZELOZONY",
---CASE WHEN nvl(pr1.przelozony,0)=0 THEN to_char('brak') ELSE pr1.przelozony END AS "PRZELOZONY"
 
-FROM pracownicy pr1 CROSS JOIN pracownicy pr2
-WHERE pr1.nr_akt LIKE pr2.nr_akt;
+DESC pracownicy;
+SELECT pr1.nr_akt, pr1.nazwisko, pr1.imiona, pr1.placa, pr1.stanowisko,pr2.nr_akt,
+Decode(nvl(pr1.przelozony,0),0,'brak',pr1.przelozony) AS "PRZELOZONY",
+pr2.nazwisko || ' ' || pr2.imiona szef
+FROM pracownicy pr1 LEFT JOIN pracownicy pr2 ON(pr1.przelozony=pr2.nr_akt);
 
 /*
 11. W oparciu o dane zawarte w tabeli Studenci wyświetl informację ilu studentów kierunku informatyka
@@ -137,7 +136,7 @@ SELECT * FROM studenci;
 SELECT rok,stopien,gr_dziekan, count(imiona) AS "LICZBA_STUDENTEK", Round(Avg(srednia),2)
 FROM studenci
 WHERE imiona LIKE('%a') AND Upper(kierunek) LIKE('MATEMATYKA%')
-GROUP BY rok, stopien, gr_dziekan
+GROUP BY rok, stopien, gr_dziekan;
 
 /*
 14. W oparciu o dane zawarte w tabeli Studenci wyświetl informacje o datach urodzeń najstarszego studenta
@@ -153,5 +152,21 @@ Round(Cast(to_date(max(data_urodzenia))-to_date(min(data_urodzenia))AS INT)/31) 
 FROM studenci
 WHERE stopien=1 AND Upper(tryb) LIKE('STACJONARNY')
 GROUP BY kierunek,rok
-HAVING Round(Cast(to_date(max(data_urodzenia))-to_date(min(data_urodzenia))AS INT)/31) > 100
+HAVING Round(Cast(to_date(max(data_urodzenia))-to_date (min(data_urodzenia))AS INT)/31) > 100
 ORDER BY 5 DESC;
+
+/*
+15. W oparciu o dane zawarte w tabeli Rejestry wyświetl informacje o liczbie wszystkich prób połowów
+oraz o liczbie udanych połowów zrealizowanych w danym dniu tygodnia (słownie) danego roku
+kalendarzowego w parzysty dzień miesiąca (2,4, …, 28, ew. 30). Dane wyświetl uporządkowane w trybie
+niemalejącym kolejno wg liczby wszystkich prób połowów oraz liczby udanych połowów (patrz Rys. 15).
+*/
+
+SELECT count(nvl(id_gatunku,0)) AS "LICZBA WSZYSTKICH POLOWOW",
+count(id_gatunku) AS "LICZBA UDANYCH POLOWOW",
+To_char(czas,'day'),
+Extract(YEAR FROM czas) as "ROK"
+FROM rejestry
+WHERE Mod(Cast(Extract(DAY FROM czas)AS INT),2)=0
+GROUP BY To_char(czas,'day'),Extract(YEAR FROM czas)
+ORDER BY count(nvl(id_gatunku,0)) DESC,count(id_gatunku) DESC;
