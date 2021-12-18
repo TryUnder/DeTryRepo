@@ -138,3 +138,19 @@ SELECT rok,stopien,gr_dziekan, count(imiona) AS "LICZBA_STUDENTEK", Round(Avg(sr
 FROM studenci
 WHERE imiona LIKE('%a') AND Upper(kierunek) LIKE('MATEMATYKA%')
 GROUP BY rok, stopien, gr_dziekan
+
+/*
+14. W oparciu o dane zawarte w tabeli Studenci wyświetl informacje o datach urodzeń najstarszego studenta
+i najmłodszego studenta studiujących na danym kierunku danego roku studiów pierwszego stopnia w trybie
+stacjonarnym. Listę uporządkuj w trybie nierosnącym wg liczby pełnych miesięcy jakie dzielą daty urodzeń
+tych studentów pod warunkiem, że różnica ta wynosi przynajmniej 100 miesięcy (patrz Rys. 14).
+*/
+
+SELECT kierunek, rok,
+To_char(max(data_urodzenia),'DD-MM-YYYY') AS "NAJMLODSZY STUDENT",
+To_char(min(data_urodzenia),'DD-MM-YYYY') AS "NAJSTARSZY STUDENT",
+Round(Cast(to_date(max(data_urodzenia))-to_date(min(data_urodzenia))AS INT)/31) AS "LICZBA_MIESIECY"
+FROM studenci
+WHERE stopien=1 AND Upper(tryb) LIKE('STACJONARNY')
+GROUP BY kierunek,rok
+HAVING Round(Cast(to_date(max(data_urodzenia))-to_date(min(data_urodzenia))AS INT)/31) > 100
