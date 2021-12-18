@@ -262,9 +262,6 @@ złowiono przynajmniej 6 ryb i odnotowano przynajmniej 2 nieudane połowy w okre
 wędkarzy, którzy przynajmniej raz odwiedzili dane łowisko w rozpatrywanym okresie
 */
 
-SELECT * FROM rejestry;
-SELECT * FROM lowiska;
-
 SELECT id_lowiska, nazwa,
 Count(Nvl(id_gatunku,0)) AS "LICZBA_POLOWOW",
 Count(id_gatunku) AS "LICZBA_RYB",
@@ -273,5 +270,21 @@ FROM rejestry JOIN lowiska USING(id_lowiska)
 WHERE (czas BETWEEN to_date('14-07-2018','DD-MM-YYYY') AND
 to_date('14-07-2018','DD-MM-YYYY') + Interval '2-00' YEAR TO MONTH + Interval '21 19:00:28' DAY TO SECOND)
 GROUP BY id_lowiska, nazwa
-HAVING Count(id_gatunku)>=6 AND Count(Nvl(id_gatunku,0))>=2
+HAVING Count(id_gatunku)>=6 AND Count(Nvl(id_gatunku,0))>=2 AND Count(DISTINCT id_wedkarza)>=1
 ORDER BY Count(id_gatunku) DESC;
+
+/*
+22. W oparciu o dane zawarte w tabelach Okregi, Oplaty i Licencje wyświetl informacje ile licencji przez ilu
+wędkarzy (różnych) zostało wykupionych w danym roku u danego zarządcy wód. W zestawieniu uwzględnij
+wszystkie oferty z poszczególnych lat (dane w tabeli Oplaty) włącznie z tymi, z których nie skorzystał żaden
+wędkarz. Dane wyświetl uporządkowane kolejno wg roku i identyfikatora okręgu
+*/
+
+SELECT * FROM okregi;
+SELECT * FROM oplaty;
+SELECT * FROM licencje;
+
+SELECT li.rok, li.id_okregu,
+count(id_licencji) AS "LICZBA_LICENCJI",
+count(DISTINCT li.id_wedkarza) AS "LICZBA_WEDKARZY",
+FROM okregi ok JOIN oplaty op ON (ok.id_okregu=op.id_okregu) JOIN licencje li ON (ok.id_okregu=op.id_okregu=li.id_okregu);
