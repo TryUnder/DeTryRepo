@@ -100,8 +100,30 @@ WHERE p1.id_dzialu=20 AND p2.id_dzialu=30;
 W przypadku braku przełożonego w ramach kolumny przełożony zastosuj frazę „ Brak” (bez analizy okresu
 zatrudnienia).
 */
-DESC przelozony;
-SELECT pr1.nr_akt, pr1.nazwisko, pr1.imiona, pr1.przelozony
+DESC pracownicy;
+SELECT pr1.nr_akt, pr1.nazwisko, pr1.imiona, pr1.placa, pr1.stanowisko,
+Decode(nvl(pr1.przelozony,0),0,'brak',pr1.przelozony) AS "PRZELOZONY",
+--CASE WHEN nvl(pr1.przelozony,0)=0 THEN to_char('brak') ELSE pr1.przelozony END AS "PRZELOZONY"
 
 FROM pracownicy pr1 CROSS JOIN pracownicy pr2
 WHERE pr1.nr_akt LIKE pr2.nr_akt;
+
+/*
+11. W oparciu o dane zawarte w tabeli Studenci wyświetl informację ilu studentów kierunku informatyka
+studiuje na danym roku studiów (patrz Rys. 11).
+*/
+
+SELECT rok, count(*) AS "LICZBA STUDENTOW" FROM STUDENCI
+WHERE UPPER(kierunek) LIKE ('INFORMATYKA')
+GROUP BY rok;
+
+/*
+12. W oparciu o dane zawarte w tabeli Studenci wyświetl informację ilu studentów studiuje dany kierunek
+w danym trybie studiów. W zestawieniu uwzględnij tylko podzbiory składające się z przynajmniej 100-u
+studentów (patrz Rys. 12).
+*/
+
+SELECT tryb,kierunek, Count(nr_indeksu) AS "LICZBA_STUDENTOW"
+FROM studenci
+GROUP BY tryb,kierunek
+HAVING count(nr_indeksu)>100;
