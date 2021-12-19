@@ -246,12 +246,13 @@ SELECT * FROM rejestry;
 SELECT * FROM gatunki;
 
 SELECT DISTINCT Decode(re.id_gatunku,NULL,'brak',re.id_gatunku) AS "ID_GATUNKU",
+--Decode(re.id_gatunku,NULL,'brak_polowu',nazwa) AS "NAZWA",
 nazwa,
 Count(re.id_gatunku) AS "SZTUK",
 Round(Sum(Nvl(re.waga,0)),3) AS "LACZNA_WAGA",
 Round(Avg(Nvl(re.waga,0)),3) AS "SREDNIA_WAGA",
 Round(Avg(Nvl(re.dlugosc,0)),1) AS "SREDNIA_DLUGOSC"
-FROM rejestry re RIGHT JOIN gatunki ga ON(re.id_gatunku=ga.id_gatunku)
+FROM rejestry re FULL JOIN gatunki ga ON(re.id_gatunku=ga.id_gatunku)
 GROUP BY re.id_gatunku, nazwa
 ORDER BY Count(re.id_gatunku)DESC, nazwa;
 
@@ -284,7 +285,42 @@ SELECT * FROM okregi;
 SELECT * FROM oplaty;
 SELECT * FROM licencje;
 
-SELECT li.rok, li.id_okregu,
-count(id_licencji) AS "LICZBA_LICENCJI",
-count(DISTINCT li.id_wedkarza) AS "LICZBA_WEDKARZY",
-FROM okregi ok JOIN oplaty op ON (ok.id_okregu=op.id_okregu) JOIN licencje li ON (ok.id_okregu=op.id_okregu=li.id_okregu);
+SELECT li.rok,li.id_okregu,
+Count(li.id_licencji) AS "LICZBA_LICENCJI",
+Count(DISTINCT li.id_wedkarza) AS "LICZBA_WEDKARZY"
+FROM okregi ok LEFT JOIN oplaty op ON (ok.id_okregu = op.id_okregu) LEFT JOIN licencje li ON (op.id_okregu = li.id_okregu)
+GROUP BY li.id_okregu,li.rok
+ORDER BY li.rok, li.id_okregu DESC;
+
+/*
+23.W oparciu o dane zawarte w tabelach Studenci i Oceny wyświetl listę studentów, którzy posiadają
+przynajmniej 2 braki (tzn. min. z 2-óch przedmiotów nie uzyskali jeszcze oceny). Listę wyświetl w formie
+uporządkowanej kolejno wg liczby braków (w trybie nierosnącym) i nazwisk
+*/
+
+SELECT * FROM studenci;
+SELECT * FROM oceny;
+SELECT nr_indeksu, nazwisko, imiona, kierunek, stopien,
+Count(Nvl(ocena,0))-Count(ocena) AS "LICZBA_BRAKOW"
+FROM studenci JOIN oceny using (nr_indeksu)
+GROUP BY nr_indeksu, nazwisko, imiona, kierunek, stopien, srednia
+HAVING Count(Nvl(ocena,0))-Count(ocena)>=2
+ORDER BY LICZBA_BRAKOW DESC, nazwisko;
+
+/*
+24. Na podstawie danych zwartych w tabelach Pojazdy i Wlasciciele wyświetl listę właścicieli posiadajacych
+status osoby fizycznej, którzy nie posiadają żadnego pojazdu lub posiadają dokładnie 3 pojazdy 3-ech
+różnych marek. Dane wyświetl uporządkowane kolejno wg liczby posiadanych pojazdów (w trybie
+niemalejącym), nazwisk i imion
+*/
+
+SELECT * FROM pojazdy;
+SELECT * FROM wlasciciele;
+
+SELECT id_wlasciciela, wlasciciel,
+Count(id_wlasciciela) AS "LICZBA_POJAZDOW",
+Count(marka) AS "LICZBA_MAREK"
+FROM pojazdy JOIN wlasciciele USING (id_wlasciciela)
+WHERE Upper(status_wlasciciela) LIKE('OSOBA_FIZYCZNA')
+GROUP by id_wlasciciela,wlasciciel
+HAVING (Count(id_wlasciciela)=0) OR (Count(id_wlasciciela)=3 AND Count(marka)=3)
