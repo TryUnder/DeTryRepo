@@ -281,10 +281,6 @@ wszystkie oferty z poszczególnych lat (dane w tabeli Oplaty) włącznie z tymi,
 wędkarz. Dane wyświetl uporządkowane kolejno wg roku i identyfikatora okręgu
 */
 
-SELECT * FROM okregi;
-SELECT * FROM oplaty;
-SELECT * FROM licencje;
-
 SELECT li.rok,li.id_okregu,
 Count(li.id_licencji) AS "LICZBA_LICENCJI",
 Count(DISTINCT li.id_wedkarza) AS "LICZBA_WEDKARZY"
@@ -298,8 +294,6 @@ przynajmniej 2 braki (tzn. min. z 2-óch przedmiotów nie uzyskali jeszcze oceny
 uporządkowanej kolejno wg liczby braków (w trybie nierosnącym) i nazwisk
 */
 
-SELECT * FROM studenci;
-SELECT * FROM oceny;
 SELECT nr_indeksu, nazwisko, imiona, kierunek, stopien,
 Count(Nvl(ocena,0))-Count(ocena) AS "LICZBA_BRAKOW"
 FROM studenci JOIN oceny using (nr_indeksu)
@@ -313,9 +307,6 @@ status osoby fizycznej, którzy nie posiadają żadnego pojazdu lub posiadają d
 różnych marek. Dane wyświetl uporządkowane kolejno wg liczby posiadanych pojazdów (w trybie
 niemalejącym), nazwisk i imion
 */
-
-SELECT * FROM pojazdy;
-SELECT * FROM wlasciciele;
 
 SELECT id_wlasciciela, wlasciciel,
 Count(id_wlasciciela) AS "LICZBA_POJAZDOW",
