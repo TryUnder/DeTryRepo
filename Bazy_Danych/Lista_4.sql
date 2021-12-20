@@ -8,7 +8,7 @@ FROM pojazdy JOIN wlasciciele using(id_wlasciciela)
 WHERE Extract(YEAR FROM data_produkcji)LIKE '2018'
 ORDER BY data_produkcji DESC;
 
-/*
+/*x
 2. W oparciu o dane zawarte w tabelach Pojazdy i Wlasciciele wyświetl listę zawierającą dane pojazdów
 starszych od swoich właścicieli mających status osoby fizycznej. Lista poza danymi pojazdów
 i ich właścicieli powinna zawierać informację o wielkości różnicy pomiędzy wiekiem pojazdu i wiekiem
