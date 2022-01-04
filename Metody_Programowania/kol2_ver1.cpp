@@ -41,9 +41,8 @@ public:
   ~rt2() { delete m_text; liczba_obiektow--; }
 
   virtual void praca() const override {
-    cout << *m_text << " ";
-    if(m_hit != 0) cout << m_hit;
-    cout << endl;
+    if(m_hit == 0) {throw string("robot niezaprogramowany");}
+    if(m_hit != 0) {cout << *m_text << " " << m_hit << endl;}
   }
 
 };
@@ -77,6 +76,7 @@ cout << "********** 3 **********" << endl;
   linia[4] = new rt1(odbior);
   cout << "Liczba robotow: " << robot::liczba_obiektow << endl;
   for(int i=0; i<5; ++i){
-    cout << *linia[i];
+    try{cout << *linia[i];
+    }catch(const string& e){ cout << e << endl;}
   }
 }
