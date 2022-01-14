@@ -52,13 +52,8 @@ INSERT INTO Zawodnicy VALUES (1021, 'Czok', 'Damian', To_date('28-08-1995', 'DD-
 commit;
 savepoint sp1;
 -- Zad.2
-<<<<<<< HEAD
--- a) 
-DELETE FROM Zawodnicy WHERE Cast(to_char(sysdate,'YYYY')AS INT)-Cast(to_char(data_ur,'YYYY')AS INT) < 21; 
-=======
 -- a)
 DELETE FROM Zawodnicy WHERE Cast(to_char(sysdate,'YYYY')AS INT)-Cast(to_char(data_ur,'YYYY')AS INT) < 21;
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 -- b)
 DELETE FROM Zawodnicy;
 -- c)
@@ -85,13 +80,8 @@ rollback;
 -- Zad 4
 commit;
 SELECT * FROM Zawodnicy;
-<<<<<<< HEAD
-UPDATE Zawodnicy SET liczba_minut=liczba_minut + 
-(CASE 
-=======
 UPDATE Zawodnicy SET liczba_minut=liczba_minut +
 (CASE
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
     WHEN liczba_minut > 100 THEN 90
     WHEN liczba_minut BETWEEN 1 AND 100 THEN 45
     WHEN liczba_minut < 1 OR liczba_minut IS NULL THEN 15
@@ -101,11 +91,7 @@ END) WHERE Upper(klub) IN ('WARTA CZESTOCHOWA','ODRA WROCLAW');
 commit;
 rollback;
 SELECT Min(liczba_minut) FROM zawodnicy;
-<<<<<<< HEAD
-UPDATE Zawodnicy SET placa = placa * (CASE 
-=======
 UPDATE Zawodnicy SET placa = placa * (CASE
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 WHEN liczba_minut = (SELECT Max(liczba_minut) FROM Zawodnicy) THEN 1.25
 WHEN liczba_minut = (SELECT Min(liczba_minut) FROM Zawodnicy) THEN 0.90
 ELSE CAST(1 AS INT)
@@ -126,11 +112,7 @@ ON(min_liczba=liczba) WHERE ROWNUM=1), placa=2123 WHERE klub IS NULL OR klub LIK
 UPDATE Zawodnicy SET placa=Nvl(placa,0)+2500, klub='Warta Czestochowa' WHERE id_zawodnika=
 (
 SELECT id_zawodnika FROM Zawodnicy WHERE klub LIKE ('Odra Wroclaw') AND data_ur=
-<<<<<<< HEAD
-(SELECT min(data_ur) FROM Zawodnicy WHERE klub LIKE ('Odra Wroclaw')AND ROWNUM=1)); 
-=======
 (SELECT min(data_ur) FROM Zawodnicy WHERE klub LIKE ('Odra Wroclaw')AND ROWNUM=1));
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 
 -- Zad 8
 SELECT * FROM Zawodnicy;
@@ -141,11 +123,7 @@ UPDATE Zawodnicy SET liczba_minut=
 (
 CASE WHEN Trim(Upper(klub)) LIKE 'Warta Czestochowa' THEN length(imie)+length(nazwisko)*10
      WHEN Trim(Upper(klub)) LIKE 'Odra Wroclaw' THEN length(nazwisko)*20
-<<<<<<< HEAD
-     WHEN Trim(Upper(klub)) LIKE 'Wisla Warszawa' THEN length(imie)*20 
-=======
      WHEN Trim(Upper(klub)) LIKE 'Wisla Warszawa' THEN length(imie)*20
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
      WHEN Trim(Upper(klub)) LIKE 'Orzel Krakow' AND liczba_minut>1 THEN Cast(to_char(sysdate,'DDD')AS INT)
 END);
 
@@ -161,14 +139,7 @@ UPDATE Zawodnicy z SET placa=placa*
 (CASE WHEN Nvl(liczba_minut,0) < 0.5 * (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub) THEN 0.8
       WHEN Nvl(liczba_minut,0) BETWEEN (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*0.5
       AND (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*0.8 THEN 0.9
-<<<<<<< HEAD
-      WHEN Nvl(liczba_minut,0) BETWEEN (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.2 
-      AND (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.5 THEN 1.1
-      WHEN Nvl(liczba_minut,0) > (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.5 THEN 1.2
-END) WHERE klub NOT LIKE ('wolny zawodnik') OR klub IS NOT NULL;
-=======
       WHEN Nvl(liczba_minut,0) BETWEEN (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.2
       AND (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.5 THEN 1.1
       WHEN Nvl(liczba_minut,0) > (SELECT avg(liczba_minut) FROM Zawodnicy WHERE klub = z.klub)*1.5 THEN 1.2
 END) WHERE klub NOT LIKE ('wolny zawodnik') OR klub IS NOT NULL;
->>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
