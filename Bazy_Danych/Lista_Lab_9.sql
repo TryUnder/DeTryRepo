@@ -36,7 +36,11 @@ dystans NUMBER(5,1),
 data_kursu DATE,
 rachunek NUMBER(7,2) DEFAULT 0,
 CONSTRAINT Przewozy_id_taxi_FK FOREIGN KEY(id_taxi) REFERENCES taxi(nr_rejestracyjny) ON DELETE SET NULL,
+<<<<<<< HEAD
 CONSTRAINT Przwozy_id_klienta_FK FOREIGN KEY(id_klienta) REFERENCES klienci(personalia) ON DELETE CASCADE 
+=======
+CONSTRAINT Przwozy_id_klienta_FK FOREIGN KEY(id_klienta) REFERENCES klienci(personalia) ON DELETE CASCADE
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 );
 
 SELECT * FROM user_tables;
@@ -63,7 +67,11 @@ SELECT * FROM user_constraints WHERE table_name LIKE 'FIRMY';
 -- Kolumna id_wlasciciela -> usuniecie unikatowosci
 ALTER TABLE TAXI DROP CONSTRAINT taxi_wlasciciel_un;
 
+<<<<<<< HEAD
 -- Dodanie kolumny kolor, wartoœæ domyœlna RED
+=======
+-- Dodanie kolumny kolor, wartoÅ›Ä‡ domyÅ›lna RED
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 ALTER TABLE TAXI ADD KOLOR VARCHAR(30) DEFAULT 'RED'; -- W przypadku dodawania kilku kolumn, to w nawiasie, po przecinku
 DESC TAXI;
 
@@ -73,7 +81,11 @@ SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'KLIENCI';
 ALTER TABLE KLIENCI DROP CONSTRAINT KLIENCI_PK;
 -- WAZNE --
 -- OPERACJA SIE NIE POWIODLA, PONIEWAZ TABELA PRZEWOZY ODWOLUJE SIE DO TABELI KLIENCI.
+<<<<<<< HEAD
 -- KLUCZ OBCY TABELI KLIENCI NIE MOZE BYC PRZYPISANY DO NIE UNIKATOWEGO *POLA*. 
+=======
+-- KLUCZ OBCY TABELI KLIENCI NIE MOZE BYC PRZYPISANY DO NIE UNIKATOWEGO *POLA*.
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 -- TAKA UNIKATOWOSC GWARANTUJE PRIMARY KEY
 -- NAJPIERW NALEZY ROZCIAC TO ZEWNETRZNE POWIAZANIE
 ALTER TABLE PRZEWOZY DROP CONSTRAINT Przewozy_id_klienta_FK;
@@ -82,7 +94,11 @@ ALTER TABLE KLIENCI ADD CONSTRAINT KLIENCI_PK PRIMARY KEY(id_klienta);
 -- ID_KLIENTA W PRZEWOZACH TO VARCHAR. NALEZY ZMIENIC NA NUMBER
 ALTER TABLE PRZEWOZY MODIFY id_klienta NUMBER(6);
 -- PRZYKLAD DEFINIOWANIA KLUCZY OBCYCH Z POZA TABELI
+<<<<<<< HEAD
 ALTER TABLE PRZEWOZY ADD CONSTRAINT Przewozy_id_klienta_FK FOREIGN KEY(id_klienta) 
+=======
+ALTER TABLE PRZEWOZY ADD CONSTRAINT Przewozy_id_klienta_FK FOREIGN KEY(id_klienta)
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 REFERENCES KLIENCI(id_klienta) ON DELETE CASCADE;
 
 -- Usuniecie kolumn wiek oraz waga
@@ -99,7 +115,11 @@ EXTRACT(DAY FROM data_up) FROM WLASCICIELE WHERE wlasciciel LIKE 'Firma%' AND RO
 -- TAXI
 SELECT * FROM TAXI;
 INSERT INTO TAXI SELECT nr_rejestracyjny,
+<<<<<<< HEAD
 Trunc(DBMS_Random.value(1,(SELECT count(*)+1 FROM FIRMY))), marka, modell, data_produkcji, kolor 
+=======
+Trunc(DBMS_Random.value(1,(SELECT count(*)+1 FROM FIRMY))), marka, modell, data_produkcji, kolor
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 FROM pojazdy WHERE typ LIKE 'SAM_OSOBOWY' AND nr_rejestracyjny IS NOT NULL AND ROWNUM<45;
 
 -- JAK ZDEFINIOWAC LOSOWOSC
@@ -135,14 +155,22 @@ SELECT * FROM PRZEWOZY JOIN KLIENCI USING (id_klienta) JOIN TAXI ON(przewozy.id_
 --------------------------
 SELECT * FROM FIRMY;
 SELECT 'INSERT INTO FIRMY VALUES
+<<<<<<< HEAD
 ('|| nazwa ||''','''|| adres ||''',' || 
+=======
+('|| nazwa ||''','''|| adres ||''',' ||
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 REPLACE(to_char(cena_km),',','.')||','||replace(to_char(oplata_stala),',','.')||');' FROM FIRMY;
 
 -- PRZEWOZY
 SELECT 'INSERT INTO PRZEWOZY VALUES(' ||id_przewozu||','''||TRIM(id_taxi)||''','||id_klienta||','||
 REPLACE(TO_CHAR(dystans),',','.')||',TO_DATE('''||TO_CHAR(data_kursu,'YYYY-MM-DD')||''',''YYYY-MM-DD''),NULL);'
 FROM przewozy ORDER BY id_przewozu;
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 SELECT * FROM PRZEWOZY;
 
 UPDATE PRZEWOZY pr SET rachunek=
@@ -197,13 +225,21 @@ DROP TABLE KLIENCI CASCADE CONSTRAINTS;
 -------------------------------------------------------------------------------------------------------------
 
 -- Zad 1
+<<<<<<< HEAD
 CREATE TABLE Produkty 
+=======
+CREATE TABLE Produkty
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 (
 id_produktu NUMBER(4) CONSTRAINT id_produktu_un UNIQUE,
 nazwa VARCHAR2(40) CONSTRAINT nazwa_nn NOT NULL,
 stan NUMBER(6,2) DEFAULT 0,
 cena  NUMBER(6,2) DEFAULT 1.23,
+<<<<<<< HEAD
 wartosc AS (stan*cena) 
+=======
+wartosc AS (stan*cena)
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
 );
 
 -- Zad 2
@@ -228,4 +264,14 @@ czas_transakcji timestamp
 );
 
 -- Zad 4
+<<<<<<< HEAD
 ALTER TABLE Kasjerzy MODIFY (placa DEFAULT 3200);
+=======
+-- a)
+ALTER TABLE Kasjerzy MODIFY (placa DEFAULT 3200);
+-- b)
+ALTER TABLE Transakcje MODIFY (czas_transakcji DEFAULT systimestamp);
+-- c)
+ALTER TABLE Kasjerzy ADD CONSTRAINT id_kasjera_ch CHECK(id_kasjera>100);
+-- d)
+>>>>>>> 2f8aec323ef5e77f30a3b076d8bd5e89c42041fe
