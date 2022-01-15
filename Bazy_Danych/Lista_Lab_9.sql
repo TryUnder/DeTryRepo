@@ -242,4 +242,134 @@ ALTER TABLE Transakcje ADD CONSTRAINT id_produktu_FK FOREIGN KEY(id_produktu)
 REFERENCES Produkty(id_produktu) ON DELETE CASCADE;
 -- e)
 ALTER TABLE Transakcje DROP CONSTRAINT id_sprzedawcy_FK;
-ALTER TABLE Transakcje ADD CONSTRAINT
+ALTER TABLE Transakcje ADD CONSTRAINT id_sprzedawcy_FK FOREIGN KEY(id_sprzedawcy)
+REFERENCES Kasjerzy(id_kasjera) ON DELETE SET NULL;
+-- f)
+ALTER TABLE Kasjerzy RENAME COLUMN placa TO pensja;
+-- g)
+ALTER TABLE Kasjerzy ADD (data_urodzenia DATE CONSTRAINT data_urodzenia_CH
+CHECK (data_urodzenia>=to_date('01.01.1960','DD.MM.YYYY')), data_zwolnienia DATE DEFAULT NULL);
+-- h)
+ALTER TABLE Kasjerzy ADD CONSTRAINT data_zwolnienia_ch
+CHECK(NVL(data_zwolnienia,data_urodzenia+1) > data_urodzenia AND
+NVL(data_zwolnienia, data_zatrudnienia+1) > data_zatrudnienia);
+-- i)
+ALTER TABLE Produkty MODIFY (wartosc NUMBER(10,2));
+-- Po zadaniu 4
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(1, 'cukier', 100, 2.95);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(2, 'chleb', 50, 3.7);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(3, 'jogurt', 20, 1.15);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(4, 'schab', 6.5, 15.2);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(5, 'piwo', 200, 3.1);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(6, 'cukierki', 10, 23);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(7, 'kurczak', 10, 12.35);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(8, 'banan', 6.5, 5.20);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(9, 'mydlo', 40, 2.5);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(10, 'pomidory', 8.5, 8.5);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(11, 'olej', 20, 6.95);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(12, 'kisiel', 150, 1.15);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(13, 'ciastka', 25, 4.80);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(14, 'plyn do naczyn', 15, 8.20);
+INSERT INTO Produkty (id_produktu, nazwa, stan, cena) VALUES(15, 'pieprz', 30, 3.15);
+
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES
+(100, 'Kowalski', To_date('01-01-2010', 'DD-MM-YYYY'), To_date('11-03-1990', 'DD-MM-YYYY'));
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES
+(101, 'Nowak', To_date('01-03-2012', 'DD-MM-YYYY'), To_date('21-10-1992', 'DD-MM-YYYY'));
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES
+(102, 'Polak', To_date('01-10-2013', 'DD-MM-YYYY'), To_date('18-09-1983', 'DD-MM-YYYY'));
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES
+(103, 'Zalas', To_date('01-01-2019', 'DD-MM-YYYY'), To_date('14-12-1985', 'DD-MM-YYYY'));
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES
+(104, 'Pogonowska', To_date('01-11-2018', 'DD-MM-YYYY'), To_date('28-03-1993', 'DD-MM-YYYY'));
+
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (1, 1, 100, 2);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (2, 1, 101, 1);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (3, 2, 100, 1);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (4, 3, 102, 5);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (5, 4, 100, 1.35);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (6, 5, 101, 4);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (7, 6, 100, 0.45);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (8, 7, 102, 1.84);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (9, 4, 101, 1.05);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (10, 6, 102, 1.55);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (11, 6, 102, 0.8);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (12, 7, 102, 2.5);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (13, 7, 103, 1.95);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (14, 11, 100, 2);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (15, 11, 104, 1);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (16, 12, 102, 8);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (17, 12, 103, 4);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (18, 12, 104, 5);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (19, 12, 103, 11);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (20, 13, 104, 2);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (21, 14, 102, 1);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (22, 14, 101, 2);
+
+-- Zad.5
+ALTER TABLE Transakcje ADD (rachunek NUMBER(8,2));
+SELECT * FROM Produkty;
+
+UPDATE Produkty pr SET stan=stan-(SELECT Sum(miara) FROM Transakcje WHERE id_produktu=pr.id_produktu AND
+rachunek IS NULL) WHERE EXISTS (SELECT * FROM Transakcje WHERE id_produktu=pr.id_produktu AND rachunek is NULL);
+UPDATE Transakcje tr SET rachunek = miara*(SELECT cena FROM Produkty pr WHERE pr.id_produktu=tr.id_produktu);
+
+-- Zad.6
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia) VALUES (10, 'Malinowska', sysdate, To_date('13-05-1958', 'DD-MM-YYYY'));
+ALTER TABLE Kasjerzy DISABLE CONSTRAINT id_kasjera_ch;
+ALTER TABLE Kasjerzy DISABLE CONSTRAINT data_urodzenia_ch;
+SELECT * FROM Kasjerzy;
+INSERT INTO Kasjerzy (id_kasjera, nazwisko, data_zatrudnienia, data_urodzenia)
+VALUES (10, 'Malinowska', sysdate, To_date('13-05-1958', 'DD-MM-YYYY'));
+UPDATE Kasjerzy SET id_kasjera=(SELECT max(id_kasjera)+1 FROM Kasjerzy WHERE id_kasjera>=100) WHERE id_kasjera<100;
+ALTER TABLE Kasjerzy ENABLE CONSTRAINT id_kasjera_ch;
+ALTER TABLE Kasjerzy ENABLE CONSTRAINT data_urodzenia_ch;
+ALTER TABLE Kasjerzy ENABLE NOVALIDATE CONSTRAINT data_urodzenia_ch;
+commit;
+
+-- Zad.7
+SELECT * FROM Produkty;
+SELECT * FROM Kasjerzy;
+SELECT * FROM Transakcje;
+CREATE TABLE Raport AS(
+SELECT nazwa produkt, tr.id_produktu, nazwisko kasjer, id_kasjera, count(id_transakcji) liczba_transakcji,
+Sum(Nvl(miara,0)) lacznie_kg_szt, Sum(Nvl(rachunek,0)) rachunek
+FROM Produkty pr LEFT JOIN Transakcje tr ON (pr.id_produktu=tr.id_produktu)
+FULL  JOIN Kasjerzy kr ON (tr.id_sprzedawcy=kr.id_kasjera)
+GROUP BY nazwa, tr.id_produktu, nazwisko, id_kasjera, rachunek
+);
+SELECT * FROM Raport;
+
+-- Zad.8
+-- przy zalożeniu, że id_kasjera nowej kasjerski Malinowskiej to 105
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (23, 14, 105, 1);
+INSERT INTO Transakcje (id_transakcji, id_produktu, id_sprzedawcy, miara) VALUES (24, 15, 105, 2);
+SELECT * FROM Produkty;
+SELECT * FROM Transakcje;
+
+UPDATE Produkty pr SET stan=stan-(SELECT Sum(miara) FROM Transakcje WHERE id_produktu=pr.id_produktu
+AND rachunek IS NULL) WHERE EXISTS (SELECT * FROM Transakcje WHERE id_produktu=pr.id_produktu AND rachunek IS NULL);
+
+UPDATE Transakcje tr SET rachunek=miara*(SELECT cena FROM Produkty WHERE tr.id_produktu=id_produktu)
+WHERE rachunek IS NULL;
+commit;
+
+-- Zad.9
+SELECT * FROM Transakcje;
+
+DELETE FROM Kasjerzy WHERE id_kasjera=(SELECT id_sprzedawcy FROM(
+SELECT Count(id_transakcji), id_sprzedawcy
+FROM Transakcje GROUP BY (id_sprzedawcy) HAVING Count(id_transakcji)>=
+ALL(SELECT Count(id_transakcji)
+FROM Transakcje GROUP BY (id_sprzedawcy))));
+
+-- Zad.10
+SELECT * FROM Produkty;
+DELETE FROM Produkty pr WHERE cena<=5 AND (1=(SELECT Count(*) FROM Transakcje WHERE id_produktu=pr.id_produktu)
+OR NOT EXISTS(SELECT * FROM Transakcje WHERE id_produktu=pr.id_produktu));
+
+-- Zad.11
+DROP TABLE Produkty CASCADE CONSTRAINTS;
+DROP TABLE Kasjerzy CASCADE CONSTRAINTS;
+DROP TABLE Transakcje CASCADE CONSTRAINTS;
+DROP TABLE Raport CASCADE CONSTRAINTS;
