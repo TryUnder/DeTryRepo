@@ -50,12 +50,12 @@ commit;
 
 INSERT ALL
 WHEN Extract(YEAR FROM DP) != Extract(YEAR FROM DR)
-    THEN INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP, 
+    THEN INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP,
     'DP: '||To_char(DP, 'YYYY')||' DR: '||To_char(DR, 'YYYY'))
 WHEN kolor LIKE '%Red%' AND pojemnosc BETWEEN 1000 AND 2000
     THEN INTO TABLE_B VALUES(nr_rejestracyjny, marka, Upper(kolor), Round(pojemnosc/1000,1),Kom)
-WHEN typ LIKE 'SAM_OSOBOWY' 
-    THEN INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor), 
+WHEN typ LIKE 'SAM_OSOBOWY'
+    THEN INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor),
     Round(pojemnosc/1000,2), Kom||typ||' '||marka||' '||modell)
 SELECT nr_rejestracyjny, marka, modell, kolor, pojemnosc, data_produkcji DP, data_rejestracji DR, typ,
 'Pojazd z Cz-wy' Kom FROM POJAZDY WHERE nr_rejestracyjny LIKE 'SC %';
@@ -64,7 +64,7 @@ SELECT * FROM TABLE_A;
 SELECT * FROM TABLE_B;
 SELECT * FROM TABLE_C;
 
-SELECT nr_rej FROM TABLE_A 
+SELECT nr_rej FROM TABLE_A
 INTERSECT
 SELECT nr_rej FROM TABLE_B
 INTERSECT
@@ -76,17 +76,17 @@ commit;
 
 INSERT ALL
 WHEN Extract(YEAR FROM DP) != Extract(YEAR FROM DR) THEN
-    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP, 
+    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP,
     'DP: '||To_char(DP, 'YYYY')||' DR: '||To_char(DR, 'YYYY'))
 WHEN kolor LIKE '%Red%' AND pojemnosc BETWEEN 1000 AND 2000 THEN
     INTO TABLE_B VALUES(nr_rejestracyjny, marka, Upper(kolor), Round(pojemnosc/1000,1),Kom)
-ELSE 
-    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor), 
+ELSE
+    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor),
     Round(pojemnosc/1000,2), Kom||typ||' '||marka||' '||modell)
     SELECT nr_rejestracyjny, marka, modell, kolor, pojemnosc, data_produkcji DP, data_rejestracji DR, typ,
     'Pojazd z Cz-wy' Kom FROM POJAZDY WHERE nr_rejestracyjny LIKE 'SC %';
 
-SELECT nr_rej FROM TABLE_A 
+SELECT nr_rej FROM TABLE_A
 INTERSECT
 SELECT nr_rej FROM TABLE_B
 INTERSECT
@@ -98,12 +98,12 @@ commit;
 
 INSERT FIRST
 WHEN Extract(YEAR FROM DP) != Extract(YEAR FROM DR) THEN
-    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP, 
+    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP,
     'DP: '||To_char(DP, 'YYYY')||' DR: '||To_char(DR, 'YYYY'))
 WHEN kolor LIKE '%Red%' AND pojemnosc BETWEEN 1000 AND 2000 THEN
     INTO TABLE_B VALUES(nr_rejestracyjny, marka, Upper(kolor), Round(pojemnosc/1000,1),Kom)
 WHEN typ LIKE 'SAM_OSOBOWY' THEN
-    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor), 
+    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor),
     Round(pojemnosc/1000,2), Kom||typ||' '||marka||' '||modell)
     SELECT nr_rejestracyjny, marka, modell, kolor, pojemnosc, data_produkcji DP, data_rejestracji DR, typ,
     'Pojazd z Cz-wy' Kom FROM POJAZDY WHERE nr_rejestracyjny LIKE 'SC %';
@@ -112,7 +112,7 @@ SELECT * FROM TABLE_A;
 SELECT * FROM TABLE_B;
 SELECT * FROM TABLE_C;
 
-SELECT nr_rej FROM TABLE_A 
+SELECT nr_rej FROM TABLE_A
 INTERSECT
 SELECT nr_rej FROM TABLE_B
 INTERSECT
@@ -120,16 +120,16 @@ SELECT nr_rej FROM TABLE_C;
 
 commit;
 
--- INSERT FIRST ELSE -- 
+-- INSERT FIRST ELSE --
 
 INSERT FIRST
 WHEN Extract(YEAR FROM DP) != Extract(YEAR FROM DR) THEN
-    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP, 
+    INTO TABLE_A VALUES(nr_rejestracyjny, marka, modell, lower(kolor), DR-DP,
     'DP: '||To_char(DP, 'YYYY')||' DR: '||To_char(DR, 'YYYY'))
 WHEN kolor LIKE '%Red%' AND pojemnosc BETWEEN 1000 AND 2000 THEN
     INTO TABLE_B VALUES(nr_rejestracyjny, marka, Upper(kolor), Round(pojemnosc/1000,1),Kom)
 ELSE
-    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor), 
+    INTO TABLE_C VALUES(nr_rejestracyjny, Initcap(kolor),
     Round(pojemnosc/1000,2), Kom||typ||' '||marka||' '||modell)
     SELECT nr_rejestracyjny, marka, modell, kolor, pojemnosc, data_produkcji DP, data_rejestracji DR, typ,
     'Pojazd z Cz-wy' Kom FROM POJAZDY WHERE nr_rejestracyjny LIKE 'SC %';
@@ -138,7 +138,7 @@ SELECT * FROM TABLE_A;
 SELECT * FROM TABLE_B;
 SELECT * FROM TABLE_C;
 
-SELECT nr_rej FROM TABLE_A 
+SELECT nr_rej FROM TABLE_A
 INTERSECT
 SELECT nr_rej FROM TABLE_B
 INTERSECT
@@ -173,7 +173,7 @@ ALTER SEQUENCE SEQ_NAME NOCYCLE MAXVALUE 25000;
 CREATE TABLE TABLE_D
 (
     id_table NUMBER(7),
-    kod VARCHAR2(7)  
+    kod VARCHAR2(7)
 );
 
 CREATE SEQUENCE Seq_name;
@@ -204,7 +204,7 @@ SELECT * FROM TABLE_E AS OF TIMESTAMP (SYSTIMESTAMP - INTERVAL '1' MINUTE);
 commit;
 DELETE FROM V_AKTUALNI_PRAC WHERE placa BETWEEN 5000 AND 7000;
 SELECT * FROM V_AKTUALNI_PRAC;
-SELECT * FROM TABLE_E AS OF TIMESTAMP (SYSTIMESTAMP-INTERVAL '5' MINUTE); 
+SELECT * FROM TABLE_E AS OF TIMESTAMP (SYSTIMESTAMP-INTERVAL '5' MINUTE);
 
 INSERT INTO V_AKTUALNI_PRAC (nr_akt,nazwisko, data_zwol) VALUES (1000,'Testowy',SYSDATE+10);
 SELECT * FROM TABLE_E;
@@ -240,7 +240,7 @@ UPDATE V_ZLOZONA SET Pensja=Pensja*10.2;
 UPDATE V_ZLOZONA SET nazwisko=nazwisko||'xd'WHERE nazwisko LIKE 'Michalski';
 SELECT * FROM V_ZLOZONA;
 
-CREATE OR REPLACE VIEW V_ZLOZONA AS 
+CREATE OR REPLACE VIEW V_ZLOZONA AS
 SELECT id_dzialu, SUM(placa) SUM_PLACA FROM TABLE_E GROUP BY id_dzialu;
 SELECT * FROM V_ZLOZONA;
 UPDATE V_ZLOZONA SET SUM_PLACA=SUM_PLACA*1.1;
@@ -322,11 +322,11 @@ T2 USING(id_wedkarza,id_gatunku);
 commit;
 -- c)
 INSERT FIRST
-WHEN NAJKROTSZA BETWEEN 0 AND 35 THEN 
+WHEN NAJKROTSZA BETWEEN 0 AND 35 THEN
 INTO Min_Ryby_Wedkarzy VALUES (id_wedkarza,nazwisko,id_gatunku,nazwa,NAJKROTSZA,'NAJKROTSZA')
 WHEN NAJDLUZSZA > 60 THEN
 INTO Max_Ryby_Wedkarzy VALUES (id_wedkarza,nazwisko,id_gatunku,nazwa,NAJDLUZSZA,'NAJDLUZSZA')
-SELECT id_wedkarza, nazwisko, id_gatunku, nazwa, 
+SELECT id_wedkarza, nazwisko, id_gatunku, nazwa,
 (SELECT NVL(MIN(dlugosc),0) FROM REJESTRY WHERE id_gatunku=ga.id_gatunku AND id_wedkarza=we.id_wedkarza)NAJKROTSZA,
 (SELECT NVL(MAX(dlugosc),0) FROM REJESTRY WHERE id_gatunku=ga.id_gatunku AND id_wedkarza=we.id_wedkarza)NAJDLUZSZA
 FROM WEDKARZE we CROSS JOIN GATUNKI ga;
@@ -356,7 +356,7 @@ NR_INDEKSU NUMBER(6),
 SREDNIA NUMBER(3,2)
 )ON COMMIT DELETE ROWS;
 
-INSERT ALL 
+INSERT ALL
 WHEN SREDNIA=MIN_SREDNIA THEN INTO NAJNIZSZE_SREDNIE VALUES (KIERUNEK, TRYB, STOPIEN, NR_INDEKSU, SREDNIA)
 WHEN SREDNIA=MAX_SREDNIA THEN INTO NAJWYZSZE_SREDNIE VALUES (KIERUNEK, TRYB, STOPIEN, NR_INDEKSU, SREDNIA)
 SELECT * FROM (
@@ -433,7 +433,7 @@ select * from studenci_bis where nazwisko like 'Test%';
 -- Zad.7
 CREATE OR REPLACE VIEW S1R1 AS SELECT nr_indeksu, nazwisko, imiona, rok,
 SUBSTR(IMIONA,1,1) || SUBSTR(NAZWISKO,1,1) || NR_INDEKSU PSEUDONIM
-FROM ZACY WHERE STOPIEN=1 AND ROK=1 
+FROM ZACY WHERE STOPIEN=1 AND ROK=1
 WITH CHECK OPTION;
 SELECT * FROM S1R1;
 
@@ -451,15 +451,15 @@ WHERE (data_zwol IS NULL OR data_zwol >= sysdate) AND nr_akt>=1000 ORDER BY id_d
 
 SELECT * FROM Lista_plac;
 INSERT INTO Lista_Plac VALUES(1222, 'TESTOWSKI', 10, 'INFORMATYK', 5000);
--- NIE WESZLO !!!
+-- NIE WESZLO !!!!
 
-SELECT * FROM Lista_plac; 
+SELECT * FROM Lista_plac;
 select * from pracownicybis;
 
 -- Zad.9
-CREATE OR REPLACE VIEW SZEFOWIE AS SELECT nr_akt, 
+CREATE OR REPLACE VIEW SZEFOWIE AS SELECT nr_akt,
 nazwisko, liczba liczba_podwladnych, data_zatr, placa, id_dzialu FROM
-(SELECT przelozony, count(*) liczba FROM PRACOWNICYBIS p1 
+(SELECT przelozony, count(*) liczba FROM PRACOWNICYBIS p1
 WHERE data_zwol IS NULL OR data_zwol>=SYSDATE GROUP BY przelozony) s1
 JOIN PRACOWNICYBIS p2 ON (p2.nr_akt=s1.przelozony) WHERE p2.data_zwol IS NULL OR p2.data_zwol>=SYSDATE;
 
