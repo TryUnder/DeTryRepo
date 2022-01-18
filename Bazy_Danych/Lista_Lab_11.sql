@@ -40,7 +40,7 @@ insert into drivers values ('89010301211', 'WITOS', 'JAN', to_date('1995-01-17',
 SELECT * FROM DRIVERS;
 
 UPDATE DRIVERS SET PESEL=
-CASE WHEN CAST(EXTRACT(YEAR FROM DATA_URODZENIA)AS INT) BETWEEN 2000 AND 2099 THEN
+CASE WHEN CAST(EXTRACT(YEAR FROM DATA_URODZENIA)AS INT) BETWEEN 2000 AND 2099 THEN 
 TO_CHAR(DATA_URODZENIA,'YY') || CAST(EXTRACT(MONTH FROM DATA_URODZENIA)AS INT)+20 || TO_CHAR(DATA_URODZENIA,'DD')
 ELSE TO_CHAR(DATA_URODZENIA,'YYMMDD') END || SUBSTR(PESEL,7);
 
@@ -81,35 +81,35 @@ MAXVALUE 99999
 INCREMENT BY 123
 CYCLE;
 
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-810, 'SC12311', 132, 70, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-420, 'SC12311', 92, 60, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-650, 'SC32326', 101, 60, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-550, 'SC32326', 85, 60, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-384, 'SC32326', 112, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-573, 'K012311', 145, 110, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-34, 'O165112', 98, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-289, 'O165112', 142, 100, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-453, 'K012311', 149, 110, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-511, 'O200022', 121, 90, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-478, 'K212111', 114, 50, 0 );
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-810, 'SC12311', 132, 70, 0 );  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-420, 'SC12311', 92, 60, 0 );  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-650, 'SC32326', 101, 60, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-550, 'SC32326', 85, 60, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-384, 'SC32326', 112, 50, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-573, 'K012311', 145, 110, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-34, 'O165112', 98, 50, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-289, 'O165112', 142, 100, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-453, 'K012311', 149, 110, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-511, 'O200022', 121, 90, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-478, 'K212111', 114, 50, 0 );   
 insert into wykroczenia values (seq_id_wyk.nextval, sysdate-950, 'WE90012', 211, 130, 0 );
-
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-10, 'SC12311', 102, 70, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-20, 'SC12311', 82, 70, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-50, 'SC32326', 112, 60, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-150, 'SC32326', 85, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-84, 'SC32326', 122, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-73, 'K012311', 135, 130, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate, 'O165112', 78, 60, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-189, 'O165112', 146, 110, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-253, 'K012311', 189, 130, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-311, 'O200022', 101, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-178, 'K212111', 104, 70, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate, 'O165112', 98, 90, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-3, 'WB23414', 92, 50, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-121, 'WE90012', 135, 50, 0 );
+  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-10, 'SC12311', 102, 70, 0 );  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-20, 'SC12311', 82, 70, 0 );  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-50, 'SC32326', 112, 60, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-150, 'SC32326', 85, 50, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-84, 'SC32326', 122, 50, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-73, 'K012311', 135, 130, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate, 'O165112', 78, 60, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-189, 'O165112', 146, 110, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-253, 'K012311', 189, 130, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-311, 'O200022', 101, 50, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-178, 'K212111', 104, 70, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate, 'O165112', 98, 90, 0 ); 
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-3, 'WB23414', 92, 50, 0 );  
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-121, 'WE90012', 135, 50, 0 );  
 insert into wykroczenia values (seq_id_wyk.nextval, sysdate-250, 'WE90012', 185, 130, 0 );
-insert into wykroczenia values (seq_id_wyk.nextval, sysdate-21, 'SCZ3422', 109, 50, 0 );
+insert into wykroczenia values (seq_id_wyk.nextval, sysdate-21, 'SCZ3422', 109, 50, 0 );  
 insert into wykroczenia values (seq_id_wyk.nextval, sysdate-50, 'SK02227', 175, 140, 0 );
 insert into wykroczenia values (seq_id_wyk.nextval, sysdate-interval '3' year, 'SC32312', 61, 50, 0 );
 
@@ -136,8 +136,8 @@ JOIN DRIVERS DRI ON (DRI.PESEL=WLASCICIEL);
 SELECT * FROM REJESTR_MANDATOW;
 
 -- D7
-insert into Wykroczenia values (seq_id_wyk.nextval, sysdate-3, 'O200022', 71, 50, 0 );
-insert into Wykroczenia values (seq_id_wyk.nextval, sysdate-19, 'O165112', 151, 90, 0 );
+insert into Wykroczenia values (seq_id_wyk.nextval, sysdate-3, 'O200022', 71, 50, 0 ); 
+insert into Wykroczenia values (seq_id_wyk.nextval, sysdate-19, 'O165112', 151, 90, 0 ); 
 insert into Wykroczenia values (seq_id_wyk.nextval, sysdate-453, 'K012311', 137, 50, 0 );
 
 -- Zad.7
@@ -154,10 +154,10 @@ SELECT * FROM WYKROCZENIA;
 
 ALTER TABLE WYKROCZENIA_TEMP ADD KOMENTARZ VARCHAR2(20);
 
-MERGE INTO WYKROCZENIA_TEMP WYK_TEMP
+MERGE INTO WYKROCZENIA_TEMP WYK_TEMP 
 USING (SELECT * FROM WYKROCZENIA) WYK ON (WYK_TEMP.ID_WYKROCZENIA=WYK.ID_WYKROCZENIA)
 WHEN MATCHED THEN UPDATE SET MANDAT = WYK.MANDAT, KOMENTARZ='STARE_WYKROCZENIA'
-WHEN NOT MATCHED THEN INSERT VALUES
+WHEN NOT MATCHED THEN INSERT VALUES 
 (WYK.ID_WYKROCZENIA,WYK.DATA_ZDARZENIA,WYK.ID_SAMOCHODU,WYK.VZ,WYK.VDOP,WYK.MANDAT,'NOWE_WYKROCZENIE');
 
 -- Zad.9
@@ -165,7 +165,7 @@ SELECT * FROM WYKROCZENIA;
 SELECT * FROM DRIVERS;
 SELECT * FROM CARS;
 
-CREATE OR REPLACE VIEW BILANS_ROCZNY_KAR AS
+CREATE OR REPLACE VIEW BILANS_ROCZNY_KAR AS 
 SELECT EXTRACT(YEAR FROM DATA_ZDARZENIA) ROK, NAZWISKO, IMIE, SUM(MANDAT) KWOTA, COUNT(*) AS LICZBA_WYKROCZEN
 FROM WYKROCZENIA JOIN CARS ON
 (WYKROCZENIA.ID_SAMOCHODU=CARS.NUMER_REJESTRACYJNY) JOIN DRIVERS ON (CARS.WLASCICIEL=DRIVERS.PESEL)
@@ -175,9 +175,9 @@ ORDER BY 1,4 DESC;
 SELECT * FROM BILANS_ROCZNY_KAR;
 
 -- Zad.10
-CREATE OR REPLACE VIEW BILANS_MANDATOW_SAM
+CREATE OR REPLACE VIEW BILANS_MANDATOW_SAM 
 AS SELECT MARKA, MODELL, KOLOR, SUM(MANDAT) KWOTA, COUNT(*) LICZBA_WYKROCZEN
-FROM DRIVERS JOIN CARS ON (DRIVERS.PESEL=CARS.WLASCICIEL)
+FROM DRIVERS JOIN CARS ON (DRIVERS.PESEL=CARS.WLASCICIEL) 
 JOIN WYKROCZENIA ON (WYKROCZENIA.ID_SAMOCHODU=CARS.NUMER_REJESTRACYJNY) WHERE MANDAT>0
 GROUP BY GROUPING SETS((MARKA,MODELL),(KOLOR,MARKA),(MARKA),(KOLOR),())
 ORDER BY MARKA, MODELL, KOLOR;
@@ -187,7 +187,7 @@ SELECT * FROM BILANS_MANDATOW_SAM;
 -- Zad.11
 CREATE OR REPLACE VIEW LISTA_PIRATOW_DROGOWYCH
 AS SELECT EXTRACT(YEAR FROM DATA_ZDARZENIA) ROK, NAZWISKO, IMIE, SUM(MANDAT) KWOTA,
-COUNT(*) LICZBA_WYKROCZEN FROM DRIVERS JOIN CARS ON (PESEL=WLASCICIEL)
+COUNT(*) LICZBA_WYKROCZEN FROM DRIVERS JOIN CARS ON (PESEL=WLASCICIEL) 
 JOIN WYKROCZENIA ON (ID_SAMOCHODU=NUMER_REJESTRACYJNY) WHERE MANDAT>0
 GROUP BY EXTRACT(YEAR FROM DATA_ZDARZENIA), NAZWISKO, IMIE
 HAVING SUM(MANDAT)>(SELECT AVG(SUM(MANDAT)) FROM DRIVERS JOIN CARS ON (PESEL=WLASCICIEL)
@@ -202,7 +202,7 @@ AS SELECT PESEL,NAZWISKO,IMIE,MIEJSCOWOSC FROM WYKROCZENIA JOIN CARS ON (ID_SAMO
 JOIN DRIVERS ON (WLASCICIEL=PESEL)
 MINUS
 SELECT PESEL,NAZWISKO,IMIE,MIEJSCOWOSC FROM WYKROCZENIA JOIN CARS ON (ID_SAMOCHODU=NUMER_REJESTRACYJNY)
-JOIN DRIVERS ON (WLASCICIEL=PESEL) WHERE MANDAT>0 AND DATA_ZDARZENIA>=SYSDATE-INTERVAL '3' YEAR
+JOIN DRIVERS ON (WLASCICIEL=PESEL) WHERE MANDAT>0 AND DATA_ZDARZENIA>=SYSDATE-INTERVAL '3' YEAR 
 WITH READ ONLY;
 
 SELECT * FROM LISTA_WZOROWYCH_KIEROWCOW;
