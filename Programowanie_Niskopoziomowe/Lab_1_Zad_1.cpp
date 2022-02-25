@@ -1,3 +1,7 @@
+/*
+Proszę napisać program obliczający objętość sześcianu o boku a.
+*/
+
 #include <iostream>
 using namespace std;
 
