@@ -8,8 +8,8 @@ dla zadanych parametrów a, b, c i x.
 using namespace std;
 
 int main(){
-	unsigned int a, b, c, x;
-	unsigned int result = 0;
+	signed int a, b, c, x;
+	signed int result = 0;
 	cout << "Wprowadz a:"; cin >> a;
 	cout << "Wprowadz b:"; cin >> b;
 	cout << "Wprowadz c:"; cin >> c;
