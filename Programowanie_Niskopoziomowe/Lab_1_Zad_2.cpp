@@ -25,12 +25,12 @@ int main() {
 		imul ecx;
 		mov ebx, eax;
 		xor eax, eax;
-		xor edx, ebx;
+		xor edx, edx;
 		mov eax, b;
 		mov edx, x;
 		imul edx;
 		add ebx, eax;
-		xor edx, ebx;
+		xor edx, edx;
 		mov edx, c;
 		add ebx, edx;
 		mov result, ebx;
