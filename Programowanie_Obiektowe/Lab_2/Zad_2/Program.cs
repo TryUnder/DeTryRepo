@@ -24,6 +24,8 @@ namespace Zad_2{
             student.Details();
             student.DeleteGrade("AWWW", 4.5D, new DateTime(2011, 4, 2));
             student.Details();
+            student.DeleteGrades("AWWW");
+            student.Details();
         }
     }
 }

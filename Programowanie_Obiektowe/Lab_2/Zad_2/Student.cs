@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace Zad_2{
     public class Student : Person{
         private int _year;
@@ -49,8 +50,16 @@ namespace Zad_2{
         }
 
         public void DeleteGrade(string subjectName, double vvalue, DateTime date){
-                Grade test = new Grade(subjectName, vvalue, date);
-                if(_grades.Contains(test)) {Console.WriteLine("YES!");} 
+            var found = _grades.FirstOrDefault(i => i.SubjectName == subjectName 
+                        && i.Value == vvalue && i.Date == date);
+                if(_grades.Contains(found))
+                    _grades.Remove(found);
+        }
+
+        public void DeleteGrades(string subjectName){
+            var found = _grades.Where(i => i.SubjectName.Contains(subjectName));
+            
+                _grades.Remove(found);
         }
 
     }
