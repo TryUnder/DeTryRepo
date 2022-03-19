@@ -60,5 +60,12 @@ namespace Zad_2{
             _grades.RemoveAll(i => i.SubjectName.Contains(subjectName));         
         }
 
+        public void DeleteGrade(Grade grade){
+            _grades.Remove(grade);
+        }
+
+        public void DeleteGrades(){
+            _grades.Clear();
+        }
     }
 }
