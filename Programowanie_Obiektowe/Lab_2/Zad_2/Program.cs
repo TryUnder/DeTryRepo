@@ -26,6 +26,12 @@ namespace Zad_2{
             student.Details();
             student.DeleteGrades("AWWW");
             student.Details();
+            student.DeleteGrades();
+            Console.WriteLine("PUSTA LINIA");
+            student.Details();
+            student.AddGrade("AB", 3.0D, new DateTime(2011, 5, 11));
+            student.AddGrade("BazyDanych", 4.0D, new DateTime(2020, 4, 3));
+            student.DisplayGrades("BazyDanych");
         }
     }
 }

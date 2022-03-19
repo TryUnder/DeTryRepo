@@ -49,6 +49,12 @@ namespace Zad_2{
             }
         }
 
+        public void DisplayGrades(string subjectName){
+            foreach(var i in _grades.Where(i => i.SubjectName == subjectName)){
+                Console.WriteLine(i);
+            }
+        }
+
         public void DeleteGrade(string subjectName, double vvalue, DateTime date){
             var found = _grades.FirstOrDefault(i => i.SubjectName == subjectName 
                         && i.Value == vvalue && i.Date == date);
