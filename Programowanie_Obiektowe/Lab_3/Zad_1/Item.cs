@@ -34,8 +34,6 @@ namespace Zad_1{
             Console.WriteLine(this);
         }
 
-        public string GenerateBarCode(){
-            return Guid.NewGuid().ToString();
-        }
+        public abstract string GenerateBarCode();
     }
 }

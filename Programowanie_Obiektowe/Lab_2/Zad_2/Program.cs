@@ -32,6 +32,9 @@ namespace Zad_2{
             student.AddGrade("AB", 3.0D, new DateTime(2011, 5, 11));
             student.AddGrade("BazyDanych", 4.0D, new DateTime(2020, 4, 3));
             student.DisplayGrades("BazyDanych");
+            Console.WriteLine("PUSTA LINIA");
+
+
         }
     }
 }
