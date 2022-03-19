@@ -34,7 +34,7 @@ namespace Zad_3{
             student.DisplayGrades("BazyDanych");
             Console.WriteLine("PUSTA LINIA");
 
-
+            Person handballPlayer = new HandballPlayer("Piotr", "Kos", new DateTime(1984, 9, 14), "striker", "FC Bayern", 4);
         }
     }
 }
