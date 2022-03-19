@@ -10,7 +10,7 @@ namespace Zad_1{
         }
         
         public override string ToString(){
-            base.Details();
+            Console.WriteLine(base.ToString());
             return $"Number: {_number}";      
         }
   
