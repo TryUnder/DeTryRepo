@@ -28,7 +28,7 @@ namespace Zad_3{
             return $" Position: {_position} Club: {_club} Scored Goals: {_scoredGoals}";
         }
 
-        public void ScoreGoal(){
+        public virtual void ScoreGoal(){
             _scoredGoals++;
         }
     }

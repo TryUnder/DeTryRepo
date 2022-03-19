@@ -35,6 +35,13 @@ namespace Zad_3{
             Console.WriteLine("PUSTA LINIA");
 
             Person handballPlayer = new HandballPlayer("Piotr", "Kos", new DateTime(1984, 9, 14), "striker", "FC Bayern", 4);
+            Person footballPlayer = new FootballPlayer("Mateusz", "Żbik", new DateTime(1986, 8, 10), "striker", "FC Barcelona", 10);
+            footballPlayer.Details();
+            handballPlayer.Details();
+            ((Player)handballPlayer).ScoreGoal();
+            (footballPlayer as Player).ScoreGoal();
+            footballPlayer.Details();
+            handballPlayer.Details();
         }
     }
 }
