@@ -57,9 +57,7 @@ namespace Zad_2{
         }
 
         public void DeleteGrades(string subjectName){
-            var found = _grades.Where(i => i.SubjectName.Contains(subjectName));
-            
-                _grades.Remove(found);
+            _grades.RemoveAll(i => i.SubjectName.Contains(subjectName));         
         }
 
     }
