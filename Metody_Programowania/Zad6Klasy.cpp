@@ -13,7 +13,7 @@ public:
     m_nazwisko = entity.m_nazwisko;
     m_liczba_lat = entity.m_liczba_lat;
   }
-        void pokaz() const {
+        virtual void pokaz() const {
           cout << m_nazwisko << " " << m_liczba_lat << endl;
         }
 
@@ -62,7 +62,8 @@ public:
     return m_placa;
   }
 
-  void pokaz(){
+
+  virtual void pokaz() const override {
     cout << m_nazwisko << " " << m_liczba_lat << " " << m_stanowisko << " " << m_placa << endl;
   }
 };

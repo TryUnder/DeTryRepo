@@ -118,7 +118,7 @@ int main() {
 	cout << *wsk3 << endl << endl;
 
 	P1 x = *wsk1; delete wsk1; wsk1 = 0;
-  P2 y = *wsk2; delete wsk2; wsk2 = 0;
+    P2 y = *wsk2; delete wsk2; wsk2 = 0;
 	P1 z = *wsk3; delete wsk3; wsk3 = 0;
 
 	B* tab1[4];

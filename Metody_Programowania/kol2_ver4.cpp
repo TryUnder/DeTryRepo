@@ -16,9 +16,9 @@ class P1 : public B {
 private:
   string* m_tab[2];
 public:
-  // VERSION 1 CONSTRUCTOR OF P1 CLASS
+  // PIERWSZY SPOSOB
      P1(const string& first_arg="brak", const string& second_arg="brak"): m_tab{new string(first_arg),new string(second_arg)} {}
-  // VERSION 2 CONSTRUCTOR OF P1 CLASS
+  // DRUGI SPOSOB
   // P1(const string& first_arg="brak", const string& second_arg="brak") {
     /*
       VER 1 OF ASSIGNMENT

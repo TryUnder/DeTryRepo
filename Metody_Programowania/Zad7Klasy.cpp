@@ -98,7 +98,7 @@ public:
     for(size_t i=0; i<m_size; ++i){
       avg+=m_pomiar[i];
     }
-    //if(m_size==0) throw string("NIE DZIEL PRZEZ ZERO");
+    if(m_size==0) throw string("NIE DZIEL PRZEZ ZERO");
     return avg/m_size;
   }
 };

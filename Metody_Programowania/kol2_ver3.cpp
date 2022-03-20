@@ -9,7 +9,7 @@ public:
     return stream;
   }
 
-  virtual void pokaz_opis () const PURE_VIRTUAL;
+  virtual void pokaz_opis() const PURE_VIRTUAL;
   virtual ~B() {}
 };
 
@@ -101,6 +101,7 @@ public:
 void kopia_danych(B* tab1[3], B* tab2[3], const int& m_int){
   for(int i=0; i<m_int; ++i){
     *tab2[i] = *tab1[i];
+    //lub wersja ze static_cast
   }
 }
 
