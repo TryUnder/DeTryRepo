@@ -1,5 +1,4 @@
-
-    --Zad.1
+--Zad.1
     --Wyświetl o jaką kwotę (wartość bezwzględna) odbiegają zarobki (pełna pensja) aktualnych
     --pracowników (tabela Pracownicy) od średniej krajowej wynoszącej 5411.45 PLN. Uzyskane
     --wartości zaokrąglij kolejno do 1-ego miejsca po przecinku stosując funkcje Round oraz do pełnych
