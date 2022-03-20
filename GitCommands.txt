@@ -1,0 +1,7 @@
+git 
+
+git add "filename.ext"
+git commit -m "sth"
+git push
+
+
