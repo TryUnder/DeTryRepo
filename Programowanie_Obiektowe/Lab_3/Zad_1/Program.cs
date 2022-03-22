@@ -12,11 +12,20 @@ namespace Zad_1{
 	    var journalBarCode = ((Journal)item1).GenerateBarCode();
 	    Console.WriteLine($"{item1} \r\n Barcode {journalBarCode}");
 	    Console.WriteLine($"{item2} \r\n Barcode {bookBarCode}");
-	    
 	    IList<Item> items = new List<Item>();
 	    items.Add(item1);
 	    items.Add(item2);
-	
+	    Catalog catalog = new Catalog("IT C# development", items);
+	    Console.WriteLine(catalog);
+	    string searchedValue = "Agile C#";
+	    Item foundedItemById = catalog.FindItem(item => item.Id == 1);
+	    Item foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue);
+	    Item foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31)
+								&& item.DateOfIssue <= new DateTime(2015, 12, 31));
+	    Console.WriteLine("++++++++++++++++++++++++++++++++++");
+	    Console.WriteLine(foundedItemById);
+	    Console.WriteLine(foundedItemByTitle);
+	    Console.WriteLine(foundedItemByDateRange);
 	}
     }
 }
