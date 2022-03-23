@@ -1,5 +1,3 @@
-//DO POPRAWY
-
 #include <iostream>
 using namespace std;
 
