@@ -68,7 +68,7 @@ static void key(unsigned char key, int x, int y){
 	glutPostRedisplay();
 	switch(key){
 	    	
-	case 'a':
+	case 'r':
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
 		    R_n[i][j] = R_b[i][j];
@@ -87,6 +87,19 @@ static void key(unsigned char key, int x, int y){
 		}
 	    }
 	break;
+
+	case '1':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    if(R_b[i][j] >= 127 && R_b[i][j] <= 255) R_n[i][j] = 0;
+			else R_n[i][j] = 255;
+		    if(G_b[i][j] >= 127 && G_b[i][j] <= 255) G_n[i][j] = 0;
+			else G_n[i][j] = 255;
+		    if(B_b[i][j] >= 127 && B_b[i][j] <= 255) B_n[i][j] = 0;
+			else B_n[i][j] = 255;
+		}    
+	    }
+
 	}
 }
 
