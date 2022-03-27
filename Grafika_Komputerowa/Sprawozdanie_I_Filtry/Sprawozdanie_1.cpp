@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include <cmath>
 using namespace std;
 const int w = 1400;
 const int k = 2000;
@@ -91,15 +92,31 @@ static void key(unsigned char key, int x, int y){
 	case '1':
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
-		    if(R_b[i][j] >= 127 && R_b[i][j] <= 255) R_n[i][j] = 0;
-			else R_n[i][j] = 255;
-		    if(G_b[i][j] >= 127 && G_b[i][j] <= 255) G_n[i][j] = 0;
-			else G_n[i][j] = 255;
-		    if(B_b[i][j] >= 127 && B_b[i][j] <= 255) B_n[i][j] = 0;
-			else B_n[i][j] = 255;
+		    if((R_b[i][j] >= 127.0 && R_b[i][j] <= 255.0) &&
+		       (G_b[i][j] >= 127.0 && G_b[i][j] <= 255.0) && 
+		       (B_b[i][j] >= 127.0 && B_b[i][j] <= 255.0))
+			{R_n[i][j] = 0; G_n[i][j] = 0; B_n[i][j] = 0;}
+			else { R_n[i][j] = 255.0; G_n[i][j] = 255.0; B_n[i][j] = 255.0; }
 		}    
 	    }
-
+	break;	
+	case '2':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    R_n[i][j] = 255.0 * pow((R_b[i][j]/255.0),1.0/1.5);
+		    G_n[i][j] = 255.0 * pow((G_b[i][j]/255.0),1.0/1.5);
+		    B_n[i][j] = 255.0 * pow((B_b[i][j]/255.0),1.0/1.5);
+		}
+	    }
+	break;
+	case '3':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    R_n[i][j] = (R_b[i][j]+G_b[i][j]+B_b[i][j])/3;
+		    G_n[i][j] = (R_b[i][j]+G_b[i][j]+B_b[i][j])/3;
+		    B_b[i][j] = (R_b[i][j]+G_b[i][j]+B_b[i][j])/3;
+		}
+	    }
 	}
 }
 
