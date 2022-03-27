@@ -53,9 +53,9 @@ static void display(void){
 	for(int i=0; i<rows; ++i){
 	    for(int j=0; j<columns; ++j){
 		glColor3f(
-		R_b[i][j]/255.,
-		G_b[i][j]/255.,
-		B_b[i][j]/255.);
+		R_n[i][j]/255.,
+		G_n[i][j]/255.,
+		B_n[i][j]/255.);
 		glVertex3f(j,i,0);
 	    }
 	}
@@ -65,8 +65,29 @@ static void display(void){
 }
 
 static void key(unsigned char key, int x, int y){
-
 	glutPostRedisplay();
+	switch(key){
+	    	
+	case 'a':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    R_n[i][j] = R_b[i][j];
+		    G_n[i][j] = 0.0f;
+		    B_n[i][j] = 0.0f;
+		}
+	    }
+	break;
+
+	case 'b':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    R_n[i][j] = R_b[i][j];
+		    G_n[i][j] = G_b[i][j];
+		    B_n[i][j] = B_b[i][j];
+		}
+	    }
+	break;
+	}
 }
 
 static void idle(void){
@@ -95,9 +116,17 @@ int main(int argc, char* argv[]){
     }
     file.close();
 
+    for(int i=0; i<rows; ++i){
+	for(int j=0; j<columns; ++j){
+	    R_n[i][j] = R_b[i][j];
+	    G_n[i][j] = G_b[i][j];
+	    B_n[i][j] = B_b[i][j];
+	}
+    }
+
 
     glutInit(&argc, argv);
-    glutInitWindowSize(640,480);
+    glutInitWindowSize(1920,1080);
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
