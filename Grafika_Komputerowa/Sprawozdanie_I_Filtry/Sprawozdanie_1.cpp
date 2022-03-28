@@ -92,8 +92,8 @@ static void key(unsigned char key, int x, int y){
 	case '1':
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
-		    if((R_b[i][j] >= 127.0 && R_b[i][j] <= 255.0) &&
-		       (G_b[i][j] >= 127.0 && G_b[i][j] <= 255.0) && 
+		    if((R_b[i][j] >= 127.0 && R_b[i][j] <= 255.0) ||
+		       (G_b[i][j] >= 127.0 && G_b[i][j] <= 255.0) || 
 		       (B_b[i][j] >= 127.0 && B_b[i][j] <= 255.0))
 			{R_n[i][j] = 0; G_n[i][j] = 0; B_n[i][j] = 0;}
 			else { R_n[i][j] = 255.0; G_n[i][j] = 255.0; B_n[i][j] = 255.0; }
@@ -117,7 +117,53 @@ static void key(unsigned char key, int x, int y){
 		    B_b[i][j] = (R_b[i][j]+G_b[i][j]+B_b[i][j])/3;
 		}
 	    }
-	}
+	break;
+	case: '5':
+	    for(int i=0; i<rows; ++i){
+		for(int j=0; j<columns; ++j){
+		    Rn[i][j]= (Mdp[0][0]*Rs[i-1][j-1]+
+                           Maska[0][1]*Rs[i-1][j]+
+                           Maska[0][2]*Rs[i-1][j+1]+
+                           Maska[1][0]*Rs[i][j-1]+
+                           Maska[1][1]*Rs[i][j]+
+                           Maska[1][2]*Rs[i][j+1]+
+                           Mdp[2][0]*Rs[i+1][j-1]+
+                           Mdp[2][1]*Rs[i+1][j]+
+                           Mdp[2][2]*Rs[i+1][j+1])/
+                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
+                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
+                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
+		
+		    Gn[i][j]= (Mdp[0][0]*Gs[i-1][j-1]+
+                           Mdp[0][1]*Gs[i-1][j]+
+                           Mdp[0][2]*Gs[i-1][j+1]+
+                           Mdp[1][0]*Gs[i][j-1]+
+                           Mdp[1][1]*Gs[i][j]+
+                           Mdp[1][2]*Gs[i][j+1]+
+                           Mdp[2][0]*Gs[i+1][j-1]+
+                           Mdp[2][1]*Gs[i+1][j]+
+                           Mdp[2][2]*Gs[i+1][j+1])/
+                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
+                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
+                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
+		    
+		    Bn[i][j]= (Mdp[0][0]*Bs[i-1][j-1]+
+                           Mdp[0][1]*Bs[i-1][j]+
+                           Mdp[0][2]*Bs[i-1][j+1]+
+                           Mdp[1][0]*Bs[i][j-1]+
+                           Mdp[1][1]*Bs[i][j]+
+                           Mdp[1][2]*Bs[i][j+1]+
+                           Mdp[2][0]*Bs[i+1][j-1]+
+                           Mdp[2][1]*Bs[i+1][j]+
+                           Mdp[2][2]*Bs[i+1][j+1])/
+                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
+                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
+                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
+		
+		}
+	    }
+	break;
+    }
 }
 
 static void idle(void){
