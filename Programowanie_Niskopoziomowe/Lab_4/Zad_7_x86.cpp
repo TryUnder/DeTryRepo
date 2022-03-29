@@ -1,62 +1,51 @@
 #include <iostream>
 using namespace std;
-// do poprawy !!!
+// do poprawy !!! - raz dziala raz nie
 
 int main() {
-	const int _size = 5;
+	const int _size = 25;
 	int* _arr = new int[_size];
-	cout << _arr << endl;
-	
+
 	__asm {
-		mov edx, 0;
-		push edx;
+		xor ebx, ebx;
+		push ebx;
 		xor edi, edi;
-		xor eax, eax;
-		mov eax, 0;
-		push eax;
-		mov edi, _size;
+		mov ebp, _arr;
+		mov edi, 25;
 		mov ecx, 1;
 		mov esi, 1;
-		mov ebp, _arr;
+	_BEFORE:
 		xor ebx, ebx;
+		mov ecx, esi;
 	_FOR:
 		xor edx, edx;
 		mov eax, esi;
 		idiv ecx;
 		cmp edx, 0;
 		jnz _OUT;
-		add ebx, 1;
+		inc ebx;
 	_OUT:
 		dec ecx;
 		jnz _FOR;
+
 		cmp ebx, 2;
-		jne _OUT2;
-		pop eax;
-		pop edx;
-		push eax;
-		inc edx;
-		mov [ebp + edx - 4], esi;
-		push edx;
-		xor eax, eax;
-		pop eax;
-		inc eax;
-		push eax;
-	_OUT2:
-		pop eax;
-		cmp eax, edi;
-		push eax;
-		je _EQUAL;
-		inc esi;
-		mov ecx, esi;
+		jne _NOT_A_PRIME;
 		xor ebx, ebx;
-		jmp _FOR;
-		
-	_EQUAL:
+		pop ebx;
+
+		mov[ebp + 4 * ebx], esi;
+		inc ebx;
+		push ebx; 			ilo�� liczb pierwszych na stosie
+
+	_NOT_A_PRIME:
+		add esi, 1;
+		cmp ebx, edi;
+		jne _BEFORE;
 		mov _arr, ebp;
 	}
-	cout << _arr << endl;
+
 	for (int i = 0; i < _size; ++i) {
 		cout << _arr[i] << endl;
 	}
-	
+
 }
