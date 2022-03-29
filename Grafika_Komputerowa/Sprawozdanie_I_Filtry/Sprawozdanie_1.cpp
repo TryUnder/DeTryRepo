@@ -8,6 +8,8 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
+#include <vector>
+#include <algorithm>
 using namespace std;
 const int w = 1400;
 const int k = 2000;
@@ -19,19 +21,18 @@ int B_b[w][k];
 
 int R_n[w][k];
 int G_n[w][k];
-int B_n[w][k]; 
+int B_n[w][k];
 
-int Maska[3][3] = { 1, 1, 1,
-		    1, 1, 1,
-		    1, 1, 1,};
-
+int Maska[3][3] = {  -1, 1, 1,
+		     -1, -1,1,
+		     -1, 1, 1};
 int rows,columns;
 static int slices = 16;
 static int stacks = 16;
-
+Vector<int> box;
 static void resize(int width, int height){
     const float ar = (float) width / (float) height;
-    
+
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -68,7 +69,7 @@ static void display(void){
 static void key(unsigned char key, int x, int y){
 	glutPostRedisplay();
 	switch(key){
-	    	
+
 	case 'r':
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
@@ -93,13 +94,13 @@ static void key(unsigned char key, int x, int y){
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
 		    if((R_b[i][j] >= 127.0 && R_b[i][j] <= 255.0) ||
-		       (G_b[i][j] >= 127.0 && G_b[i][j] <= 255.0) || 
+		       (G_b[i][j] >= 127.0 && G_b[i][j] <= 255.0) ||
 		       (B_b[i][j] >= 127.0 && B_b[i][j] <= 255.0))
 			{R_n[i][j] = 0; G_n[i][j] = 0; B_n[i][j] = 0;}
 			else { R_n[i][j] = 255.0; G_n[i][j] = 255.0; B_n[i][j] = 255.0; }
-		}    
+		}
 	    }
-	break;	
+	break;
 	case '2':
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
@@ -118,54 +119,66 @@ static void key(unsigned char key, int x, int y){
 		}
 	    }
 	break;
-	case: '5':
+	case '5':
+	int sum = Maska[0][0] + Maska[0][1] + Maska[0][2] +
+		  Maska[1][0] + Maska[1][1] + Maska[1][2] +
+		  Maska[2][0] + Maska[2][1] + Maska[2][2];
+	if(sum==0)sum=1;
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
-		    Rn[i][j]= (Mdp[0][0]*Rs[i-1][j-1]+
-                           Maska[0][1]*Rs[i-1][j]+
-                           Maska[0][2]*Rs[i-1][j+1]+
-                           Maska[1][0]*Rs[i][j-1]+
-                           Maska[1][1]*Rs[i][j]+
-                           Maska[1][2]*Rs[i][j+1]+
-                           Mdp[2][0]*Rs[i+1][j-1]+
-                           Mdp[2][1]*Rs[i+1][j]+
-                           Mdp[2][2]*Rs[i+1][j+1])/
-                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
-                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
-                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
-		
-		    Gn[i][j]= (Mdp[0][0]*Gs[i-1][j-1]+
-                           Mdp[0][1]*Gs[i-1][j]+
-                           Mdp[0][2]*Gs[i-1][j+1]+
-                           Mdp[1][0]*Gs[i][j-1]+
-                           Mdp[1][1]*Gs[i][j]+
-                           Mdp[1][2]*Gs[i][j+1]+
-                           Mdp[2][0]*Gs[i+1][j-1]+
-                           Mdp[2][1]*Gs[i+1][j]+
-                           Mdp[2][2]*Gs[i+1][j+1])/
-                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
-                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
-                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
-		    
-		    Bn[i][j]= (Mdp[0][0]*Bs[i-1][j-1]+
-                           Mdp[0][1]*Bs[i-1][j]+
-                           Mdp[0][2]*Bs[i-1][j+1]+
-                           Mdp[1][0]*Bs[i][j-1]+
-                           Mdp[1][1]*Bs[i][j]+
-                           Mdp[1][2]*Bs[i][j+1]+
-                           Mdp[2][0]*Bs[i+1][j-1]+
-                           Mdp[2][1]*Bs[i+1][j]+
-                           Mdp[2][2]*Bs[i+1][j+1])/
-                           (Mdp[0][0]+Mdp[0][1]+Mdp[0][2]+
-                            Mdp[1][0]+Mdp[1][1]+Mdp[1][2]+
-                            Mdp[2][0]+Mdp[2][1]+Mdp[2][2]);
-		
+		    R_n[i][j]= (Maska[0][0]*R_b[i-1][j-1]+
+                           Maska[0][1]*R_b[i-1][j]+
+                           Maska[0][2]*R_b[i-1][j+1]+
+                           Maska[1][0]*R_b[i][j-1]+
+                           Maska[1][1]*R_b[i][j]+
+                           Maska[1][2]*R_b[i][j+1]+
+                           Maska[2][0]*R_b[i+1][j-1]+
+                           Maska[2][1]*R_b[i+1][j]+
+                           Maska[2][2]*R_b[i+1][j+1])/
+                           sum;
+
+		    G_n[i][j]= (Maska[0][0]*G_b[i-1][j-1]+
+                           Maska[0][1]*G_b[i-1][j]+
+                           Maska[0][2]*G_b[i-1][j+1]+
+                           Maska[1][0]*G_b[i][j-1]+
+                           Maska[1][1]*G_b[i][j]+
+                           Maska[1][2]*G_b[i][j+1]+
+                           Maska[2][0]*G_b[i+1][j-1]+
+                           Maska[2][1]*G_b[i+1][j]+
+                           Maska[2][2]*G_b[i+1][j+1])/
+                           sum;
+
+		    B_n[i][j]= (Maska[0][0]*B_b[i-1][j-1]+
+                           Maska[0][1]*B_b[i-1][j]+
+                           Maska[0][2]*B_b[i-1][j+1]+
+                           Maska[1][0]*B_b[i][j-1]+
+                           Maska[1][1]*B_b[i][j]+
+                           Maska[1][2]*B_b[i][j+1]+
+                           Maska[2][0]*B_b[i+1][j-1]+
+                           Maska[2][1]*B_b[i+1][j]+
+                           Maska[2][2]*B_b[i+1][j+1])/
+                           sum;
 		}
 	    }
 	break;
-    }
+	case '6':
+	for(int i=0; i<rows; ++i){
+	    for(int j=0; j<columns; ++j){
+		box.push_back(R_b[i-1][j-1]);
+		box.push_back(R_b[i-1][j]);
+		box.push_back(R_b[i-1][j+1]);
+		box.push_back(R_b[i][j-1]);
+		box.push_back(R_b[i][j]);
+		box.push_back(R_b[i][j+1]);
+		box.push_back(R_b[i+1][j-1]);
+		box.push_back(R_b[i+1][j]);
+		box.push_back(R_b[i+1][j+1]);
+		R_n[i][j] = max_element(box.begin(), box.end());
+		box.erase();
+	    }
+	}
 }
-
+}
 static void idle(void){
     glutPostRedisplay();
 }
@@ -200,14 +213,13 @@ int main(int argc, char* argv[]){
 	}
     }
 
-
     glutInit(&argc, argv);
     glutInitWindowSize(1920,1080);
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     glutCreateWindow("GLUT Shapes");
-    
+
     glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
