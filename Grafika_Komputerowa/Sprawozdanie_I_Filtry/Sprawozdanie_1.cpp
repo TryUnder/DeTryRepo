@@ -8,8 +8,8 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
 const int w = 1400;
 const int k = 2000;
@@ -23,13 +23,17 @@ int R_n[w][k];
 int G_n[w][k];
 int B_n[w][k];
 
-int Maska[3][3] = {  -1, 1, 1,
-		     -1, -1,1,
-		     -1, 1, 1};
+int Maska[3][3] = { -1, 1, 1,
+		    -1, -1, 1,
+		    -1, 1, 1 };
+
+vector<int> box;
+vector<int>::iterator iter;
+
 int rows,columns;
 static int slices = 16;
 static int stacks = 16;
-Vector<int> box;
+
 static void resize(int width, int height){
     const float ar = (float) width / (float) height;
 
@@ -120,10 +124,6 @@ static void key(unsigned char key, int x, int y){
 	    }
 	break;
 	case '5':
-	int sum = Maska[0][0] + Maska[0][1] + Maska[0][2] +
-		  Maska[1][0] + Maska[1][1] + Maska[1][2] +
-		  Maska[2][0] + Maska[2][1] + Maska[2][2];
-	if(sum==0)sum=1;
 	    for(int i=0; i<rows; ++i){
 		for(int j=0; j<columns; ++j){
 		    R_n[i][j]= (Maska[0][0]*R_b[i-1][j-1]+
@@ -135,7 +135,9 @@ static void key(unsigned char key, int x, int y){
                            Maska[2][0]*R_b[i+1][j-1]+
                            Maska[2][1]*R_b[i+1][j]+
                            Maska[2][2]*R_b[i+1][j+1])/
-                           sum;
+                           (Maska[0][0]+Maska[0][1]+Maska[0][2]+
+                            Maska[1][0]+Maska[1][1]+Maska[1][2]+
+                            Maska[2][0]+Maska[2][1]+Maska[2][2]);
 
 		    G_n[i][j]= (Maska[0][0]*G_b[i-1][j-1]+
                            Maska[0][1]*G_b[i-1][j]+
@@ -146,7 +148,9 @@ static void key(unsigned char key, int x, int y){
                            Maska[2][0]*G_b[i+1][j-1]+
                            Maska[2][1]*G_b[i+1][j]+
                            Maska[2][2]*G_b[i+1][j+1])/
-                           sum;
+                           (Maska[0][0]+Maska[0][1]+Maska[0][2]+
+                            Maska[1][0]+Maska[1][1]+Maska[1][2]+
+                            Maska[2][0]+Maska[2][1]+Maska[2][2]);
 
 		    B_n[i][j]= (Maska[0][0]*B_b[i-1][j-1]+
                            Maska[0][1]*B_b[i-1][j]+
@@ -157,28 +161,104 @@ static void key(unsigned char key, int x, int y){
                            Maska[2][0]*B_b[i+1][j-1]+
                            Maska[2][1]*B_b[i+1][j]+
                            Maska[2][2]*B_b[i+1][j+1])/
-                           sum;
+                           (Maska[0][0]+Maska[0][1]+Maska[0][2]+
+                            Maska[1][0]+Maska[1][1]+Maska[1][2]+
+                            Maska[2][0]+Maska[2][1]+Maska[2][2]);
+
 		}
 	    }
 	break;
 	case '6':
-	for(int i=0; i<rows; ++i){
-	    for(int j=0; j<columns; ++j){
-		box.push_back(R_b[i-1][j-1]);
-		box.push_back(R_b[i-1][j]);
-		box.push_back(R_b[i-1][j+1]);
-		box.push_back(R_b[i][j-1]);
-		box.push_back(R_b[i][j]);
-		box.push_back(R_b[i][j+1]);
-		box.push_back(R_b[i+1][j-1]);
-		box.push_back(R_b[i+1][j]);
-		box.push_back(R_b[i+1][j+1]);
-		R_n[i][j] = max_element(box.begin(), box.end());
-		box.erase();
-	    }
-	}
+        for(int i=0; i<rows; ++i){
+            for(int j=0; j<columns; ++j){
+                box.push_back(R_b[i-1][j-1]);
+                box.push_back(R_b[i-1][j]);
+                box.push_back(R_b[i-1][j+1]);
+                box.push_back(R_b[i][j-1]);
+                box.push_back(R_b[i][j]);
+                box.push_back(R_b[i][j+1]);
+                box.push_back(R_b[i+1][j-1]);
+                box.push_back(R_b[i+1][j]);
+                box.push_back(R_b[i+1][j+1]);
+                iter = max_element(box.begin(), box.end());
+                R_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+
+		box.push_back(G_b[i-1][j-1]);
+                box.push_back(G_b[i-1][j]);
+                box.push_back(G_b[i-1][j+1]);
+                box.push_back(G_b[i][j-1]);
+                box.push_back(G_b[i][j]);
+                box.push_back(G_b[i][j+1]);
+                box.push_back(G_b[i+1][j-1]);
+                box.push_back(G_b[i+1][j]);
+                box.push_back(G_b[i+1][j+1]);
+                iter = max_element(box.begin(), box.end());
+                G_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+
+		box.push_back(B_b[i-1][j-1]);
+                box.push_back(B_b[i-1][j]);
+                box.push_back(B_b[i-1][j+1]);
+                box.push_back(B_b[i][j-1]);
+                box.push_back(B_b[i][j]);
+                box.push_back(B_b[i][j+1]);
+                box.push_back(B_b[i+1][j-1]);
+                box.push_back(B_b[i+1][j]);
+                box.push_back(B_b[i+1][j+1]);
+                iter = max_element(box.begin(), box.end());
+                B_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+    
+    }
 }
+break;
+    case '7':
+        for(int i=0; i<rows; ++i){
+            for(int j=0; j<columns; ++j){
+                box.push_back(R_b[i-1][j-1]);
+                box.push_back(R_b[i-1][j]);
+                box.push_back(R_b[i-1][j+1]);
+                box.push_back(R_b[i][j-1]);
+                box.push_back(R_b[i][j]);
+                box.push_back(R_b[i][j+1]);
+                box.push_back(R_b[i+1][j-1]);
+                box.push_back(R_b[i+1][j]);
+                box.push_back(R_b[i+1][j+1]);
+                iter = min_element(box.begin(), box.end());
+                R_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+
+		box.push_back(G_b[i-1][j-1]);
+                box.push_back(G_b[i-1][j]);
+                box.push_back(G_b[i-1][j+1]);
+                box.push_back(G_b[i][j-1]);
+                box.push_back(G_b[i][j]);
+                box.push_back(G_b[i][j+1]);
+                box.push_back(G_b[i+1][j-1]);
+                box.push_back(G_b[i+1][j]);
+                box.push_back(G_b[i+1][j+1]);
+                iter = min_element(box.begin(), box.end());
+                G_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+
+		box.push_back(B_b[i-1][j-1]);
+                box.push_back(B_b[i-1][j]);
+                box.push_back(B_b[i-1][j+1]);
+                box.push_back(B_b[i][j-1]);
+                box.push_back(B_b[i][j]);
+                box.push_back(B_b[i][j+1]);
+                box.push_back(B_b[i+1][j-1]);
+                box.push_back(B_b[i+1][j]);
+                box.push_back(B_b[i+1][j+1]);
+                iter = min_element(box.begin(), box.end());
+                B_n[i][j] = box.at(distance(box.begin(), iter));
+		box.clear();
+    
+    }
 }
+break;
+}}
 static void idle(void){
     glutPostRedisplay();
 }
