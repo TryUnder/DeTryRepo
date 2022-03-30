@@ -18,15 +18,14 @@ namespace Zad_1{
 	    items.Add(item2);
 	    Catalog catalog = new Catalog("IT C# development", items);
 	    Console.WriteLine(catalog);
+	    //--- find position
 	    string searchedValue = "Agile C#";
-	    Item foundedItemById = catalog.FirstOrDefault(item => item.Id == 1);
-	    //Item foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue);
-	    //Item foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31)
+	    Item foundedItemById = catalog.FindItem(item => item.Id == 1);
+	    //Item foundedItemByTitle = FindItem(item => item.Title == searchedValue);
+	    //Item foundedItemByDateRange = FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31)
 		//						&& item.DateOfIssue <= new DateTime(2015, 12, 31));
 	    Console.WriteLine("++++++++++++++++++++++++++++++++++");
 	    Console.WriteLine(foundedItemById);
-	    //Console.WriteLine(foundedItemByTitle);
-	    //Console.WriteLine(foundedItemByDateRange);
 	}
     }
 }
