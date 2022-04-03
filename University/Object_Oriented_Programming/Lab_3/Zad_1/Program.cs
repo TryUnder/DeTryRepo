@@ -19,13 +19,7 @@ namespace Zad_1{
 	    Catalog catalog = new Catalog("IT C# development", items);
 	    Console.WriteLine(catalog);
 	    //--- find position
-	    string searchedValue = "Agile C#";
-	    Item foundedItemById = catalog.FindItem(item => item.Id == 1);
-	    //Item foundedItemByTitle = FindItem(item => item.Title == searchedValue);
-	    //Item foundedItemByDateRange = FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31)
-		//						&& item.DateOfIssue <= new DateTime(2015, 12, 31));
-	    Console.WriteLine("++++++++++++++++++++++++++++++++++");
-	    Console.WriteLine(foundedItemById);
+	
 	}
     }
 }
