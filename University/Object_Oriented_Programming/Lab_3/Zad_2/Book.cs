@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
-namespace Zad_1{
+namespace Zad_2{
     public class Book : Item{
 	public int PageCount { get; set; }
 	public IList<Author> Authors { get; set; }

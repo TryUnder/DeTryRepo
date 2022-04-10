@@ -1,8 +1,10 @@
 using System;
 using System.Text;
+using System.Linq;
 using System.Collections.Generic;
-namespace Zad_1{
-    public class Catalog{
+using System.Linq.Expressions;
+namespace Zad_2{
+    public class Catalog : IItemManagement{
 		public IList<Item> Items { get; set; }
 		public string ThematicDepartment { get; set; }
 	
@@ -31,5 +33,15 @@ namespace Zad_1{
 		public void ShowAllItems(){
 	    	Console.WriteLine(this);
 		}
-    	}
+
+		public Item FindItem(Expression<Func<Item,bool>> lambd){
+			var a = lambd.Compile();
+			var Result = this.FirstOrDefault(a);
+			return Result;
+		}
+
+		//public Item FindItemBy(int id){
+			
+		//}
+    }
 }

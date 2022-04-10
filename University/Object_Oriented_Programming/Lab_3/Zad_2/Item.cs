@@ -1,5 +1,5 @@
 using System;
-namespace Zad_1{
+namespace Zad_2{
     public abstract class Item{
         protected int _id;
         protected string _title;
