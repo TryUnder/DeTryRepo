@@ -17,13 +17,24 @@ namespace Zad_2{
 			items.Add(item1);
 			items.Add(item2);
 			Catalog catalog = new Catalog("IT C# development", items);
-			catalog.AddItem(new Journal(1,"Neurocomputing", "IEEE", new DateTime(2020, 1, 1), 1));
+			catalog.AddItem(new Journal(3,"Neurocomputing", "IEEE", new DateTime(2020, 1, 1), 1));
 			Console.WriteLine(catalog);
 			catalog.ShowAllItems();
 
 			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 			string searchedValue = "Agile C#";
 			Item foundedItemById = catalog.FindItem(item => item.Id == 1);
+			Item foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue);
+			Item foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31) &&
+															   item.DateOfIssue <= new DateTime(2015, 12, 31));
+			Console.WriteLine(foundedItemById);
+			Console.WriteLine(foundedItemByTitle);
+			Console.WriteLine(foundedItemByDateRange);
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
+			Item foundedItemByIdOld = catalog.FindItemBy(1);
+			Item foundedItemByTitleOld = catalog.FindItemBy(searchedValue);
+			System.Console.WriteLine(foundedItemByIdOld);
+			System.Console.WriteLine(foundedItemByTitleOld);
 		}
     }
 }

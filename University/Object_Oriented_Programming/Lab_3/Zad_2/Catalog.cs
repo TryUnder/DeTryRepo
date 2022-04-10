@@ -36,12 +36,18 @@ namespace Zad_2{
 
 		public Item FindItem(Expression<Func<Item,bool>> lambd){
 			var a = lambd.Compile();
-			var Result = this.FirstOrDefault(a);
+			var Result = Items.FirstOrDefault(a);
 			return Result;
 		}
 
-		//public Item FindItemBy(int id){
-			
-		//}
+		public Item FindItemBy(int id){
+			var result = Items.FirstOrDefault(i => i.Id == id);
+			return result;
+		}
+
+		public Item FindItemBy(string title){
+			var result = Items.FirstOrDefault(i => i.Title == title);
+			return result;
+		}
     }
 }

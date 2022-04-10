@@ -9,7 +9,7 @@ namespace Zad_2{
         public int Id { get => _id; set => _id = value; }
         public string Title { get => _title; set => _title = value; }
         public string Publisher { get => _publisher; set => _publisher = value; }
-        protected DateTime DateOfIssue { get => _dateOfIssue; set => _dateOfIssue = value; }
+        public DateTime DateOfIssue { get => _dateOfIssue; set => _dateOfIssue = value; }
 	
         public Item(){
             _id = 0;
