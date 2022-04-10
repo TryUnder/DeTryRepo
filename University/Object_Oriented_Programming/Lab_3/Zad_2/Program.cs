@@ -35,6 +35,11 @@ namespace Zad_2{
 			Item foundedItemByTitleOld = catalog.FindItemBy(searchedValue);
 			System.Console.WriteLine(foundedItemByIdOld);
 			System.Console.WriteLine(foundedItemByTitleOld);
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
+			Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000);
+			Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>());
+			library.AddLibrarian((Librarian)librarian);
+			library.ShowAllLibrarians();
 		}
     }
 }
