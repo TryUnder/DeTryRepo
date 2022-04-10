@@ -15,8 +15,9 @@ namespace Zad_1{
 	public override string ToString(){
 	    StringBuilder listBuild = new StringBuilder();
 	    foreach(var i in Authors){
-		listBuild.Append(i+"\n");
+		listBuild.Append(i);
 	    }
+		Console.WriteLine(base.ToString());
 	    return $"Page Count: {PageCount} Athors: {listBuild}";
 	}
 

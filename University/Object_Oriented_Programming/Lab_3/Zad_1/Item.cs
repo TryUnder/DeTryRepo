@@ -35,6 +35,5 @@ namespace Zad_1{
         }
 
         public abstract string GenerateBarCode();
-
     }
 }

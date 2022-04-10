@@ -6,11 +6,11 @@ namespace Zad_1{
         public Journal() {}
         public Journal(int id, string title, string publisher, DateTime dateOfIssue, int number)
             : base(id, title, publisher, dateOfIssue) {
-        Number = number;
+            Number = number;
         }
         
         public override string ToString(){
-            Console.Write(base.ToString());
+            Console.Write(base.ToString() + "\n");
             return $" Number: {Number}";      
         }
   
