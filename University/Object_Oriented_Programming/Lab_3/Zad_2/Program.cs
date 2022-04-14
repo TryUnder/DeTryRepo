@@ -39,7 +39,8 @@ namespace Zad_2{
 			Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000);
 			Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>());
 			library.AddLibrarian((Librarian)librarian);
-			library.ShowAllLibrarians();
+			
+			Console.WriteLine(librarian);
 		}
     }
 }
