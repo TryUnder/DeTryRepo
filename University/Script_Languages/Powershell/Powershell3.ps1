@@ -39,44 +39,66 @@ $textBox1 = New-Object System.Windows.Forms.TextBox
 $textBox1.Location = New-Object System.Drawing.Size(80,60)
 $textBox1.Width = 200
 
-
+<# 1.5 #>
 <# Text box 2 #>
 $textBox2 = New-Object System.Windows.Forms.TextBox
 $textBox2.Location = New-Object System.Drawing.Size(520,60)
 $textBox2.Width = 200
 
+<# 1.9 . 1.10 #>
 <# Button Add #>
 $buttonAdd = New-Object System.Windows.Forms.Button
 $buttonAdd.Location = New-Object System.Drawing.Size(100,100)
 $buttonAdd.Width = 150
 $buttonAdd.Text = "Dodaj"
 $buttonAdd.Add_Click({
-    [int32]$result.Text = [int32]$TextBox1.Text + [int32]$TextBox2.Text
+    [float]$result.Text = [float]$textBox1.Text + [float]$textBox2.Text
 })
 
+<# 1.9 . 1.10 #>
 <# Button Subtract #>
 $buttonSub = New-Object System.Windows.Forms.Button
 $buttonSub.Location = New-Object System.Drawing.Size(250,100)
 $buttonSub.Width = 150
 $buttonSub.Text = "Odejmij"
+$buttonSub.Add_Click({
+    [float]$result.Text = [float]$textBox1.Text - [float]$textBox2.Text
+})
 
+<# 1.9 . 1.10 #>
 <# Button Multiply #>
 $buttonMul = New-Object System.Windows.Forms.Button
 $buttonMul.Location = New-Object System.Drawing.Size(400,100)
 $buttonMul.Width = 150
 $buttonMul.Text = "Pomnóż"
+$buttonMul.Add_Click({
+    [float]$result.Text = [float]$textBox1.Text * [float]$textBox2.Text
+})
 
+<# 1.9 . 1.10 #>
 <# Button Divide #>
 $buttonDiv = New-Object System.Windows.Forms.Button
 $buttonDiv.Location = New-Object System.Drawing.Size(550,100)
 $buttonDiv.Width = 150
 $buttonDiv.Text = "Podziel"
+$buttonDiv.Add_Click({
+    if($textBox2.Text -EQ 0){
+        $result.Text = "Error"
+    }else{
+        [float]$result.Text = [float]$textBox1.Text / [float]$textBox2.Text
+    }
+})
 
+<# 1.7 #>
+<# Button Color #>
+
+
+<# 1.6 #>
 <# Label Result #>
 $result = New-Object System.Windows.Forms.Label
 $result.Location = New-Object System.Drawing.Size(365,150)
 $result.Width = 70
-$result.Text = "Wynik"
+[float]$result.Text = 0
 $result.TextAlign = "MiddleCenter"
 
 <# Controls #>
