@@ -39,8 +39,14 @@ namespace Zad_2{
 			Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000);
 			Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>());
 			library.AddLibrarian((Librarian)librarian);
+			library.ShowAllLibrarians();
+
+			Catalog catalog2 = new Catalog("Novels", new List<Item>());
+			library.AddCatalog(catalog2);
+			library.AddCatalog(catalog);
 			
-			Console.WriteLine(librarian);
+			Item newItem = new Book(4, "Song of Ice and Fire", "Publisher", new DateTime(2011, 1, 1), 800, new List<Author>(){ author });
+			library.AddItem(newItem, "Novels");
 		}
     }
 }

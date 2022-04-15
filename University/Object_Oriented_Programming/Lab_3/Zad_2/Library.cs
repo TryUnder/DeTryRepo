@@ -21,6 +21,15 @@ namespace Zad_2{
             }
             System.Console.WriteLine(librarians);
         }
+
+        public void AddCatalog(Catalog catalog){
+            Catalogs.Add(catalog);
+        }
+
+        public void AddItem(Item item, string thematicDepartment){
+            Catalog cat = new Catalog(thematicDepartment, new List<Item>(){ item }); // czy to tak?
+        }
+
         public override string ToString()
         {
             return $"{this}";
