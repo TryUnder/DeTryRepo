@@ -14,10 +14,6 @@ ma następować zmiana atrybutu ukryty utworzonego wcześniej folderu.
 
 Add-Type -AssemblyName System.Windows.Forms
 
-function Hide{
-
-}
-
 <# Main Window #>
 $window = New-Object System.Windows.Forms.Form
 $window.Location = New-Object System.Drawing.Size(640,480)
