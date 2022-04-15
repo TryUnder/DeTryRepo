@@ -14,6 +14,10 @@ ma następować zmiana atrybutu ukryty utworzonego wcześniej folderu.
 
 Add-Type -AssemblyName System.Windows.Forms
 
+function Hide{
+
+}
+
 <# Main Window #>
 $window = New-Object System.Windows.Forms.Form
 $window.Location = New-Object System.Drawing.Size(640,480)
@@ -30,8 +34,14 @@ $buttonFolder.Text = "Wybierz..."
 $buttonFolder.Add_Click({
     $openFileDialog = New-Object System.Windows.Forms.FolderBrowserDialog
     $openFileDialog.ShowDialog()
-    Write-Host $openFileDialog.SelectedPath
+    if(Test-Path -Path $openFileDialog.SelectedPath){
+        $file = Get-Item -Path $openFileDialog.SelectedPath -Force
+        $file.Attributes = "Archive"
+    }else{
+        Write-Host "Error"
+    }
 })
+
 <# Folder Label #>
 $label = New-Object System.Windows.Forms.Label
 $label.Location = New-Object System.Drawing.Size(160, 75)
@@ -40,7 +50,23 @@ $label.Height = 24
 $label.Text = "Wybierz folder: "
 $label.Font = New-Object System.Drawing.Font("Times New Roman",12, [System.Drawing.FontStyle]::Bold)
 
+<# CheckBox #>
+$checkBox = New-Object System.Windows.Forms.CheckBox
+$checkBox.Location = New-Object System.Drawing.Size(320, 115)
+$checkBox.Width = 128
+$checkBox.Height = 24
+
+<# CheckBox Label #>
+$checkBoxLabel = New-Object System.Windows.Forms.Label
+$checkBoxLabel.Location = New-Object System.Drawing.Size(160,115)
+$checkBoxLabel.Width = 128
+$checkBoxLabel.Height = 24
+$checkBoxLabel.Text = "Ukryj folder: "
+$checkBoxLabel.Font = New-Object System.Drawing.Font("Times New Roman",12,[System.Drawing.FontStyle]::Bold)
+
 <# Load #>
 $window.Controls.Add($buttonFolder)
 $window.Controls.Add($label)
+$window.Controls.Add($checkBox)
+$window.Controls.Add($checkBoxLabel)
 $window.ShowDialog()
