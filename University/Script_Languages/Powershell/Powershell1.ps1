@@ -198,11 +198,14 @@ UtwórzKatalogi([int]$arg=9)
 parzystą cyfrą na końcu i przeniesie je do katalogu {Parzyste}.
 #>
 
-Write-Host "Do poprawienia 17"
-
 if(Test-Path -Path "${Home}\Dom\Katalogi"){
     Get-ChildItem -Path "${Home}\Dom\Katalogi" -Recurse -Force
-    | Where-Object {$_.name -Match "2"}
+    | Where-Object {$_.name -Match "2" -OR $_.name -Match "4" -OR $_.name -Match "6" -OR $_.name -Match "8"}
+    | Move-Item -Destination "${Home}\Dom\Parzyste"
 }else{
     Write-Host "Exception"
 }
+
+<#
+Do poprawienia ewentualnie linijka 203, którą mógłby zastąpić bardziej ogólny algorytm do parsowania
+#>
