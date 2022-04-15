@@ -36,7 +36,11 @@ $buttonFolder.Add_Click({
     $openFileDialog.ShowDialog()
     if(Test-Path -Path $openFileDialog.SelectedPath){
         $file = Get-Item -Path $openFileDialog.SelectedPath -Force
-        $file.Attributes = "Archive"
+        if($checkBox.Checked -EQ $true){
+            $file.Attributes = "Hidden"
+        }else{
+            $file.Attributes = "Archive"
+        }
     }else{
         Write-Host "Error"
     }
