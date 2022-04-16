@@ -26,7 +26,7 @@ namespace Zad_2{
 		public override string ToString(){
 	    	StringBuilder str_list = new StringBuilder();
 	    	foreach(var i in Items){
-			str_list.Append(i+"\n");
+				str_list.Append(i+"\n");
 	    	}
 	    	return $"Catalog: {ThematicDepartment} Lista: {str_list}";
 		}
@@ -47,7 +47,7 @@ namespace Zad_2{
 		}
 
 		public Item FindItemBy(string title){
-			var result = Items.FirstOrDefault(i => i.Title == title);
+			var result = Items.SelectMany(i => i.Items);
 			return result;
 		}
     }

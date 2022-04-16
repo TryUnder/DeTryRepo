@@ -64,6 +64,13 @@ namespace Zad_2{
 			Console.ForegroundColor = ConsoleColor.White;
 			library.ShowAllItems();
 			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
+
+
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("FIND BY SECTION \n");
+			Console.ForegroundColor = ConsoleColor.White;
+			var foundedById = library.FindItemBy(4);
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 		}
     }
 }

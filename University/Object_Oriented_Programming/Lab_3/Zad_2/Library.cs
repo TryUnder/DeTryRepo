@@ -41,6 +41,11 @@ namespace Zad_2{
             Console.WriteLine(library);
         }
 
+        public Item FindItemBy(int id){
+            var result = Catalogs.SelectMany();
+            return result;
+        }
+
         public override string ToString()
         {
             if(this.GetType() == typeof(Library)){
