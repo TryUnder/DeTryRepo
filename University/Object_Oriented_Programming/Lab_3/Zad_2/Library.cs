@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+
 namespace Zad_2{
     public class Library{
         public string Address { get; set; }
@@ -30,9 +33,24 @@ namespace Zad_2{
             Catalog cat = new Catalog(thematicDepartment, new List<Item>(){ item }); // czy to tak?
         }
 
+        public void ShowAllItems(){
+            StringBuilder library = new StringBuilder();
+            foreach(var i in Catalogs){
+                library.Append(i);
+            }
+            Console.WriteLine(library);
+        }
+
         public override string ToString()
         {
-            return $"{this}";
+            if(this.GetType() == typeof(Library)){
+                this.ShowAllItems();
+                this.ShowAllLibrarians();
+                return null;
+            }
+            else {
+                return $"{this}";
+            }
         }
     }
 }

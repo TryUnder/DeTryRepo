@@ -1,8 +1,9 @@
 using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 namespace Zad_2{
     public class Catalog : IItemManagement{
 		public IList<Item> Items { get; set; }

@@ -1,6 +1,9 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Zad_2{
     public class Program{
 		public static void Main(){
@@ -39,7 +42,11 @@ namespace Zad_2{
 			Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000);
 			Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>());
 			library.AddLibrarian((Librarian)librarian);
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("WYPISUJE BIBLIOTEKARZY PRZY UŻYCIU SHOW_ALL_LIBRARIANS() -> TO_STRING()\n");
+			Console.ForegroundColor = ConsoleColor.White;
 			library.ShowAllLibrarians();
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 
 			Catalog catalog2 = new Catalog("Novels", new List<Item>());
 			library.AddCatalog(catalog2);
@@ -47,6 +54,16 @@ namespace Zad_2{
 			
 			Item newItem = new Book(4, "Song of Ice and Fire", "Publisher", new DateTime(2011, 1, 1), 800, new List<Author>(){ author });
 			library.AddItem(newItem, "Novels");
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("WYPISUJE ZAWARTOŚĆ BIBLIOTEKI PRZY UŻYCIU TO_STRING() -> (SHOW_ALL_LIBRARIANS() I SHOW_ALL_ITEMS()) -> TO_STRING()\n");
+			Console.ForegroundColor = ConsoleColor.White;
+			Console.WriteLine(library);
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("WYPISUJE ZAWARTOŚĆ KATALOGÓW PRZY UŻYCIU SHOW_ALL_ITEMS() -> TO_STRING() \n");
+			Console.ForegroundColor = ConsoleColor.White;
+			library.ShowAllItems();
+			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 		}
     }
 }

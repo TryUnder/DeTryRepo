@@ -1,8 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Zad_2{
     public interface IItemManagement{
-        public void ShowAllItems();
-        public Item FindItemBy(int id);
-        public Item FindItemBy(string title);
+        void ShowAllItems();
+        Item FindItemBy(int id);
+        Item FindItemBy(string title);
     }
 }
