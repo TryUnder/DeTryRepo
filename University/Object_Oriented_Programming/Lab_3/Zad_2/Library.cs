@@ -30,7 +30,11 @@ namespace Zad_2{
         }
 
         public void AddItem(Item item, string thematicDepartment){
-            Catalog cat = new Catalog(thematicDepartment, new List<Item>(){ item }); // czy to tak?
+            for(int i=0; i<Catalogs.Count; ++i){
+                if(Catalogs[i].ThematicDepartment == thematicDepartment){
+                    Catalogs[i].AddItem(item);
+                }
+            }
         }
 
         public void ShowAllItems(){
@@ -42,8 +46,11 @@ namespace Zad_2{
         }
 
         public Item FindItemBy(int id){
+            Console.WriteLine("TUTAJ TYLKO TESTUJEMY CO JEST W ŚRODKU\n\n");
             var result = Catalogs[0].Items.FirstOrDefault(i => i.Id == id);
-            Console.WriteLine(Catalogs[0].Items[0]);
+            foreach(var i in Catalogs){
+                Console.WriteLine(i);
+            }
             return null;
         }
 
