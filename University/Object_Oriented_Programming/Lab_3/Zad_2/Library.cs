@@ -39,10 +39,9 @@ namespace Zad_2{
 
         public void ShowAllItems(){
             StringBuilder library = new StringBuilder();
-            foreach(var i in Catalogs){
-                library.Append(i);
+            for(int i=0; i<Catalogs.Count; ++i){
+                Catalogs[i].ShowAllItems();
             }
-            Console.WriteLine(library);
         }
 
         public Item FindItemBy(int id){
