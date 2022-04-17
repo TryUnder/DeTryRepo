@@ -40,8 +40,11 @@ namespace Zad_2{
 			System.Console.WriteLine(foundedItemByTitleOld);
 			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 			Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000);
+			//dodano nowy obiekt do kodu testującego
+			Person librarian2 = new Librarian("Hubert", "Kowalsky", DateTime.Now.Date, 2000);
 			Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>());
 			library.AddLibrarian((Librarian)librarian);
+			library.AddLibrarian((Librarian)librarian2);
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine("WYPISUJE BIBLIOTEKARZY PRZY UŻYCIU SHOW_ALL_LIBRARIANS() -> TO_STRING()\n");
 			Console.ForegroundColor = ConsoleColor.White;

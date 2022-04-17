@@ -18,11 +18,9 @@ namespace Zad_2{
             Librarians.Add(librarian);
         }
         public void ShowAllLibrarians(){
-            StringBuilder librarians = new StringBuilder();
             foreach(var i in Librarians){
-                librarians.Append(i);
+                Console.WriteLine(i);
             }
-            System.Console.WriteLine(librarians);
         }
 
         public void AddCatalog(Catalog catalog){
@@ -38,19 +36,16 @@ namespace Zad_2{
         }
 
         public void ShowAllItems(){
-            StringBuilder library = new StringBuilder();
             for(int i=0; i<Catalogs.Count; ++i){
                 Catalogs[i].ShowAllItems();
             }
         }
 
         public Item FindItemBy(int id){
-            Console.WriteLine("TUTAJ TYLKO TESTUJEMY CO JEST W ŚRODKU\n\n");
-            var result = Catalogs[0].Items.FirstOrDefault(i => i.Id == id);
-            foreach(var i in Catalogs){
-                Console.WriteLine(i);
+            for(int i=0; i<Catalogs.Count; ++i){
+                var result = Catalogs[i].Items.Where(i => i.Id == id);
             }
-            return null;
+            return result;
         }
 
         public override string ToString()
