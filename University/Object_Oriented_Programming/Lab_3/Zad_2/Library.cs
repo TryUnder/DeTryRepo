@@ -42,8 +42,9 @@ namespace Zad_2{
         }
 
         public Item FindItemBy(int id){
-            var result = Catalogs.SelectMany();
-            return result;
+            var result = Catalogs[0].Items.FirstOrDefault(i => i.Id == id);
+            Console.WriteLine(Catalogs[0].Items[0]);
+            return null;
         }
 
         public override string ToString()

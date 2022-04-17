@@ -47,7 +47,7 @@ namespace Zad_2{
 		}
 
 		public Item FindItemBy(string title){
-			var result = Items.SelectMany(i => i.Items);
+			var result = Items.FirstOrDefault(i => i.Title == title);
 			return result;
 		}
     }
