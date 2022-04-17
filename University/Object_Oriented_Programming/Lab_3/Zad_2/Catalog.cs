@@ -35,8 +35,8 @@ namespace Zad_2{
 	    	Console.WriteLine(this);
 		}
 
-		public Item FindItem(Expression<Func<Item,bool>> lambd){
-			var a = lambd.Compile();
+		public Item FindItem(Expression<Func<Item,bool>> lambda){
+			var a = lambda.Compile();
 			var Result = Items.FirstOrDefault(a);
 			return Result;
 		}

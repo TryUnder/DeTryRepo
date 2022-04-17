@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,8 +48,26 @@ namespace Zad_2{
                 if(result != null)
                     return result;
             }
-                return null;
-            
+            return null;
+        }
+
+        public Item FindItemBy(string title){
+            for(int i=0; i<Catalogs.Count; ++i){
+                var result = Catalogs[i].Items.FirstOrDefault(i => i.Title == title);
+                if(result != null)
+                    return result;
+            }
+            return null;
+        }
+
+        public Item FindItem(Expression<Func<Item,bool>> lambda){
+            var lambdaExpression = lambda.Compile();
+            for(int i=0; i<Catalogs.Count; ++i){
+                var result = Catalogs[i].Items.FirstOrDefault(lambdaExpression);
+                if(result != null)
+                    return result;
+            }
+            return null;
         }
 
         public override string ToString()

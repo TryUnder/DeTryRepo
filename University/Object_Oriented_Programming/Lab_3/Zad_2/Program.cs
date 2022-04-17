@@ -9,7 +9,7 @@ namespace Zad_2{
 		public static void Main(){
         	Item item1 = new Journal(1, "JAISCR", "Springer", new DateTime(2000, 1, 1), 1);            
         	Author author = new Author("Robert", "Cook", "Polish");                    
-	    	Item item2 = new Book(2, "Agile C#", "Springer", new DateTime(2015, 1, 1), 500, new List<Author>() {author});
+	    	Item item2 = new Book(2, "Agile C#", "SPRINGER", new DateTime(2015, 1, 1), 500, new List<Author>() {author});
 	    
 			var jorunalBarCode = ((Journal)item1).GenerateBarCode();
 			var bookBarCode = ((Book)item2).GenerateBarCode();
@@ -74,6 +74,12 @@ namespace Zad_2{
 			Console.ForegroundColor = ConsoleColor.White;
 			var foundedById = library.FindItemBy(4);
 			Console.WriteLine(foundedById);
+			var foundedByTitle = library.FindItemBy(searchedValue);
+			Console.WriteLine(foundedByTitle);
+			///!!!
+			var foundedbyLambda = library.FindItem(x => x.Publisher == "Springer");
+			Console.WriteLine(foundedbyLambda);
+			///!!!
 			Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++\n");
 		}
     }
