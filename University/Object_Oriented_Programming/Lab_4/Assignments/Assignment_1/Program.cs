@@ -67,6 +67,7 @@ namespace Assignment_1{
             //.....
             Console.WriteLine("************************************************************************");
             Lecturer dean = new Lecturer("Tadeusz", "Nowak", new DateTime(1955, 1, 12), "Prof. dr hab. inż.", "Profesor");
+            //CO Z TYM?
             Department department = new Department("Wydział Inżynierii Mechanicznej i Informatyki", dean, new List<Subject>() { subject1, subject2 }, new List<Student>() { student1, student2, (Student)student3 }, organizationUnits); //added
             Console.WriteLine(department);
             Console.WriteLine("************************************************************************");

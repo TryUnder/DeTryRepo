@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 
 namespace Assignment_1{
     public class Student : Person{
         private static int id = 0;
-        //final grade to update
+        public IList<FinalGrade> Grades { get; set; } //CO Z TYM?
         public int Semester { get; set; }
         public int Group { get; set; }
         public int IndexId { get; set; }

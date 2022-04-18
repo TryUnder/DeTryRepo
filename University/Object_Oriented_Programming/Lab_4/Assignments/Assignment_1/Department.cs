@@ -13,7 +13,7 @@ namespace Assignment_1{
             Dean = dean;
             Subjects = new List<Subject>(subjects);
             Students = new List<Student>(students);
-            OrganizationUnits = new List<OrganizationUnit>(organizationUnits);
+            OrganizationUnits = new List<OrganizationUnit>(organizationUnits); //To ask
         }
 
         public override string ToString(){
