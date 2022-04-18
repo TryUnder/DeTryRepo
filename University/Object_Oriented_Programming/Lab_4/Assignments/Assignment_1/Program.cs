@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace Assignment_1{
     public class Program{
         public static void Main(){
@@ -53,6 +55,10 @@ namespace Assignment_1{
             Console.WriteLine(lecturer6);
 
             Console.WriteLine("************************************************************************");
+            var lecturerList1 = new List<Lecturer> { lecturer1, lecturer2 };
+            var lecturerList2 = new List<Lecturer> { lecturer4, lecturer3 };
+            OrganizationUnit organizationUnit1 = new OrganizationUnit("Katedra Informatyki", "Częstochowa", lecturerList1);
+            Console.WriteLine(organizationUnit1);
         }
     }
 }
