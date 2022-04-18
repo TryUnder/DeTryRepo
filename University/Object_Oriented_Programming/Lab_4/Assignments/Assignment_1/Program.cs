@@ -21,6 +21,24 @@ namespace Assignment_1{
             Console.WriteLine(subject4);
 
             Console.WriteLine("************************************************************************");
+            FinalGrade grade1 = new FinalGrade(subject1, 4.5d, DateTime.Now.AddDays(30));
+            FinalGrade grade2 = new FinalGrade(subject1, 5d, DateTime.Now.AddDays(10));
+            FinalGrade grade3 = new FinalGrade(subject2, 3.5d, DateTime.Now.AddDays(50));
+            FinalGrade grade4 = new FinalGrade(subject2, 3.0d, DateTime.Now.AddDays(20));
+            FinalGrade grade5 = new FinalGrade(subject3, 5d, DateTime.Now.AddDays(10));
+            FinalGrade grade6 = new FinalGrade(subject3, 4.0d, DateTime.Now.AddDays(10));
+            FinalGrade grade7 = new FinalGrade(subject4, 4.0d, DateTime.Now.AddDays(30));
+            FinalGrade grade8 = new FinalGrade(subject4, 3.5d, DateTime.Now.AddDays(20));
+            Console.WriteLine(grade1);
+            Console.WriteLine(grade2);
+            Console.WriteLine(grade3);
+            Console.WriteLine(grade4);
+            Console.WriteLine(grade5);
+            Console.WriteLine(grade6);
+            Console.WriteLine(grade7);
+            Console.WriteLine(grade8);
+
+            Console.WriteLine("************************************************************************");
         }
     }
 }
