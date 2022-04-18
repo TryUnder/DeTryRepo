@@ -16,7 +16,9 @@ namespace Assignment_1{
             List<Lecturer>.Enumerator em = (Lecturers as List<Lecturer>).GetEnumerator();
             foreach(var i in Lecturers){
                 em.MoveNext();
-                stringBuilder += $"\nLecturer {Lecturers.IndexOf(em.Current)+1}: {em.Current}";}
+                stringBuilder += $"\nLecturer {Lecturers.IndexOf(em.Current)+1}: {em.Current}";
+            }
+            stringBuilder += "\n";
             return stringBuilder;
         }
     }
