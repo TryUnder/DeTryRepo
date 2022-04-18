@@ -13,7 +13,7 @@ namespace Assignment_1{
 
         public override string ToString()
         {
-            string person = $"First name: {FirstName} Last name: {LastName}, DateOfBirth: {DateOfBirth}";
+            string person = $"FirstName: {FirstName} LastName: {LastName}, DateOfBirth: {DateOfBirth}";
             return person;
         }
     }

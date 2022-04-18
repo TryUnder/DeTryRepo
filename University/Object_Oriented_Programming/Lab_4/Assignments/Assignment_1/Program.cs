@@ -39,6 +39,20 @@ namespace Assignment_1{
             Console.WriteLine(grade8);
 
             Console.WriteLine("************************************************************************");
+            Lecturer lecturer1 = new Lecturer("Krzysztof", "Nowakowski", new DateTime(1978, 12, 12), "dr inż.", "Adiunkt");
+            Lecturer lecturer2 = new Lecturer("Jan", "Kowalski", new DateTime(1960, 10, 12), "Prof. dr hab. inż.", "Profesor");
+            Lecturer lecturer3 = new Lecturer("Adam", "Nowakowski", new DateTime(1968, 2, 12), "dr inż.", "Adiunkt");
+            Lecturer lecturer4 = new Lecturer("Arkadiusz", "Bednarski", new DateTime(1969, 1, 12), "dr hab. inż.", "Profesor");
+            Lecturer lecturer5 = new Lecturer("Janusz", "Wiśniewski", new DateTime(1988, 2, 12), "dr inż.", "Adiunkt");
+            Lecturer lecturer6 = new Lecturer("Dariusz", "Kowalewski", new DateTime(1979, 1, 12), "dr hab. inż.", "Profesor");
+            Console.WriteLine(lecturer1);
+            Console.WriteLine(lecturer2);
+            Console.WriteLine(lecturer3);
+            Console.WriteLine(lecturer4);
+            Console.WriteLine(lecturer5);
+            Console.WriteLine(lecturer6);
+
+            Console.WriteLine("************************************************************************");
         }
     }
 }
