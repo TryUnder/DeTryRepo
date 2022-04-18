@@ -15,12 +15,13 @@ namespace Assignment_1{
             Specialization = specialization;
             Group = group;
             Semester = semester;
-            id++;
+            ++id;
+            IndexId = id;
         }
 
         public override string ToString()
         {
-            string student = $"{base.ToString()} Specialization: {Specialization}, Group: {Group}, Semester: {Semester}";
+            string student = $"{base.ToString()} Id: {IndexId}, Specialization: {Specialization}, Group: {Group}, Semester: {Semester}";
             return student;
         }
     }
