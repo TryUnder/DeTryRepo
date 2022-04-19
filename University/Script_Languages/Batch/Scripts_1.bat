@@ -126,7 +126,7 @@ echo %zm3% - %zm4%
 :: zgłoszenia (polecenie prompt), wyświetli tekst powitania zawierający nazwę użytkownika (należy ją odnaleźć w
 :: zmiennych środowiskowych), bieżącą datę oraz jedną liczbę losową.
 
-color 3
+:: color 3
 title "MyTitle"
 prompt 
 echo Witaj %USERNAME%
@@ -142,18 +142,18 @@ echo %RANDOM%
 
 :START_
 SETLOCAL
-set /P readLine="Podaj nazwe katalogu: "
+set /P readLine=type a name of a catalog
 mkdir %TEMP%\%readLine%
 if %ERRORLEVEL%==0 (
     echo Directory was created succesfully
 ) else (
     echo Directory was already created
-    set /P readLine2="Do you want to delete that directory?: "
-    if %readLine2% ==Y (
+    set /P readLine2=do you want to delete that directory?:
+    if %readLine2%==Y (
         rd %TEMP%\%readLine%
         echo Directory was deleted succesfully
-        set /P readLine3="Woud you like to create a directory?: "
-        if %readLine3% ==Y (
+        set /P readLine3=would you like to create a directory?:
+        if %readLine3%==Y (
             ENDLOCAL
             goto START_
         ) else (
