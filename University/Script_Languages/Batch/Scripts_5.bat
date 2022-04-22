@@ -79,3 +79,123 @@ if %choice%==1 (
 )
 
 echo Koncze dzialanie skryptu
+
+:: FIND is used to search for specific array of characters in files
+::  /V - used to display all lines NOT containing ths specific string
+::  /C - used to display only the count of lines containing the string
+::  /N - Displays line numbers with the displayed lines
+::  /I - Ignores the case of characters when searching for the string
+
+:: Pipeline processing is known as directing the output stream from one command to the second command
+:: as a stream of input data  
+
+:: more - Displays output one screen at a time
+::  /C - Clear screen before displaying page
+::  /Tn - Expand tabs to n spaces (default 8)
+
+:: sort
+::  /+n - Specifies the character number n to begin each comparison
+::  /M  - Specifies the amount of main memory to use for the sort in KB
+::  /R  - Reverse the sort order Z to A then 9 to 0
+::  /T  - Specifies the file which held the sorting items not to occupy memory
+::  /O  - Specifies the file where sorted input is to be stored.
+
+:: Zadanie 7.
+:: Wykorzystać przetwarzanie potokowe w celu:
+:: Wyświetlenia tylko adresów fizycznych z polecenia ipconfig –all
+:: Wyświetlenia tylko poleceń dotyczących plików (lista poleceń: help)
+:: Posortowania zawartości dowolnego pliku (wyświetlenie pliku: type plik)
+
+ipconfig /all | find "Physical Address" /I
+help | find "file" /I
+
+if exist %userprofile%\Desktop\test.txt (
+    del test.txt /Q /F
+)
+echo.
+echo PROJECT MKULTRA, THE CIA'S PROGRAM OF > %userprofile%\Desktop\MK-ULTRA.txt
+echo RESEARCH IN BEHAVIORAL MODIFICATION >> %userprofile%\Desktop\MK-ULTRA.txt
+echo WEDNESDAY, AUGUST 3, 1977 >> %userprofile%\Desktop\MK-ULTRA.txt
+echo U.S. SENATE, >> %userprofile%\Desktop\MK-ULTRA.txt
+echo SELECT COMMITTEE ON INTELLIGENCE, >> %userprofile%\Desktop\MK-ULTRA.txt
+echo AND SUBCOMIrrTEE ON HEALTH >> %userprofile%\Desktop\MK-ULTRA.txt
+echo AND SCIENTIFIC RESEARCH >> %userprofile%\Desktop\MK-ULTRA.txt
+echo The committees met, pursuant to notice, at 9:07 a.m. in room 1202, >> %userprofile%\Desktop\MK-ULTRA.txt
+echo Dirksen Senate Office Building, Senator Daniel K. Inouye-(chairman - >> %userprofile%\Desktop\MK-ULTRA.txt
+echo of the Select Committee on Intelligence) presiding. >> %userprofile%\Desktop\MK-ULTRA.txt
+echo Present: Senators Inouye (presiding), Kennedy, Goldwater, Bayh, >> %userprofile%\Desktop\MK-ULTRA.txt
+echo Hathaway, Huddleston, Hart, Schweiker, Case, Garn, Chafee, Lugar >> %userprofile%\Desktop\MK-ULTRA.txt
+echo and Wallop. >> %userprofile%\Desktop\MK-ULTRA.txt
+echo Also present: William G. Miller, staff director, Select Committee on >> %userprofile%\Desktop\MK-ULTRA.txt
+echo Intelligence; Dr. Lawrence Horowitz, staff director, Subcommittee >> %userprofile%\Desktop\MK-ULTRA.txt
+echo on Health and Scientific Research; and professional staff members of >> %userprofile%\Desktop\MK-ULTRA.txt
+echo both committees. >> %userprofile%\Desktop\MK-ULTRA.txt
+
+echo Before sort:
+echo.
+more %userprofile%\Desktop\MK-ULTRA.txt /C
+sort %userprofile%\Desktop\MK-ULTRA.txt /O %userprofile%\Desktop\MK-ULTRA-SORTED.txt /+2
+echo.
+echo After sort:
+if exist %userprofile%\Desktop\MK-ULTRA-SORTED.txt (
+    more %userprofile%\Desktop\MK-ULTRA-SORTED.txt
+    del %userprofile%\Desktop\MK-ULTRA-SORTED.txt /Q /F
+    del %userprofile%\Desktop\MK-ULTRA.txt /Q /F
+)
+
+:: data stream
+:: keyboard - CON
+:: printer - PRN
+:: series joints - COM1 -> COM4
+:: parralel joints - LPT1 -> LPT3
+:: void devices - NUL 
+
+:: >    redirect stream to the input
+:: >>   add stream to the input
+:: 2>   redirection output errors as a stream to the input
+:: 2>>  add output errors as a stream to the input
+:: <    redirection streams from the input to the output
+
+:: mkdir test 2> NUL 
+:: errors will be redirected to the null device (won't be displayed)
+
+:: Zadanie 8.
+:: Zapisać zmienne środowiskowe do pliku zm1.txt
+:: Zapisać posortowane zmienne środowiskowe do pliku zm2.txt
+:: Porównać oba pliki za pomocą polecenia fc
+
+echo %path% > %userprofile%\Desktop\zm1.txt
+echo %os% %systemroot% %homedrive% %homepath% %computername% %username% %userprofile% >> %userprofile%\Desktop\zm1.txt     
+sort %userprofile%\Desktop\zm1.txt /O %userprofile%\Desktop\zm2.txt
+
+:: FC - Compares two files or sets of files and displays the differences between them
+::  /C  - Disregards the case of letters
+
+fc %userprofile%\Desktop\zm1.txt %userprofile%\Desktop\zm2.txt
+
+:: Zadanie 9.
+:: Napisać skrypt który wyszuka wszystkie pliki zawierające w nazwie "readme". Wynik skryptu zapisać do pliku
+:: readme.txt
+
+if %2==0 (
+    echo C: > %userprofile%\Desktop\readme.txt
+    dir C:\ /S /A:-S | find "readme" >> %userprofile%\Desktop\readme.txt
+    echo D: >> %userprofile%\Desktop\readme.txt
+    dir D:\ /S /A:-S | find "readme" >> %userprofile%\Desktop\readme.txt
+)
+
+echo %%~dp0 is "%~dp0"
+echo %%0 is "%0"
+echo %%~dpnx0 is "%~dpnx0"
+echo %%~f1 is "%~f1"
+echo %%~dp0%%~1 is "%~dp0%~1"
+
+rem Temporarily change the current working directory, to retrieve a full path 
+rem   to the first parameter
+pushd .
+cd %~dp0
+echo batch-relative %%~f1 is "%~f1"
+popd
+
+:: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/call
+:: https://stackoverflow.com/questions/1645843/resolve-absolute-path-from-relative-path-and-or-file-name

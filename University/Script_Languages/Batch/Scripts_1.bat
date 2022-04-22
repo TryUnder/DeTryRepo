@@ -83,6 +83,8 @@ PAUSE
 :: 	S - System files
 :: 	R - Read-only files
 
+:: /B Returns file names
+
 :: /C Display the thousand separator in file sizes.. 
 :: /-C is used to disable the display separator
 :: /D Display by columns
