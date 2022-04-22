@@ -197,5 +197,6 @@ cd %~dp0
 echo batch-relative %%~f1 is "%~f1"
 popd
 
+:: https://ss64.com/nt/syntax-args.html
 :: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/call
 :: https://stackoverflow.com/questions/1645843/resolve-absolute-path-from-relative-path-and-or-file-name
