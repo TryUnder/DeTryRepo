@@ -140,27 +140,28 @@ echo %RANDOM%
 :: usunąć dany katalog). Przykład wczytania danych od użytkownika: set /P katalog="Podaj nazwe katalogu: "
 
 
-:START_
+SETLOCAL EnableDelayedExpansion
 SETLOCAL
+:START_
 set /P readLine=type a name of a catalog
 mkdir %TEMP%\%readLine%
 if %ERRORLEVEL%==0 (
     echo Directory was created succesfully
 ) else (
     echo Directory was already created
-    set /P readLine2=do you want to delete that directory?:
-    if %readLine2%==Y (
-        rd %TEMP%\%readLine%
+    set /P readLine2=do you want to delete that directory?(Y/N)
+    if "!readLine2!" == "Y" (
+        rd %TEMP%\!readLine!
         echo Directory was deleted succesfully
-        set /P readLine3=would you like to create a directory?:
-        if %readLine3%==Y (
+        set /P readLine3=would you like to create a directory?(Y/N)
+        if "!readLine3!" == "Y" (
             ENDLOCAL
             goto START_
         ) else (
-            echo exit from the program
+            echo Directory was created succesfully
         )
     ) else (
-        echo Exit from the program
+        echo Directory was not deleted
     )
 )
 ::DOESNT WORK
