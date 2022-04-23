@@ -52,9 +52,9 @@ if not exist %userprofile%\Desktop\%1 (
     echo 1 - Tworzy kopie plikow w folderze C:\temp\
     echo 2 - Konczy dzialanie skryptu
     set /P choice=Wybierz opcje:
-    if %choice%==0 goto _0
-    if %choice%==1 goto _1
-    if %choice%==2 goto _exit
+    if "%choice%"=="0" goto _0
+    if "%choice%"=="1" goto _1
+    if "%choice%"=="2" goto _exit
 ) else (
     rmdir %userprofile%\Desktop\%1 /S /Q 
     goto _START
@@ -69,12 +69,12 @@ robocopy %userprofile%\Desktop\%1 C:\temp
 goto _exit
 
 :_exit
-if %choice%==0 (
+if "%choice%"=="0" (
     attrib +r %userprofile%\Desktop\%1\test.txt
     attrib +r %userprofile%\Desktop\%1\test2.txt
 )
 
-if %choice%==1 (
+if "%choice%"=="1" (
     del C:\temp\*.txt /Q /F
 )
 
@@ -177,7 +177,7 @@ fc %userprofile%\Desktop\zm1.txt %userprofile%\Desktop\zm2.txt
 :: Napisać skrypt który wyszuka wszystkie pliki zawierające w nazwie "readme". Wynik skryptu zapisać do pliku
 :: readme.txt
 
-if %2==0 (
+if "%2"=="0" (
     echo C: > %userprofile%\Desktop\readme.txt
     dir C:\ /S /A:-S | find "readme" >> %userprofile%\Desktop\readme.txt
     echo D: >> %userprofile%\Desktop\readme.txt
@@ -200,3 +200,48 @@ popd
 :: https://ss64.com/nt/syntax-args.html
 :: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/call
 :: https://stackoverflow.com/questions/1645843/resolve-absolute-path-from-relative-path-and-or-file-name
+
+:: In order to get the file path https://ss64.org/viewtopic.php?t=180
+:: or use WHERE
+
+:: Zadanie 10.
+:: I.
+:: Wykorzystaj polecenie tasklist tak aby wyświetlało tylko procesy zajmujące więcej niż 100MB w
+:: pamięci (należy wykorzystać przełącznik /FI z odpowiednim filtrem).
+:: II.
+:: Posortuj wynik powyższej komendy (polecenie sort) tak aby sortowało wyniki według rozmiaru
+:: zajmowanego w pamięci (sortowanie począwszy od znaku nr. 64).
+:: III.
+:: Napisz skrypt który będzie dopisywał wynik powyższego działania do pliku procesy%data%.txt
+:: (wartość %data% powinna zawierać bieżący dzień, miesiąc i rok).
+
+set day=%date:~0,2%
+set month=%date:~3,2%
+set year=%date:~6,4%
+for /F "delims=" %%i in ('tasklist /FI "MEMUSAGE GT 100000" ^| sort /+64 ') do (
+    echo %%i >> %userprofile%\Desktop\%day%.%month%.%year%.txt
+)
+
+:: Zadanie 11
+:: Napisz skrypt zapisujący statystyki połączeń użytkownika (net statistics workstation) do pliku C:\temp\net.txt.
+:: Do pliku należy dopisać tylko bieżącą datę, godzinę, oraz informacje o ilości danych nadanych i otrzymanych
+:: (w celu ich pozyskania należy wykorzystać komendę find). Skrypt powinien tworzyć katalog C:\temp\ (w
+:: przypadku gdy katalog istnieje błędy należy przekierować do strumienia pustego).
+
+mkdir C:\temp 2> NUL
+echo %date:~0,2%.%date:~3,2%.%date:~6,4% %time:~0,5% >> C:\temp\net.txt
+net statistics workstation | find "Bytes" >> C:\temp\net.txt
+
+:: Zadanie 12
+:: Napisz skrypt który wyświetli kolejno wszystkie liczby od 2 do 10 oprócz liczby 7.
+
+SETLOCAL EnableDelayedExpansion
+for /L %%i in (2,1,10) do (
+    set /A check=%%i
+    if "!check!" == "7" (
+
+    ) else (
+        echo !check!
+    )
+)
+SETLOCAL DisableDelayedExpansion
