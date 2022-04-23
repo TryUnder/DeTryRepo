@@ -128,3 +128,38 @@ net statistics workstation | more
 
 :: 3. Włącz przywracanie bieżących połączeń przy każdym logowaniu, niezależnie od późniejszych
 :: zmian.
+
+:: 4. Uruchom kalkulator za pomocą wiersza poleceń.
+
+start calc.exe
+
+:: 6. Wyświetl zmienne środowiskowe, których nazwa zaczyna się na literę D.
+:: Klucz: Nie ma zmiennej środowiskowej na literę D. Poprawna odpowiedź to P.
+echo nie trolluj gamoniu, bo jest. -> driverdata
+
+set > %userprofile%\Desktop\env_var.txt && finstr /B "D" %userprofile%\Desktop\env_var.txt
+
+:: 7. Zamknij zadanie o id =7.
+
+taskkill /F /PID 7
+
+:: 9. Ustaw maksymalną długość haseł na 8 znaków
+
+net accounts /FORCELOGOFF /MINPWLEN:8 ::?
+
+:: 10. Wyświetl ustawienia stacji roboczej.
+
+net config workstation
+
+:: 11. Dodaj nową grupę do listy na serwerze o nazwie nowa.
+
+net group /add nowa
+
+:: 12. Zatrzymaj Harmonogram zadań.
+
+net stop harmonogram zadań
+
+:: 13. Udostępni zasoby z folderu dom z dysku USB:
+
+net share g:\dom\
+
