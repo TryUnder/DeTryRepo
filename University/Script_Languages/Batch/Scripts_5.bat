@@ -237,11 +237,8 @@ net statistics workstation | find "Bytes" >> C:\temp\net.txt
 
 SETLOCAL EnableDelayedExpansion
 for /L %%i in (2,1,10) do (
-    set /A check=%%i
-    if "!check!" == "7" (
-
-    ) else (
-        echo !check!
+    if %%i NEQ 7 (
+        echo %%i
     )
 )
 SETLOCAL DisableDelayedExpansion
