@@ -242,3 +242,58 @@ for /L %%i in (2,1,10) do (
     )
 )
 SETLOCAL DisableDelayedExpansion
+
+:: Windows Registry
+
+::  Is a hierarchical database that stores low-level settings for the Microsoft Windows operating system
+::  and for applications that opt to use the registry.
+::  The kernel, device drivers, services and User Interfaces can all use the registry.
+
+:: In other words, the registry or Windows Registry contains information, settings, options, and other
+:: values for programs and hardware installed on all versions of Microsoft Windows os.
+
+:: Every program that is installed on the OS has to store a subkey containing settings such as program's
+:: location, its version, and how to start the program.
+
+:: atomicity + kernel transaction manager
+
+:: The registry contains two basic elements: keys and values. 
+:: Registry keys are container objects similar to folders while registry values are non-container
+:: objects similar to files.
+:: Key may contain values and subkeys.
+
+:: 7 PREDEFINED (HIVE) ROOT KEYS ARE:
+:: H - HIVE
+::
+:: HKEY_CLASSES_ROOT HKCR       - Contains information about registered applications, such as file associations
+::                              - Object class IDs
+::                              - Windows stores in here information about file types, extensions.  
+::                              - Defines default programs which are used to open certain types as well
+
+:: HKEY_CURRENT_USER HKCU       - Stores specific information that are associated with currently logged-in user.
+::                              - HKCU is a link to the subkey HKU that coressponds to the user. 
+::                              - Same information is accesible in both locations.
+
+:: HKEY_LOCAL_MACHINE HKLM      - Stores settings that are specific to the local computer
+::                              - The key located by HKLM is not stored on disk, but maintained in memory by
+::                              - the system kernel
+::                              - Information about drivers and their settings
+::
+::      HKLM\HARDWARE                   - Is created during the first start-up of the system and contain 
+::                                      - hardware configuration
+::  
+::      HKLM\SAM                        - (Security Accounts Manager)
+::                                      - Stores information about users (database)
+::
+::      HKLM\SECURITY                   - Information about system security, permissions of currently logged-in
+::                                      - user. Cannot be modified
+::
+::      HKLM\SOFTWARE                   - Stores information about installed software on the OS
+::  
+::      HKLM\SYSTEM                     - Stores information about specific session.
+::                                      - System setup
+::                                      - RNG data
+
+:: HKEY_USERS HKU                 - Stores settings of all users associated to the computer
+
+:: HKEY_CURRENT_CONFIG HKCC       - Stores current settings about devices that are connected to the computer
