@@ -297,3 +297,18 @@ SETLOCAL DisableDelayedExpansion
 :: HKEY_USERS HKU                 - Stores settings of all users associated to the computer
 
 :: HKEY_CURRENT_CONFIG HKCC       - Stores current settings about devices that are connected to the computer
+
+
+
+:: Windows 7 Domain
+::
+:: It is a collection of computers in internet whose resources and security are controlled by determined
+:: server called main controler of a domain.
+:: Windows 7 embraces from the service Active Directory (ADS - Active Directory Services). In the structure
+:: of such type user accounts, groups and computers are grouped together in organization unit which provides
+:: administrators with easier maintability of resources.
+:: Only servers work as a main controlers of a domain.
+
+:: Working group
+::
+:: Connection of group of computers that make data share, printer joint-use, and other resources available. 
