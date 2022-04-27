@@ -13,7 +13,7 @@ namespace Mock_Exam_1_Ver_1{
 
         public Sklad(List<Wagonik> lista_wagonikow, List<Wagonik> lista_lokomotyw){
             wagoniki = new List<Wagonik>(lista_wagonikow);
-            lokomotywy = new List<Lokomotywa>(lista_lokomotyw);
+            lokomotywy = new List<Wagonik>(lista_lokomotyw);
         }
 
         public void WypiszInfo(){
