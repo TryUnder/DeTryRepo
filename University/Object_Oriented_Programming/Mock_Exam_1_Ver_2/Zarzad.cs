@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Mock_Exam_1_Ver_2{
@@ -25,6 +26,11 @@ namespace Mock_Exam_1_Ver_2{
 
         public void DodajNowyLokal(Lokal nowyLokal){
             Lokale.Add(nowyLokal);
+        }
+
+        public void WyszukajLokalPoAdresie(string adres){
+            foreach(var i in Lokale)
+                var a = i.FirstOrDefault(i => i.Adres == adres);
         }
     }
 }
