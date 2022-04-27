@@ -9,7 +9,7 @@ namespace Mock_Exam_1_Ver_2{
             Lokale = new List<Lokal>(lokale);
         }
 
-        void WypiszWszystkieLokale(){
+        public void WypiszWszystkieLokale(){
             List<Lokal>.Enumerator enumeratorLokali = Lokale.GetEnumerator();
             foreach(var i in Lokale){
                 enumeratorLokali.MoveNext();
@@ -21,6 +21,10 @@ namespace Mock_Exam_1_Ver_2{
         public override string ToString(){
             this.WypiszWszystkieLokale();
             return null;
+        }
+
+        public void DodajNowyLokal(Lokal nowyLokal){
+            Lokale.Add(nowyLokal);
         }
     }
 }

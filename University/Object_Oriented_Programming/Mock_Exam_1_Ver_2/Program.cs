@@ -22,6 +22,10 @@ namespace Mock_Exam_1_Ver_2{
             Zarzad zarzad = new Zarzad(lokale);
 
             Console.WriteLine(zarzad);
+            Console.WriteLine("--------------------------------------------------------------");
+            //Lokal dom = new Dom("Szara 10/15 47-005 Gniezno", true, true, 7, 320);
+            zarzad.DodajNowyLokal(new Dom("Szara 10/15 47-005 Gniezno", true, true, 7, 320));
+            Console.WriteLine(zarzad);
         }
     }
 }
