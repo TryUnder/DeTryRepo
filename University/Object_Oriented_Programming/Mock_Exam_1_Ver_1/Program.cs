@@ -21,11 +21,12 @@ namespace Mock_Exam_1_Ver_1{
             lista_wagonikow.Add(wagonik4);
             lista_wagonikow.Add(wagonik5);
 
-            List<Wagonik> lista_lokomotyw = new List<Lokomotywa>();
+            List<Lokomotywa> lista_lokomotyw = new List<Lokomotywa>();
             lista_lokomotyw.Add((Lokomotywa)wagonik4);
             lista_lokomotyw.Add((Lokomotywa)wagonik5);
 
-            //Sklad sklad = new Sklad(lista_wagonikow, List(Lokomotywa)lista_lokomotyw);
+            Sklad sklad = new Sklad(lista_wagonikow, lista_lokomotyw);
+            Console.WriteLine(sklad.MozeJechac());
         }
     }
 }

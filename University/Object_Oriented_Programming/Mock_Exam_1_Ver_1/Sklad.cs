@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Mock_Exam_1_Ver_1{
     public class Sklad : IInfo{
-        public List<Wagonik> lokomotywy { get; set; }
-        public List<Lokomotywa> wagoniki { get; set; }
+        public List<Wagonik> wagoniki { get; set; }
+        public List<Lokomotywa> lokomotywy { get; set; }
 
         public Sklad(){
             wagoniki = new List<Wagonik>();
