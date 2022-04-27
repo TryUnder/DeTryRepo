@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Mock_Exam_1_Ver_2{
     public class Program{
@@ -11,6 +12,16 @@ namespace Mock_Exam_1_Ver_2{
 
             Lokal mieszkanie = new Mieszkanie("Tomaszowa 11 07-227 Łódź", true, true, 5, 2);
             Console.WriteLine($"{mieszkanie}Czy mieszkanie jest wynajmowalne?: {mieszkanie.Wynajmowalne()}\n");
+
+            Lokal[] arr = new Lokal[]{lokal,dom,mieszkanie};
+            Console.WriteLine("--------------------------------------------------------------");
+
+            List<Lokal> lokale = new List<Lokal>();
+            lokale.AddRange(arr);
+
+            Zarzad zarzad = new Zarzad(lokale);
+
+            Console.WriteLine(zarzad);
         }
     }
 }

@@ -8,13 +8,11 @@ namespace Mock_Exam_1_Ver_2{
             rozmiarDzialki = rozmiardzialki;
         }
 
-        public override bool Wynajmowalne()
-        {
+        public override bool Wynajmowalne(){
             return base.Wynajmowalne();
         }
 
-        public override void Wypisz()
-        {
+        public override void Wypisz(){
             base.Wypisz();
             Console.WriteLine($"Rozmiar dzialki: {rozmiarDzialki}");
         }
