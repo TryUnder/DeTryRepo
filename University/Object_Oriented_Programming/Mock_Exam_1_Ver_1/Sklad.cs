@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Mock_Exam_1_Ver_1{
     public class Sklad : IInfo{
         public List<Wagonik> lokomotywy { get; set; }
-        public List<Wagonik> wagoniki { get; set; }
+        public List<Lokomotywa> wagoniki { get; set; }
 
         public Sklad(){
             wagoniki = new List<Wagonik>();
             lokomotywy = new List<Lokomotywa>();
         }
 
-        public Sklad(List<Wagonik> lista_wagonikow, List<Wagonik> lista_lokomotyw){
+        public Sklad(List<Wagonik> lista_wagonikow, List<Lokomotywa> lista_lokomotyw){
             wagoniki = new List<Wagonik>(lista_wagonikow);
-            lokomotywy = new List<Wagonik>(lista_lokomotyw);
+            lokomotywy = new List<Lokomotywa>(lista_lokomotyw);
         }
 
         public void WypiszInfo(){
