@@ -10,7 +10,10 @@ namespace Mock_Exam_1_Ver_2{
         }
 
         void WypiszWszystkieLokale(){
+            List<Lokal>.Enumerator enumeratorLokali = Lokale.GetEnumerator();
             foreach(var i in Lokale){
+                enumeratorLokali.MoveNext();
+                Console.WriteLine($"Lokal nr: {Lokale.IndexOf(enumeratorLokali.Current)+1}"); 
                 Console.WriteLine(i);
             }
         }
