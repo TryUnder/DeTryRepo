@@ -35,7 +35,10 @@ namespace Mock_Exam_1_Ver_2{
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine(zarzad);
             Console.WriteLine("--------------------------------------------------------------");
-
+            Console.WriteLine("Usuwam wszystkie lokale");
+            zarzad.UsunWszystkieLokale();
+            zarzad.WypiszWszystkieLokale();
+            Console.WriteLine("--------------------------------------------------------------");
         }
     }
 }
