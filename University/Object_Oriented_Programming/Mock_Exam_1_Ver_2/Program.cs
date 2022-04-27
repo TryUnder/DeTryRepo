@@ -26,6 +26,16 @@ namespace Mock_Exam_1_Ver_2{
             //Lokal dom = new Dom("Szara 10/15 47-005 Gniezno", true, true, 7, 320);
             zarzad.DodajNowyLokal(new Dom("Szara 10/15 47-005 Gniezno", true, true, 7, 320));
             Console.WriteLine(zarzad);
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine($"Szukam lokalu po adresie: Tomaszowa 11:");
+            Console.WriteLine(zarzad.WyszukajLokalPoAdresie(mieszkanie.Adres));
+            Console.WriteLine("Lokal znaleziony. Usuwam");
+            zarzad.UsunLokal(zarzad.WyszukajLokalPoAdresie(mieszkanie.Adres));
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine(zarzad);
+            Console.WriteLine("--------------------------------------------------------------");
+
         }
     }
 }

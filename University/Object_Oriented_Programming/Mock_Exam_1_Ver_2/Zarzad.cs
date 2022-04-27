@@ -28,9 +28,17 @@ namespace Mock_Exam_1_Ver_2{
             Lokale.Add(nowyLokal);
         }
 
-        public void WyszukajLokalPoAdresie(string adres){
-            foreach(var i in Lokale)
-                var a = i.FirstOrDefault(i => i.Adres == adres);
+        public Lokal WyszukajLokalPoAdresie(string adres){
+            return Lokale.FirstOrDefault(i => i.Adres == adres);
+        }
+
+        public void UsunLokal(Lokal lokal){
+            foreach(var i in Lokale){
+                if(lokal.Adres == i.Adres){
+                    Lokale.Remove(lokal);
+                    break;
+                }
+            }
         }
     }
 }
