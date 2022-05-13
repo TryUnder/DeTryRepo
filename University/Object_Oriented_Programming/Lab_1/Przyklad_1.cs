@@ -1,4 +1,4 @@
-﻿public class Housess
+﻿public class Houses
 {
     const int _windowCount = 10;
     private double _area;
