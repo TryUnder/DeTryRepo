@@ -1,0 +1,15 @@
+Zbudować dwa diagramy stanów (Statechart Diagram) pierwszy dla ekspresu do kawy a drugi dla procesu zakładania konta bibliotecznego.
+
+Typowy ekspres do kawy może być włączony, wyłączony, bądź być w trybie gotowości. Gdy jest woda w zbiorniku, woda jest podgrzewana do wrzenia, 
+a następnie jest przygotowywana kawa, jeżeli ponadto jest mleko w zbiorniku, to można także na życzenie przygotować kawę cappuccino. 
+Gdy otwarta jest pokrywa (np. w celu dodania wody bądź kawy), niemożliwe jest rozpoczęcie podgrzewania wody. 
+Ekspres do kawy można również zaprogramować, aby przygotował kawę o wskazanej porze.
+
+Opis jest ogólny więc w razie konieczności można dodać dodatkowe stany, których nie ma w tekście opisu.
+
+W przypadku drugiego diagramu stanów, dla procesu zakładania konta bibliotecznego, 
+należy uwzględnić konieczność potwierdzenia tożsamości klienta przez pracownika biblioteki przed dostarczeniem fizycznej karty bibliotecznej 
+(konto nie jest w pełni aktywne przed wydaniem karty, której nie można otrzymać przed potwierdzeniem tożsamości).
+
+Niżej podano bardzo prosty przykład diagramu stanów przedstawiający działanie czajnika elektrycznego. 
+Pokazano na nim również sposób dodawania czynności wewnętrznych dla danego stanu (do - czynność wykonywana w trakcie trwania stanu):

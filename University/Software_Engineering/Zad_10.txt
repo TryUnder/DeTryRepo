@@ -1,0 +1,9 @@
+Na podstawie wcześniejszych wyników analizy własnego projektu systemu dla biblioteki utworzyć diagramy sekwencji, 
+które obrazować będą przepływ komunikatów pomiędzy częściami systemu w ramach realizacji poszczególnych przypadków użycia (wystarczy zobrazować w ten sposób 3 przypadki użycia).
+
+Tworzone diagramy interakcji powinny pozostawać spójne z pozostałymi diagramami w tym sensie, 
+że występujące na nich linie życia (lifelines) powinny odpowiadać aktorom i klasom utworzonym wcześniej.
+
+Dodatkowym poleceniem jest rozszerzenie diagramu klas systemu dla biblioteki, 
+w taki sposób aby w tym projekcie znajdowały się klasy odpowiedzialne za warstwę prezentacji i wejścia, zgodnie ze wzorcem Widok-Model-Kontroler 
+(schemat tego wzorca można znaleźć w wyklad07, slajd 24 - model w tym wzorcu jest właśnie grupą klas odpowiedzialną za przechowywanie danych niezbędnych do działalności biblioteki).
