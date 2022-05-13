@@ -10,7 +10,7 @@
     {
         _address = "none";
         Area = 0;
-        _houseCount++;
+        _houseCount++;xx
     }
 
     public House(string address, double area, int doorCount, string owner)
