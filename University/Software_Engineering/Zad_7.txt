@@ -1,0 +1,12 @@
+To zadanie jest kontynuacją tworzenia projektu systemu komputerowego wspomagającego pracę biblioteki zawierającego różne diagramy i polega na utworzeniu dla tego systemu diagramu klas, który powinien w projekcie znajdować się w perspektywie klas. 
+ poprzednich ćwiczebnych diagramach klas).
+Klasy w tym diagramie powinny zawierać zarówno metody (dozwolone operacje) jak i atrybuty (dane potrzebne do wykonania tych operacji) i być między sobą powiązane relacjami wraz licznościami (podobnie jak było to w
+
+Tworząc diagram klas należy wykorzystać diagram przypadków użycia i diagram czynności. 
+Operacje klas (na tym etapie) będą odpowiadać czynnościom wykonywanym przez system bądź operacjom wejścia-wyjścia, a atrybuty klas danym potrzebnym do wykonania tych operacji.  
+Należy przy tym pamiętać o w miarę równomiernym przydziale zadań poszczególnym klasom, tzn. chodzi oto aby nie było klas bez atrybutów lub metod i by obciążenie poszczególnych klas było na ile możliwe równomierne.
+
+Wszystkie zaprojektowane klasy powinny być w stanie zrealizować (obsłużyć) wszystkie przypadki użycia, czyli funkcjonalności systemu.
+
+
+Jako rozwiązanie przesłać projekt systemu bibliotecznego w EA (*.eap) wzbogacony o diagram klas.

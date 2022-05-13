@@ -1,0 +1,32 @@
+Na podstawie opisu podanego w formie załącznika do tego zadania (opis.pdf), stworzyć diagram klas dla systemu akwaparku.
+
+Diagram klas powinien zawierać klasy utworzone na podstawie opisu (z reguły będą to rzeczowniki występujące w opisie) oraz relacje między nimi
+ (na występowanie relacji wskazuje pojawienie się czasowników w opisie, zgodnie ze schematem: jest rodzajem/specjalną wersją - generalizacja,
+ jest częścią składową/jednym z elementów - agregacja bądź kompozycja, inny czasownik - asocjacja).
+
+Na potrzeby tego ćwiczenia należy utworzyć nowy projekt (nie zawierający żadnych diagramów z poprzednich ćwiczeń) i przesłać go jako rozwiązanie zadania.
+
+Opis systemu
+Na podstawie poniższego opisu utwórz diagram klas opisujący działanie
+systemu Aquapark:
+Po ciężkich i męczących zajęciach z inżynierii oprogramowania, z pewno-
+ścią każdy chętnie zrelaksowałby się w pobliskim aquaparku. Różnorodność
+basenów sprawia, że w takim miejscu każdy znajdzie coś odpowiedniego dla
+siebie. Poza basenami różnej głębokości, tymi dla dzieci jak i tymi przeznaczo-
+nymi dla osób chcących po prostu popływać lub poskakać na głęboką wodę,
+znaleźć można również baseny przeznaczone dla osób mniej aktywnych: so-
+lanki czy jacuzzi. Osobom lubiącym dobrą zabawę z pewnością przypadną do
+gustu baseny wyposażone w liczne atrakcje takie jak zjeżdżalnie, fala, rzeka
+czy bicze wodne. Po miłych chwilach spędzonych w wodzie doskonałym po-
+mysłem jest odwiedzenie sauny, w zależności od upodobań suchej lub parowej.
+Profesjonalny aquapark to jednak nie tylko sam obiekt, ale również perso-
+nel, na którego pomoc można liczyć w każdej sytuacji. Nad bezpieczeństwem
+czuwają doświadczeni ratownicy wodni oraz młodsi ratownicy będący ich
+asystentami jak również personel medyczny i pracownicy ochrony. Doskonale
+wykwalifikowani instruktorzy wypełnią czas spędzany w aquaparku ciekawy-
+mi i wartościowymi zajęciami z zakresu aqua aerobiku oraz nauki pływania.
+Program tych zajęć, prowadzonych w różnych grupach wiekowych, został spe-
+cjalnie dostosowany do profilu uczestników.
+Bardzo ważnym elementem aquaparku jest zaplecze, które stanowią czy-
+ste i przestronne szatnie z indywidualnymi szafkami zamykanymi na zamki
+magnetyczne oraz nowoczesne natryski oraz suszarki.

@@ -1,0 +1,5 @@
+Na podstawie opisu wymagań dla systemu komputerowego wspomagającego pracę biblioteki, opracowanego na poprzednich zajęciach, określić aktorów i przypadki użycia. 
+Efekty analizy przedstawić w postaci diagramu (bądź diagramów) przypadków użycia. Uzupełnić kilka wybranych przypadków użycia o scenariusze (minimum 3). 
+Scenariusz w EA znajduje się na zakładce scenarios w properities konkretnego przypadku użycia.
+W tym ćwiczeniu scenariusze mogą być proste, tzn. bez rozwidleń ścieżki wykonania, bądź wyjątków. 
+Będą one uzupełniane w czasie kolejnego ćwiczenia. 

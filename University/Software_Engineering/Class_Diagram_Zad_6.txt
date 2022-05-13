@@ -1,0 +1,14 @@
+Utworzyć dwa diagramy klas: Budynki  i Zamówienia z podanych poniżej dwu zestawów pojęć:
+
+Zestaw 1 - Budynki
+Okno, DomJednorodzinny, InstalacjaCO, OpłataZaWynajem, HalaFabryczna, Garaż, Budynek, Drzwi, BlokMieszkalny, Instalacja, DomWielorodzinny, Szyba, InstalacjaElektryczna, Kamienica, Wynajmujący
+
+Zestaw 2 - Zamówienia
+Klient, Detal, Zamówienie, KartaKredytowa, OsobaFizyczna, Gotówka, PozycjaZamówienia, PodmiotGospodarczy, FormaZapłaty, RodzajSprzedaży, Czek, Przedmiot, Hurt
+
+
+Klasy powinny być połączone odpowiednimi relacjami (asocjacja, agregacja, kompozycja, generalizacja). 
+Każde pojęcie (słowo) z powyższych zestawów należy traktować jako nazwę klasy. 
+W tym ćwiczeniu nie ma jeszcze potrzeby uzupełniania klas o atrybuty i operacje.
+
+Rozwiązaniem tego zadania powinien być plik projektu programu EA (*.eap), zawierający dwa diagramy klas: Budynki oraz Zamówienia.

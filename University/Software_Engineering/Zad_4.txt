@@ -1,0 +1,4 @@
+Proszę dla minimum trzech przypadków użycia systemu bibliotecznego z zadania 3.1 (najlepiej dla tych ze scenariuszami) zbudować diagramy czynności.
+
+W celu wykonania tego ćwiczenia należy wykorzystać swój projekt z poprzednich ćwiczeń i dodać diagramy czynności (Activity diagram) w sposób podobny do rysunku 
+(uwaga! diagram na rysunku nie jest pełny, brak m.in. węzła końcowego; występujące na nim elementy to: węzeł początkowy - Initial, czynność - Activity, partycje - Partition):
