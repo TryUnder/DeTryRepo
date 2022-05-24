@@ -1,0 +1,1 @@
+if [ -r $1 ]; then chmod g+w $1; else echo "Podaj prawidlowa nazwe pliku"; fi

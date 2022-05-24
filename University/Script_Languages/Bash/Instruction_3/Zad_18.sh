@@ -1,0 +1,1 @@
+cat $HOME/.bash_history | grep "cat"

