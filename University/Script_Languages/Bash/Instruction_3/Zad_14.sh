@@ -1,3 +1,11 @@
+# 14. Znajdź błędy w skrypcie:
+# if [-d plik ]; then
+# mv plik plik2
+# elif [ -f plik3 ] then
+# mw plik3 plik4
+# fi
+# Opisz działanie skryptu.
+
 if [ -d $1 ]; 
 then
     mv $1 $2;
