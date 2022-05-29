@@ -46,7 +46,7 @@ if [ $? == 0 ]; then
 						Zapis)	     chmod o+w $1 ;;
 						Odczyt)	     chmod o+r $1 ;;
 						Wykonywanie) chmod o+x $1 ;;
-				Odbierz) case $menuitem3 in
+				Odbierz) case $menuitem2 in
 					Autor) case $menuitem3 in
 						Zapis)	     chmod u-w $1 ;;
 						Odczyt)      chmod u-r $1 ;;
