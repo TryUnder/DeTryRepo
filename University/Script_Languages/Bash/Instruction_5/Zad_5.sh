@@ -59,9 +59,14 @@ if [ $? == 0 ]; then
 						Zapis)	     chmod o-w $1 ;;
 						Odczyt)      chmod o-r $1 ;;
 						Wykonywanie) chmod o-x $1 ;;
-	
+						esac
+					esac
+			esac
+		fi
 		rm $HOME/input3
+	fi
 	rm $HOME/input2
+fi
 rm $HOME/input1
 	
 
