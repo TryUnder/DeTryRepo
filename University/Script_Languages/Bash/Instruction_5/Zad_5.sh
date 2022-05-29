@@ -1,3 +1,6 @@
+# 5. Stwórz skrypt umozliwiajacy dodawanie i odejmowanie dowolnych uprawnien z
+# plików za pomoca menu (uzyj polecenia dialog).
+
 # nie dziala tak jak bym tego oczekiwał
 
 dialog --title "Program do edycji uprawnien dla plikow #1" \
