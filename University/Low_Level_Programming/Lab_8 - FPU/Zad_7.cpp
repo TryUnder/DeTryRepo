@@ -43,7 +43,6 @@ int main() {
 		*(x + i) = i + 1;
 		*(z + i) = i + 10;
 	}
-	std::cout << sizeof(double) << std::endl;
 	std::cout << VectorMultiplying(n, x, z) << std::endl;
 	FreeMemory(x, z);
 }
