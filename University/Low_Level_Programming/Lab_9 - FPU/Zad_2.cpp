@@ -13,8 +13,8 @@ void Func(size_t k, double* x, double* y, double* a,
 		push esi;
 		push edi;
 
-		mov esi, dword ptr x;
-		mov edi, dword ptr y;
+		mov esi, x;
+		mov edi, y;
 		mov ebx, a;
 		mov ecx, k;
 
