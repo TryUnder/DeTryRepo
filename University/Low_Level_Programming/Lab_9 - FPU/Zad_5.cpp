@@ -1,6 +1,6 @@
 /*
 Zadanie 
-Oblicz y = 4 * sin(^(3)a * pi/180) - 2 * cos(b*pi/180)^2
+Oblicz y = log.2.((1 + a / (b+1))^2) + log.2.((1 + b / (a+1)))
 */
 
 #include <iostream>
