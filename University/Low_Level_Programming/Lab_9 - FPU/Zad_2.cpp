@@ -59,18 +59,18 @@ void Func(size_t k, double* x, double* y, double* a,
 
 int main() {
 	size_t k = 5;
-	double* x = new double[k];
-	double* y = new double[k];
+	auto* x = new double[k];
+	auto* y = new double[k];
 
-	double min_x = 1.0l;
-	double max_x = 10.0l;
+	auto min_x = 1.0l;
+	auto max_x = 10.0l;
 
-	double b = 2.5l;
-	double p1 = 3.5l;
-	double p2 = 4.5l;
-	double buf = 180.0l;
+	auto b = 2.5l;
+	auto p1 = 3.5l;
+	auto p2 = 4.5l;
+	auto buf = 180.0l;
 	
-	double* a = new double{ 5.5 };
+	auto * a = new double{ 5.5 };
 	Func(k, x, y, a, min_x, max_x, b, p1, p2, buf);
 
 	for (auto i = 0; i < k; ++i) {
