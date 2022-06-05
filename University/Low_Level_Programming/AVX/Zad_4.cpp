@@ -19,7 +19,7 @@ void VAddPackedInt64(const int __size, __int64* x, __int64* y, __int64* suma) {
 		vmovdqu ymm0, ymmword ptr [esi + 8 * ecx - 64];
 		vmovdqu ymm1, ymmword ptr [edi + 8 * ecx - 64];
 
-		vpaddd ymm2, ymm1, ymm0;
+		vpaddq ymm2, ymm1, ymm0;
 
 		vmovdqu ymmword ptr [ebx + 8 * ecx - 64], ymm2;
 		sub ecx, 4;
@@ -44,7 +44,7 @@ void VSubPackedInt64(const int __size, __int64* x, __int64* y, __int64* roznica)
 		vmovdqu ymm0, ymmword ptr [esi + 8 * ecx - 64];
 		vmovdqu ymm1, ymmword ptr [edi + 8 * ecx - 64];
 
-		vsubpd ymm2, ymm1, ymm0;
+		vpsubq ymm2, ymm1, ymm0;
 
 		vmovdqu ymmword ptr[ebx + 8 * ecx - 64], ymm2;
 
@@ -70,7 +70,7 @@ void VMulPackedInt64(const int __size, __int64* x, __int64* y, __int64* iloczyn)
 		vmovdqu ymm0, ymmword ptr [esi + 8 * ecx - 64];
 		vmovdqu ymm1, ymmword ptr [edi + 8 * ecx - 64];
 
-		vpmulld ymm2, ymm1, ymm0; //vpmulq nie dziala
+		vpmuldq ymm2, ymm1, ymm0;
 
 		vmovdqu ymmword ptr [ebx + 8 * ecx - 64], ymm2;
 		sub ecx, 4;
