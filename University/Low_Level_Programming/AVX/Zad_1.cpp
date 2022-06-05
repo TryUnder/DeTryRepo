@@ -13,7 +13,7 @@ void AddInt32Vectors(int __size, __int32* packed_int_1, __int32* packed_int_2, _
 		mov edi, packed_int_2;
 		mov ebx, packed_int_3;
 
-		vmovdqu xmm0, xmmword ptr [esi];
+		vmovdqu xmm0, xmmword ptr [esi]; // vector move doubleword / quadword unaligned
 		vmovdqu xmm1, xmmword ptr [edi];
 		vpaddd xmm2, xmm1, xmm0;
 		vmovdqu xmmword ptr [ebx], xmm2;
