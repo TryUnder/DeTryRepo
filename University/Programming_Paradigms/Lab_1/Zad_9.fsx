@@ -1,7 +1,7 @@
 // Zadanie 1.9 Napisz funkcję, która rekurencyjnie sprawdza, czy dana liczba jest liczbą pierwszą
 open System;
 
-let number : int = 11
+let number : int = 6
 let iterator : int = number;
 
 let rec _is_prime number _iterator : bool =

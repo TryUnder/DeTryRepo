@@ -18,7 +18,7 @@ void VSubPackedInt32(const int __size, __int32* packed_int_1, __int32* packed_in
 		vmovdqu ymm0, ymmword ptr [esi + 4 * ecx - 32];
 		vmovdqu ymm1, ymmword ptr [edi + 4 * ecx - 32];
 
-		vsubpd ymm2, ymm1, ymm0;
+		vpsubd ymm2, ymm1, ymm0; 
 
 		vmovdqu ymmword ptr [ebx + 4 * ecx - 32], ymm2;
 		sub ecx, 8
