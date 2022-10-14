@@ -32,15 +32,41 @@ def reverse_array(array):
     print("Before reverse:",array)
     print("After reverse:",arr)
     
+def calculate_pairs(array):
+    Acounter = 0
+    Tcounter = 0
+    Ccounter = 0
+    Gcounter = 0
+    
+    for i in range(0, len(array), 1):
+        if array[i] == 'A':
+            Acounter = Acounter + 1
+        elif array[i] == 'T':
+            Tcounter = Tcounter + 1
+        elif array[i] == 'C':
+            Counter = Ccounter + 1
+        elif array[i] == 'G':
+            Gcounter = Gcounter + 1
+    print(Acounter,Tcounter,Ccounter,Gcounter)
+    
 def calculate_GG_pairs(array):
     counter = 0
     for i in range(0,len(array) - 1, 1):
-        if array[i] == 'G' and array[i+1] == 'G':
-            counter+1
+        if ((array[i] == 'G') and (array[i+1] == 'G')):
+            counter=counter+1
     print("GG pairs:",counter)
+    
+def calculate_ATA_pairs(array):
+    counter = 0
+    for i in range(0, len(array) - 2, 1):
+        if ((array[i] == 'A') and (array[i+1] == 'T') and (array[i+2] == 'A')):
+            counter=counter+1
+    print("ATA pairs:",counter)
 
 calculate_length(array)
 validate_string(array)
 generate_complementary_array(array)
 reverse_array(array)
+calculate_pairs(array)
 calculate_GG_pairs(array)
+calculate_ATA_pairs(array)
