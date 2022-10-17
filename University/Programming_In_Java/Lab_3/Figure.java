@@ -1,3 +1,5 @@
+package University.Programming_In_Java.Lab_3;
+
 public class Figure {
 	private String color;
 	private double surface_area;
