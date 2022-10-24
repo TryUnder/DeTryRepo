@@ -10,25 +10,36 @@ public class MainProgram {
 		double ave_n_minutes;
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Czy chcesz wprowadziæ nowego u¿ytkownika? Yes/No");
+		System.out.println("\nCzy chcesz wprowadzic nowego uzytkownika?: Yes/No");
 		while(scanner.nextLine().equals("Yes")) {
 			
 			System.out.println("Podaj imie: ");
 			name = scanner.nextLine();
-			System.out.println("Podaj nazwe zespo³u: ");
-			//for(String team : teams) {
-				
-			//}
-			team_name = scanner.nextLine();
-			System.out.println("Podaj wiek: ");
-			try {
-				age = Integer.parseInt(scanner.next());
-			}catch(NumberFormatException e) {
-				System.out.println("Proszê podaæ ponownie wiek");
-				age = Integer.parseInt(scanner.next());
+			System.out.println("Podaj nazwe zespolu: ");
+				team_name = scanner.nextLine();
+				try {
+					for(var i=0; i<teams.size(); ++i) {
+						if (team_name.equals(teams.get(i))){
+							break;
+						} else if (i==teams.size()-1) {
+							throw new IllegalArgumentException("Wprowadzono zawodnika z nieistniejacym klubem. Koncze dzialanie");
+						}
+					}	
+			}catch(IllegalArgumentException e){
+				System.out.println(e); 
+				return;
 			}
-			System.out.println("Podaj liczbê goli");
-			goals = scanner.nextInt();
+
+			try {
+				System.out.println("Podaj wiek: ");
+				age = Integer.parseInt(scanner.next());
+				System.out.println("Podaj liczba goli");
+				goals = Integer.parseInt(scanner.next());
+			}catch(NumberFormatException e) {
+				System.out.println("Podano nieprawidlowy format liczbowy");
+				break;
+			}
+
 			System.out.println("Podaj ave n minutes");
 			ave_n_minutes = scanner.nextDouble();
 			
@@ -44,20 +55,20 @@ public class MainProgram {
 	public static void main(String[] args) {
 	
 		ArrayList<String> teams = new ArrayList<String>();
-		teams.add("Warta Czêstochowa");
+		teams.add("Warta Czestochowa");
 		teams.add("Gryf Poznan");
-		teams.add("Pilica Piotrków Trybunalski");
-		teams.add("Wis³a Katowice");
-		teams.add("San Kraków");
+		teams.add("Pilica Piotrkow Trybunalski");
+		teams.add("Wisla Katowice");
+		teams.add("San Krakow");
 		
-		System.out.println("Lista klubów przed sortowaniem: \n");
+		System.out.println("\nLista klubow przed sortowaniem: \n");
 		teams.forEach(System.out::println);
 		
-		System.out.println("Lista klubów po sortowaniu: \n");
+		System.out.println("\nLista klubow po sortowaniu: \n");
 		Collections.sort(teams);
 		teams.forEach(System.out::println);
 		
 		ArrayList<Player> arrayListOfPlayers = new ArrayList<Player>();
-		addUser(arrayListOfPlayers);
+		addUser(arrayListOfPlayers, teams);
 	}
 }
