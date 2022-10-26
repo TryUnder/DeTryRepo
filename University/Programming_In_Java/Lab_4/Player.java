@@ -8,6 +8,10 @@ public class Player {
 	private double ave_n_minutes;
 	
 	public Player(String Name, String Team_name, int Age, int m_Goals, double Ave_n_minutes) {
+		if (Name.isBlank()) throw new IllegalArgumentException("Bad name");
+		if (Age < 16 || Age > 60) throw new ArithmeticException("Bad age");
+		if (m_Goals < 0) throw new IllegalArgumentException("Bad number of goals");
+		if (Ave_n_minutes < 0 || Ave_n_minutes > 90) throw new IllegalArgumentException("Bad spending time on field");
 		name = Name;
 		team_name = Team_name;
 		age = Age;
@@ -15,8 +19,8 @@ public class Player {
 		ave_n_minutes = Ave_n_minutes;
 	}
 	
-	public static void toString(String data) {
-		System.out.println(data);
+	public String toString() {
+		return "Name: " + name + " team name: " + team_name + " age: " + age + " m_goals: " + m_goals + " ave n minutes: " + ave_n_minutes;
 	}
 	
 }

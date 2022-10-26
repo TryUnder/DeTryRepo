@@ -32,22 +32,23 @@ public class MainProgram {
 
 			try {
 				System.out.println("Podaj wiek: ");
-				age = Integer.parseInt(scanner.next());
+				age = Integer.parseInt(scanner.nextLine());
 				System.out.println("Podaj liczba goli");
-				goals = Integer.parseInt(scanner.next());
+				goals = Integer.parseInt(scanner.nextLine());
 			}catch(NumberFormatException e) {
 				System.out.println("Podano nieprawidlowy format liczbowy");
 				break;
 			}
 
 			System.out.println("Podaj ave n minutes");
-			ave_n_minutes = scanner.nextDouble();
+			ave_n_minutes = Double.parseDouble(scanner.nextLine());
 			
 			try {
 				arrayListOfPlayers.add(new Player(name, team_name, age, goals, ave_n_minutes));
 			} catch (IllegalArgumentException e) {
 				System.out.println(e);
 			}
+			System.out.println("\nCzy chcesz wprowadzic nowego uzytkownika?: Yes/No");
 		}
 		System.out.println("Koniec");
 	}
@@ -70,5 +71,10 @@ public class MainProgram {
 		
 		ArrayList<Player> arrayListOfPlayers = new ArrayList<Player>();
 		addUser(arrayListOfPlayers, teams);
+
+		System.out.println("Wprowadzeni uzytkownicy: ");
+		for(Player p: arrayListOfPlayers){
+			System.out.println(p);
+		}
 	}
 }
