@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kalkulator</title>
+        <script>
+ 
+            function sum() {
+                let l1 = document.getElementById("liczba1");
+                let l2 = document.getElementById("liczba2");
+                let l3 = document.getElementById("wynik");
+                l3.innerHTML = parseFloat(l1.value) + parseFloat(l2.value);
+            }
+ 
+            function minus() {
+                let l1 = document.getElementById("liczba1");
+                let l2 = document.getElementById("liczba2");
+                let l3 = document.getElementById("wynik");
+                l3.innerHTML = parseFloat(l1.value) - parseFloat(l2.value);
+            }
+ 
+            function multiply() {
+                let l1 = document.getElementById("liczba1");
+                let l2 = document.getElementById("liczba2");
+                let l3 = document.getElementById("wynik");
+                l3.innerHTML = parseFloat(l1.value) * parseFloat(l2.value);
+            }
+ 
+            function divide() {
+                let l1 = document.getElementById("liczba1");
+                let l2 = document.getElementById("liczba2");
+                let l3 = document.getElementById("wynik");
+                l3.innerHTML = parseFloat(l1.value) / parseFloat(l2.value);
+            }
+ 
+        </script>
+    </head>
+ 
+    <body>
+        <input id="liczba1">  <input id="liczba2"><br>
+        <button onclick="sum();">+</button>
+        <button onclick="minus();">-</button>
+        <button onclick="multiply();">*</button>
+        <button onclick="divide();">/</button><br>
+        <p id="wynik"></p>
+    </body>
+</html>

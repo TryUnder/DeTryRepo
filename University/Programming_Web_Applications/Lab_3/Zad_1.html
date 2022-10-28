@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+ 
+    <body>
+        <p id="suma"></p>
+        <p id="max"></p>
+        <p id="min"></p>
+ 
+        <script>
+            function suma(tab){
+                let sum_lok=0;
+                for (let i=0; i < tab.length; ++i){
+                    sum_lok += tab[i];
+                }
+                return sum_lok;
+            }
+ 
+            function max(tab){
+                let max = tab[0];
+                for (let i=0; i<tab.length; ++i){
+                    if (tab[i] > max)
+                        max = tab[i];
+                }
+                return max;
+            }
+ 
+            function min(tab){
+                let min = tab[0];
+                for(let i=0; i<tab.length; ++i){
+                    if (tab[i] < min)
+                        min = tab[i];
+                }
+                return min;
+            }
+            
+            let elementA = document.getElementById("suma");
+            let tab = [5, 7, 21, 11, 9, 19, 13];
+            let Sum = suma(tab);
+            elementA.innerHTML = "Suma wartości elementów tablicy wynosi: " + Sum;
+ 
+            let elementB = document.getElementById("max");
+            let Max = max(tab);
+            elementB.innerHTML = "Wartość maksymalna elementów tablicy wynosi: " + Max;
+ 
+            let elementC = document.getElementById("min");
+            let Min = min(tab);
+            elementC.innerHTML = "Wartość minimalna elementów tablicy wynosi: " + Min;
+        </script>
+    </body>
+</html>
