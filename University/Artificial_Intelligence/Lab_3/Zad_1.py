@@ -13,7 +13,7 @@ class Perceptron:
         self.error = []
         self.givenValue = []
         
-    def ActivationFunctionAndCorrectWeights(self):
+    def ActivationFunction(self):
         print(self.xWeight[1], self.xWeight[2])
         for i in range(len(self.xVector)):
             self.sigma.append(self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * (-1.0))
@@ -22,13 +22,19 @@ class Perceptron:
             else:
                 self.givenValue.append(0)
 
-            #tutaj chcialem zrobic osobna funkcje z korekcja wag
             self.error.append(self.expectedValue[i] - self.givenValue[i])
             #self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[i] * (-1)
             #self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[i] * self.xVector[i][0]
             #self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[i] * self.xVector[i][1]
 
+    def CorrectWeights(self):
+        for i in range() 
+
     def PlotFigure(self):
+        xGenerator = np.arange(-10,10)
+        line = -(self.xWeight[1] / self.xWeight[2]) * xGenerator + (self.xWeight[0] / self.xWeight[2])
+        plt.plot(xGenerator, line, 'r-')
+
         for i in range(len(self.xVector)):
             if self.expectedValue[i] == 1:
                 plt.plot(self.xVector[i,0], self.xVector[i,1],"bo")
@@ -51,7 +57,9 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.random(1), np.random.random(1), np.random.random(1)], -1, 40, 0.1)
+                         [np.random.uniform(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 40, 0.1)
  
-perceptron.ActivationFunctionAndCorrectWeights()
+perceptron.ActivationFunction()
 perceptron.TestFunction()
+print("Wykres przed uczeniem: ")
+perceptron.PlotFigure()
