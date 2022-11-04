@@ -23,12 +23,14 @@ class Perceptron:
                 self.givenValue.append(0)
 
             self.error.append(self.expectedValue[i] - self.givenValue[i])
-            #self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[i] * (-1)
-            #self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[i] * self.xVector[i][0]
-            #self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[i] * self.xVector[i][1]
 
     def CorrectWeights(self):
-        for i in range() 
+        for i in range(self.iters):
+            self.PlotFigure()
+            for j in range(len(self.xVector)):
+                self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * (-1)
+                self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[j] * self.xVector[j][0]
+                self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[j] * self.xVector[j][1]
 
     def PlotFigure(self):
         xGenerator = np.arange(-10,10)
@@ -57,9 +59,8 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.uniform(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 40, 0.1)
+                         [np.random.uniform(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 10, 0.1)
  
 perceptron.ActivationFunction()
 perceptron.TestFunction()
-print("Wykres przed uczeniem: ")
-perceptron.PlotFigure()
+perceptron.CorrectWeights()
