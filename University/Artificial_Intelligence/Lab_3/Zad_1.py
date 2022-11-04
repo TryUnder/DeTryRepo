@@ -14,8 +14,9 @@ class Perceptron:
         self.givenValue = []
         
     def ActivationFunctionAndCorrectWeights(self):
+        print(self.xWeight[1], self.xWeight[2])
         for i in range(len(self.xVector)):
-            self.sigma.append(self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * self.xWeight[1])
+            self.sigma.append(self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * (-1.0))
             if self.sigma[i] >= 0:
                 self.givenValue.append(1)
             else:
@@ -23,9 +24,9 @@ class Perceptron:
 
             #tutaj chcialem zrobic osobna funkcje z korekcja wag
             self.error.append(self.expectedValue[i] - self.givenValue[i])
-            self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[i] * (-1)
-            self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[i] * self.xVector[i][0]
-            self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[i] * self.xVector[i][1]
+            #self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[i] * (-1)
+            #self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[i] * self.xVector[i][0]
+            #self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[i] * self.xVector[i][1]
 
     def PlotFigure(self):
         for i in range(len(self.xVector)):
@@ -37,7 +38,7 @@ class Perceptron:
 
     def TestFunction(self):
         for i in range (len(self.xVector)):
-            print("x1: ", self.xVector[i][0], " x2: ", self.xVector[i][1], " oczekiwany y: ", self.expectedValue[i], " dany y: ", self.givenValue[i], " error: ", self.error[i])
+            print("x1: ", self.xVector[i][0], " x2: ", self.xVector[i][1], " oczekiwany y: ", self.expectedValue[i], " obliczony: ", self.givenValue[i], " error: ", self.error[i])
 
 
             
@@ -50,7 +51,7 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [-1,np.random.random(1),np.random.random(1)], -1, 40, 0.1)
+                         [np.random.random(1), np.random.random(1), np.random.random(1)], -1, 40, 0.1)
  
 perceptron.ActivationFunctionAndCorrectWeights()
 perceptron.TestFunction()
