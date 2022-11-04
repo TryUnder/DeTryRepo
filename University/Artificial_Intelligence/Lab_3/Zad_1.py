@@ -28,6 +28,7 @@ class Perceptron:
         for i in range(self.iters):
             self.PlotFigure()
             for j in range(len(self.xVector)):
+                self.error.append(self.expectedValue[j] - self.givenValue[j])
                 self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * (-1)
                 self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[j] * self.xVector[j][0]
                 self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[j] * self.xVector[j][1]
