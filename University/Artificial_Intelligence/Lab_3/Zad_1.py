@@ -14,9 +14,8 @@ class Perceptron:
         self.givenValue = []
         
     def ActivationFunction(self):
-        print(self.xWeight[1], self.xWeight[2])
         for i in range(len(self.xVector)):
-            self.sigma.insert(i,self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * (-1.0))
+            self.sigma.insert(i,self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * self.thresholdValue)
             if self.sigma[i] >= 0:
                 self.givenValue.insert(i,1)
             else:
@@ -25,15 +24,28 @@ class Perceptron:
             self.error.insert(i,self.expectedValue[i] - self.givenValue[i])
 
     def CorrectWeights(self):
+        counter = 0
         for i in range(self.iters):
-            self.PlotFigure()
-            self.TestFunction()
+            print("Iteracja: ", i+1)
             self.ActivationFunction()
+            self.TestFunction()
+            self.PlotFigure()
             for j in range(len(self.xVector)):
                 self.error.insert(j,self.expectedValue[j] - self.givenValue[j])
-                self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * (-1)
+                self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * self.thresholdValue
                 self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[j] * self.xVector[j][0]
                 self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[j] * self.xVector[j][1]
+            for k in self.error:
+                if self.error[k] == 0:
+                    counter += 1
+                if counter == len(self.error):
+                    print("Koncze nauke. Calosc zajela: ", i+1, " iteracji")
+                    self.ActivationFunction()
+                    self.TestFunction()
+                    self.PlotFigure()
+                    return
+ 
+                   
 
     def PlotFigure(self):
         xGenerator = np.arange(-10,10)
@@ -56,13 +68,13 @@ class Perceptron:
             
 perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[1,5],[2,4],[4,4],
                          [4,3],[4,2],[4,1],[8,7],[6,1],[6,3],[6,5],[3,6],[5,6],[-5,7],
-                         [-7,-1],[-6,-2],[-4,-2],[-2,-2],[-7,-4],[-6,-4],[-4,-4],[-2,-4],[-6,-7],[-4,-7],
+                         [-7,-1],[-6,-2],[-4,2],[-2,-2],[-7,-4],[-6,-4],[-4,-4],[-2,-4],[-6,-7],[-4,-7],
                          [1,-7],[1,-5],[1,-2],[3,-7],[3,-4],[5,-6],[6,-5],[7,-5],[6,-7],[8,-7]]),
                          np.array([1,1,1,1,1,1,1,1,1,1,
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.uniform(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 10, 0.1)
- 
-perceptron.ActivationFunction()
+                         [np.random.random(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 100, 0.1)
+
 perceptron.CorrectWeights()
+value = input("Please enter a string:\n")
