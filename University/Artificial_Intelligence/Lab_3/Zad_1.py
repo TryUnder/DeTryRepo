@@ -24,10 +24,10 @@ class Perceptron:
             #self.error.insert(i,self.expectedValue[i] - self.givenValue[i])
 
     def CorrectWeights(self):
-        counter = 0
         self.PlotFigure(parameter3 = "Prosta przed nauka")
         for i in range(self.iters):
             self.ActivationFunction()
+            counter = 0
             for j in range(len(self.xVector)):
                 self.error.insert(j,self.expectedValue[j] - self.givenValue[j])
                 self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * self.thresholdValue
@@ -47,6 +47,7 @@ class Perceptron:
         xGenerator = np.arange(-10,10)
         line = -(self.xWeight[1] / self.xWeight[2]) * xGenerator + (self.xWeight[0] / self.xWeight[2])
         plt.plot(xGenerator, line, 'r-', label = parameter3)
+        plt.legend()
         for i in range(len(self.xVector)):
             if self.expectedValue[i] == 0:
                 if self.xVector[i,1] > -(self.xWeight[1] / self.xWeight[2]) * self.xVector[i,0] + (self.xWeight[0] / self.xWeight[2]):
