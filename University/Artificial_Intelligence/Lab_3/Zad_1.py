@@ -21,42 +21,43 @@ class Perceptron:
             else:
                 self.givenValue.insert(i,0)
 
-            self.error.insert(i,self.expectedValue[i] - self.givenValue[i])
+            #self.error.insert(i,self.expectedValue[i] - self.givenValue[i])
 
     def CorrectWeights(self):
         counter = 0
+        self.PlotFigure(parameter3 = "Prosta przed nauka")
         for i in range(self.iters):
-            print("Iteracja: ", i+1)
             self.ActivationFunction()
-            self.TestFunction()
-            self.PlotFigure()
             for j in range(len(self.xVector)):
                 self.error.insert(j,self.expectedValue[j] - self.givenValue[j])
                 self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * self.thresholdValue
                 self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[j] * self.xVector[j][0]
                 self.xWeight[2] = self.xWeight[2] + self.learningRate * self.error[j] * self.xVector[j][1]
-            for k in self.error:
+            for k in range(len(self.error)):
                 if self.error[k] == 0:
                     counter += 1
                 if counter == len(self.error):
                     print("Koncze nauke. Calosc zajela: ", i+1, " iteracji")
                     self.ActivationFunction()
-                    self.TestFunction()
-                    self.PlotFigure()
+                    self.PlotFigure(parameter3 = "Prosta po procesie nauki")
                     return
  
-                   
 
-    def PlotFigure(self):
+    def PlotFigure(self, parameter3):
         xGenerator = np.arange(-10,10)
         line = -(self.xWeight[1] / self.xWeight[2]) * xGenerator + (self.xWeight[0] / self.xWeight[2])
-        plt.plot(xGenerator, line, 'r-')
-
+        plt.plot(xGenerator, line, 'r-', label = parameter3)
         for i in range(len(self.xVector)):
-            if self.expectedValue[i] == 1:
-                plt.plot(self.xVector[i,0], self.xVector[i,1],"bo")
+            if self.expectedValue[i] == 0:
+                if self.xVector[i,1] > -(self.xWeight[1] / self.xWeight[2]) * self.xVector[i,0] + (self.xWeight[0] / self.xWeight[2]):
+                    plt.plot(self.xVector[i,0], self.xVector[i,0], "ro")
+                else:
+                    plt.plot(self.xVector[i,0], self.xVector[i,1], "go")
             else:
-                plt.plot(self.xVector[i,0], self.xVector[i,1],"go")
+                if self.xVector[i,1] < -(self.xWeight[1] / self.xWeight[2]) * self.xVector[i,0] + (self.xWeight[0] / self.xWeight[2]):
+                    plt.plot(self.xVector[i,0], self.xVector[i,0], "ro")
+                else:
+                    plt.plot(self.xVector[i,0], self.xVector[i,1], "m*")
         plt.show()
 
     def TestFunction(self):
@@ -74,7 +75,6 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.random(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1, 100, 0.1)
+                         [np.random.random(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1.0, 100, 0.002)
 
 perceptron.CorrectWeights()
-value = input("Please enter a string:\n")
