@@ -20,7 +20,6 @@ class Perceptron:
                 self.givenValue.insert(i,1)
             else:
                 self.givenValue.insert(i,0)
-
             #self.error.insert(i,self.expectedValue[i] - self.givenValue[i])
 
     def CorrectWeights(self):
@@ -28,7 +27,7 @@ class Perceptron:
         for i in range(self.iters):
             self.ActivationFunction()
             counter = 0
-            for j in range(len(self.xVector)):
+            for j in range(0,len(self.xVector),1):
                 self.error.insert(j,self.expectedValue[j] - self.givenValue[j])
                 self.xWeight[0] = self.xWeight[0] + self.learningRate * self.error[j] * self.thresholdValue
                 self.xWeight[1] = self.xWeight[1] + self.learningRate * self.error[j] * self.xVector[j][0]
@@ -41,6 +40,9 @@ class Perceptron:
                     self.ActivationFunction()
                     self.PlotFigure(parameter3 = "Prosta po procesie nauki")
                     return
+            self.error.clear()
+            self.sigma.clear()
+            self.givenValue.clear()
  
 
     def PlotFigure(self, parameter3):
@@ -76,6 +78,6 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.random(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1.0, 100, 0.002)
+                         [np.random.random(1)-1, np.random.random(1)-1, np.random.random(1)-1], -1.0, 100, 0.02)
 
 perceptron.CorrectWeights()
