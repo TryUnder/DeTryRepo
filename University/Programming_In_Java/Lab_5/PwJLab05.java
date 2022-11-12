@@ -113,13 +113,13 @@ public class PwJLab05 {
     public static int checkId(ArrayList<Purchase> purchases, ArrayList<Customer> customers) {
         int counter = 0;
         for (int i = 0; i < purchases.size(); ++i) {
+            counter = 0;
             for (int j = 0; j < customers.size(); ++j) {
                 if (purchases.get(i).getId() != customers.get(j).getId()) {
                     counter++;
                 }
 
                 if (counter == customers.size() - 1) {
-                    counter = 0;
                     return purchases.get(i).getId();
                 }
             }
