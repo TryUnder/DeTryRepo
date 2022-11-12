@@ -60,7 +60,7 @@ public class PwJLab05 {
             counter += 1;
         }
 
-        System.err.println(counter);
+        //System.err.println(counter);
         inputFilePurchases.close();
         inputFilePurchases = openFilePartially(filePurchases);
         
@@ -99,7 +99,8 @@ public class PwJLab05 {
         for (int i = 0; i < counter-1; ++i) {
             purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
                                        inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
-            checkId(purchases, customers);
+            int zm = checkId(purchases, customers);
+            System.out.println(zm);
         }
 
         System.out.println("PURCHASES: ");
@@ -115,15 +116,15 @@ public class PwJLab05 {
             for (int j = 0; j < customers.size(); ++j) {
                 if (purchases.get(i).getId() == customers.get(j).getId()) {
                     //System.out.println("Id znalezione");
-                    //break;
+                    break;
                 } else {
                     if (j == customers.size() - 1) {
-                        System.out.println("Id: " + purchases.get(i).getId() + " nie zgadza sie z: " + customers.get(j).getId());
+                        return purchases.get(i).getId();
                     }
                 }
             }
         }
-        return 1;
+        return 100;
     }
 
     public static void main(String[] args) throws IOException {
