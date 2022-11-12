@@ -118,13 +118,12 @@ public class PwJLab05 {
                 if (purchases.get(i).getId() != customers.get(j).getId()) {
                     counter++;
                 }
-
-                if (counter == customers.size() - 1) {
-                    return purchases.get(i).getId();
-                }
+            }
+            if (counter == customers.size()) {
+                return purchases.get(i).getId();
             }
         }
-        return 100;
+        return 300;
     }
 
     public static void main(String[] args) throws IOException {
