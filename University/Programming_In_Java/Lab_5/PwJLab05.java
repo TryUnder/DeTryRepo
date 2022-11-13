@@ -61,6 +61,19 @@ public class PwJLab05 {
                 System.out.println("Total cost: " + totalSumInvoice[i]);
             }
         }
+        File file = new File("D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\invoice_generated.txt");
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter fileWriter = new FileWriter(file, true);
+                fileWriter.write(stringBuilder.toString());
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Wystapil problem z zapisem do pliku");
+            e.printStackTrace();
+        }
+
         JOptionPane.showMessageDialog(null, stringBuilder);
     }
 
@@ -127,7 +140,7 @@ public class PwJLab05 {
                 }
             }
         }catch(IOException e) {
-            System.out.println("Wystapil problem.");
+            System.out.println("Wystapil problem z zapisem do pliku.");
             e.printStackTrace();
         }
 
