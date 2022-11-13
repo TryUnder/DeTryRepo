@@ -173,12 +173,12 @@ public class PwJLab05 {
         String fileDirCustomers, fileDirPurchases, fileDirInvoices;
 
         do {
-            //fileDirCustomers = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o klientach (customers.txt)");
-            //fileDirPurchases = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o zakupach (purchases.txt)");
-            //fileDirInvoices = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o fakturach (invoices.txt)");
-            fileDirCustomers = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\customers.txt";
-            fileDirPurchases = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\purchases.txt";
-            fileDirInvoices = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\inovoices.txt";
+            fileDirCustomers = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o klientach (customers.txt)");
+            fileDirPurchases = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o zakupach (purchases.txt)");
+            fileDirInvoices = JOptionPane.showInputDialog("Wprowadz sciezke do pliku zawierajacego dane o fakturach (invoices.txt)");
+            //fileDirCustomers = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\customers.txt";
+            //fileDirPurchases = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\purchases.txt";
+            //fileDirInvoices = "D:\\P.R.I.V\\Uczelnia\\Semestr_V\\Programowanie_w_Javie\\PwJ_Lab05\\inovoices.txt";
 
             fileCustomers = new File(fileDirCustomers);
             filePurchases = new File(fileDirPurchases);
