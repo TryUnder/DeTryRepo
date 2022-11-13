@@ -38,26 +38,30 @@ public class PwJLab05 {
     public static void generateInvoice(ArrayList<Customer> customers, ArrayList<Purchase> purchases) {
         int[] numberOfTransactions = new int[customers.size()];
         double[] totalSumInvoice = new double[customers.size()];
+        String numOfTrans, totalSumInvoiceString;
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < customers.size(); ++i) {
-            System.out.print("Invoice.");
+            System.out.print("Invoice.\n");
             customers.get(i).PrintCustomerInfo();
             stringBuilder.append("Invoice.");
             stringBuilder.append(customers.get(i).PrintCustomerInfoForBuilder());
             for(int j = 0; j < purchases.size(); ++j) {  
                 if (purchases.get(j).getId() == i + 1) {
                     numberOfTransactions[i] += 1;
-                    System.out.println("Cena: " + purchases.get(j).getNumberOfItems() + " " + purchases.get(j).getPrice());
+                    //System.out.println("Cena: " + purchases.get(j).getNumberOfItems() + " " + purchases.get(j).getPrice());
                     totalSumInvoice[i] += (purchases.get(j).getNumberOfItems() * purchases.get(j).getPrice());
                 }
             }
+            numOfTrans = Integer.toString(numberOfTransactions[i]);
+            totalSumInvoiceString = Double.toString(totalSumInvoice[i]);
+            stringBuilder.append("Number of transactions: " + numOfTrans + "\n");
+            stringBuilder.append("Do zaplaty: " + totalSumInvoiceString + "\n");
             if (numberOfTransactions[i] != 0){
-                JOptionPane.showMessageDialog(null,"Number of transactions: " + numberOfTransactions[i]);
                 //System.out.println("Number of transactions: " + numberOfTransactions[i]);
                 System.out.println("Total cost: " + totalSumInvoice[i]);
             }
         }
-        System.out.println(stringBuilder);
+        JOptionPane.showMessageDialog(null, stringBuilder);
     }
 
     public static ArrayList<Customer> AddingAndParsingForCustomers(File fileCustomers) {

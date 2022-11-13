@@ -20,4 +20,8 @@ public class Customer {
     public int getId() {
         return id;
     }
+
+    public String PrintCustomerInfoForBuilder() { 
+        return new String("\nCustomer id: " + id + " " + name + " " + surname + address + "\n");
+    }
 }
