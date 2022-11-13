@@ -44,6 +44,7 @@ public class PwJLab05 {
             for(int j = 0; j < purchases.size(); ++j) {  
                 if (purchases.get(j).getId() == i + 1) {
                     numberOfTransactions[i] += 1;
+                    System.out.println("Cena: " + purchases.get(j).getNumberOfItems() + " " + purchases.get(j).getPrice());
                     totalSumInvoice[i] += (purchases.get(j).getNumberOfItems() * purchases.get(j).getPrice());
                 }
             }
