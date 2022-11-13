@@ -97,11 +97,11 @@ public class PwJLab05 {
         }
 
         for (int i = 0; i < counter-1; ++i) {
-            purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
-                                       inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
-            int zm = checkId(purchases, customers);
-            System.out.println(zm);
+            ArrayList<Integer> badInts = checkId(purchases, customers, inputFilePurchases);
+            //System.out.println(zm);
         }
+
+        System.out.println(Arrays.toString(badInts));
 
         System.out.println("PURCHASES: ");
         for (int i = 0; i < purchases.size(); ++i) {
@@ -110,9 +110,12 @@ public class PwJLab05 {
         inputFilePurchases.close();
     }
 
-    public static int checkId(ArrayList<Purchase> purchases, ArrayList<Customer> customers) {
+    public static ArrayList<Integer> checkId(ArrayList<Purchase> purchases, ArrayList<Customer> customers, Scanner inputFilePurchases) {
         int counter = 0;
+        ArrayList<Integer> badInts = new ArrayList<>();
         for (int i = 0; i < purchases.size(); ++i) {
+            purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
+                                       inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
             counter = 0;
             for (int j = 0; j < customers.size(); ++j) {
                 if (purchases.get(i).getId() != customers.get(j).getId()) {
@@ -120,10 +123,10 @@ public class PwJLab05 {
                 }
             }
             if (counter == customers.size()) {
-                return purchases.get(i).getId();
+                badInts.add(purchases.get(i).getId());
             }
         }
-        return 300;
+        return badInts;
     }
 
     public static void main(String[] args) throws IOException {
