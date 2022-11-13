@@ -42,6 +42,8 @@ public class PwJLab05 {
         for(int i = 0; i < customers.size(); ++i) {
             System.out.print("Invoice.");
             customers.get(i).PrintCustomerInfo();
+            stringBuilder.append("Invoice.");
+            stringBuilder.append(customers.get(i).PrintCustomerInfoForBuilder());
             for(int j = 0; j < purchases.size(); ++j) {  
                 if (purchases.get(j).getId() == i + 1) {
                     numberOfTransactions[i] += 1;
@@ -55,6 +57,7 @@ public class PwJLab05 {
                 System.out.println("Total cost: " + totalSumInvoice[i]);
             }
         }
+        System.out.println(stringBuilder);
     }
 
     public static ArrayList<Customer> AddingAndParsingForCustomers(File fileCustomers) {
