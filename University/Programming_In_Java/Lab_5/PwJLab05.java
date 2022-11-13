@@ -52,10 +52,6 @@ public class PwJLab05 {
                 System.out.println("Total cost: " + totalSumInvoice[i]);
             }
         }
-
-        for (int i = 0; i < customers.size(); ++i) {
-            System.out.println(numberOfTransactions[i]);
-        }
     }
 
     public static ArrayList<Customer> AddingAndParsingForCustomers(File fileCustomers) {
