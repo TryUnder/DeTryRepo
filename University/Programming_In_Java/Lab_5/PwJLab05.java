@@ -38,6 +38,7 @@ public class PwJLab05 {
     public static void generateInvoice(ArrayList<Customer> customers, ArrayList<Purchase> purchases) {
         int[] numberOfTransactions = new int[customers.size()];
         double[] totalSumInvoice = new double[customers.size()];
+        StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < customers.size(); ++i) {
             System.out.print("Invoice.");
             customers.get(i).PrintCustomerInfo();
@@ -49,7 +50,8 @@ public class PwJLab05 {
                 }
             }
             if (numberOfTransactions[i] != 0){
-                System.out.println("Number of transactions: " + numberOfTransactions[i]);
+                JOptionPane.showMessageDialog(null,"Number of transactions: " + numberOfTransactions[i]);
+                //System.out.println("Number of transactions: " + numberOfTransactions[i]);
                 System.out.println("Total cost: " + totalSumInvoice[i]);
             }
         }
@@ -131,7 +133,7 @@ public class PwJLab05 {
             inputFilePurchases = openFilePartially(file);
         }
 
-        for (int i = 0; i < counter - 1; ++i) {
+        for (int i = 0; i < counter; ++i) {
             purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
                                        inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
         }
