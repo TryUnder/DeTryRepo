@@ -26,7 +26,8 @@ public class PwJLab05 {
                     break;
                 } else {
                     if (j == customers.size() - 1) {
-                        System.out.println("Bledne id: " + purchases.get(i).getId());
+                        System.out.println("Bledne id: " + purchases.get(i).getId() + " usuwam rekord.");
+                        purchases.remove(purchases.get(i));
                     }
                 }
             }
