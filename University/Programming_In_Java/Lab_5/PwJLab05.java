@@ -36,15 +36,25 @@ public class PwJLab05 {
     }
 
     public static void generateInvoice(ArrayList<Customer> customers, ArrayList<Purchase> purchases) {
+        int[] numberOfTransactions = new int[customers.size()];
+        double[] totalSumInvoice = new double[customers.size()];
         for(int i = 0; i < customers.size(); ++i) {
-            ArrayList<Invoice> invoices = new ArrayList<Invoice>(customers.size());
-            invoices.add(new Invoice(customers.get(i), null));
-            for(int j = 0; j < purchases.size(); ++j) {
-                if (purchases.get(j).getId() == i+1) {
-                    invoices.get(i).getInvoice(i)
+            System.out.print("Invoice.");
+            customers.get(i).PrintCustomerInfo();
+            for(int j = 0; j < purchases.size(); ++j) {  
+                if (purchases.get(j).getId() == i + 1) {
+                    numberOfTransactions[i] += 1;
+                    totalSumInvoice[i] += (purchases.get(j).getNumberOfItems() * purchases.get(j).getPrice());
                 }
-                    
             }
+            if (numberOfTransactions[i] != 0){
+                System.out.println("Number of transactions: " + numberOfTransactions[i]);
+                System.out.println("Total cost: " + totalSumInvoice[i]);
+            }
+        }
+
+        for (int i = 0; i < customers.size(); ++i) {
+            System.out.println(numberOfTransactions[i]);
         }
     }
 

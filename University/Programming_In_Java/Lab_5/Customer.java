@@ -14,7 +14,7 @@ public class Customer {
     }
 
     public void PrintCustomerInfo() {
-        System.out.println("Customer: " + id + " " + name + " " + surname + address);
+        System.out.println("Customer id: " + id + "\n " + name + " " + surname + address);
     }
 
     public int getId() {

@@ -21,4 +21,12 @@ public class Purchase {
     public int getId() {
         return id;
     }
+
+    public int getNumberOfItems() {
+        return numberOfItems;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

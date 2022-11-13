@@ -9,7 +9,7 @@ public class Invoice {
         this.purchase = purchase;
     }
 
-    public ArrayList<Purchase> setPurchase(Purchase Purchasex) {
-        purchase = Purchasex;
-    }
+    //public ArrayList<Purchase> setPurchase(Purchase Purchasex) {
+      //  purchase = Purchasex;
+    //}
 }
