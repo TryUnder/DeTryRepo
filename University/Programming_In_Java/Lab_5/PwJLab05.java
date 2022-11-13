@@ -4,6 +4,7 @@
 // D:\P.R.I.V\Uczelnia\Semestr_V\Programowanie_w_Javie\PwJ_Lab05\purchases.txt
 // D:\P.R.I.V\Uczelnia\Semestr_V\Programowanie_w_Javie\PwJ_Lab05\inovoices.txt
 
+import javax.lang.model.type.NullType;
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.util.*;
@@ -30,6 +31,19 @@ public class PwJLab05 {
                         purchases.remove(purchases.get(i));
                     }
                 }
+            }
+        }
+    }
+
+    public static void generateInvoice(ArrayList<Customer> customers, ArrayList<Purchase> purchases) {
+        for(int i = 0; i < customers.size(); ++i) {
+            ArrayList<Invoice> invoices = new ArrayList<Invoice>(customers.size());
+            invoices.add(new Invoice(customers.get(i), null));
+            for(int j = 0; j < purchases.size(); ++j) {
+                if (purchases.get(j).getId() == i+1) {
+                    invoices.get(i).getInvoice(i)
+                }
+                    
             }
         }
     }
@@ -121,6 +135,7 @@ public class PwJLab05 {
         for (int i = 0; i < purchases.size(); ++i) {
             purchases.get(i).PrintPurchaseInfo();
         }
+        PwJLab05.generateInvoice(customers, purchases);
         inputFilePurchases.close();
     }
 
