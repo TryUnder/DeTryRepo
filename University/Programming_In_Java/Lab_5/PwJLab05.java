@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.*;
 
 public class PwJLab05 {
-
     public static Scanner openFilePartially(File file) {
         Scanner scanner;
         try {
@@ -18,6 +17,20 @@ public class PwJLab05 {
             scanner = null;
         }
         return scanner;
+    }
+
+    public static void checkId(ArrayList<Customer> customers, ArrayList<Purchase> purchases) {
+        for(int i = 0; i < purchases.size(); ++i) {
+            for (int j = 0; j < customers.size(); ++j) {
+                if (purchases.get(i).getId() == customers.get(j).getId()) {
+                    break;
+                } else {
+                    if (j == customers.size() - 1) {
+                        System.out.println("Bledne id: " + purchases.get(i).getId());
+                    }
+                }
+            }
+        }
     }
 
     public static ArrayList<Customer> AddingAndParsingForCustomers(File fileCustomers) {
@@ -96,37 +109,18 @@ public class PwJLab05 {
             inputFilePurchases = openFilePartially(file);
         }
 
-        for (int i = 0; i < counter-1; ++i) {
-            ArrayList<Integer> badInts = checkId(purchases, customers, inputFilePurchases);
-            //System.out.println(zm);
+        for (int i = 0; i < counter - 1; ++i) {
+            purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
+                                       inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
         }
 
-        System.out.println(Arrays.toString(badInts));
-
+        checkId(customers, purchases);
+        
         System.out.println("PURCHASES: ");
         for (int i = 0; i < purchases.size(); ++i) {
             purchases.get(i).PrintPurchaseInfo();
         }
         inputFilePurchases.close();
-    }
-
-    public static ArrayList<Integer> checkId(ArrayList<Purchase> purchases, ArrayList<Customer> customers, Scanner inputFilePurchases) {
-        int counter = 0;
-        ArrayList<Integer> badInts = new ArrayList<>();
-        for (int i = 0; i < purchases.size(); ++i) {
-            purchases.add(new Purchase((inputFilePurchases.nextInt()), inputFilePurchases.next(),
-                                       inputFilePurchases.nextInt(), inputFilePurchases.nextDouble()));
-            counter = 0;
-            for (int j = 0; j < customers.size(); ++j) {
-                if (purchases.get(i).getId() != customers.get(j).getId()) {
-                    counter++;
-                }
-            }
-            if (counter == customers.size()) {
-                badInts.add(purchases.get(i).getId());
-            }
-        }
-        return badInts;
     }
 
     public static void main(String[] args) throws IOException {
