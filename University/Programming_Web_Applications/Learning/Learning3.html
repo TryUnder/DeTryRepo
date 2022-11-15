@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #trescDoZmiany { background: yellow;
+                             padding: 10px; }
+        </style>
+        
+        <script>
+            function wstawTytul() {
+                var element = document.getElementById("trescDoZmiany");
+                element.innerHTML = "ZMIENIONA TRESC";
+            }
+        </script>
+    </head>
+
+    <body onclick="wstawTytul();">
+
+        <div id="trescDoZmiany">trescBazowa</div>
+    </body>
+</html>

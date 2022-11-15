@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <script>
+            if (confirm("Czy chcesz dodać liczby?")) {
+                const a = prompt("Podaj liczbę A:");
+                const b = prompt("Podaj liczbe B:");
+                if (a && b) {
+                    let wynik = parseInt(a) + parseInt(b);
+                    alert("Wynik: " + wynik);
+                } else {
+                    alert("Nie podano dwóch liczb!");
+                    alert("a = " + a);
+                    alert("b = " + b);
+                }
+            }
+        </script>
+    </body>
+</html>

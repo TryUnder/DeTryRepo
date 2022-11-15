@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Moja Strona</title>
+        <style>
+            #costam { padding: 10px;
+                      background: yellow;}
+        </style>
+
+        <script>
+            function wstawTytul() {
+                var element = document.getElementById("costam");
+                element.innerHTML = "<b>Wstawiony tytul</b>";
+            }
+        </script>
+    </head>
+    <body>
+        <body onload="wstawTytul();">
+            <div id="costam">test diva</div>
+        </body>
+    </body>
+</html>

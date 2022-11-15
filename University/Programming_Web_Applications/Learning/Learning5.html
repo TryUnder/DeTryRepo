@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #pole { width: 200px;
+                    height: 200px;
+                    background: beige;}
+        </style>
+
+        <script>
+            function pinfo(event) {
+                let pel = document.getElementById("pole");
+                pel.innerHTML = "X: " + event.clientX + "<br>";
+                pel.innerHTML += "Y: " + event.clientY + "<br>";
+                pel.innerHTML += "B: " + event.clientB + "<br>";
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="pole" onmousemove="pinfo(event);"></div>
+    </body>
+</html>
