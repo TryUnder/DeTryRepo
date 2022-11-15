@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script>
+            function oblicz() {
+                let lA = document.getElementById("liczbaA");
+                let lB = document.getElementById("liczbaB");
+                let wyn = document.getElementById("wynik");
+                let liA = parseFloat(lA.value);
+                let liB = parseFloat(lB.value);
+                if (isNaN(liA) || isNaN(liB)) {
+                    wyn.innerHTML = "Należy podać liczby";
+                } else {
+                    wyn.innerHTML = "Wynik: " + (liA + liB);
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <label>
+            Liczba A: <input id="liczbaA" onkeyup="oblicz();">
+            <br>
+        </label>
+
+        <label>
+            Liczba B: <input id="liczbaB" onkeyup="oblicz();">
+            <br>
+        </label>
+        <span id="wynik"></span>
+    </body>
+</html>

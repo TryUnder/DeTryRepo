@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            div {
+                width: 200px;
+                height: 100px;
+                background: gold;
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+        <div id="div2"></div>
+        <script>
+            var el1 = document.getElementById("div1");
+            el1.onclick = () => { el1.innerHTML = "TEST"; }
+
+            var el2 = document.getElementById("div2");
+            var tab = ["raz", "dwa", "trzy"];
+            tab.forEach((element) => { el2.innerHTML += element + "<br>"; });
+        </script>
+    </body>
+</html>
