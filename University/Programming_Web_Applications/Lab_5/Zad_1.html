@@ -2,11 +2,64 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Zad_1</title>
+        <title>Lab_5 Zad_1</title>
     </head>
- 
+
     <body>
-        <table id = "dane", border = "5"></table>
+
+        <table border="1" id = "table"></table>
+
+        <script>
+            class Osoba {
+                constructor(imie, nazwisko, rokUrodzenia) {
+                    this.imie = imie;
+                    this.nazwisko = nazwisko;
+                    this.rokUrodzenia = rokUrodzenia;
+                }
+
+                wypiszInformacje() {
+                    console.log(`${this.imie} ${this.nazwisko} ${this.rokUrodzenia}`);
+                }
+            }
+
+            osoba1 = new Osoba("Jagna", "Chlopka", 1000);
+            osoba2 = new Osoba("Aga", "Niewidoma", 2000);
+            osoba1.wypiszInformacje();
+            osoba2.wypiszInformacje();
+
+            class Pracownik extends Osoba {
+                constructor(imie, nazwisko, rokUrodzenia, pensja, premia) {
+                    super(imie, nazwisko, rokUrodzenia);
+                    this.pensja = pensja;
+                    this.premia = premia;
+                }
+                    wypiszInformacje() {
+                        super.wypiszInformacje();
+                        console.log(`pensja: ${this.pensja} premia: ${this.premia}`);
+                    }
+
+                    returnDOM() {
+                        let newTr = document.createElement("tr");
+                        let newTd = document.createElement("td");
+                        let newTd2 = document.createElement("td");
+                        let newTd3 = document.createElement("td");
+                        newTr.appendChild(newTd);
+                        newTd.innerHTML = this.imie + " " + this.nazwisko[0];
+                        newTr.appendChild(newTd2);
+                        newTd2.innerHTML = this.pensja;
+                        newTr.appendChild(newTd3);
+                        newTd3.innerHTML = this.premia;
+                        return newTr;
+                    }
+            }
+
+            osoba3 = new Pracownik("Pawel", "Jakis", 1976, 3000, 1000);
+            osoba4 = new Pracownik("Test", "Nazwisko", 1923, 2340, 1230);
+            osoba3.wypiszInformacje();
+            osoba3.returnDOM();
+            let table = document.getElementById("table");
+            table.appendChild(osoba3.returnDOM());
+            table.appendChild(osoba4.returnDOM());
+        </script>
     </body>
-    <script type = "text/javascript" src = "Zad_1js.js"></script>
 </html>
