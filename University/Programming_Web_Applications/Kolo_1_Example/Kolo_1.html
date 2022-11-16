@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #przyklad_1 {
+                background-color: blueviolet;
+            }
+
+            tr {
+                height: 50px;
+            }
+
+            div > a {
+                display: block;
+            }
+
+            #button1 {
+                height: 100px;
+                width: 100px;
+            }
+
+            #licz {
+                height: 100px;
+                width: 100px;
+            }
+        </style>
+
+        <script>
+            function zmienZawartosc(event) {
+                let x = document.getElementById("pobierz").value;
+                let wynik = document.getElementById("wstaw");
+                wynik.innerHTML = x;
+            }
+
+            function funkcja1() {
+                let liczba = document.getElementById("pobierz").value;
+                let nowyDiv = document.getElementById("doWstawienia");
+                if (parseInt(liczba) > 1 && parseInt(liczba) < 10) {
+                    console.log("YES");
+                    for (let i = 0; i < liczba ; ++i) {
+                        let nowyInput = document.createElement("input");
+                        nowyInput.setAttribute("id",`${i}`);
+                        nowyDiv.appendChild(nowyInput);
+                        nowyDiv.append(document.createElement("br"));
+                    }
+                } else {
+                    console.log("NO");
+                }
+            }
+
+            function liczWartosc() {
+                var sum = 0;
+                let length = document.getElementById("pobierz");
+                for(let i = 0; i < length.value; ++i) {
+                    let selectInput = document.getElementById(`${i}`);
+                    console.log(selectInput);
+                    sum += parseInt(selectInput.value);
+                }
+                document.getElementById("suma").innerHTML = sum;
+                alert(sum);
+            }
+        </script>
+    </head>
+
+    <body>
+        <table border="1">
+            <tr id="przyklad_1">
+                <td>
+                    <a href="http:www.google.com">aaa</a>
+                </td>
+                <td>b</td>
+                <td>b</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="http:www.github.com">bbb</a>
+                </td>
+                <td></td>
+                <td>
+                    <a href="http:www.facebook.com">ccc</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <a href="http:www.google.com">google</a>
+            <a href="http:www.facebook.com">facebook</a>
+            <a href="http:www.twitter.com">twitter</a>
+            tekst
+        </div>
+        <input id = "pobierz" onkeydown="zmienZawartosc(event);">
+        <label id="wstaw"></label>
+        <br>
+        <button id = "button1" onclick="funkcja1();"> Przycisk1 </button>
+        <div id="doWstawienia"></div>
+        <button id = "licz" onclick="liczWartosc();"> Do Policzenia </button>
+        <div id="suma"></div>
+
+        <script>
+            let zbierzElementTd = document.querySelectorAll("td");
+            for (let wezel of zbierzElementTd) {
+                if (wezel.textContent.length == 0) {
+                    wezel.innerHTML = Math.random() * 100;
+                }
+            }
+        </script>
+
+        <script>
+            class Projekt {
+                constructor(czas, ocena) {
+                    this.czas = czas;
+                    this.ocena = ocena;
+                    this.osoby = [];
+                }
+
+                dodajOsobe(firstName, lastName) {
+                    this.osoby.push({firstName, lastName});
+                }
+            }
+
+            projekt1 = new Projekt(2,5);
+
+            projekt1.dodajOsobe("Jan","Chryzostom_Pasek");
+
+            for (let i = 0; i < 1; ++i) {
+                console.log(projekt1.osoby[0]);
+            }
+        </script>
+    </body>
+</html>
