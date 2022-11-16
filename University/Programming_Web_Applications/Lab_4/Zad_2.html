@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Gra w kosci</title>
+        <style>
+            #button {
+                width: 50px;
+                height: 50px;
+            }
+
+            #counter {
+                width: 200px;
+                height: 300px;
+                background-color: aqua;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button onclick="createDiv();" id = "button"></button>
+        <div id="kosci"></div>
+        <script>
+            let counter = 0;
+            createDiv = () => {
+                let getKosciTag = document.getElementById("kosci");
+                getKosciTag.innerHTML = " ";
+                for (let i = 0; i < 5; ++i) {
+                    let newDiv = document.createElement("div");
+                    newDiv.innerHTML = 1 + Math.floor(Math.random() * 6);
+                    newDiv.style.height = "100px";
+                    newDiv.style.width = "100px";
+                    newDiv.style.margin = "10px";
+                    newDiv.style.float = "left";
+                    newDiv.onclick = () => {
+                        counter += 1;
+                        let newSpan = document.getElementById("counter");
+                        newSpan.innerHTML = counter;
+                        //getKosciTag.append(newSpan);
+                        getKosciTag.removeChild(newDiv);
+                    }
+                    getKosciTag.appendChild(newDiv);
+                }
+            }
+        </script>
+        <span id="counter"></span>
+    </body>
+</html>

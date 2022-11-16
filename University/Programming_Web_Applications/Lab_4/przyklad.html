@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body > div {
+                min-height: 200px;
+                background: rgb(150, 150, 150);
+            }
+
+            body > div div {
+                float: left;
+                width: 200px;
+                height: 40px;
+            }
+
+            body > div div {
+                background: rgb(200, 200, 200);
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="main"> Kliknij mnie<br></div>
+        <script>
+            let pierwszyDiv = document.getElementById("main");
+            pierwszyDiv.onclick = () => {
+                let nowyDiv = document.createElement("div");
+                nowyDiv.innerHTML = "Kliknij mnie";
+                pierwszyDiv.append(nowyDiv);
+
+                nowyDiv.onclick = () => {
+                    let r = Math.floor(Math.random() * 255);
+                    let g = Math.floor(Math.random() * 255);
+                    let b = Math.floor(Math.random() * 255);
+                    nowyDiv.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+                    pierwszyDiv.style.backgroudColor = "rgb(" + b + "," + r + "," + g +")"; 
+                }
+            }
+        </script>
+    </body>
+</html>
