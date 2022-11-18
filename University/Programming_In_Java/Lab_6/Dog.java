@@ -10,7 +10,7 @@ public class Dog extends Animal {
     public String toString() {
         return super.toString() + " Factor: " + this.factor;
     }
-
+    
     public void setBMI() {
         double bmi = 0;
         switch (this.factor) {

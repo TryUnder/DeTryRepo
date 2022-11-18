@@ -35,5 +35,5 @@ public abstract class Animal implements Dietician {
 
     public double getWeight() {
         return weight;
-    }
+    }   
 }
