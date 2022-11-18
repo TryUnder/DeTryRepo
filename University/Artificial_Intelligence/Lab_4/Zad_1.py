@@ -106,4 +106,4 @@ perceptron3 = Perceptron(np.array([[yy1[0], yy2[0]],
 
 
 y3 = perceptron3.CorrectWeights()
-#perceptron3.PrintGV()
+perceptron3.PrintGV()
