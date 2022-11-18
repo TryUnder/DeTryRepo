@@ -14,7 +14,9 @@ public class Person implements Dietician {
     }
     
     public String toString() {
-        return this.personalData + " " + age + " " + height + " " + weight;
+        return (this.bmi >= 30)
+        ? this.viewAlarm() + "Osoba: " + this.personalData + " Wiek: " + age + " Wysokosc: " + height + " Waga: " + weight + " BMI: " + bmi
+        : "Osoba: " + this.personalData + " Wiek: " + age + " Wysokosc: " + height + " Waga: " + weight + " BMI: " + bmi;
     }
 
     public int getAge() {
@@ -25,9 +27,12 @@ public class Person implements Dietician {
         return bmi;
     }
 
-    public void setBMI() {
-        this.bmi = weight / Math.pow((height * 0.01),2);
+    public String getPersonal() {
+        return personalData;
     }
 
+    public void setBMI() {
+        this.bmi = Math.round(weight / Math.pow((height * 0.01), 2));
+    }
 
 }

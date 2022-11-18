@@ -1,4 +1,4 @@
-public class Animal implements Dietician {
+public abstract class Animal implements Dietician {
     private String name;
     private double weight;
     private int age;
@@ -12,15 +12,21 @@ public class Animal implements Dietician {
     }
 
     public String toString() {
-        return name +  " " + weight + " " + age + " " + bmi;
+        return ((int)this.getBMI() >= 30) 
+        ? viewAlarm() + this.name + " Age: " + this.age + " Weight: " + this.weight + " BMI: " + this.bmi
+        : "Zwierze: " + this.name + " Age: " + this.age + " Weight: " + this.weight + " BMI: " + this.bmi;
     }
 
     public double getBMI() {
         return bmi;
     }
 
-    public void setBMI() {
-        this.bmi = 2;
+    public String getPersonal() {
+        return name;
+    }
+
+    public void setBMI(double bmi) {
+        this.bmi = Math.round(bmi);
     }
 
     public int getAge() {

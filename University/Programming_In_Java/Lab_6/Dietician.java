@@ -4,7 +4,8 @@ public interface Dietician {
     public double getBMI();
     public int getAge();
     public void setBMI();
+    public String getPersonal();
     default public String viewAlarm() {
-        return "SOS";
+        return "ALARM! OTYLOSC! ";
     }
 }
