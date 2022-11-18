@@ -38,6 +38,7 @@ public class Program {
         
         Arrays.sort(tab, new Comparator<Dietician>(){
             public int compare(Dietician dieticianL, Dietician dieticianR) {
+
                 return String.valueOf(dieticianL.getClass()).length() - String.valueOf(dieticianR.getClass()).length();
             }
         });
@@ -51,5 +52,6 @@ public class Program {
         for (Dietician t : tab) {
             System.out.println(t);
         }
+
     }
 }
