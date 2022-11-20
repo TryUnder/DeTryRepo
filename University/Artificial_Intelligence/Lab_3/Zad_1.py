@@ -15,7 +15,7 @@ class Perceptron:
         
     def ActivationFunction(self):
         for i in range(0,len(self.xVector),1):
-            self.sigma.append(self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1] * self.xWeight[2] + self.xWeight[0] * self.thresholdValue)
+            self.sigma.append(self.xVector[i][0] * self.xWeight[1] + self.xVector[i][1]* self.xWeight[2] + self.xWeight[0] * self.thresholdValue)
             if self.sigma[i] >= 0:
                 self.givenValue.append(1)
             else:
@@ -77,6 +77,6 @@ perceptron = Perceptron(np.array([[-4,3],[-2,3],[-1,2],[1,2],[2,2],[2,1],[1,4],[
                                    1,1,1,1,1,1,1,1,1,1,
                                    0,0,0,0,0,0,0,0,0,0,
                                    0,0,0,0,0,0,0,0,0,0]),
-                         [np.random.random(1)-0.5, np.random.random(1)-0.25, np.random.random(1)-1], -1.0, 100, 0.01)
+                         [np.random.random(1)-0.5, np.random.random(1)-0.25, np.random.random(1)-1], -1.0, 100, 0.001)
 
 perceptron.CorrectWeights()

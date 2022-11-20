@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <title>Gra w kosci</title>
         <style>
-            #button {
-                width: 50px;
-                height: 50px;
+            button {
+                width: 75px;
+                height: 75px;
             }
 
             #kosci {
@@ -23,9 +23,14 @@
     </head>
 
     <body>
-        <button onclick="createDiv();" id = "button"></button>
+        <button onclick="createDiv();" id = "button"> Zagraj </button>
+        <button onclick="generuj();"   id = "button2"> Generuj </button>
         <div id="kosci"></div>
+        <div id="test2"></div>
         <script>
+            generuj = () => {
+                console.log("x");
+            }
             let counter = 0;
             createDiv = () => {
                 let getKosciTag = document.getElementById("kosci");
@@ -43,6 +48,18 @@
                         newDiv2.innerHTML = counter;
                         //getKosciTag.append(newSpan);
                         getKosciTag.removeChild(newDiv);
+                        // if (counter != 0) {
+                        //     console.log("x");
+                        //     let test2 = document.getElementById("test2");
+                        //     let getButton = document.getElementById("button2");
+                        //     let nevDiv2 = document.createElement("div");
+                        //     newDiv2.innerHTML = 1 + Math.floor(Math.random() * 6);
+                        //     newDiv2.style.height = "200px";
+                        //     newDiv2.style.width = "200px";
+                        //     newDiv2.style.margin = "20px";
+                        //     newDiv2.style.float = "left";
+                        //     test2.appendChild(newDiv2);
+                        // }
                     }
                     getKosciTag.appendChild(newDiv);
                 }

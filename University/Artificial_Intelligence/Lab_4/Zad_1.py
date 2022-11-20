@@ -76,6 +76,9 @@ class Perceptron:
         return self.givenValue
         #for i in range(len(self.givenValue)):
             #print(self.givenValue[i])
+
+    def PrintGivenValue(self):
+        print(self.__ne__,self.givenValue)
  
 perceptron1 = Perceptron(np.array([[0,0], [0,1], [1,0], [1,1]]),
                          np.array([0,0,0,1]),
@@ -87,23 +90,18 @@ perceptron2 = Perceptron(np.array([[0,0], [0,1], [1,0], [1,1]]),
  
  
 y1 = perceptron1.CorrectWeights()
+perceptron1.PrintGivenValue()
 y2 = perceptron2.CorrectWeights()
+perceptron2.PrintGivenValue()
 yy1 = perceptron1.PrintGV()
+print("YY1: ", yy1)
 yy2 = perceptron2.PrintGV()
-
-print(yy1[0],yy2[0])
-print(yy1[1],yy2[1])
-print(yy1[2],yy2[2])
-print(yy1[3],yy2[3])
+print("YY2: ", yy2)
 perceptron3 = Perceptron(np.array([[yy1[0], yy2[0]],
                                    [yy1[1], yy2[1]],
                                    [yy1[3], yy2[3]]]),
                          np.array([1,0,1]),
                          [np.random.random(1) - 0.5, np.random.random(1) - 0.25, np.random.random(1) - 1], -1.0, 100, 0.1)
-
-
-
-
-
 y3 = perceptron3.CorrectWeights()
+perceptron3.PrintGivenValue()
 perceptron3.PrintGV()
