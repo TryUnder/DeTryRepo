@@ -20,7 +20,7 @@ int main(int argc, char** argv){
     }
     unsigned x;
     if(rank == 0){
-	MPI_Send(&rozmiar, 1, MPI_UNSIGNED, 1, 102, MPI_COMM_WORLD);
+		MPI_Send(&rozmiar, 1, MPI_UNSIGNED, 1, 102, MPI_COMM_WORLD);
 	for(int i=0; i<rozmiar; ++i){
 	    MPI_Send(&tab[i], 1, MPI_DOUBLE, 1, 102, MPI_COMM_WORLD);
 	}
