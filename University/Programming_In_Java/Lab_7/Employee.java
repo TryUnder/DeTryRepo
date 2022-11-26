@@ -34,10 +34,8 @@ public class Employee implements Accountant{
 		return age;
 	}
 
-	public void countSalary(Employee e) {
-		Accountant accountant = (e) -> {
-			(e.getAge() < 26)? e.setSalary(2.3) : e.setSalary(3.2);
-		};
+	public void countSalary(double netSalary) {
+		this.setSalary(netSalary);
 	}
 
 	public void setSalary(double netSalary) {
