@@ -1,5 +1,13 @@
 import java.util.*;
 
+// interface Accountant {
+// 	public static final int ageLimit = 26;
+// 	public static final double ratePIT = 0.18;
+// 	public static final double hcc = 0.09;
+
+// 	public abstract void countSalary(double netSalary);
+// }
+
 interface MyLambda {
 	public void foo();
 }
@@ -19,10 +27,10 @@ public class Program {
 		for(Employee e : eTab) {
 			System.out.println(e);
 			MyLambda x = () -> {
-				if (e.getAge() <= 26) {
-					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.09));
+				if (e.getAge() <= e.ageLimit) {
+					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - e.hcc));
 				} else {
-					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.18 - 0.09));
+					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - e.ratePIT - e.hcc));
 				}
 			};
 			x.foo();
