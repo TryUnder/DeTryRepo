@@ -30,6 +30,10 @@ public class Employee implements Accountant{
 		return age;
 	}
 
+	public String getPosition() {
+		return position;
+	}
+
 	public void countSalary(double netSalary) {
 		this.netSalary = netSalary;
 	}
