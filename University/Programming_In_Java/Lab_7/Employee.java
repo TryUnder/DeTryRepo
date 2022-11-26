@@ -1,5 +1,11 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-public class Employee {
+interface LambdaSalary {
+
+}
+
+public class Employee implements Accountant{
 	private String name;
 	private int age;
 	private double fte;
@@ -28,12 +34,19 @@ public class Employee {
 		return age;
 	}
 
+	public void countSalary(Employee e) {
+		Accountant accountant = (e) -> {
+			(e.getAge() < 26 ?) e.setSalary(2.3) : e.setSalary(3.2);
+		};
+	}
+
 	public void setSalary(double netSalary) {
 		this.netSalary = netSalary;
 	}
 
 	public String toString() {
 		return name + " lat:" + age + " " + position 
-				+ " placa podstawowa: " + salaryFTE + " pensja: " + netSalary;
+				+ " placa podstawowa: " + salaryFTE + " pensja: "
+				+ (new BigDecimal(netSalary).setScale(2, RoundingMode.HALF_UP));
 	}
 }
