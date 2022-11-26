@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Program {
 	public static void main(String[] args) {
 		var eTab = new ArrayList<Employee>();
@@ -14,7 +13,13 @@ public class Program {
 		System.out.println("Na starcie: ");
 		for(Employee e : eTab) {
 			System.out.println(e);
-			e.countSalary();
+			Accountant accountant = () -> {
+				if (e.getAge() <= 26) {
+					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - hcc));
+				} else {
+					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - ratePIT - hcc));
+				}
+			};
 		}
 		
 		System.out.println("Po obliczeniu pensji: ");

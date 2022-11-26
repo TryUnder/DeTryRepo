@@ -1,5 +1,5 @@
 
-public class Employee implements Accountant {
+public class Employee {
 	private String name;
 	private int age;
 	private double fte;
@@ -16,8 +16,20 @@ public class Employee implements Accountant {
 		this.position = position;
 	}
 
-	public void countSalary(){
+	public double getSalaryFTE() {
+		return salaryFTE;
+	}
+
+	public double getfte() {
 		
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setSalary(double netSalary) {
+		this.netSalary = netSalary;
 	}
 
 	public String toString() {
