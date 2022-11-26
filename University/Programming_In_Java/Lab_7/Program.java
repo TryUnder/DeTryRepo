@@ -1,5 +1,9 @@
 import java.util.*;
 
+interface MyLambda {
+	public void foo();
+}
+
 public class Program {
 	public static void main(String[] args) {
 		var eTab = new ArrayList<Employee>();
@@ -14,14 +18,14 @@ public class Program {
 		
 		for(Employee e : eTab) {
 			System.out.println(e);
-			Accountant accountant = () -> {
+			MyLambda x = () -> {
 				if (e.getAge() <= 26) {
 					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.09));
 				} else {
 					e.countSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.18 - 0.09));
 				}
 			};
-			accountant.countSalary();
+			x.foo();
 		}
 		
 		System.out.println("Po obliczeniu pensji: ");

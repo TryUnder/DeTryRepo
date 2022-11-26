@@ -1,10 +1,6 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-interface LambdaSalary {
-
-}
-
 public class Employee implements Accountant{
 	private String name;
 	private int age;
@@ -35,10 +31,6 @@ public class Employee implements Accountant{
 	}
 
 	public void countSalary(double netSalary) {
-		this.setSalary(netSalary);
-	}
-
-	public void setSalary(double netSalary) {
 		this.netSalary = netSalary;
 	}
 
