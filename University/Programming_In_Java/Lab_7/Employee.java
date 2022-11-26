@@ -21,7 +21,7 @@ public class Employee {
 	}
 
 	public double getfte() {
-		
+		return fte;
 	}
 
 	public int getAge() {

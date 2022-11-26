@@ -11,15 +11,17 @@ public class Program {
 		eTab.add(new Employee("Bak Olga", 1.0, 6000.0, 29, "Księgowa"));
 		
 		System.out.println("Na starcie: ");
+		
 		for(Employee e : eTab) {
 			System.out.println(e);
 			Accountant accountant = () -> {
 				if (e.getAge() <= 26) {
-					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - hcc));
+					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.09));
 				} else {
-					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - ratePIT - hcc));
+					e.setSalary(e.getSalaryFTE() * e.getfte() * (1 - 0.18 - 0.09));
 				}
 			};
+			accountant.countSalary();
 		}
 		
 		System.out.println("Po obliczeniu pensji: ");
