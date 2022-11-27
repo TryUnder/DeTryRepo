@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 
 public class Program {
 
-	public static void SaveToFile(ArrayList <Employee> eTab, String path) {
-		File file = new File(path);
+	public static void SaveToFile(ArrayList <Employee> eTab, String fileDir) {
+		File file = new File(fileDir);
 		Scanner scanner;
 		try {
 			scanner = new Scanner(file);
