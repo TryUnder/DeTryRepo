@@ -1,15 +1,35 @@
 import java.util.*;
+import java.io.*;
+import java.util.Scanner;
 
-
-// interface Accountant {
-// 	public static final int ageLimit = 26;
-// 	public static final double ratePIT = 0.18;
-// 	public static final double hcc = 0.09;
-
-// 	public abstract void countSalary(double netSalary);
-// }
 
 public class Program {
+
+	public static void SaveToFile(ArrayList <Employee> eTab, String path) {
+		File file = new File(path);
+		Scanner scanner;
+		try {
+			scanner = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			scanner = null;
+		}
+	
+		StringBuilder stringBuilder = new StringBuilder();
+		eTab.forEach(e -> {
+			stringBuilder.append(e);
+		});
+	
+		try {
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write(stringBuilder.toString());
+			fileWriter.close();
+		} catch (IOException e) {
+			System.out.println("Nastapil problem z zapisem do pliku");
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		var eTab = new ArrayList<Employee>();
 		eTab.add(new Employee("Nowak Jan", 1.0, 5200.0, 24, "Kierowca"));
@@ -45,7 +65,23 @@ public class Program {
 
 		System.out.println("\nPo posortowaniu wg position age netSalary: \n");
 
-		Collections.sort(eTab, (e1, e2) -> e1.getPosition().compareTo(e2.getPosition()););
+		Collections.shuffle(eTab);
+
+		Comparator <Employee> customComparator1 =  (e1, e2) -> {
+			return e1.getPosition().compareTo(e2.getPosition());
+		};
+
+		Comparator <Employee> customComparator2 = (e1, e2) -> {
+			return e2.getAge() - e1.getAge();
+		};
+
+		Comparator <Employee> customComparator3 = (e1, e2) -> {
+			return Double.compare(e2.getNetSalary(), e1.getNetSalary());
+		};
+
+		Collections.sort(eTab, customComparator1);
+		Collections.sort(eTab, customComparator2);
+		Collections.sort(eTab, customComparator3);
 
 		eTab.forEach(employee -> System.out.println(employee));
 		
@@ -57,6 +93,9 @@ public class Program {
 			.thenComparing(Employee::getPosition)
 			.thenComparing(Employee::getSalaryFTE, Comparator.reverseOrder())
 			);
+
 		eTab.forEach(employee -> System.out.println(employee));
+
+		SaveToFile(eTab, "C:\\Users\\Hubert\\Desktop\\123.txt");
 	}
 }
