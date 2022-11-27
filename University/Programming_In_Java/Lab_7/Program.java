@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 
 public class Program {
@@ -16,14 +17,16 @@ public class Program {
 	
 		StringBuilder stringBuilder = new StringBuilder();
 		eTab.forEach(e -> {
-			stringBuilder.append(e);
+			stringBuilder.append(e.toString() + new String("\n"));
 		});
 	
 		try {
-			file.createNewFile();
-			FileWriter fileWriter = new FileWriter(file, true);
-			fileWriter.write(stringBuilder.toString());
-			fileWriter.close();
+			if (!file.exists()){
+				file.createNewFile();
+				FileWriter fileWriter = new FileWriter(file, true);
+				fileWriter.write(stringBuilder.toString());
+				fileWriter.close();
+			}
 		} catch (IOException e) {
 			System.out.println("Nastapil problem z zapisem do pliku");
 			e.printStackTrace();
@@ -95,7 +98,7 @@ public class Program {
 			);
 
 		eTab.forEach(employee -> System.out.println(employee));
-
-		SaveToFile(eTab, "C:\\Users\\Hubert\\Desktop\\123.txt");
+		String fileDir = JOptionPane.showInputDialog("Wprowadz sciezke do zapisu");
+		SaveToFile(eTab, fileDir);
 	}
 }
