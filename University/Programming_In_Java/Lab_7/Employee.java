@@ -34,6 +34,10 @@ public class Employee implements Accountant{
 		return position;
 	}
 
+	public double getNetSalary() {
+		return netSalary;
+	}
+
 	public void countSalary(double netSalary) {
 		this.netSalary = netSalary;
 	}

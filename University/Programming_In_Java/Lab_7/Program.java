@@ -43,10 +43,20 @@ public class Program {
 
 		eTab.forEach(employee -> System.out.println(employee));
 
-		System.out.println("\nPo posortowaniu wg position, age, netSalary: \n");
+		System.out.println("\nPo posortowaniu wg position age netSalary: \n");
 
-		Collections.sort(eTab, (e1, e2) -> e1.getPosition().compareTo(e2.getPosition()));
+		Collections.sort(eTab, (e1, e2) -> e1.getPosition().compareTo(e2.getPosition()););
+
+		eTab.forEach(employee -> System.out.println(employee));
 		
+		Collections.shuffle(eTab);
+
+		System.out.println("\nPo posortowaniu wg age position salaryFTE: \n");
+
+		Collections.sort(eTab, Comparator.comparing(Employee::getAge, Comparator.reverseOrder())
+			.thenComparing(Employee::getPosition)
+			.thenComparing(Employee::getSalaryFTE, Comparator.reverseOrder())
+			);
 		eTab.forEach(employee -> System.out.println(employee));
 	}
 }
