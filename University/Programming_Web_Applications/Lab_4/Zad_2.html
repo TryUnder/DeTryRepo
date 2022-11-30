@@ -19,6 +19,7 @@
                 height: 300px;
                 text-align: left;
             }
+
         </style>
     </head>
 
@@ -29,7 +30,7 @@
         <div id="test2"></div>
         <script>
             let counter = 0;
-            createDiv = (generuj) => {
+            createDiv = () => {
                 let getKosciTag = document.getElementById("kosci");
                 getKosciTag.innerHTML = " ";
                 for (let i = 0; i < 5; ++i) {
@@ -39,28 +40,31 @@
                     newDiv.style.width = "100px";
                     newDiv.style.margin = "10px";
                     newDiv.style.float = "left";
+                    newDiv.style.backgroundColor = "aquamarine";
                     newDiv.onclick = () => {
                         counter += 1;
                         let newDiv2 = document.getElementById("counter");
                         newDiv2.innerHTML = counter;
                         //getKosciTag.append(newSpan);
                         getKosciTag.removeChild(newDiv);
-                        // if (counter != 0) {
-                        //     console.log("x");
-                        //     let test2 = document.getElementById("test2");
-                        //     let getButton = document.getElementById("button2");
-                        //     let nevDiv2 = document.createElement("div");
-                        //     newDiv2.innerHTML = 1 + Math.floor(Math.random() * 6);
-                        //     newDiv2.style.height = "200px";
-                        //     newDiv2.style.width = "200px";
-                        //     newDiv2.style.margin = "20px";
-                        //     newDiv2.style.float = "left";
-                        //     test2.appendChild(newDiv2);
-                        // }
-                        generuj = () => {
-                            console.log("x");
-                        }
                     }
+                    getKosciTag.appendChild(newDiv);
+                    counter = 0
+                }
+            }
+
+            generuj = () => {
+                let counter = document.getElementById("counter");
+                let getKosciTag = document.getElementById("kosci");
+                getKosciTag.innerHTML = " ";
+                for(let i = 0; i < counter.innerHTML; ++i) {
+                    let newDiv = document.createElement("div");
+                    newDiv.innerHTML = 1 + Math.floor(Math.random() * 6);
+                    newDiv.style.height = "100px";
+                    newDiv.style.width = "100px";
+                    newDiv.style.margin = "10px";
+                    newDiv.style.float = "left";
+                    newDiv.style.backgroundColor = "aquamarine";
                     getKosciTag.appendChild(newDiv);
                 }
             }
