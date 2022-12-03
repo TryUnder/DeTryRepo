@@ -14,20 +14,20 @@ public class main {
         ArrayList<Board.Point> userPoint = new ArrayList<Board.Point>();
         ArrayList<Point> point = new ArrayList<Point>();
         for (int i = 0; i < 3; ++i) {
-        System.out.println("Runda nr: ");
-        System.out.println("Wprowadz wspolrzedne punktu A");
-        userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
-        userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
-        System.out.println("Wprowadz wspolrzedne punktu B");
-        userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
-        userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
-        board.printBoard(userPointPairList);
-        point.add(new Point((i+1), 1));
-        if (board.checkGuess(userPointPairList, truePair) == false) {
-            board.checkDistance(userPointPairList, truePair);
-            } else {
-                System.out.println("Punkt trafiony");
-            }
+            System.out.println("Runda nr: ");
+            System.out.println("Wprowadz wspolrzedne punktu A");
+            userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+            userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
+            System.out.println("Wprowadz wspolrzedne punktu B");
+            userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+            userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
+            board.printBoard(userPointPairList);
+            point.add(new Point((i+1), 1));
+            if (board.checkGuess(userPointPairList, truePair) == false) {
+                board.checkDistance(userPointPairList, truePair);
+                } else {
+                    System.out.println("Punkt trafiony");
+                }
         }
     }
 }
