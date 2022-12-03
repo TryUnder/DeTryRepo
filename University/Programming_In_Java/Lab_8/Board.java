@@ -1,5 +1,6 @@
 import java.lang.StringBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.lang.Math;
 
 public class Board {
@@ -59,11 +60,11 @@ public class Board {
     }
 
     public void checkDistance(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
-        System.out.print("Dystans wynosi: ");
+        ArrayList<Integer> distance = new ArrayList<Integer>();      
         for (int i = 0; i < userPointPairList.size(); ++i) {
-            int distance = Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd());
-            System.out.println(distance);
+            distance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
         }
+        System.out.println("Minimalny dystans: " + Collections.min(distance));
     }
 
     public String toString() {

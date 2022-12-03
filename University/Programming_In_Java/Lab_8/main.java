@@ -8,26 +8,21 @@ public class main {
         Pair<Integer, Integer> truePair = new Pair<Integer, Integer>(1,2);
         Board.Point truePoint = board.new Point(truePair.getFst(), truePair.getSnd());
 
-        //Board.Point userPoint = board.new Point();
-        
-        // userPoint.setX(new Scanner(System.in).nextInt());
-        // userPoint.setY(new Scanner(System.in).nextInt());
         Pair<Integer, Integer> userPointPair = new Pair<Integer, Integer>();
         ArrayList<Pair<Integer, Integer>> userPointPairList = new ArrayList<Pair<Integer, Integer>>();
         
         ArrayList<Board.Point> userPoint = new ArrayList<Board.Point>();
-        for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 4; ++j) {
             userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
-            //userPoint.setX(new Scanner(System.in).nextInt());
-            //userPoint.setY(new Scanner(System.in).nextInt());
-            userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
+            userPointPairList.add(new Pair(userPoint.get(j).getX(), userPoint.get(j).getY()));
+            board.printBoard(userPointPairList);
+            if (board.checkGuess(userPointPairList, truePair) == false) {
+                board.checkDistance(userPointPairList, truePair);
+            } else {
+                System.out.println("Punkt trafiony");
+            }
         }
-        board.printBoard(userPointPairList);
-        if (board.checkGuess(userPointPairList, truePair) == false) {
-            board.checkDistance(userPointPairList, truePair);
-        } else {
-            System.err.println("Punkt trafiony");
-        }
+        
 
     }
 }
