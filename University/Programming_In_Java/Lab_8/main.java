@@ -12,17 +12,22 @@ public class main {
         ArrayList<Pair<Integer, Integer>> userPointPairList = new ArrayList<Pair<Integer, Integer>>();
         
         ArrayList<Board.Point> userPoint = new ArrayList<Board.Point>();
-        for (int j = 0; j < 4; ++j) {
-            userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
-            userPointPairList.add(new Pair(userPoint.get(j).getX(), userPoint.get(j).getY()));
-            board.printBoard(userPointPairList);
-            if (board.checkGuess(userPointPairList, truePair) == false) {
-                board.checkDistance(userPointPairList, truePair);
+        ArrayList<Point> point = new ArrayList<Point>();
+        for (int i = 0; i < 3; ++i) {
+        System.out.println("Runda nr: ");
+        System.out.println("Wprowadz wspolrzedne punktu A");
+        userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+        userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
+        System.out.println("Wprowadz wspolrzedne punktu B");
+        userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
+        userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
+        board.printBoard(userPointPairList);
+        point.add(new Point((i+1), 1));
+        if (board.checkGuess(userPointPairList, truePair) == false) {
+            board.checkDistance(userPointPairList, truePair);
             } else {
                 System.out.println("Punkt trafiony");
             }
         }
-        
-
     }
 }

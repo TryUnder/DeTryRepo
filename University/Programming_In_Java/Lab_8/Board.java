@@ -60,11 +60,19 @@ public class Board {
     }
 
     public void checkDistance(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
-        ArrayList<Integer> distance = new ArrayList<Integer>();      
+        ArrayList<Integer> distance = new ArrayList<Integer>();   
+        ArrayList<Integer> localDistance = new ArrayList<Integer>();   
         for (int i = 0; i < userPointPairList.size(); ++i) {
             distance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
         }
-        System.out.println("Minimalny dystans: " + Collections.min(distance));
+
+        //for (int i = userPointPairList.size(); i > userPointPairList.size() - 2; --i) {
+        //    localDistance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
+        //}
+        //localDistance.clear();
+
+        //System.out.println("Blizej jest punkt: " + Collections.min(localDistance));
+        System.out.println("Odleglosc wynosi: " + Collections.min(distance));
     }
 
     public String toString() {
