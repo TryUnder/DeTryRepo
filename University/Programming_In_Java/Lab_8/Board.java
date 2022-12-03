@@ -1,5 +1,6 @@
 import java.lang.StringBuilder;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Board {
     
@@ -20,7 +21,7 @@ public class Board {
         public void setX(int x) { this.x = x; }
         public void setY(int y) { this.y = y; }
         public int getX() { return x; }
-        public int getY() { return y;}
+        public int getY() { return y; }
 
         public String toString() {
             return "X:" + x + " Y:" + y; 
@@ -29,19 +30,40 @@ public class Board {
 
     public void printBoard(ArrayList<Pair<Integer, Integer>> userPointPairList) {
         StringBuilder stringBuilder = new StringBuilder();
+        String temp;
         for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {
+            for (int j = 0; j < 8; ++j) { loop:
                 for (int k = 0; k < userPointPairList.size(); ++k) {
-                    if (i+1 != userPointPairList.get(k).getFst() || j+1 != userPointPairList.get(k).getSnd()) {
-                        stringBuilder.append("(" + (i+1) + "," + (j+1) + ")" + " ");
-                    } else {
-                        stringBuilder.append("  X   ");
+                    temp = "(" + (i+1) + "," + (j+1) + ")" + " ";
+                    if (i+1 == userPointPairList.get(k).getFst() && j+1 == userPointPairList.get(k).getSnd()) {
+                        temp = "  X   ";
+                        stringBuilder.append(temp);
+                        break loop;
                     }
+                    if (k == userPointPairList.size() - 1)
+                        stringBuilder.append(temp);
                 }
             }
             stringBuilder.append("\n");
         }
         System.out.println(stringBuilder.toString());
+    }
+
+    public boolean checkGuess(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
+        for (Pair<Integer, Integer> pair : userPointPairList) {
+            if (pair.compare(truePoint) == true) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void checkDistance(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
+        System.out.print("Dystans wynosi: ");
+        for (int i = 0; i < userPointPairList.size(); ++i) {
+            int distance = Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd());
+            System.out.println(distance);
+        }
     }
 
     public String toString() {

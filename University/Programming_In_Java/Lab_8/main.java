@@ -5,7 +5,8 @@ public class main {
     public static void main(String[] args) {
         Board board = new Board();
         System.out.println(board);
-        Board.Point truePoint = board.new Point(1,2);
+        Pair<Integer, Integer> truePair = new Pair<Integer, Integer>(1,2);
+        Board.Point truePoint = board.new Point(truePair.getFst(), truePair.getSnd());
 
         //Board.Point userPoint = board.new Point();
         
@@ -19,11 +20,14 @@ public class main {
             userPoint.add(board.new Point(new Scanner(System.in).nextInt(), new Scanner(System.in).nextInt()));
             //userPoint.setX(new Scanner(System.in).nextInt());
             //userPoint.setY(new Scanner(System.in).nextInt());
-            userPointPair.add(userPoint.get(i).getX(), userPoint.get(i).getY());
-            userPointPairList.add(userPointPair);
+            userPointPairList.add(new Pair(userPoint.get(i).getX(), userPoint.get(i).getY()));
         }
-        System.out.println(userPointPairList.get(0).getFst().toString() + userPointPairList.get(0).getSnd().toString());
-        System.out.println(userPointPairList.get(1).getFst().toString() + userPointPairList.get(1).getSnd().toString());
-        //board.printBoard(userPointPairList);
+        board.printBoard(userPointPairList);
+        if (board.checkGuess(userPointPairList, truePair) == false) {
+            board.checkDistance(userPointPairList, truePair);
+        } else {
+            System.err.println("Punkt trafiony");
+        }
+
     }
 }
