@@ -63,7 +63,7 @@ public class Board {
         ArrayList<Integer> distance = new ArrayList<Integer>();   
         ArrayList<Integer> localDistance = new ArrayList<Integer>();   
         for (int i = 0; i < userPointPairList.size(); ++i) {
-            distance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
+            distance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst()) + Math.abs(userPointPairList.get(i).getSnd() - truePoint.getSnd()));
         }
 
         localDistance.add(Math.abs(userPointPairList.get(userPointPairList.size() - 1).getFst() - truePoint.getFst()) + Math.abs(userPointPairList.get(userPointPairList.size() - 1).getSnd() - truePoint.getSnd()));

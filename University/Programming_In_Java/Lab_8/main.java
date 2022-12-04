@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,8 +37,8 @@ public class main implements GameScoring {
                 int distance = board.checkDistance(userPointPairList, truePair);
                 points.add(new Point(10 - distance, (i + 1)));
             } else {
-                System.out.println("Punkt trafiony - Koniec gry");
                 points.add(new Point(scorePoints[i], (i + 1)));
+                System.out.println("Punkt trafiony w rundzie nr " + points.get(points.size() - 1).getRound() + " - Koniec gry");
                 score = sumPoints(points);
                 System.out.println("Zdobyto: " + score + " punktow");
                 return;

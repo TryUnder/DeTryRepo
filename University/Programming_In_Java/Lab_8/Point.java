@@ -10,4 +10,8 @@ public class Point {
     public double getScore() {
         return score;
     }
+
+    public int getRound() {
+        return num_rounds;
+    }
 }
