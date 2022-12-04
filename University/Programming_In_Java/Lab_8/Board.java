@@ -59,20 +59,26 @@ public class Board {
         return false;
     }
 
-    public void checkDistance(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
+    public int checkDistance(ArrayList<Pair<Integer, Integer>> userPointPairList, Pair<Integer, Integer> truePoint) {
         ArrayList<Integer> distance = new ArrayList<Integer>();   
         ArrayList<Integer> localDistance = new ArrayList<Integer>();   
         for (int i = 0; i < userPointPairList.size(); ++i) {
             distance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
         }
 
-        //for (int i = userPointPairList.size(); i > userPointPairList.size() - 2; --i) {
-        //    localDistance.add(Math.abs(userPointPairList.get(i).getFst() - truePoint.getFst() + userPointPairList.get(i).getSnd() - truePoint.getSnd()));
-        //}
-        //localDistance.clear();
+        localDistance.add(Math.abs(userPointPairList.get(userPointPairList.size() - 1).getFst() - truePoint.getFst()) + Math.abs(userPointPairList.get(userPointPairList.size() - 1).getSnd() - truePoint.getSnd()));
+        localDistance.add(Math.abs(userPointPairList.get(userPointPairList.size() - 2).getFst() - truePoint.getFst()) + Math.abs(userPointPairList.get(userPointPairList.size() - 2).getSnd() - truePoint.getSnd()));
 
-        //System.out.println("Blizej jest punkt: " + Collections.min(localDistance));
-        System.out.println("Odleglosc wynosi: " + Collections.min(distance));
+        System.out.println("Minimalna odleglosc wynosi: " + Collections.min(distance));
+        System.out.print("Lokalna minimalna odleglosc wynosi: " + Collections.min(localDistance));
+        if (localDistance.get(localDistance.size() - 1) == localDistance.get(localDistance.size() - 2)) {
+            System.out.println(" - Punkty sa w takiej samej odleglosci");
+        } else if (localDistance.get(localDistance.size() - 1) < localDistance.get(localDistance.size() - 2)) {
+            System.out.println(" - Blizej jest punkt A");
+        } else {
+            System.out.println(" - Blizej jest punkt B");
+        }
+        return Collections.min(localDistance); 
     }
 
     public String toString() {

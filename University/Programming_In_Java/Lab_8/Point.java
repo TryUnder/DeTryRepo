@@ -6,4 +6,8 @@ public class Point {
         this.score = score;
         this.num_rounds = num_rounds;
     }
+
+    public double getScore() {
+        return score;
+    }
 }
