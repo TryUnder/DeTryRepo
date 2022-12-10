@@ -26,8 +26,12 @@ public class Program {
             robert.setHand(pack.getPack());
         }
         //pack.getPack().removeIf(e -> e.getSnd() == "HEART");
-        System.out.println(pack);
+        //System.out.println(pack);
         //System.out.println(albert);
         //System.out.println(robert);
+        albert.deleteDuplicates(pack.getPack());
+        robert.deleteDuplicates(pack.getPack());
+
+        System.out.println(pack);
     }
 }

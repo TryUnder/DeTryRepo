@@ -13,14 +13,18 @@ public class Player {
 
     public void setHand(ArrayList<Pair<String, String>> pack) {
         Random random = new Random();
-        int rand = random.nextInt(6);
-        int rand2 = random.nextInt(4);
-        hand.add(new Pair(pack.get(rand).getFst(), pack.get(rand2).getSnd()));
-        pack.removeIf(e -> e.getFst() == hand.get(rand).getFst() && e.getSnd() == hand.get(rand2).getSnd());
+        hand.add(new Pair(pack.get(new Random().nextInt(6)).getFst(), pack.get(new Random().nextInt(4)).getSnd()));
+        pack.remove(hand.getLast());
     }
 
     public void deleteDuplicates(ArrayList<Pair<String, String>> pack) {
-        
+        for (int i = 0; i < pack.size(); ++i) {
+            for (int j = 0; j < hand.size(); ++j) {
+                pack.removeIf(e -> e.getFst() == hand.get(i).getFst() && 
+                e.getSnd() == e.getSnd() );
+                
+            }
+        }
     }
 
     public String toString() {
