@@ -1,0 +1,1 @@
+public enum Colour { HEART, TILE, CLOVER, PIKE };

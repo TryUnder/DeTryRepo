@@ -1,6 +1,9 @@
+import java.util.TreeMap;
 
 public class Card {
-    private String figure;
-    private String colour;
+    private TreeMap<String, String> card;
 
+    public Card(String key, String value) {
+        this.card.put(key, value);
+    }
 }
