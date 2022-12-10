@@ -6,7 +6,7 @@ public class Program {
         Pack pack = new Pack();
         for(Figure fig : Figure.values()) {
             for (Colour colour : Colour.values()) {
-                pack.add(fig.toString(), colour.toString());
+                pack.add((fig.get()), colour.toString());
             }
         }
 

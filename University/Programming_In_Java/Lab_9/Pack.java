@@ -7,7 +7,7 @@ public class Pack {
     
     public Pack() { pack = new ArrayList<Pair<String, String>>(); }
     public void add(String figure, String colour) {
-        pack.add(new Pair(figure, colour));
+        pack.add(new Pair(figure.toString(), colour.toString()));
     }
 
     public String toString() {

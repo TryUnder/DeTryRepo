@@ -7,10 +7,23 @@ public enum Figure {
     Ace(14);
 
     private int number;
-    
+
     Figure(int number) {
         this.number = number;
     }
 
-    public int get() { return this.number; }
+    public String get() { if (this.number <= 10) return Integer.toString(this.number);
+                       else return get(number).toString(); }
+    public static Figure get(int number) { switch (number) {
+        case 11:
+            return Jack;
+        case 12:
+            return Queen;
+        case 13:
+            return King;
+        case 14:
+            return Ace;
+        default:
+            return Ace;
+    }}
  };
