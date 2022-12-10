@@ -1,18 +1,19 @@
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Map;
 
 public class Pack {
-    private TreeMap<String, String> pack;
+    private ArrayList<Pair<String, String>> pack;
     
-    public Pack() {}
-    void add(String key, String value) {
-        pack.put(key, value);
+    public Pack() { pack = new ArrayList<Pair<String, String>>(); }
+    public void add(String figure, String colour) {
+        pack.add(new Pair(figure, colour));
     }
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Map.Entry<String, String> entry : pack.entrySet()) {
-            stringBuilder.append(entry.getKey() + " " + entry.getValue() + "\n");
+        for(Pair<String, String> pair : pack) {
+            stringBuilder.append(pair.getFst() + " " + pair.getSnd() + "\n");
         }
         return stringBuilder.toString();
     }
