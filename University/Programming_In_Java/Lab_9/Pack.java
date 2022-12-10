@@ -10,10 +10,14 @@ public class Pack {
         pack.add(new Pair(figure.toString(), colour.toString()));
     }
 
+    public ArrayList<Pair<String, String>> getPack() { return pack; }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Pair<String, String> pair : pack) {
-            stringBuilder.append(pair.getFst() + " " + pair.getSnd() + "\n");
+        for(int i = 1; i < pack.size() + 1; ++i) {
+            stringBuilder.append(pack.get(i-1).getFst() + " " + pack.get(i-1).getSnd() + ", ");
+            if (i % 4 == 0)
+                stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }

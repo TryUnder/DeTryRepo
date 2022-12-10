@@ -1,5 +1,6 @@
 import java.util.TreeMap;
 import java.util.Map;
+import java.util.Collections;
 
 public class Program {
     public static void main(String[] args) {
@@ -9,7 +10,13 @@ public class Program {
                 pack.add((fig.get()), colour.toString());
             }
         }
-
+        System.out.println("Talia Bazowa: \n");
         System.out.println(pack);
+
+        Collections.shuffle(pack.getPack());
+
+        System.out.println("Talia pomieszana: \n");
+        System.out.println(pack);
+
     }
 }
