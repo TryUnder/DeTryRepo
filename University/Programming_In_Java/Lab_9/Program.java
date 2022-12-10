@@ -13,10 +13,21 @@ public class Program {
         System.out.println("Talia Bazowa: \n");
         System.out.println(pack);
 
-        Collections.shuffle(pack.getPack());
+        //Collections.shuffle(pack.getPack());
 
-        System.out.println("Talia pomieszana: \n");
+        //System.out.println("Talia pomieszana: \n");
+        //System.out.println(pack);
+
+        Player albert = new Player("Albert", pack.getPack());
+        Player robert = new Player("Robert", pack.getPack());
+
+        for(int i = 0; i < 5; ++i) {
+            albert.setHand(pack.getPack());
+            robert.setHand(pack.getPack());
+        }
+
         System.out.println(pack);
-
+        //System.out.println(albert);
+        //System.out.println(robert);
     }
 }
