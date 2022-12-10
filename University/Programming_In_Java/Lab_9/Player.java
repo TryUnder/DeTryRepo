@@ -12,8 +12,15 @@ public class Player {
     }
 
     public void setHand(ArrayList<Pair<String, String>> pack) {
-        hand.add(new Pair(pack.get(new Random().nextInt(6)).getFst(), pack.get(new Random().nextInt(6)).getSnd()));
-        pack.remove(hand.getLast());
+        Random random = new Random();
+        int rand = random.nextInt(6);
+        int rand2 = random.nextInt(4);
+        hand.add(new Pair(pack.get(rand).getFst(), pack.get(rand2).getSnd()));
+        pack.removeIf(e -> e.getFst() == hand.get(rand).getFst() && e.getSnd() == hand.get(rand2).getSnd());
+    }
+
+    public void deleteDuplicates(ArrayList<Pair<String, String>> pack) {
+        
     }
 
     public String toString() {

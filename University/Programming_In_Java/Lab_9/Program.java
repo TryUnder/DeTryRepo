@@ -25,7 +25,7 @@ public class Program {
             albert.setHand(pack.getPack());
             robert.setHand(pack.getPack());
         }
-
+        //pack.getPack().removeIf(e -> e.getSnd() == "HEART");
         System.out.println(pack);
         //System.out.println(albert);
         //System.out.println(robert);
