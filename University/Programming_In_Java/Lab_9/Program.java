@@ -3,6 +3,10 @@ import java.util.Map;
 
 public class Program {
     public static void main(String[] args) {
-        System.out.println(Figure.N8 + " " + Figure.N8.get());
+        for(Figure fig : Figure.values()) {
+            for (Colour colour : Colour.values()) {
+                System.out.println(fig + " " + colour);
+            }
+        }
     }
 }
