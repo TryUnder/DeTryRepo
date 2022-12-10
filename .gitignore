@@ -384,3 +384,5 @@ DeTryRepo.iml
 .idea/vcs.xml
 University/University.iml
 .idea/.gitignore
+University/Programming_Web_Applications/Lab_7/p5.min.js
+*.class
