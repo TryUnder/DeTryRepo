@@ -16,6 +16,10 @@ public class Pair<T, U> {
     public void add(T first, U second) { this.first = first; this.second = second; }
 
     public boolean compare(Pair<T,U> obj) {
-        return (this.getFst() == obj.getFst() && this.getSnd() == obj.getSnd()) ? true : false;
+        return (this.getFst().equals(obj.getFst()) && this.getSnd().equals(obj.getSnd())) ? true : false;
+    }
+
+    public String toString() {
+        return getFst().toString() + " " + getSnd().toString();
     }
 }
