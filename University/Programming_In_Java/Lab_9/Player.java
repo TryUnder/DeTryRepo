@@ -15,6 +15,8 @@ public class Player {
         rand2 = 4;
     }
 
+    public LinkedList<Pair<String, String>> getHand() { return hand; }
+
     public ArrayList<Pair<String, String>> setHand(ArrayList<Pair<String, String>> pack, ArrayList<Pair<String, String>> deletedPairs) {
         hand.add(new Pair(pack.get(new Random().nextInt(rand1)).getFst(), pack.get(new Random().nextInt(rand2)).getSnd()));
         int t = 0;
