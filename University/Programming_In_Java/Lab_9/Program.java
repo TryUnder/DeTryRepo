@@ -24,7 +24,7 @@ public class Program {
         Player robert = new Player("Robert", pack.getPack());
         Collections.shuffle(pack.getPack());
         ArrayList<Pair<String, String>> deletedPairs = new ArrayList<Pair<String, String>>();
-        for(int i = 0; i < 2; ++i) {
+        for(int i = 0; i < 5; ++i) {
             deletedPairs = albert.setHand(pack.getPack(), deletedPairs);
             System.out.println("\nReka alberta: " + albert + "\n");
             System.out.println(pack);

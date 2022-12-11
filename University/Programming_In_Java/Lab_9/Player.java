@@ -21,29 +21,30 @@ public class Player {
         for (int i = 0; i < hand.size(); ++i) {
             for (int j = 0; j < deletedPairs.size(); ++j) {
                 if (hand.get(i).compare(deletedPairs.get(j)) == true) {
-                    //System.out.println("Zawiera!");
-                    System.out.println("Del ins: " + deletedPairs.get(j));
+                    //System.out.println("Del ins: " + deletedPairs.get(j));
                     t++;
-                    if (t==2){
-                        System.out.println("Zawiera!");
-                        hand.removeLast();
-                        hand.add(new Pair(pack.get(new Random().nextInt(rand1)).getFst(), pack.get(new Random().nextInt(rand2)).getSnd()));
+                    if (t == deletedPairs.size() + 1){
+                        while(hand.get(i).compare(deletedPairs.get(j)) == true) {
+                            System.out.println("Zawiera!: z hand: " + hand.get(i) + " z deletedPair: " + deletedPairs.get(j));
+                            System.out.print("Hand przed usunieciem: ");
+                            hand.forEach(element -> System.out.print(element + " "));
+                            System.out.println();
+                            hand.removeLast();
+                            System.out.print("Hand po usunieciu: ");
+                            hand.forEach(element -> System.out.print(element + " "));
+                            System.out.println();
+                            hand.add(new Pair(pack.get(new Random().nextInt(rand1)).getFst(), pack.get(new Random().nextInt(rand2)).getSnd()));
+                            System.out.println("Hand po dodaniu: ");
+                            hand.forEach(element -> System.out.println(element + " "));
+                            System.out.println();
+                        }
                     }
                 }
             }
         }
-        t = 0;
-        //pack.remove(hand.getLast());
-        //System.out.println("\nNEW PRINTING\n");
-        // for(int i = 1; i < pack.size() + 1; ++i) {
-        //     System.out.print(pack.get(i-1).getFst() + " " + pack.get(i-1).getSnd() + ", ");
-        //     if (i % 4 == 0) { System.out.println();}
-        // }
         Pair<Boolean, Integer> pair = this.findDuplicates(pack, deletedPairs);
         if (pair.getFst() == true) {
-            System.out.println(pair.getFst());
             this.deleteDuplicates(pack, pair.getSnd());
-            rand1 -= 1;
         }
         return deletedPairs;
     }
