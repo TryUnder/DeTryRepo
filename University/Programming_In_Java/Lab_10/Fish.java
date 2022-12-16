@@ -22,9 +22,21 @@ public class Fish {
     public String getSpecie() { return fishSpecie; }
     public double getWeight() { return fishWeight; }
     public double getLength() { return fishLength; }
+    public static String parseDays(String dayOfTheWeek) {
+        switch(dayOfTheWeek) {
+            case "MONDAY"     : return "PONIEDZIALEK";
+            case "TUESDAY"    : return "WTOREK";
+            case "WEDNESDAY"  : return "SRODA";
+            case "THURSDAY"   : return "CZWARTEK";
+            case "FRIDAY"     : return "PIATEK";
+            case "SATURDAY"   : return "SOBOTA";
+            case "SUNDAY"     : return "NIEDZIELA";
+            default           : return "BLAD";
+        }
+    }
 
     @Override public String toString() {
-        return "Polow: " + fishingDate.toString() + " gatunek: " + fishSpecie
+        return "Polow: " + fishingDate.toString() + " (" + parseDays(fishingDate.getDayOfWeek().toString()) + ") gatunek: " + fishSpecie
                + " wedkarz: " + anglerData + " waga: " + fishWeight + " dlugosc: " + fishLength;
     }
 }
