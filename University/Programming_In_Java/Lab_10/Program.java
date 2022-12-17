@@ -62,5 +62,13 @@ public class Program {
                                                              LinkedHashMap::new, Collectors.toList()))
                         .values().forEach(System.out::println);
         //Fish.parseDays(e.getFishingDate().getDayOfWeek().toString())), Comparator.comparing(e -> e.getFishingDate().getDayOfWeek().toString()))).values().forEach(System.out::println);
+    
+        System.out.println("\n6.Informacje z zakresu ile ryb o dlugosci powyzej 50cm zlowil dany wedkarz: \n");
+    
+        fishes.stream()
+            .filter(e -> e.getLength() > 50.0)
+                .collect(Collectors
+                    .groupingBy(e -> e.getAnglerData(), Collectors.counting()))
+                        .forEach((key, value) -> System.out.println("Angler: " + key + " caught: " + value + " fishes"));
     }
 }
