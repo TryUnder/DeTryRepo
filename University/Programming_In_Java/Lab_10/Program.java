@@ -70,5 +70,19 @@ public class Program {
                 .collect(Collectors
                     .groupingBy(e -> e.getAnglerData(), Collectors.counting()))
                         .forEach((key, value) -> System.out.println("Angler: " + key + " caught: " + value + " fishes"));
+    
+        System.out.println("\n7.Informacje o ladcznej wadze zlowionych szczupakow i sandaczy: \n");
+
+        System.out.println("Laczna waga wynosi: " + fishes.stream()
+            .filter(e -> (e.getSpecie().equals("szczupak") || e.getSpecie().equals("sandacz")))
+                .mapToDouble(e -> { return e.getWeight(); }).sum());
+    
+        System.out.println("\n8.Informacje o sredniej dlugosci ryb zlowionych w poszczegolne dni tygodnia" +
+                                "uzupelnione danymi z zakresu ile zlowiono w danym dniu ryb i ile wynosily najmniejsze" +
+                                "i najwieksze odnotowane w danym dniu wartosci dlugosci ryb\n");
+
+        System.out.println("\nSrednie dlugosci ryb zlowionych w poszczegolne dni tygodnia: \n");
+
+        
     }
 }
