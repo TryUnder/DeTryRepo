@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.stream.*;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.Collections;
 import java.io.*;
 
@@ -49,7 +50,17 @@ public class Program {
     
         System.out.println("\n5.Polowy pogrupowane po dniu tygodnia: \n");
         //fishes.stream().collect(Collectors.groupingBy(Fish::getFishingDate::parseDays))
-         fishes.stream().collect(Collectors.collectingAndThen(Collectors.groupingBy(e -> Fish.parseDays(e.getFishingDate().getDayOfWeek().toString())), Collections.sort(fishes, Comparator.comparing(e -> e.getFishingDate().getDayOfWeek().toString())))).values().forEach(System.out::println);    
+        // fishes.stream().collect(
+        //     Collectors.collectingAndThen(
+        //         Collectors.groupingBy(e -> (e.getFishingDate().getDayOfWeek().toString()), l -> {
+        //             Collections.sort(l, Fish::getDayOfWeek)}; return l;)));    
+        
+        fishes.stream()
+            .sorted(Comparator
+                .comparing(e -> e.getFishingDate().getDayOfWeek()))
+                    .collect(Collectors.groupingBy(e -> e.getFishingDate().getDayOfWeek().toString(),
+                                                             LinkedHashMap::new, Collectors.toList()))
+                        .values().forEach(System.out::println);
         //Fish.parseDays(e.getFishingDate().getDayOfWeek().toString())), Comparator.comparing(e -> e.getFishingDate().getDayOfWeek().toString()))).values().forEach(System.out::println);
     }
 }
