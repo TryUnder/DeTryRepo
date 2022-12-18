@@ -37,7 +37,7 @@ public class Fish {
     }
 
     @Override public String toString() {
-        return "Polow: " + fishingDate.toString() + " (" + fishingDate.getDayOfWeek().toString() + ") gatunek: " + fishSpecie
+        return "Polow: " + fishingDate.toString() + " (" + parseDaysString(fishingDate.getDayOfWeek().toString()) + ") gatunek: " + fishSpecie
                + " wedkarz: " + anglerData + " waga: " + fishWeight + " dlugosc: " + fishLength;
     }
 }
