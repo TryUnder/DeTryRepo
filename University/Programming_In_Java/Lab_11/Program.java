@@ -40,5 +40,12 @@ public class Program {
             LongSummaryStatistics stats3 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length()).distinct().summaryStatistics();
             System.out.printf("\n\nLaczna liczba slow: %d\nLiczba roznych slow: %d\nMinimalna dlugosc slowa: %d\nMaksymalna dlugosc slowa: %d\nSrednia dlugosc slow: %f",
                              stats.getSum(), stats3.getSum(), stats2.getMin(), stats2.getMax(), stats2.getAverage());
+        
+        
+            System.out.println("\n\nPierwsze 10 slow tekstu(+ dlugosc poszczegolnych slow): ");
+            pureTextList.stream().limit(10).forEach(e -> System.out.print(e + " "));
+            System.out.println();
+            pureTextList.stream().limit(10).forEach(e -> System.out.print(e.length() + " "));
+                            
         }    
 }
