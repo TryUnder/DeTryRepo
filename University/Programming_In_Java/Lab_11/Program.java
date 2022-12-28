@@ -36,8 +36,9 @@ public class Program {
             //System.out.println(summary.getCount());
 
             LongSummaryStatistics stats = wordCounts.entrySet().stream().mapToLong(x -> x.getValue()).summaryStatistics();
-            LongSummaryStatistics stats2 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length() ).summaryStatistics();
-            System.out.printf("\n\nLaczna liczba slow: %d\nMinimalna dlugosc slowa: %d\nMaksymalna dlugosc slowa: %d",
-                             stats.getSum(), stats2.getMin(), stats2.getMax());
+            LongSummaryStatistics stats2 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length()).summaryStatistics();
+            LongSummaryStatistics stats3 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length()).distinct().summaryStatistics();
+            System.out.printf("\n\nLaczna liczba slow: %d\nLiczba roznych slow: %d\nMinimalna dlugosc slowa: %d\nMaksymalna dlugosc slowa: %d\nSrednia dlugosc slow: %f",
+                             stats.getSum(), stats3.getSum(), stats2.getMin(), stats2.getMax(), stats2.getAverage());
         }    
 }
