@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.TreeMap;
 import java.util.function.Function;
+import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.stream.Collectors;
 import java.util.regex.Pattern;
@@ -39,8 +40,9 @@ public class Program {
             LongSummaryStatistics stats = wordCounts.entrySet().stream().mapToLong(x -> x.getValue()).summaryStatistics();
             LongSummaryStatistics stats2 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length()).summaryStatistics();
             LongSummaryStatistics stats3 = wordCounts.entrySet().stream().mapToLong(x -> x.getKey().length()).distinct().summaryStatistics();
+            DoubleSummaryStatistics avg = wordCounts.entrySet().stream().mapToDouble(x -> x.getValue() * x.getKey().length()).summaryStatistics();
             System.out.printf("\n\nLaczna liczba slow: %d\nLiczba roznych slow: %d\nMinimalna dlugosc slowa: %d\nMaksymalna dlugosc slowa: %d\nSrednia dlugosc slow: %f",
-                             stats.getSum(), stats3.getSum(), stats2.getMin(), stats2.getMax(), stats2.getAverage());
+                             stats.getSum(), stats3.getSum(), stats2.getMin(), stats2.getMax(), avg.getSum()/stats.getSum());
         
         
             System.out.println("\n\nPierwsze 10 slow tekstu(+ dlugosc poszczegolnych slow): ");
@@ -54,12 +56,16 @@ public class Program {
         
             System.out.println("\n");
             System.out.printf("Dlugosc Liczba_wystapien\n");
-
             pureTextList.stream().collect(Collectors.groupingBy(e -> e.length(), Collectors.counting()))
                 .forEach((key, value) -> {
                     System.out.println(key + " " + value);
                 });
 
-            System.out.println("\n");
+            System.out.println("\nSuma(laczna liczba liter): ");
+            
+            //System.out.println(IntStream.range(pureTextList.stream()., 10).sum());
+            //pureTextList.stream().map(e -> e.replaceAll(", ", "")).takeWhile(e -> e.length() > 0);
+
+            System.out.println(pureTextList.stream().mapToInt(String::length).sum());
     }    
 }
