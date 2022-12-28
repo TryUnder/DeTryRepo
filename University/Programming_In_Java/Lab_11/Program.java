@@ -47,6 +47,8 @@ public class Program {
             System.out.println();
             pureTextList.stream().limit(10).forEach(e -> System.out.print(e.length() + " "));
             System.out.println();
-            pureTextList.stream().skip(stats.getSum() - 10).forEach(e -> System.out.print(e + " "));            
+            pureTextList.stream().skip(stats.getSum() - 10).forEach(e -> System.out.print(e + " "));    
+            System.out.println();
+            pureTextList.stream().skip(stats.getSum() - 10).forEach(e -> System.out.print(e.length() + " "));        
         }    
 }
