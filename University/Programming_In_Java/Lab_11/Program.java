@@ -36,6 +36,6 @@ public class Program {
             //System.out.println(summary.getCount());
 
             LongSummaryStatistics stats = wordCounts.entrySet().stream().mapToLong(x -> x.getValue()).summaryStatistics();
-            System.out.printf("\n\nLaczna liczba slow: %d Liczba roznych slow: %f", stats.getSum(), stats.getAverage());
+            System.out.printf("\n\nLaczna liczba slow: %d", stats.getSum());
         }    
 }
