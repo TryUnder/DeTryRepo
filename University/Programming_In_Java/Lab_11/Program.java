@@ -54,10 +54,12 @@ public class Program {
         
             System.out.println("\n");
             System.out.printf("Dlugosc Liczba_wystapien\n");
-            wordCounts.entrySet().stream().collect(
-                        Collectors.groupingBy(Function.identity(), Collectors.counting())).
-                            forEach((key, value) -> {
-                                System.out.println(key + " " + value);
-                            });
+
+            pureTextList.stream().collect(Collectors.groupingBy(e -> e.length(), Collectors.counting()))
+                .forEach((key, value) -> {
+                    System.out.println(key + " " + value);
+                });
+
+            System.out.println("\n");
     }    
 }
