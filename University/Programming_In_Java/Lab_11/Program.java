@@ -12,6 +12,7 @@ import java.util.IntSummaryStatistics;
 import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 import java.util.stream.*;
+import java.util.function.Function;
 
 public class Program {
     public static void main(String[] args) throws IOException {
@@ -50,5 +51,13 @@ public class Program {
             pureTextList.stream().skip(stats.getSum() - 10).forEach(e -> System.out.print(e + " "));    
             System.out.println();
             pureTextList.stream().skip(stats.getSum() - 10).forEach(e -> System.out.print(e.length() + " "));        
-        }    
+        
+            System.out.println("\n");
+            System.out.printf("Dlugosc Liczba_wystapien\n");
+            wordCounts.entrySet().stream().collect(
+                        Collectors.groupingBy(Function.identity(), Collectors.counting())).
+                            forEach((key, value) -> {
+                                System.out.println(key + " " + value);
+                            });
+    }    
 }
