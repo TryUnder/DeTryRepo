@@ -6,9 +6,16 @@
         <style>
             .button1 {
                 position:relative;
-                left: 200px;
+                left: 680px;
                 width: 100px;
-                height: 10px;
+                height: 30px;
+            }
+
+            .button2 {
+                position:relative;
+                left: 700px;
+                width: 100px;
+                height: 30px;
             }
 
             .input {
@@ -17,12 +24,14 @@
                 width: 100px;
                 height: 15px;
             }
+
         </style>
     </head>
  
     <body>
         <button id="button" onclick="updateChart()" class="button1">Dodaj Punkt</button">
-        <input id="inputX" class="input">
+        <button id="button2" onclick="deletePoint()" class="button2">Usun Punkt</button>
+        Wspolrzedne:<input id="inputX" class="input">
         <input id="inputY" class="input">
  
         <div style="width: 600px; height: 400px;">
@@ -51,6 +60,11 @@
                 let y = document.getElementById("inputY").value;
                 wykres.data.datasets[0].data.push({x: parseFloat(x), y: parseFloat(y)});
                 wykres.update();    
+            }
+
+            function deletePoint() {
+                wykres.data.datasets[0].data.shift();
+                wykres.update();
             }
 
         </script>
