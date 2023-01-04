@@ -4,17 +4,26 @@
         <meta charset="utf-8">
         <script src="chart.js"></script>
         <style>
-            #button {
+            .button1 {
+                position:relative;
+                left: 200px;
                 width: 100px;
-                height: 100px;
+                height: 10px;
+            }
+
+            .input {
+                position:relative;
+                left:100px;
+                width: 100px;
+                height: 15px;
             }
         </style>
     </head>
  
     <body>
-        <button id="button"> Dodaj Punkt</button>
-        <input id="inputX">
-        <input id="inputY">
+        <button id="button" onclick="updateChart()" class="button1">Dodaj Punkt</button">
+        <input id="inputX" class="input">
+        <input id="inputY" class="input">
  
         <div style="width: 600px; height: 400px;">
             <canvas id="wykres" width="600" height="400"></canvas>
@@ -33,10 +42,17 @@
                 borderColor: "blue"
                         }]
             }
- 
+            
             const ctx = document.getElementById("wykres").getContext("2d");
-            const wykres = new Chart(ctx, { type: "scatter", data: dane });
-  
+            let wykres = new Chart(ctx, { type: "scatter", data: dane });
+
+            function updateChart() {
+                let x = document.getElementById("inputX").value;
+                let y = document.getElementById("inputY").value;
+                wykres.data.datasets[0].data.push({x: parseFloat(x), y: parseFloat(y)});
+                wykres.update();    
+            }
+
         </script>
     </body>
 </html>
