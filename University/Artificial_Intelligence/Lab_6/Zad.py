@@ -12,12 +12,12 @@ xx2[:,1] = np.random.normal(+3, 1, 100)
 
 x = np.concatenate([xx1, xx2])
 
-# xx3 = np.zeros([100,2])
-# xx3[:,0] = np.random.normal(-5, 1, 100)
-# xx3[:,1] = np.random.normal(+5, 1, 100)
-# x = np.concatenate([x, xx3])
+xx3 = np.zeros([100,2])
+xx3[:,0] = np.random.normal(-5, 1, 100)
+xx3[:,1] = np.random.normal(+5, 1, 100)
+x = np.concatenate([x, xx3])
 
-N = 2
+N = 3
 M = 2
 wagi = np.random.random([N, M]) * 4 - 2
  
@@ -40,20 +40,6 @@ def zwyciezca(xx):
     #print("Zwyciezca jest neuron nr: ", z)
     return z,d[z]
  
- 
- 
-klasa = np.zeros(len(x))
-for i in range(len(x)):
-    z,dz = zwyciezca(x[i])
-    klasa[i] = z
-    
-plt.plot(x[klasa[:]==0,0], x[klasa[:]==0,1], 'g.', label="klasa 0")
-plt.plot(x[klasa[:]==1,0], x[klasa[:]==1,1], 'r.', label="klasa 1")
-plt.plot(wagi[:,0], wagi[:,1], 'bo', label="neuron")
-plt.legend()
-plt.show()
- 
- 
 E = []
 for m in range(1000):  
     sumx = 0
@@ -68,11 +54,22 @@ for m in range(1000):
             print (E[m-1], E[m])
             print ("Nauczono w: ", m, " iteracjach")
             break;
+     
+
+klasa = np.zeros(len(x))
+for i in range(len(x)):
+    z,dz = zwyciezca(x[i])
+    klasa[i] = z
     
-    
+plt.plot(x[klasa[:]==0,0], x[klasa[:]==0,1], 'g.', label="klasa 0")
+plt.plot(x[klasa[:]==1,0], x[klasa[:]==1,1], 'r.', label="klasa 1")
+plt.plot(wagi[:,0], wagi[:,1], 'bo', label="neuron")
+plt.legend()
+plt.show()
+
 plt.plot(x[klasa[:]==0,0], x[klasa[:]==0,1], 'g*', label="klasa 1")
 plt.plot(x[klasa[:]==1,0], x[klasa[:]==1,1], 'r*', label="klasa 2")
-#plt.plot(x[klasa[:]==2,0], x[klasa[:]==2,1], 'y*', label="klasa 3")
+plt.plot(x[klasa[:]==2,0], x[klasa[:]==2,1], 'y*', label="klasa 3")
 #plt.plot(x[klasa[:]==3,0], x[klasa[:]==3,1], 'c*', label="klasa 4")
 plt.plot(wagi[:,0], wagi[:,1], 'bo', label="neuron")
 plt.legend()
