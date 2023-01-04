@@ -20,7 +20,6 @@ int main(int argc, char* argv[]){
 	float* A;
 	float* B;
 	float* C;
-	if(rank == 0){
 		cout << "Podaj rozmiar wektora: ";
 		cin >> rozmiar;
 		A = new float[rozmiar];
@@ -35,18 +34,19 @@ int main(int argc, char* argv[]){
 		for (int i=0; i<rozmiar; ++i){
 			cout << "A[" << i+1 << "]: " << A[i] << " B[" << i+1 << "]: " << B[i] << " C[" << i+1 << "]: " << C[i] <<  endl;
 		}
-	}
 
-	MPI_Bcast(&rozmiar, 1, MPI_INT, 0, MPI_COMM_WORLD);
-	float* a = new float[rozmiar/size];
-	float* b = new float[rozmiar/size];
-	float* c = new float[rozmiar/size];
-	MPI_Scatter(A, rozmiar/size, MPI_FLOAT, a, rozmiar/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-	MPI_Scatter(B, rozmiar/size, MPI_FLOAT, b, rozmiar/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-        for (int i=0; i<rozmiar/size; ++i){
+	float* a = new float[rozmiar];
+	float* b = new float[rozmiar];
+	float* c = new float[rozmiar];
+        for (int i=0; i<rozmiar; ++i) {
+            a[i] = A[i];
+            b[i] = B[i];
 			c[i] = a[i] + b[i];
-	}
-	MPI_Gather(c, rozmiar/size, MPI_FLOAT, C, rozmiar/size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+	    }
+
+        for (int i=0; i<rozmiar; ++i) {
+            C[i] = c[i];
+        }
 
 	if (rank == 0){
 		cout << "Po obliczeniach: \n";
