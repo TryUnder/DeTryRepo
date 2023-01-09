@@ -1,26 +1,41 @@
 #include <iostream>
+#include <omp.h>
 
 int main(int argc, char** argv) {
-    unsigned int n = 2;
+	
+	double tBegin, tEnd;
+	
+	tBegin = omp_get_wtime();
+	
+    unsigned int n = 2000;
     double** F = new double *[n];
     double** A = new double *[n];
 
     double Beta = 2.2;
     double alfa = 0.0;
 
-    double* a = new double[n] {1.5, 2.5};
-    double* b = new double[n] {3.5, 4.5};
-    double* c = new double[n] {5.5, 6.5};
-    double* e = new double[n] {7.5, 8.5};
+    double* a = new double[n];
+    double* b = new double[n];
+    double* c = new double[n];
+    double* e = new double[n];
+
     for (int i = 0; i < n; ++i) {
-        F[i] = new double;
-        A[i] = new double;
+        a[i] = i;
+        b[i] = i;
+        c[i] = i;
+        e[i] = i;
+    }
+
+
+    for (int i = 0; i < n; ++i) {
+        F[i] = new double[n];
+        A[i] = new double[n];
         for (int j = 0; j < n; ++j) {
             F[i][j] = 1.4;
             A[i][j] = 1.5;
         }
     }
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < 500; ++i) {
         //1
         for (int j = 0; j < n; ++j) {
             for (int k = 0; k < n; ++k) {
@@ -29,8 +44,9 @@ int main(int argc, char** argv) {
         }
 
         //2
+        alfa = 0;
         for (int j = 0; j < n; ++j) {
-            alfa +=  (a[j] * b[j]);
+            alfa += (a[j] * b[j]);
         }
 
         //3
@@ -41,7 +57,7 @@ int main(int argc, char** argv) {
         //4
         for (int j = 0; j < n; ++j) {
             for (int k = 0; k < n; ++k) {
-                e[j] = F[j][k] * a[j];
+                e[j] = F[j][k] * a[k];
             }
         }
 
@@ -51,10 +67,14 @@ int main(int argc, char** argv) {
         }
     }
 
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            std::cout << F[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    // for (int i = 0; i < n; ++i) {
+    //     for (int j = 0; j < n; ++j) {
+    //         std::cout << F[i][j] << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+    
+    tEnd = omp_get_wtime();
+    
+    std::cout << "Czas wyniosl: " << tEnd - tBegin << std::endl;
 }
