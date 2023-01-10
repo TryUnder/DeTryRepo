@@ -31,9 +31,7 @@ public class Klasa {
     public synchronized void procesProducenta() throws InterruptedException {
         Random random = new Random();
         int ktory = random.nextInt(3);
-        while (!(ktory == 0 && magazynSurowcow >= 120 && magazynSurowcow < 250) || 
-            !(ktory == 1 && magazynSurowcow >= 250 && magazynSurowcow < 500) ||
-            !(ktory == 2 && magazynSurowcow >= 500)) {
+        while (magazynSurowcow < 120) {
             System.out.println(Thread.currentThread().getName() + 
             ": Czekam na materialy, chce wyprodukowac: " + Klasa.getProduct(ktory));
             wait();

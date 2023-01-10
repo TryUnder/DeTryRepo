@@ -28,8 +28,7 @@ public class Program {
         thread5.setName("Dostawca 3");
 
         thread1.start();
-        thread2.start();
         thread3.start();
-        
+
     }
 }
