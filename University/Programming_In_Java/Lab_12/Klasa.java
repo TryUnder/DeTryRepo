@@ -27,24 +27,42 @@ public class Klasa {
             default: return "Blad";
         }
     }
+
+    public static int getValue(int ktory) {
+        switch(ktory) {
+            case 0: return 120;
+            case 1: return 250;
+            case 2: return 500;
+            default: return 0;
+        }
+    }
     
     public synchronized void procesProducenta() throws InterruptedException {
         Random random = new Random();
         int ktory = random.nextInt(3);
-        while (magazynSurowcow < 120) {
+        while (!(ktory == 0 && magazynSurowcow >= 120 && magazynSurowcow < 250) || 
+            !(ktory == 1 && magazynSurowcow >= 250 && magazynSurowcow < 500) ||
+            !(ktory == 2 && magazynSurowcow >= 500)){
             System.out.println(Thread.currentThread().getName() + 
             ": Czekam na materialy, chce wyprodukowac: " + Klasa.getProduct(ktory));
             wait();
+            aktualizujSurowce(Klasa.getValue(ktory));
+            System.out.println("DZIALA!" + Thread.currentThread().getName());
         }
-        System.out.println("DZIALA!");
+        System.out.println("DZIALA!" + Thread.currentThread().getName());
     }
 
-    public void transfer(int liczbaSurowcow, int zrodlo) {
+    public void aktualizujSurowce(int number) {
+        magazynSurowcow -= number;
+    }
+
+    public synchronized void transfer(int liczbaSurowcow, int zrodlo) throws InterruptedException {
         magazynSurowcow += liczbaSurowcow;
         surowiec[zrodlo] -= liczbaSurowcow;
+        notifyAll();
     }    
 
-    public void procesDostawcy() {
+    public synchronized void procesDostawcy() throws InterruptedException {
         if (surowiec[0] != 0 && surowiec[1] != 0) {
             Random random = new Random();
             int liczbaSurowcow = random.nextInt(100, 300);

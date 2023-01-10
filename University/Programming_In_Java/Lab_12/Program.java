@@ -10,7 +10,9 @@ public class Program {
         };
 
         Runnable dostawca = () -> {
+            try {
             klasa.procesDostawcy();
+            }catch(InterruptedException e) {}
         };
 
         Thread thread1 = new Thread(producent);
@@ -29,6 +31,7 @@ public class Program {
 
         thread1.start();
         thread3.start();
+        thread2.start();
 
     }
 }
