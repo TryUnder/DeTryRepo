@@ -33,5 +33,8 @@ public class Program {
         thread3.start();
         thread2.start();
 
+        thread4.start();
+        thread5.start();
+
     }
 }

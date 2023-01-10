@@ -40,37 +40,44 @@ public class Klasa {
     public synchronized void procesProducenta() throws InterruptedException {
         Random random = new Random();
         int ktory = random.nextInt(3);
-        while (!(ktory == 0 && magazynSurowcow >= 120 && magazynSurowcow < 250) || 
-            !(ktory == 1 && magazynSurowcow >= 250 && magazynSurowcow < 500) ||
-            !(ktory == 2 && magazynSurowcow >= 500)){
+        Pair<Integer, Integer> pair = new Pair<Integer, Integer>(ktory, magazynSurowcow);
+        if ((pair.getFst() == 0 && pair.getSnd() < 120) || 
+            (pair.getFst() == 1 && pair.getSnd() < 250) ||
+            (pair.getFst() == 2 && pair.getSnd() < 500)){
             System.out.println(Thread.currentThread().getName() + 
-            ": Czekam na materialy, chce wyprodukowac: " + Klasa.getProduct(ktory));
+            ": Czekam na materialy, chce wyprodukowac: " + Klasa.getProduct(pair.getFst()));
             wait();
-            aktualizujSurowce(Klasa.getValue(ktory));
-            System.out.println("DZIALA!" + Thread.currentThread().getName());
+            aktualizujSurowce(Klasa.getValue(pair.getFst()));
+            //System.out.println("DZIALA!" + Thread.currentThread().getName());
         }
         System.out.println("DZIALA!" + Thread.currentThread().getName());
     }
 
     public void aktualizujSurowce(int number) {
+        System.out.println("xxx");
         magazynSurowcow -= number;
     }
 
-    public synchronized void transfer(int liczbaSurowcow, int zrodlo) throws InterruptedException {
-        magazynSurowcow += liczbaSurowcow;
+    public synchronized void pobierzSurowiec(int liczbaSurowcow, int zrodlo) throws InterruptedException {
         surowiec[zrodlo] -= liczbaSurowcow;
-        notifyAll();
-    }    
+    }  
+
+    public synchronized void dostarczSurowiec(int liczbaSurowcow) {
+        magazynSurowcow += liczbaSurowcow;
+    }
 
     public synchronized void procesDostawcy() throws InterruptedException {
         if (surowiec[0] != 0 && surowiec[1] != 0) {
             Random random = new Random();
             int liczbaSurowcow = random.nextInt(100, 300);
             int zrodlo = random.nextInt(2);
-            transfer(liczbaSurowcow, zrodlo);
+            pobierzSurowiec(liczbaSurowcow, zrodlo);
             System.out.println(Thread.currentThread().getName() + 
                 ": Pobralem " + liczbaSurowcow + " jednostek ze zrodla: " + zrodlo + " (w magazynie pozostalo: " +
                 surowiec[zrodlo] + " szt.)");
+            dostarczSurowiec(liczbaSurowcow);
+            System.out.println(Thread.currentThread().getName() +
+                ": Dostarczylem " + liczbaSurowcow + " Stan magazynu surowcow to " + magazynSurowcow);
         }
     }
 }
