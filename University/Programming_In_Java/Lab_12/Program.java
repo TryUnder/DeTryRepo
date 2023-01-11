@@ -2,7 +2,6 @@ public class Program {
     public static void main(String[] args) {
         final int zrodlo = 2;
         Klasa klasa = new Klasa(50000, zrodlo);
-
         Runnable producent = () -> {
             try {
                 klasa.procesProducenta();
@@ -11,7 +10,7 @@ public class Program {
 
         Runnable dostawca = () -> {
             try {
-            klasa.procesDostawcy();
+                klasa.procesDostawcy();
             }catch(InterruptedException e) {}
         };
 
