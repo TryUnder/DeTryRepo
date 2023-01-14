@@ -11,6 +11,9 @@ public class Resources {
     int sourceACurrent = 50000;
     int sourceBCapacity = 50000;
     int sourceBCurrent = 50000;
+    int productACount = 0;
+    int productBCount = 0;
+    int productCCount = 0;
  
     Semaphore resourceSem = new Semaphore(1);
     Semaphore productSem = new Semaphore(1);
