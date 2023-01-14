@@ -1,7 +1,6 @@
-import java.util.Random;
 import java.util.concurrent.Semaphore;
  
-// Shared resources
+// zasoby dzielone
 public class Resources {
     int resourceStorageCapacity = 5000;
     int resourceStorageCurrent = 0;

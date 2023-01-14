@@ -16,12 +16,12 @@ public class Supplier extends Thread {
                 resources.sourceASem.acquire();
                 resources.sourceBSem.acquire();
                 resources.resourceSem.acquire();
-                // select a random source
+                // wybor zrodla
                 int sourceNum = rand.nextInt(2) + 1;
                 int resourceAmount = rand.nextInt(201) + 100;
-                // check if there is enough resources in the source
+                // czy jest odpowiednia ilosc surowcow potrzebnych do produkcji produktu
                 if ((sourceNum == 1 && resources.sourceACurrent < resourceAmount) || (sourceNum == 2 && resources.sourceBCurrent < resourceAmount)) {
-                    System.out.println("<-> D:Thread[" + Thread.currentThread().getName() + "] Awaiting delivery of " + resourceAmount + " pcs. to the warehouse of raw materials (current in warehouse no. " + resources.resourceStorageCurrent + ")");
+                    System.out.println("<-> Watek[" + Thread.currentThread().getName() + "] Czekam na materialy w ilosci " + resourceAmount + " sztuk.  (W magazynie jest): " + resources.resourceStorageCurrent + ")");
                     resources.sourceASem.release();
                     resources.sourceBSem.release();
                     resources.resourceSem.release();
@@ -30,13 +30,13 @@ public class Supplier extends Thread {
                 }
                 if (sourceNum == 1) {
                     resources.sourceACurrent -= resourceAmount;
-                    System.out.println("Thread[" + Thread.currentThread().getName() + "]: I took " + resourceAmount + " units from source 0 (" + resources.sourceACurrent + " left in stock)");
+                    System.out.println("Watek[" + Thread.currentThread().getName() + "-" + Thread.currentThread().getId() + "]: Pobralem " + resourceAmount + " jednostek z magazynu 0 (" + resources.sourceACurrent + " zostalo)");
                 } else {
                     resources.sourceBCurrent -= resourceAmount;
-                    System.out.println("Thread[" + Thread.currentThread().getName() + "]: I took " + resourceAmount + " units from source 1 (" + resources.sourceBCurrent + " left in stock)");
+                    System.out.println("Watek[" + Thread.currentThread().getName() + "-" + Thread.currentThread().getId() + "]: Pobralem " + resourceAmount + " jednostek z magazynu 1 (" + resources.sourceBCurrent + " zostalo)");
                 }
                 resources.resourceStorageCurrent += resourceAmount;
-                System.out.println("Thread[" + Thread.currentThread().getName() + "]: I delivered " + resourceAmount + " pcs. Stock of raw materials is " + resources.resourceStorageCurrent + " pcs.");
+                System.out.println("Watek[" + Thread.currentThread().getName() + "-" + Thread.currentThread().getId() + "]: Dostarczylem " + resourceAmount + " sztuk. Stan materialow: " + resources.resourceStorageCurrent + " sztuk.");
                 resources.sourceASem.release();
                 resources.sourceBSem.release();
                 resources.resourceSem.release();
