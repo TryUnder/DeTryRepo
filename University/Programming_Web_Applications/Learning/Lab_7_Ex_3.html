@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_7\p5.min.js"></script>
+    </head>
+
+    <body>
+        <script>
+
+            function setup() {
+                createCanvas(640, 480, WEBGL);
+            }
+
+            let kat = 0.0;
+
+            function draw() {
+                background(200);
+                rotateY(kat);
+                translate(150, 0, 0);
+                box();
+                kat += 0.03;
+            }
+        </script>
+    </body>
+</html>
