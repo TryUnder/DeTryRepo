@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <script src="C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_9\chart.js"></script>
+        <div style="width: 600px; height:600px;">
+            <canvas id="myChart" width="600" height="400"></canvas>
+        </div>
+
+        <script>
+
+            function updateChart(dane, wykres) {
+                dane.datasets[0].data[Math.floor(Math.random() * 4)] += 10;
+                wykres.update();
+            }
+
+            const ctx = document.getElementById("myChart");
+            const dane = {
+                labels: ["Młody", "Średniego wieku", "Stary", "Bardzo stary"],
+                datasets: [ {
+                        label: "Grupa wiekowa nr 1",
+                        data: [21, 35, 65, 75],
+                        backgroundColor: ["violet", "blue", "green", "pink"]
+                    },
+                
+                ]
+            }
+            
+            const wykres = new Chart(ctx, { type: "pie", data: dane });
+            setInterval(() => updateChart(dane, wykres), 1000);
+        </script>
+    </body>
+</html>

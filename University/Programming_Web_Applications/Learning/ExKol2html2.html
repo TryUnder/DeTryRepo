@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div { display:inline; }
+        </style>
+    </head>
+
+    <body>
+        <script src="C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_7\p5.min.js"></script>
+        <div><button id = "cube" onclick= "drawModified();">Szescian</button></div>
+        <div><button id = "sphere" onclick = "drawModified();">Sfera</button></div>
+        <div><button id = "cone" onclick = "drawModified();">Stozek</button></div>
+        <br><br>
+        <script>
+            function setup() {
+                createCanvas(400, 400, WEBGL);
+            }
+
+            let objectType = "cube";
+
+            function drawModified() {
+                document.getElementById("cube").onclick = function() {
+                    objectType = "cube";
+                }
+
+                document.getElementById("sphere").onclick = function() {
+                    objectType = "sphere";
+                }
+
+                document.getElementById("cone").onclick = function() {
+                    objectType = "cone";
+                }
+            }
+
+            let angleX = 0;
+            let angleY = 0;
+
+            function draw() {
+                background(145);
+                rotateX(angleX);
+                rotateY(angleY);
+                angleX += 0.01;
+                angleY += 0.01;
+                stroke(255,20,30);
+                fill(120, 34, 187);
+                lights();
+                if (objectType === "cube") {
+                    box(50);
+                } else if (objectType === "sphere") {
+                    sphere(50);
+                } else if (objectType === "cone") {
+                    cone(50, 100);
+                }
+
+            }
+        </script>
+
+    </body>
+</html>
