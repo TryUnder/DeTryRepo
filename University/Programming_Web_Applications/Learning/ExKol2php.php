@@ -28,10 +28,13 @@
         ?>
 
         <?php
-            function wordPermutate($array1, $array2) {
+            $plik = fopen("doZapisu.txt", "a");
+
+            function wordPermutate($array1, $array2, $plik) {
                 for ($i = 0; $i < count($array1); $i++) {
                     for ($j = 0; $j < count($array2); $j++) {
                         echo($array1[$i].$array2[$j]."<br>");
+                        fputs($plik, $array1[$i].$array2[$j]."\r\n");
                     }
                 }
             }
@@ -39,7 +42,7 @@
             $array1 = ["admin", "123", "root", "!@#", "zaqwsx", "password", "pwd"];
             $array2 = ["admin", "123", "root", "!@#", "zaqwsx", "password", "pwd"];
 
-            wordPermutate($array1, $array2);
+            wordPermutate($array1, $array2, $plik);
         ?>
     </body>
 </html>
