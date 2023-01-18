@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src ="C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_7\p5.min.js"></script>
+    </head>
+
+    <body>
+        <script>
+            function setup() {
+                createCanvas(1000, 840, WEBGL);
+            }
+
+            let kat = 20.0;
+            
+            function draw() {
+                background(200);
+                for (let i = -200; i < 300; i += 100) {
+                    push();
+                    translate(0, i, 0);
+                    for (let j = -200; j < 300; j += 100) {
+                        push();
+                        translate(j, 0, 0);
+                        rotateX(kat);
+                        if (j == 0) {
+                            rotateZ(kat);
+                        }
+                        sphere(50);
+                        pop();
+                    }
+                    kat += 0.01;
+                    pop();
+                }
+                orbitControl();
+            }
+
+
+        </script>
+    </body>
+</html>

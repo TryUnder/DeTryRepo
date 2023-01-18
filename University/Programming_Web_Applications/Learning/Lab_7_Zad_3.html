@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src = "C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_7\p5.min.js"></script>
+        <style>
+            main { position: fixed;
+                   left: 0;
+                   top: 0;
+                   z-index: -1;
+            }
+            div div {
+                margin: 100px;
+                padding: 10px;
+                width: 200px;
+                height: 100px;
+                border-radius: 10px;
+                background: white;
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main></main>
+
+        <div>
+            <div>Muladhara</div>
+            <div>Sahasrara</div>
+            <div>Anahata</div>
+            <div>Visudha</div>
+            <div>Manipura</div>
+        </div>
+
+        <script>
+            let rysunek = null;
+            function preload() {
+                rysunek = loadImage("https://cdn.pixabay.com/photo/2022/02/15/17/45/winter-7015372_960_720.jpg");
+                noStroke();
+            }
+
+            function setup() {
+                createCanvas(windowWidth, windowHeight, WEBGL);
+            }
+
+            function windowResized() {
+                resizeCanvas(windowWidth, windowHeight);
+            }
+
+            let kat = 0.0;
+
+            function draw() {
+                background(0, 10, 40);
+                lights();
+                rotateY(kat);
+                texture(rysunek);
+                sphere(100);
+                kat += 0.02;
+
+                for (let i = 0; i < 10; ++i) {
+                    push();
+                    rotateX(kat * i);
+                    rotateY(kat * i / 3);
+                    rotateZ(kat / i);
+                    translate(150, 150, 150);
+                    sphere(50);
+                    pop();
+                }
+
+                camera(0, mouseX, 500, window.scrollY/2, 0, 0);
+            }
+        </script>
+    </body>
+</html>
