@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src = "C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_7\p5.min.js"></script>
+        <style>
+            main { position: fixed;
+                   left: 0;
+                   top: 0;
+                   z-index: -1;    
+            }
+
+            div div {
+                margin: 100px;
+                padding: 10px;
+                width: 200px;
+                height: 100px;
+                border-radius: 10px;
+                background: white;
+                opacity: 0.8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main></main>
+
+        <script>
+            let rysunek = null;
+            function preload() {
+                rysunek = loadImage("https://cdn.pixabay.com/photo/2018/05/17/15/24/armillar-ball-3408811_1280.jpg");
+            }
+
+            function setup() {
+                createCanvas(windowWidth, windowHeight, WEBGL);
+                noStroke();
+            }
+
+            function windowResized() {
+                resizeCanvas(windowWidth, windowHeight);
+            }
+
+            let kat = 0.0;
+
+            function draw() {
+                background(0, 10, 40);
+                lights();
+                rotateY(kat);
+                texture(rysunek);
+                sphere(100);
+                kat += 0.02;
+            }
+
+        </script>
+    </body>
+</html>
