@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lab_8 - Zad_2</title>
+        <script src = "C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_9\chart.js"></script>        
+    </head>
+
+    <body>
+        <div>
+            X:<input id = "x">
+        </div>
+
+        <div>
+            Y:<input id = "y">
+        </div>
+
+        <div>
+            <button id = "button" onclick = "aktualizujWykres();">Dodaj Punkt</button>
+            <button id = "buttonUsun" onclick = "usunPunkt();">Usuń Punkt</button>
+            <button id = "buttonUsunWybrany" onclick = "usunWybranyPunkt();">Usuń Wybrany Punkt</button>
+        </div>
+
+        <main></main>
+
+        <div style = "width: 600px; height: 400px;">
+            <canvas id = "wykres" width = "600" height = "400"></canvas>
+        </div>
+
+
+
+        <script>
+            var wykres = new Chart(document.getElementById("wykres").getContext("2d"), {
+                type: "scatter",
+                data: {
+                    datasets: [{
+                        label: "Scatter Dataset",
+                        pointRadius: 5,
+                        pointBackgroundColor: ["red", "pink", "blue"],
+                        showLine: true,
+                        borderColor: "black",
+                        data: [ {
+                            x: 0,
+                            y: 0,
+                        }, {
+                            x: 1,
+                            y: 0,
+                        }, {
+                            x: 1,
+                            y: 1,
+                        }]
+                    }]
+                }
+            });
+
+            function aktualizujWykres() {
+                var x = parseFloat(document.getElementById("x").value);
+                var y = parseFloat(document.getElementById("y").value);
+                wykres.data.datasets[0].data.push({x, y});
+                wykres.update();
+            }
+
+            function usunPunkt() {
+                wykres.data.datasets[0].data.shift();
+                wykres.update();
+            }
+
+            function usunWybranyPunkt() {
+                var x = parseFloat(document.getElementById("x").value);
+                var y = parseFloat(document.getElementById("y").value);
+                var data = wykres.data.datasets[0].data;
+                for (let i = 0; i < data.length; ++i) {
+                    if (data[i].x === x && data[i].y === y) {
+                        data.splice(i, 1);
+                        break;
+                    }
+                }
+                wykres.update();
+            }
+
+        </script>
+    </body>
+</html>

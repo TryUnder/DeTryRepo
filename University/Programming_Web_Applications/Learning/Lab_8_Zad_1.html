@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src = "C:\Users\Hubert\github\DeTryRepo\University\Programming_Web_Applications\Lab_9\chart.js"></script>
+    </head>
+
+    <body>
+        <div style = "width: 600px; height: 400px;">
+            <canvas id = "wykres" width = "600" height = "400"></canvas>
+        </div>
+
+        <script>
+            const dane = {
+                labels: ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
+                datasets: [
+                    {
+                        label: "2020",
+                        data: [ 8280, 17965, 31335, 39511, 34626, 26399 ],
+                        backgroundColor: ["rgba(5,120,75,20)", "violet", "red", "blue", "yellow", "green"]
+                    }
+                ],
+            }
+
+            const opcje = {
+                options: {
+                    title: {
+                        display: true,
+                        text: "Zaległość (zł)"
+                    }
+                }
+            }
+
+            const ctx = document.getElementById("wykres").getContext("2d");
+            const wykres = new Chart(ctx, { 
+                type: "bar",
+                data: dane,
+                options: {
+                    title: {
+                        display: true,
+                        text: "Zaległość (zł)"
+                    },
+                    legend : {
+                        position: "right"
+                    }
+                }
+             });
+
+        </script>
+
+    </body>
+</html>
