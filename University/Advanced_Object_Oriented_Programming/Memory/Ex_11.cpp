@@ -40,5 +40,6 @@ int main() {
         A a("a");
         A b{"b"};
         A c = A("c");
+        A d = A{"d"};
     }
 }
