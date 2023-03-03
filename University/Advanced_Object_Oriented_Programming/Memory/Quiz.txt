@@ -1,0 +1,18 @@
+Quiz:
+
+1.Is memory allocation on the stack faster than on the heap?
+
+Memory allocation on the stack is much faster than on the heap mostly due to the lower number of
+opearation that need to be done by processor in order to allocate such memory.
+
+2.Where can we allocate objects?
+    * stack
+    * heap
+
+3.What is the return value optimization? (RVO)
+
+Return value optimization is the compiler technique to eliminate unnecessary use of copy or move
+operations when returning objects from functions. 
+Unlike creating a temporary object that holds a value, compiler tries to construct the return value
+object at its final destination instead.
+This technique is available by the use of copy-constructor or/and move-constructor.
