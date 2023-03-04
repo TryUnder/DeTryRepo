@@ -1,0 +1,19 @@
+Quiz:
+
+1) Can expression be both an lvalue and rvalue at the same time?
+Expression cannot be lvalue and rvalue at the same time, although it is possible to convert
+lvalue to rvalue, and not the other way around.
+
+2) Is a temporary object an rvalue?
+Yes
+
+3) What does the category of the function-call expression depend on?
+Category of the function-call expression depend on whether the function return the reference type,
+or not. If so, the category of such expression is lvalue, if not, rvalue.
+
+4) Why does int i; ++i++; not compile?
+Because the expression cannot be rvalue and lvalue at the same time.
+++i is the prefix increment operator which returns the reference of the incremented object, whereas
+i++ is the suffix increment operator which returns the temporary copy of the object.
+
+Reference from ++i is the lvalue which is not the variable that is possible to change. 
