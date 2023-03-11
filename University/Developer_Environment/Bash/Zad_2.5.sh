@@ -5,7 +5,7 @@ if test $# -ne 1; then
     echo "Uruchom skrypt z jednym argumentem wywołania skryptu, będacym nazwą katalogu, którego chcemy zrobić kopie zapasową."
 else
     if [ -d $1 ]; then
-        cp $1 $(date +%F::%H:%M).tar -r
+        tar -czvf $(date +%F-%H-%M).tar.gz $1
 else
     echo "Plik nie jest katalogiem"
     fi
