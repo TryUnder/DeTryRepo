@@ -1,3 +1,7 @@
+# Napisz program, który przyjmie od użytkownika ścieżkę do pliku i sprawdzi czy plik faktycznie istnieje. 
+# W przypadku kiedy plik nie istnieje użytkownik powinien otrzymać odpowiednią informacje zwrotną. 
+# Korzystając z poprzedniego programu doimplementuj funkcjonalność, która będzie zwracać rozszerzenie do pliku.
+
 import os 
 
 sciezka=input("Proszę wprowadzić scieżkę do pliku: ") 

@@ -1,3 +1,5 @@
+# Napisz program, który wpisze Twoje imię do pliku tekstowego
+
 import os
 
 imie=input("Prosze o podanie imienia")
