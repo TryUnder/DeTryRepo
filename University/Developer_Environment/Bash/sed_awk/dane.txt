@@ -1,0 +1,6 @@
+student=Jan Kowalski
+nr indeksu=123456
+ocena=5.0
+student=Anna Nowak
+nr indeksu=1234567
+ocena=5.0
