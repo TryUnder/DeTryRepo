@@ -1,0 +1,17 @@
+Quiz:
+
+1) What are the reference types, and what are their hallmarks?
+
+    * l-value reference (T&) - Binds to data that we can modify, but not move.
+    * const l-value reference (const T&) - Binds to data that we neither can modify nor move.
+    Can be bined not only to l-value but to an rvalue too. 
+    * r-value reference (T&&) - Bind to data that we can both modify and move (because
+    they soon will not be needed). Can be bind to an rvalue, but not to an lvalue.
+    * const r-value reference (const T&&)
+
+2) What can we initialize a const reference with?
+    * Const reference can be initialized with l-value or r-value.
+
+3) Can we get an rvalue reference to a non-const lvalue?
+    * The answer shouldn't be affirmative, because lvalue reference cannot be bind
+      to an rvalue.
