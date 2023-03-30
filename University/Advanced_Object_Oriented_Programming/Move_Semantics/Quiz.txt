@@ -1,0 +1,29 @@
+Quiz:
+
+1) Dlaczego semantyka przeniesienia jest ważna?
+    Semantyka przeniesienia jest ważna, ponieważ pozwala na przeniesienie wartości z
+    obiektu źródłowego do docelowego, gdy kopiowanie nie jest potrzebne. Pozwala na
+    bardziej wydajne zarządzanie pamięcią i przyspieszenie działania programów.
+    Przeniesienie to operacja, w której zasoby są przenoszone do obiektu docelowego,
+    zamiast kopiowania tych zasobów.
+
+2) Jak działa semantyka przeniesienia?
+    Semantyka przeniesienia w C++ jest realizowana za pomocą tzw. rvalue references
+    (odwołania do wartości tymczasowych), które oznacza się przy użyciu operatora &&.
+    Rvalue reference to odwołanie do obiektu, który nie ma nazwy, a więc nie może być
+    modyfikowany ani kopiowany.
+    W języku C++11 wprowadzono specjalny konstruktor przenoszący (ang. move constructor)
+    oraz operator przypisania przenoszącego (ang. move assignment operator), które
+    umożliwiają przenoszenie zasobów między obiektami.
+    Konstruktor przenoszący jest wywoływany, gdy tworzony jest obiekt za pomocą innego
+    obiektu, który jest przenoszony, a nie kopiowany. W konstruktorze przenoszącym, zasoby
+    (np. pamięć) są przenoszone ze źródłowego obiektu do nowego obiektu.
+    Operator przypisania przenoszącego umożliwia przypisanie wartości innego obiektu
+    do istniejącego obiektu, jednocześnie przenosząc zasoby z jednego obiektu do drugiego.
+     
+3) Czy jest typ tylko do przenoszenia?
+    Tak, taki typ występuje. Charakteryzuje się on tym, że obiekty tego typu mogą
+    być tylko przenoszone i nie mogą być kopiowane.
+    Cechą charakterystyczną tego typu jest to, że nie musimy jawnie usuwać konstruktora
+    kopiującego, ponieważ zostanie on niejawnie usunięty, gdy zadeklarujemy konstruktor
+    przenoszący i operator przypisania.
