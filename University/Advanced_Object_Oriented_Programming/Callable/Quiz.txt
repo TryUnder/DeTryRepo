@@ -1,0 +1,14 @@
+Quiz : 
+
+1) W jaki sposób możemy przekazać callable?
+
+    Callable możemy przekazać w postaci wskaźnika na funkcje, funktora,
+    albo domknięcia, czyli wyrażenia lambda.
+
+2) Jaka jest różnica pomiędzy funktorem a domknięciem?
+    Funktor to obiekt, który może być wywołany jak funkcja, a domknięcie to sposób definiowania
+    funkcji anonimowych w C++.
+
+3) Czy wyrażenia lambda są nieodzowne?
+    Bez wyrażeń lambda można się obejść, ponieważ wyrażenia lambda są tłumaczone i tak na struktury, lub
+    klasy.

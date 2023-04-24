@@ -14,3 +14,9 @@ int main() {
     Wyrażenie "B()" się nie skompiluje, bo bo jest r-wartością, a klasa "B" jest niekompletna.
     */
 }
+
+// Write a program in C++ that add two numbers and returns the result
+
+// Path: University\Advanced_Object_Oriented_Programming\Expression_Categories\Ex_15.cpp
+
+
