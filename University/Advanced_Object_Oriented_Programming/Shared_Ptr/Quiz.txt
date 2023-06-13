@@ -1,0 +1,24 @@
+Pyt 1) Jaka jest różnica między unique_ptr i shared_ptr?
+
+    Główna różnica pomiędzy tymi dwoma typami jest taka, że unique_ptr implementuje semantykę wyłącznej
+    własności, a shared_ptr współdzielonej własności. Skutki są takie, że unique_ptr jest jedynym właścicielem
+    danych którymi zarządza. Shared_ptr dealokuje pamięć dla danych zarządzanych tylko w przypadku, gdy
+    wszystkie obiekty shared_ptr, które pokazują na te dane, są zniszczone.
+    Unique_ptr może być przenoszony, ale nie może być kopiowany. Przeniesienie właściciela unique_ptr
+    powoduje przeniesienie zarządzanego zasobu, a oryginalny unique_ptr, traci własność nad nim.
+    Shared_ptr może być i przenoszony i kopiowany. Każdy shared_ptr przechowuje licznik odwołań.
+    Każda kopia zwiększa licznik odwołań.
+    Shared_ptr ma zwykle dwukrotnie większy rozmiar niż Unique_ptr.
+
+Pyt 2) W jaki sposób należy przygotować typ danych, żeby shared_ptr mógł nimi zarządzać?
+
+    Aby shared_ptr mógł zarządzać danymi, typ danych musi:
+        1) posiadać możliwość alokacji dynamicznej
+        2) możliwość kopiowania (lub przenoszenia)
+        3) być przeznaczony do współdzielenia przez wiele obiektów
+
+Pyt 3) Dlaczego shared_ptr potrzebuje struktury sterującej?
+
+    Shared_ptr potrzebuje struktury sterującej, ponieważ sposób w jaki działa i jaką funkcjonalność
+    udostępnia (semantykę współdzielonej własności) tego wymaga. Struktura sterująca zwiększa, bądź
+    zmniejsza reference_count przy każdym kolejnym obiekcie zarządzającym pełniącym funkcję obserwatora.

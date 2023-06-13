@@ -1,0 +1,22 @@
+Pyt 1) Dlaczego warto używać inteligentnych wskaźników?
+
+Inteligentnych wskaźniki udostępniają funkcjonalność surowych wskaźników, a w zasadzie je opakowują,
+sprawiając, że rozwiązują większość problemów surowych wskaźników. Warto je używać m.in dlatego, że:
+    - inteligentne wskaźniki same dbają o to, aby zwolnić przydzieloną pamięć obiektom, na które pokazują,
+      gdy taki obiekt wyjdzie poza zakres - rozwiązują problem własności. Dokładnie wiemy, kto gdzie i kiedy
+      ma zwolnić pamięć. Rozwiązują również problem nieaktualnego wskaźnika - invalid pointer, jak 
+      również chronią przed podwójnym usunięciem.
+    - rozwiązują problem typów - dzięki implementacji inteligentnych wskaźników w wersji szablonowej,
+      dokładnie wiemy jaki typ będzie taki IW przechowywał.
+    
+Pyt 2) Czym jest semantyka wyłącznej własności?
+
+Semantyka wyłącznej własności polega na tym, że obiektem zaalokowanym dynamicznie w tym przypadku,
+może zarządzać jedynie ten obiekt inteligentnego wskaźnika, który pokazuje na tą daną. Obiekt zarządzający
+jest jedynym właścicielem danych. Obiekt zarządzający jest odpowiedzialny za zniszczenie danych, którymi
+zarządza.
+
+Pyt 3) Dlaczego warto używać funkcji make_unique?
+
+Warto używać funkcji make_unique, ponieważ chroni nas ona przed definicją obiektu o innym typie,
+niż typ wskaźnika, albo odwrotnie. Zwiększa to również czytelność kodu.

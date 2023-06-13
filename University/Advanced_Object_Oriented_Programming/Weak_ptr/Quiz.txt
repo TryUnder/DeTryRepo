@@ -1,0 +1,25 @@
+Pyt 1) Dlaczego potrzebujemy weak_ptr?
+
+    Za pomocą funkcjonalności jaką oferuje weak_ptr, mamy dostęp do obiektu zarządzanego przez shared_ptr
+    bez zwiększania jego licznika referencji, co pozwala na uniknięcie problemów związanych z wyciekami
+    pamięci i błędnym obiegiem cykli referencji. Weak_ptr daje nam możliwość sprawdzenia, czy obiekt na 
+    który wskazuje, istnieje jeszcze, przed próbą uzyskania do niego dostępu.
+
+Pyt 2) Jaka jest różnica między shared_ptr a weak_ptr?
+
+    Główna różnica dotyczy funkcjonalności jakie te typy zarządzające oferują.
+        a)Shared_ptr implementuje semantykę współdzielonej własności. Licznik referencji jest zwiększany
+        za każdym razem, gdy nowy shared_ptr jest tworzony, a zmniejszany, gdy shared_ptr przestaje 
+        kontrolować obiekt. Obiekt jest usuwany z pamięci tylko wtedy, gdy ostatni shared_ptr przestaje
+        kontrolować obiekt.
+
+        b)Weak_ptr pełni funkcję obserwatora. Nie zarządza żadnym obiektem w sposób bezpośredni.
+        Jest tworzony na podstawie shared_ptr i może "obserwować" ten obiekt.
+        Może być używany do sprawdzenia, czy obiekt, na który wskazuje shared_ptr, nadal istnieje.
+        Weak_ptr nie zwiększa licznika referencji, więc nie utrzymuje obiektu przy życiu.
+
+        Słabe referencje są przydatne, gdy chcemy obserwować obiekt kontrolowany przez shared_ptr, ale
+        nie chcemy, aby nasza referencja utrzymywała je przy życiu. Mogą one być wykorzystywane do 
+        sprawdzenia, czy obiekt jeszcze istnieje, przed próbą dostępu do niego.
+        Jeżeli wszystkie shared_ptr zniszczą obiekt, słaba referencja zostanie automatycznie unieważniona,
+        
