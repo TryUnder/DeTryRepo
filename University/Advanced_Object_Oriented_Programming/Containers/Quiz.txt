@@ -1,0 +1,43 @@
+Pyt 1) Jakie są najważniejsze różnice między kontenerami?
+
+    1) Kolejność przechowywania elementów:
+        * kontenery sekwencyjnie utrzymują kolejność taką, jaką zostały wstawiony do kontenera.
+        * kontenery asocjacyjne (np std::set, std::map) przechowują elementy w uporządkowany sposób,
+          zazwyczaj na podstawie porządku określonego przez klucz 
+    
+    2) Unikalność elementów:
+        * Kontenery sekwencyjne mogą zawierać duplikaty, czyli te same elementy wielokrotnie.
+        * Kontenery asocjacyjne przechowują tylko unikalne elementy
+
+    3) Sposób dostępu do elementów:
+        * Kontenery sekwencyjne umożliwiają swobodny dostęp do elementów za pomocą operator []
+          lub iteratorów
+        * kontenery asocjacyjne wymagają odwoływania się do elementów za pomocą kluczy
+
+    4) Wyszukiwanie elementów: 
+        * Kontenery sekwencyjne wymagają iteracji przez elementy w celu znalezienia określonego elementu
+        * Kontenery asocjacyjne, takie jak std::set i std::map, oferują efektywne wyszukiwanie elementów
+          dzięki zastosowaniu struktur danych (np. drzewo czerwono-czarne).
+
+    5) Wydajność operacji:
+        * Kontenery sekwencyjne takie jak std::vector i std::list są bardziej odpowiednie do operacji
+          wstawiania, usuwania i modyfikacji elementów.
+        * Kontenery asocjacyjne są bardziej odpowiednie do operacji wyszukiwania i przechowywania
+          unikalnych elementów.
+
+Pyt 2) Dlaczego nie można zmienić wartości elementu zbioru?
+
+    Kontenery asocjacyjne takie jak std::set i std::map utrzymują swoje elementy w uporządkowany sposób
+    na podstawie kluczy. Aby to osiągnąć, wewnętrzna struktura danych, tak jak zazwyczaj drzewo
+    czerwono-czarne, jest utrzymywana w porządku. Każdy element jest związany z kluczem, który służy
+    do określenia jego pozycji w strukturze.
+    Gdybyśmy mogli zmieniać elementy w zbiorze, to moglibyśmy wprowadzić sytuację, w której element
+    zmieniłby swoją wartość w taki sposób, że naruszyłby porządek wewnątrz struktury danych. Może to
+    prowadzić do niespójności w zbiorze, gdzie elementy nie byłyby już w odpowiednim porządku.
+
+Pyt 3) Jak działa umieszczanie?
+
+    Umieszczanie (ang. eplacement) to operacja na kontenerach, która polega na tworzeniu nowego elementu
+    w miejscu, bez konieczności kopiowania lub przenoszenia istniejącego obiektu. Zamiast przekazywać
+    gotowy obiekt do kontenera, przekazujemy argumenty konstruktora, które są używane do bezpośredniego
+    tworzenia nowego elementu w kontenerze.
